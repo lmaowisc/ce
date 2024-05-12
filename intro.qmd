@@ -2,4 +2,4 @@
 
 ## Slides
 
-Course information slides [here](intro.html){target="_blank"}. (To convert html to pdf, press E $\to$ Print $\to$ Destination: Save to pdf)
+Course information slides [here](chap1.html){target="_blank"}. (To convert html to pdf, press E $\to$ Print $\to$ Destination: Save to pdf)
