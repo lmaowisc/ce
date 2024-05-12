@@ -4,7 +4,7 @@
     "href": "index.html",
     "title": "Statistical Methods for Composite Endpoints",
     "section": "",
-    "text": "Preface\nThis is a companion site for"
+    "text": "Preface\nThis is a companion site for the same-titled workshop at the 2024 Society for Clinical Trials (SCT) Annual Meeting given on May 19, 2024 in Boston, MA."
   },
   {
     "objectID": "intro.html",
@@ -26,5 +26,12 @@
     "title": "References",
     "section": "",
     "text": "Knuth, Donald E. 1984. “Literate Programming.” Comput.\nJ. 27 (2): 97–111. https://doi.org/10.1093/comjnl/27.2.97."
+  },
+  {
+    "objectID": "index.html#slides",
+    "href": "index.html#slides",
+    "title": "Statistical Methods for Composite Endpoints",
+    "section": "Slides",
+    "text": "Slides\nCourse information slides here. (To convert html to pdf, press E \\(\\to\\) Print \\(\\to\\) Destination: Save to pdf)"
   }
 ]
