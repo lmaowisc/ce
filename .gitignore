@@ -1,5 +1,4 @@
+/.quarto/
 .Rproj.user
-.Rhistory
-.RData
-.Ruserdata
+_book
 ce.Rproj

@@ -1,0 +1,24 @@
+project:
+  type: book
+  output-dir: docs
+book:
+  title: "Statistical Methods for Composite Endpoints"
+  subtitle: "Win Ratio and Beyond"
+  author: "Lu Mao"
+  # date: "5/12/2024"
+  chapters:
+    - index.qmd
+    - intro.qmd
+    - summary.qmd
+    - references.qmd
+
+bibliography: references.bib
+
+format:
+  html:
+    theme: cosmo
+  pdf:
+    documentclass: scrreprt
+
+editor: visual
+
