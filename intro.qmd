@@ -3,3 +3,116 @@
 ## Slides {.unnumbered}
 
 Chapter slides [here](chap1.html){target="_blank"}. (To convert html to pdf, press E $\to$ Print $\to$ Destination: Save to pdf)
+
+
+## R-code {.unnumbered}
+
+```{r}
+#| code-fold: true
+#| code-summary: "Show the code"
+#| eval: false
+
+##################################################################
+# This code generates the numerical results in  chapter 1       ##
+##################################################################
+
+# load the survival package
+library(survival)
+# install.packages("Wcompo")
+library(Wcompo) # for weighted total events
+library(rmt) # for hfaction data
+# install.packages("ggplot2")
+library(tidyverse) # for data wrangling
+
+# hfaction
+
+data(hfaction)
+head(hfaction)
+
+# convert status=1 for death, 2=hospitalization
+hfaction <- hfaction |> 
+  mutate(
+    status = case_when(
+      status == 1 ~ 2,
+      status == 2 ~ 1,
+      status == 0 ~ 0
+    )
+  )
+
+head(hfaction)
+
+# count unique patients in each arm
+hfaction |> 
+  group_by(trt_ab) |> 
+  distinct(patid) |> 
+  count(trt_ab)
+
+# TFE: take the first event per patient id
+hfaction_TFE <- hfaction |> 
+  arrange(patid, time) |> 
+  group_by(patid) |> 
+  slice_head() |> 
+  ungroup()
+
+# Mortality analysis ------------------------------------------------------
+
+## get mortality data
+
+hfaction_D <- hfaction |> 
+  filter(status != 2) # remove hospitalization records
+
+## Cox model for death against trt_ab
+obj_D <- coxph(Surv(time, status) ~ trt_ab, data = hfaction_D)
+summary(obj_D)
+#> n= 426, number of events= 93 
+#> coef exp(coef) se(coef)      z Pr(>|z|)  
+#> trt_ab -0.3973    0.6721   0.2129 -1.866   0.0621 .
+
+# TFE analysis --------------------------------------------------------
+
+## how many of first events are death (1) or hosp (2)
+hfaction_TFE |> 
+  count(status)
+
+# Cox model for TFE against trt_ab
+obj_TFE <- coxph(Surv(time, status > 0) ~ trt_ab, data = hfaction_TFE)
+summary(obj_TFE)
+
+
+# Mortality vs TFE --------------------------------------------------------
+
+library(ggsurvfit)
+library(patchwork)
+
+pD <- survfit2(Surv(time, status) ~ trt_ab, data = hfaction_D) |>
+  ggsurvfit(linewidth = 1) +
+  scale_ggsurvfit() +
+  scale_color_discrete(labels = c("Usual care", "Training")) +
+  scale_x_continuous("Time (years)", limits = c(0, 4)) +
+  labs(y = "Overall survival")
+
+pTFE <- survfit2(Surv(time, status > 0) ~ trt_ab, data = hfaction_TFE) |>
+  ggsurvfit(linewidth = 1) +
+  scale_ggsurvfit() +
+  scale_color_discrete(labels = c("Usual care", "Training")) +
+  scale_x_continuous("Time (years)", limits = c(0, 4)) +
+  labs(y = "Hospitalization-free survival")
+
+
+pD + pTFE + plot_layout(guides = "collect") & 
+  theme(
+    legend.position = "top", 
+    legend.text = element_text(size = 12)
+    )
+
+ggsave("images/intro_hfaction_unis.png", width = 8, height = 4.5)
+
+# Total events (proportional mean) ----------------------------------------
+
+
+obj_ML <- CompoML(hfaction$patid, hfaction$time, hfaction$status, hfaction$trt_ab, w = c(2, 1))
+
+
+obj_ML
+```
+
