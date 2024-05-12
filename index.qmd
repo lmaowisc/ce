@@ -1,7 +1,8 @@
 # Preface {.unnumbered}
 
 This is a companion site for the same-titled **workshop** at the 
-2024 Society for Clinical Trials (SCT) Annual Meeting given on May 19, 2024 in Boston, MA.
+[2024 Society for Clinical Trials (SCT) Annual Meeting](https://www.sctweb.org/meeting/){target="_blank"}
+given on May 19, 2024 at Boston Marriott Copley Place in Boston, MA.
 
 ## Slides
 
