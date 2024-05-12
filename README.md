@@ -1,2 +1,3 @@
-# ce
-Statistical methods for composite time-to-event outcomes
+# Statistical methods for composite endpoints: win ratio and beyond
+
+
