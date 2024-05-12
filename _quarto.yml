@@ -9,7 +9,10 @@ book:
   chapters:
     - index.qmd
     - intro.qmd
-    - summary.qmd
+    - testing.qmd
+    - estimation.qmd
+    - regression.qmd
+    - discussions.qmd
     - references.qmd
 
 bibliography: references.bib
