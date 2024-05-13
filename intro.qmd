@@ -12,6 +12,7 @@ Chapter slides [here](chap1.html){target="_blank"}. (To convert html to pdf, pre
 #| code-summary: "Show the code"
 #| eval: false
 
+
 ##################################################################
 # This code generates the numerical results in  chapter 1       ##
 ##################################################################
@@ -21,11 +22,9 @@ library(survival)
 # install.packages("Wcompo")
 library(Wcompo) # for weighted total events
 library(rmt) # for hfaction data
-# install.packages("ggplot2")
 library(tidyverse) # for data wrangling
 
-# hfaction
-
+# load hfaction data
 data(hfaction)
 head(hfaction)
 
@@ -57,7 +56,6 @@ hfaction_TFE <- hfaction |>
 # Mortality analysis ------------------------------------------------------
 
 ## get mortality data
-
 hfaction_D <- hfaction |> 
   filter(status != 2) # remove hospitalization records
 
@@ -108,11 +106,17 @@ pD + pTFE + plot_layout(guides = "collect") &
 ggsave("images/intro_hfaction_unis.png", width = 8, height = 4.5)
 
 # Total events (proportional mean) ----------------------------------------
-
-
-obj_ML <- CompoML(hfaction$patid, hfaction$time, hfaction$status, hfaction$trt_ab, w = c(2, 1))
-
-
+## fit proportional means model with death = 2 x hosp
+obj_ML <- CompoML(hfaction$patid, hfaction$time, hfaction$status, 
+                  hfaction$trt_ab, w = c(2, 1))
+## summary results
 obj_ML
+
+## plot model-based mean functions
+plot(obj_ML, 0, ylim= c(0, 5), xlim= c(0, 4), xlab="Time (years)", 
+     col = "red", lwd = 2)
+plot(obj_ML, 1, add = TRUE, col = "blue", lwd=2)
+legend(0, 5, col = c("red", "blue"), c("Usual care","Training"), lwd = 2)
+
 ```
 
