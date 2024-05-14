@@ -916,7 +916,7 @@ H_A: H^\t(s, t) \geq  H^\c(s, t)\mbox{ for all } t\leq s
 <li><strong>Simplified outcome model</strong>
 <ul>
 <li><strong>Gumbel-Hougaard copula</strong> <span class="citation" data-cites="oakes1989">(<a href="#/references" role="doc-biblioref" onclick="">Oakes, 1989</a>)</span> <span class="math display">\[
-\pr(D^\a&gt;s, T_1^\a&gt;t) = \exp\left(-\left[\{\exp(a\xi_D)\lambda_D\}^\kappa + \{\exp(a\xi_H)\lambda_H\}^\kappa \right]^{1/\kappa}\right)
+\pr(D^\a&gt;s, T_1^\a&gt;t) = \exp\left(-\left[\{\exp(a\xi_D)\lambda_Ds\}^\kappa + \{\exp(a\xi_H)\lambda_Ht\}^\kappa \right]^{1/\kappa}\right)
 \]</span></li>
 <li><strong>Parameters</strong>
 <ul>
@@ -1142,7 +1142,7 @@ n = \frac{\zeta_0^2(\lambda_D,\lambda_H,\kappa,\tau_c,\tau,\lambda_L)(z_{1-\alph
 </ul></li>
 <li><strong>Sample size calculations</strong>
 <ul>
-<li><strong>Gumbel-Hougaard copula</strong> for death &amp; nonfatal event <span class="math display">\[\pr(D^\a&gt;s, T_1^\a&gt;t) = \exp\left(-\left[\{\exp(a\xi_D)\lambda_D\}^\kappa + \{\exp(a\xi_H)\lambda_H\}^\kappa \right]^{1/\kappa}\right)
+<li><strong>Gumbel-Hougaard copula</strong> for death &amp; nonfatal event <span class="math display">\[\pr(D^\a&gt;s, T_1^\a&gt;t) = \exp\left(-\left[\{\exp(a\xi_D)\lambda_Ds\}^\kappa + \{\exp(a\xi_H)\lambda_Ht\}^\kappa \right]^{1/\kappa}\right)
 \]</span>
 <ul>
 <li>Step 1: estimate <span class="math inline">\((\lambda_D,\lambda_H,\kappa)\)</span> <code>WR::gumbel.est(id, time, status)</code></li>
