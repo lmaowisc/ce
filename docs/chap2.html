@@ -1,0 +1,1603 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<script src="chap2_files/libs/clipboard/clipboard.min.js"></script>
+<script src="chap2_files/libs/quarto-html/tabby.min.js"></script>
+<script src="chap2_files/libs/quarto-html/popper.min.js"></script>
+<script src="chap2_files/libs/quarto-html/tippy.umd.min.js"></script>
+<link href="chap2_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="chap2_files/libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="chap2_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
+<link href="chap2_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.3.450">
+
+  <meta name="author" content="Lu Mao">
+  <title>Statistical Methods for Composite Endpoints: Win Ratio and Beyond</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="chap2_files/libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="chap2_files/libs/revealjs/dist/reveal.css">
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
+    /* CSS for citations */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+    }
+    .hanging-indent div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }  </style>
+  <link rel="stylesheet" href="chap2_files/libs/revealjs/dist/theme/quarto.css">
+  <link rel="stylesheet" href="style.css">
+  <link href="chap2_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="chap2_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="chap2_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="chap2_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+
+  .callout {
+    margin-top: 1em;
+    margin-bottom: 1em;  
+    border-radius: .25rem;
+  }
+
+  .callout.callout-style-simple { 
+    padding: 0em 0.5em;
+    border-left: solid #acacac .3rem;
+    border-right: solid 1px silver;
+    border-top: solid 1px silver;
+    border-bottom: solid 1px silver;
+    display: flex;
+  }
+
+  .callout.callout-style-default {
+    border-left: solid #acacac .3rem;
+    border-right: solid 1px silver;
+    border-top: solid 1px silver;
+    border-bottom: solid 1px silver;
+  }
+
+  .callout .callout-body-container {
+    flex-grow: 1;
+  }
+
+  .callout.callout-style-simple .callout-body {
+    font-size: 1rem;
+    font-weight: 400;
+  }
+
+  .callout.callout-style-default .callout-body {
+    font-size: 0.9rem;
+    font-weight: 400;
+  }
+
+  .callout.callout-titled.callout-style-simple .callout-body {
+    margin-top: 0.2em;
+  }
+
+  .callout:not(.callout-titled) .callout-body {
+      display: flex;
+  }
+
+  .callout:not(.no-icon).callout-titled.callout-style-simple .callout-content {
+    padding-left: 1.6em;
+  }
+
+  .callout.callout-titled .callout-header {
+    padding-top: 0.2em;
+    margin-bottom: -0.2em;
+  }
+
+  .callout.callout-titled .callout-title  p {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+  }
+    
+  .callout.callout-titled.callout-style-simple .callout-content  p {
+    margin-top: 0;
+  }
+
+  .callout.callout-titled.callout-style-default .callout-content  p {
+    margin-top: 0.7em;
+  }
+
+  .callout.callout-style-simple div.callout-title {
+    border-bottom: none;
+    font-size: .9rem;
+    font-weight: 600;
+    opacity: 75%;
+  }
+
+  .callout.callout-style-default  div.callout-title {
+    border-bottom: none;
+    font-weight: 600;
+    opacity: 85%;
+    font-size: 0.9rem;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+  }
+
+  .callout.callout-style-default div.callout-content {
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+  }
+
+  .callout.callout-style-simple .callout-icon::before {
+    height: 1rem;
+    width: 1rem;
+    display: inline-block;
+    content: "";
+    background-repeat: no-repeat;
+    background-size: 1rem 1rem;
+  }
+
+  .callout.callout-style-default .callout-icon::before {
+    height: 0.9rem;
+    width: 0.9rem;
+    display: inline-block;
+    content: "";
+    background-repeat: no-repeat;
+    background-size: 0.9rem 0.9rem;
+  }
+
+  .callout-title {
+    display: flex
+  }
+    
+  .callout-icon::before {
+    margin-top: 1rem;
+    padding-right: .5rem;
+  }
+
+  .callout.no-icon::before {
+    display: none !important;
+  }
+
+  .callout.callout-titled .callout-body > .callout-content > :last-child {
+    margin-bottom: 0.5rem;
+  }
+
+  .callout.callout-titled .callout-icon::before {
+    margin-top: .5rem;
+    padding-right: .5rem;
+  }
+
+  .callout:not(.callout-titled) .callout-icon::before {
+    margin-top: 1rem;
+    padding-right: .5rem;
+  }
+
+  /* Callout Types */
+
+  div.callout-note {
+    border-left-color: #4582ec !important;
+  }
+
+  div.callout-note .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAEU0lEQVRYCcVXTWhcVRQ+586kSUMMxkyaElstCto2SIhitS5Ek8xUKV2poatCcVHtUlFQk8mbaaziwpWgglJwVaquitBOfhQXFlqlzSJpFSpIYyXNjBNiTCck7x2/8/LeNDOZxDuEkgOXe++553zfefee+/OYLOXFk3+1LLrRdiO81yNqZ6K9cG0P3MeFaMIQjXssE8Z1JzLO9ls20MBZX7oG8w9GxB0goaPrW5aNMp1yOZIa7Wv6o2ykpLtmAPs/vrG14Z+6d4jpbSKuhdcSyq9wGMPXjonwmESXrriLzFGOdDBLB8Y6MNYBu0dRokSygMA/mrun8MGFN3behm6VVAwg4WR3i6FvYK1T7MHo9BK7ydH+1uurECoouk5MPRyVSBrBHMYwVobG2aOXM07sWrn5qgB60rc6mcwIDJtQrnrEr44kmy+UO9r0u9O5/YbkS9juQckLed3DyW2XV/qWBBB3ptvI8EUY3I9p/67OW+g967TNr3Sotn3IuVlfMLVnsBwH4fsnebJvyGm5GeIUA3jljERmrv49SizPYuq+z7c2H/jlGC+Ghhupn/hcapqmcudB9jwJ/3jvnvu6vu5lVzF1fXyZuZZ7U8nRmVzytvT+H3kilYvH09mLWrQdwFSsFEsxFVs5fK7A0g8gMZjbif4ACpKbjv7gNGaD8bUrlk8x+KRflttr22JEMRUbTUwwDQScyzPgedQHZT0xnx7ujw2jfVfExwYHwOsDTjLdJ2ebmeQIlJ7neo41s/DrsL3kl+W2lWvAga0tR3zueGr6GL78M3ifH0rGXrBC2aAR8uYcIA5gwV8zIE8onoh8u0Fca/ciF7j1uOzEnqcIm59sEXoGc0+z6+H45V1CvAvHcD7THztu669cnp+L0okAeIc6zjbM/24LgGM1gZk7jnRu1aQWoU9sfUOuhrmtaPIO3YY1KLLWZaEO5TKUbMY5zx8W9UJ6elpLwKXbsaZ4EFl7B4bMtDv0iRipKoDQT2sNQI9b1utXFdYisi+wzZ/ri/1m7QfDgEuvgUUEIJPq3DhX/5DWNqIXDOweC2wvIR90Oq3lDpdMIgD2r0dXvGdsEW5H6x6HLRJYU7C69VefO1x8Gde1ZFSJLfWS1jbCnhtOPxmpfv2LXOA2Xk2tvnwKKPFuZ/oRmwBwqRQDcKNeVQkYcOjtWVBuM/JuYw5b6isojIkYxyYAFn5K7ZBF10fea52y8QltAg6jnMqNHFBmGkQ1j+U43HMi2xMar1Nv0zGsf1s8nUsmUtPOOrbFIR8bHFDMB5zL13Gmr/kGlCkUzedTzzmzsaJXhYawnA3UmARpiYj5ooJZiUoxFRtK3X6pgNPv+IZVPcnwbOl6f+aBaO1CNvPW9n9LmCp01nuSaTRF2YxHqZ8DYQT6WsXT+RD6eUztwYLZ8rM+rcPxamv1VQzFUkzFXvkiVrySGQgJNvXHJAxiU3/NwiC03rSf05VBaPtu/Z7/B8Yn/w7eguloAAAAAElFTkSuQmCC');
+  }
+
+  div.callout-note.callout-style-default .callout-title {
+    background-color: #dae6fb
+  }
+
+  div.callout-important {
+    border-left-color: #d9534f !important;
+  }
+
+  div.callout-important .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAEKklEQVRYCcVXTWhcVRS+575MJym48A+hSRFr00ySRQhURRfd2HYjk2SSTokuBCkU2o0LoSKKraKIBTcuFCoidGFD08nkBzdREbpQ1EDNIv8qSGMFUboImMSZd4/f9zJv8ibJMC8xJQfO3HPPPef7zrvvvnvviIkpC9nsw0UttFunbUhpFzFtarSd6WJkStVMw5xyVqYTvkwfzuf/5FgtkVoB0729j1rjXwThS7Vio+Mo6DNnvLfahoZ+i/o32lULuJ3NNiz7q6+pyAUkJaFF6JwaM2lUJlV0MlnQn5aTRbEu0SEqHUa0A4AdiGuB1kFXRfVyg5d87+Dg4DL6m2TLAub60ilj7A1Ec4odSAc8X95sHh7+ZRPCFo6Fnp7HfU/fBng/hi10CjCnWnJjsxvDNxWw0NfV6Rv5GgP3I3jGWXumdTD/3cbEOP2ZbOZp69yniG3FQ9z1jD7bnBu9Fc2tKGC2q+uAJOQHBDRiZX1x36o7fWBs7J9ownbtO+n0/qWkvW7UPIfc37WgT6ZGR++EOJyeQDSb9UB+DZ1G6DdLDzyS+b/kBCYGsYgJbSQHuThGKRcw5xdeQf8YdNHsc6ePXrlSYMBuSIAFTGAtQo+VuALo4BX83N190NWZWbynBjhOHsmNfFWLeL6v+ynsA58zDvvAC8j5PkbOcXCMg2PZFk3q8MjI7WAG/Dp9AwP7jdGBOOQkAvlFUB+irtm16I1Zw9YBcpGTGXYmk3kQIC/Cds55l+iMI3jqhjAuaoe+am2Jw5GT3Nbz3CkE12NavmzN5+erJW7046n/CH1RO/RVa8lBLozXk9uqykkGAyRXLWlLv5jyp4RFsG5vGVzpDLnIjTWgnRy2Rr+tDKvRc7Y8AyZq10jj8DqXdnIRNtFZb+t/ZRtXcDiVnzpqx8mPcDWxgARUqx0W1QB9MeUZiNrV4qP+Ehc+BpNgATsTX8ozYKL2NtFYAHc84fG7ndxUPr+AR/iQSns7uSUufAymwDOb2+NjK27lEFocm/EE2WpyIy/Hi66MWuMKJn8RvxIcj87IM5Vh9663ziW36kR0HNenXuxmfaD8JC7tfKbrhFr7LiZCrMjrzTeGx+PmkosrkNzW94ObzwocJ7A1HokLolY+AvkTiD/q1H0cN48c5EL8Crkttsa/AXQVDmutfyku0E7jShx49XqV3MFK8IryDhYVbj7Sj2P2eBxwcXoe8T8idsKKPRcnZw1b+slFTubwUwhktrfnAt7J++jwQtLZcm3sr9LQrjRzz6cfMv9aLvgmnAGvpoaGLxM4mAEaLV7iAzQ3oU0IvD5x9ix3yF2RAAuYAOO2f7PEFWCXZ4C9Pb2UsgDeVnFSpbFK7/IWu7TPTvBqzbGdCHOJQSxiEjt6IyZmxQyEJHv6xyQsYk//moVFsN2zP6fRImjfq7/n/wFDguUQFNEwugAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-important.callout-style-default .callout-title {
+    background-color: #f7dddc
+  }
+
+  div.callout-warning {
+    border-left-color: #f0ad4e !important;
+  }
+
+  div.callout-warning .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAETklEQVRYCeVWW2gcVRg+58yaTUnizqbipZeX4uWhBEniBaoUX1Ioze52t7sRq6APio9V9MEaoWlVsFasRq0gltaAPuxms8lu0gcviE/FFOstVbSIxgcv6SU7EZqmdc7v9+9mJtNks51NTUH84ed889/PP+cmxP+d5FIbMJmNbpREu4WUkiTtCicKny0l1pIKmBzovF2S+hIJHX8iEu3hZJ5lNZGqyRrGSIQpq15AzF28jgpeY6yk6GVdrfFqdrD6Iw+QlB8g0YS2g7dyQmXM/IDhBhT0UCiRf59lfqmmDvzRt6kByV/m4JjtzuaujMUM2c5Z2d6JdKrRb3K2q6mA+oYVz8JnDdKPmmNthzkAk/lN63sYPgevrguc72aZX/L9C6x09GYyxBgCX4NlvyGUHOKELlm5rXeR1kchuChJt4SSwyddZRXgvwMGvYo4QSlk3/zkHD8UHxwVJA6zjZZqP8v8kK8OWLnIZtLyCAJagYC4rTGW/9Pqj92N/c+LUaAj27movwbi19tk/whRCIE7Q9vyI6yvRpftAKVTdUjOW40X3h5OXsKCdmFcx0xlLJoSuQngnrJe7Kcjm4OMq9FlC7CMmScQANuNvjfP3PjGXDBaUQmbp296S5L4DrpbrHN1T87ZVEZVCzg1FF0Ft+dKrlLukI+/c9ENo+TvlTDbYFvuKPtQ9+l052rXrgKoWkDAFnvh0wTOmYn8R5f4k/jN/fZiCM1tQx9jQQ4ANhqG4hiL0qIFTGViG9DKB7GYzgubnpofgYRwO+DFjh0Zin2m4b/97EDkXkc+f6xYAPX0KK2I/7fUQuwzuwo/L3AkcjugPNixC8cHf0FyPjWlItmLxWw4Ou9YsQCr5fijMGoD/zpdRy95HRysyXA74MWOnscpO4j2y3HAVisw85hX5+AFBRSHt4ShfLFkIMXTqyKFc46xdzQM6XbAi702a7sy04J0+feReMFKp5q9esYLCqAZYw/k14E/xcLLsFElaornTuJB0svMuJINy8xkIYuL+xPAlWRceH6+HX7THJ0djLUom46zREu7tTkxwmf/FdOZ/sh6Q8qvEAiHpm4PJ4a/doJe0gH1t+aHRgCzOvBvJedEK5OFE5jpm4AGP2a8Dxe3gGJ/pAutug9Gp6he92CsSsWBaEcxGx0FHytmIpuqGkOpldqNYQK8cSoXvd+xLxXADw0kf6UkJNFtdo5MOgaLjiQOQHcn+A6h5NuL2s0qsC2LOM75PcF3yr5STuBSAcGG+meA14K/CI21HcS4LBT6tv0QAh8Dr5l93AhZzG5ZJ4VxAqdZUEl9z7WJ4aN+svMvwHHL21UKTd1mqvChH7/Za5xzXBBKrUcB0TQ+Ulgkfbi/H/YT5EptrGzsEK7tR1B7ln9BBwckYfMiuSqklSznIuoIIOM42MQO+QnduCoFCI0bpkzjCjddHPN/F+2Yu+sd9bKNpVwHhbS3LluK/0zgfwD0xYI5dXuzlQAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-warning.callout-style-default .callout-title {
+    background-color: #fcefdc
+  }
+
+  div.callout-tip {
+    border-left-color: #02b875 !important;
+  }
+
+  div.callout-tip .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAADr0lEQVRYCe1XTWgTQRj9ZjZV8a9SPIkKgj8I1bMHsUWrqYLVg4Ue6v9BwZOxSYsIerFao7UiUryIqJcqgtpimhbBXoSCVxUFe9CTiogUrUp2Pt+3aUI2u5vdNh4dmMzOzHvvezuz8xNFM0mjnbXaNu1MvFWRXkXEyE6aYOYJpdW4IXuA4r0fo8qqSMDBU0v1HJUgVieAXxzCsdE/YJTdFcVIZQNMyhruOMJKXYFoLfIfIvVIMWdsrd+Rpd86ZmyzzjJmLStqRn0v8lzkb4rVIXvnpScOJuAn2ACC65FkPzEdEy4TPWRLJ2h7z4cArXzzaOdKlbOvKKX25Wl00jSnrwVxAg3o4dRxhO13RBSdNvH0xSARv3adTXbBdTf64IWO2vH0LT+cv4GR1DJt+DUItaQogeBX/chhbTBxEiZ6gftlDNXTrvT7co4ub5A6gp9HIcHvzTa46OS5fBeP87Qm0fQkr4FsYgVQ7Qg+ZayaDg9jhg1GkWj8RG6lkeSacrrHgDaxdoBiZPg+NXV/KifMuB6//JmYH4CntVEHy/keA6x4h4CU5oFy8GzrBS18cLJMXcljAKB6INjWsRcuZBWVaS3GDrqB7rdapVIeA+isQ57Eev9eCqzqOa81CY05VLd6SamW2wA2H3SiTbnbSxmzfp7WtKZkqy4mdyAlGx7ennghYf8voqp9cLSgKdqNfa6RdRsAAkPwRuJZNbpByn+RrJi1RXTwdi8RQF6ymDwGMAtZ6TVE+4uoKh+MYkcLsT0Hk8eAienbiGdjJHZTpmNjlbFJNKDVAp2fJlYju6IreQxQ08UJDNYdoLSl6AadO+fFuCQqVMB1NJwPm69T04Wv5WhfcWyfXQB+wXRs1pt+nCknRa0LVzSA/2B+a9+zQJadb7IyyV24YAxKp2Jqs3emZTuNnKxsah+uabKbMk7CbTgJx/zIgQYErIeTKRQ9yD9wxVof5YolPHqaWo7TD6tJlh7jQnK5z2n3+fGdggIOx2kaa2YI9QWarc5Ce1ipNWMKeSG4DysFF52KBmTNMmn5HqCFkwy34rDg05gDwgH3bBi+sgFhN/e8QvRn8kbamCOhgrZ9GJhFDgfcMHzFb6BAtjKpFhzTjwv1KCVuxHvCbsSiEz4CANnj84cwHdFXAbAOJ4LTSAawGWFn5tDhLMYz6nWeU2wJfIhmIJBefcd/A5FWQWGgrWzyORZ3Q6HuV+Jf0Bj+BTX69fm1zWgK7By1YTXchFDORywnfQ7GpzOo6S+qECrsx2ifVQAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-tip.callout-style-default .callout-title {
+    background-color: #ccf1e3
+  }
+
+  div.callout-caution {
+    border-left-color: #fd7e14 !important;
+  }
+
+  div.callout-caution .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAACV0lEQVRYCdVWzWoUQRCuqp2ICBLJXgITZL1EfQDBW/bkzUMUD7klD+ATSHBEfAIfQO+iXsWDxJsHL96EHAwhgzlkg8nBg25XWb0zIb0zs9muYYWkoKeru+vn664fBqElyZNuyh167NXJ8Ut8McjbmEraKHkd7uAnAFku+VWdb3reSmRV8PKSLfZ0Gjn3a6Xlcq9YGb6tADjn+lUfTXtVmaZ1KwBIvFI11rRXlWlatwIAAv2asaa9mlB9wwygiDX26qaw1yYPzFXg2N1GgG0FMF8Oj+VIx7E/03lHx8UhvYyNZLN7BwSPgekXXLribw7w5/c8EF+DBK5idvDVYtEEwMeYefjjLAdEyQ3M9nfOkgnPTEkYU+sxMq0BxNR6jExrAI31H1rzvLEfRIdgcv1XEdj6QTQAS2wtstEALLG1yEZ3QhH6oDX7ExBSFEkFINXH98NTrme5IOaaA7kIfiu2L8A3qhH9zRbukdCqdsA98TdElyeMe5BI8Rs2xHRIsoTSSVFfCFCWGPn9XHb4cdobRIWABNf0add9jakDjQJpJ1bTXOJXnnRXHRf+dNL1ZV1MBRCXhMbaHqGI1JkKIL7+i8uffuP6wVQAzO7+qVEbF6NbS0LJureYcWXUUhH66nLR5rYmva+2tjRFtojkM2aD76HEGAD3tPtKM309FJg5j/K682ywcWJ3PASCcycH/22u+Bh7Aa0ehM2Fu4z0SAE81HF9RkB21c5bEn4Dzw+/qNOyXr3DCTQDMBOdhi4nAgiFDGCinIa2owCEChUwD8qzd03PG+qdW/4fDzjUMcE1ZpIAAAAASUVORK5CYII=');
+  }
+
+  div.callout-caution.callout-style-default .callout-title {
+    background-color: #ffe5d0
+  }
+
+  </style>
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+  <style type="text/css">
+  ul li ul li {
+    font-size: 0.78em;
+  }
+  </style>
+</head>
+<body class="quarto-light">
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide" class="quarto-title-block center">
+  <h1 class="title">Statistical Methods for Composite Endpoints: Win Ratio and Beyond</h1>
+  <p class="subtitle">Chapter 2 - Hypothesis Testing</p>
+
+<div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Lu Mao 
+</div>
+<div class="quarto-title-author-email">
+<a href="mailto:lmao@biostat.wisc.edu">lmao@biostat.wisc.edu</a>
+</div>
+        <p class="quarto-title-affiliation">
+            Department of Biostatistics &amp; Medical Informatics
+          </p>
+        <p class="quarto-title-affiliation">
+            University of Wisconsin-Madison
+          </p>
+        <p class="quarto-title-affiliation">
+            ——————————————————————————————————–
+          </p>
+        <p class="quarto-title-affiliation">
+            2024 Society for Clinical Trials (SCT) Annual Meeting
+          </p>
+        <p class="quarto-title-affiliation">
+            (May 19, 2024; Boston, MA)
+          </p>
+    </div>
+</div>
+
+</section>
+<section id="outline" class="slide level2">
+<h2>Outline</h2>
+<ul>
+<li>Win ratio basics and properties</li>
+<li>Generalize to recurrent events
+<ul>
+<li>HF-ACTION example (<a href="https://cran.r-project.org/package=WR" target="_blank"><code>WR</code></a> package)</li>
+</ul></li>
+<li>Sample size calculations
+<ul>
+<li>HF-ACTION example (<a href="https://cran.r-project.org/package=WR" target="_blank"><code>WR</code></a> package) <span class="math display">\[\newcommand{\d}{{\rm d}}\]</span> <span class="math display">\[\newcommand{\T}{{\rm T}}\]</span> <span class="math display">\[\newcommand{\dd}{{\rm d}}\]</span> <span class="math display">\[\newcommand{\cc}{{\rm c}}\]</span> <span class="math display">\[\newcommand{\pr}{{\rm pr}}\]</span> <span class="math display">\[\newcommand{\var}{{\rm var}}\]</span> <span class="math display">\[\newcommand{\se}{{\rm se}}\]</span> <span class="math display">\[\newcommand{\indep}{\perp \!\!\! \perp}\]</span> <span class="math display">\[\newcommand{\Pn}{n^{-1}\sum_{i=1}^n}\]</span> <span class="math display">\[
+\newcommand\mymathop[1]{\mathop{\operatorname{#1}}}
+\]</span> <span class="math display">\[
+\newcommand{\Ut}{{n \choose 2}^{-1}\sum_{i&lt;j}\sum}
+\]</span> <span class="math display">\[ \def\a{{(a)}} \def\b{{(1-a)}} \def\t{{(1)}} \def\c{{(0)}} \def\d{{\rm d}} \def\T{{\rm T}} \def\bs{\boldsymbol}
+\]</span></li>
+</ul></li>
+</ul>
+</section>
+<section>
+<section id="win-ratio-basics-properties" class="title-slide slide level1 center">
+<h1>Win Ratio Basics &amp; Properties</h1>
+
+</section>
+<section id="standard-two-sample" class="slide level2">
+<h2>Standard Two-Sample</h2>
+<ul>
+<li><strong>Two-sample comparison</strong> <span class="citation" data-cites="pocock2012">(<a href="#/references" role="doc-biblioref" onclick="">Pocock et al., 2012</a>)</span>
+<ul>
+<li><strong>Data</strong>: <span class="math inline">\(D_i^{(a)}, T_i^{(a)}, C_i^{(a)}\)</span>: survival, hospitalization, censoring times on <span class="math inline">\(i\)</span>th subject in group <span class="math inline">\(a\)</span> <span class="math inline">\((i=1,\ldots, N_a; a= 1, 0)\)</span></li>
+<li><strong>Hierarchical composite</strong>: Death &gt; hospitalization in <span class="math inline">\(\left[0, C_i^{(a)}\wedge C_j^{(1-a)}\right]\)</span></li>
+<li><strong>Pairwise comparisons</strong> <span class="math display">\[\begin{align}
+\hat w^{(a, 1-a)}_{ij}&amp;= \underbrace{I(D_j^{(1-a)}&lt; D_i^{(a)}\wedge C_i^{(a)}\wedge C_j^{(1-a)})}_{\mbox{win on survival}}\\
+&amp; + \underbrace{I(\min(D_i^{(a)}, D_j^{(1-a)}) &gt; C_i^{(a)}\wedge C_j^{(1-a)}, T_j^{(1-a)}&lt; T_i^{(a)}\wedge C_i^{(1)}\wedge C_j^{(0)})}_{\mbox{inconclusive on survival, win on hospitalization}}
+\end{align}\]</span></li>
+</ul></li>
+</ul>
+</section>
+<section id="pococks-rule" class="slide level2">
+<h2>Pocock’s Rule</h2>
+<ul>
+<li><strong>Win, lose, or tie?</strong></li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/test_wrp.png" style="width:80.0%"></p>
+</figure>
+</div>
+</section>
+<section id="calculation-of-win-ratio" class="slide level2">
+<h2>Calculation of Win Ratio</h2>
+<ul>
+<li><strong>Two-sample statistics</strong>
+<ul>
+<li><strong>Win (loss) fraction</strong> for group <span class="math inline">\(a\)</span> (<span class="math inline">\(1-a\)</span>) <span class="math display">\[
+\hat w^{(a, 1-a)}=(N_0N_1)^{-1}\sum_{i=1}^{N_a}\sum_{j=1}^{N_{1-a}}\hat w^{(a, 1-a)}_{ij}\]</span></li>
+<li><strong>Win ratio</strong> statistic <span class="math display">\[
+WR = \hat w^{(1, 0)} / \hat w^{(0, 1)}
+\]</span></li>
+<li><strong>Other measures</strong>
+<ul>
+<li><strong>Net benefit (proportion in favor)</strong>: <span class="math inline">\(\hat w^{(1, 0)} - \hat w^{(0, 1)}\)</span> <span class="citation" data-cites="buyse2010">(<a href="#/references" role="doc-biblioref" onclick="">Buyse, 2010</a>)</span></li>
+<li><strong>Win odds</strong>: <span class="math inline">\((\hat w^{(1, 0)} - \hat w^{(0, 1)} + 1)/ (\hat w^{(0, 1)} - \hat w^{(1, 0)} + 1)\)</span> <span class="citation" data-cites="brunner2021">(<a href="#/references" role="doc-biblioref" onclick="">Brunner et al., 2021</a>)</span></li>
+</ul></li>
+</ul></li>
+</ul>
+</section>
+<section id="the-binary-case" class="slide level2">
+<h2>The Binary Case</h2>
+<ul>
+<li><strong>Consider binary</strong> <span class="math inline">\(Y^{(a)}= 1, 0\)</span>
+<ul>
+<li><span class="math inline">\(\hat w^{(a, 1-a)}_{ij} = I(Y_i^{(a)}&gt; Y_j^{(1-a)})=Y_i^{(a)}(1-Y_j^{(1-a)})\)</span></li>
+<li><strong>Win (loss) fraction</strong> <span class="math display">\[
+\hat w^{(a, 1-a)} = (N_1N_0)^{-1}\sum_{i=1}^{N_a}\sum_{j=1}^{N_{1-a}}Y_i^{(a)}(1-Y_j^{(1-a)})
+= \hat p^{(a)}(1-\hat p^{(1-a)})\]</span> where <span class="math inline">\(\hat p^{(a)}= N_a^{-1}\sum_{i=1}^{N_a} Y_i^{(a)}\)</span> (success probability)</li>
+<li><strong>Equivalencies</strong> <span class="math display">\[\begin{align}
+{\rm Win\,\, ratio}&amp;= \frac{\hat w^{(1, 0)}}{\hat w^{(0, 1)}} = \frac{\hat p^{(1)}(1-\hat p^{(0)})}{\hat p^{(0)}(1-\hat p^{(1)})} = {\rm Odds \,\, ratio}\\
+{\rm Net \,\, benefit}&amp;=\hat w^{(1, 0)} - \hat w^{(0, 1)} = \hat p^{(1)}- \hat p^{(0)}= {\rm Risk \,\, difference}
+\end{align}\]</span></li>
+</ul></li>
+</ul>
+</section>
+<section id="hypothesis-testing" class="slide level2">
+<h2>Hypothesis Testing</h2>
+<ul>
+<li><strong>Test statistic</strong>
+<ul>
+<li><strong>Log-transformed and normalized</strong> <span class="math display">\[
+S_n = \frac{n^{1/2}\log(\hat w_{1,0}/\hat w_{0,1})}{\hat{\rm SE}} \stackrel{H_0}{\sim} N (0, 1)
+\]</span>
+<ul>
+<li><span class="math inline">\(n = N_1 + N_0\)</span></li>
+<li><span class="math inline">\(\hat{\rm SE}\)</span>: standard error of numerator by <span class="math inline">\(U\)</span>-statistic method <span class="citation" data-cites="Luo2015 Bebu2016 dong2016">(<a href="#/references" role="doc-biblioref" onclick="">Bebu &amp; Lachin, 2016</a>; <a href="#/references" role="doc-biblioref" onclick="">Dong et al., 2016</a>; <a href="#/references" role="doc-biblioref" onclick="">Luo et al., 2015</a>)</span></li>
+</ul></li>
+<li><strong>Null hypothesis</strong> <span class="math display">\[
+H_0: H^\t(s, t) = H^\c(s, t)\mbox{ for all } t\leq s
+\]</span>
+<ul>
+<li><span class="math inline">\(H^\a(s, t)=\pr(D^\a &gt; s, T^\a &gt; t)\)</span></li>
+</ul></li>
+</ul></li>
+</ul>
+</section>
+<section id="alternative-hypothesis" class="slide level2">
+<h2>Alternative Hypothesis</h2>
+<ul>
+<li><strong>What is estimand of WR?</strong>
+<ul>
+<li>Censoring-weighted average of time-dependent WRs <span class="citation" data-cites="oakes2016">(<a href="#/references" role="doc-biblioref" onclick="">Oakes, 2016</a>)</span> <span class="math display">\[
+\frac{\hat w_{1,0}}{\hat w_{0,1}}\to
+\frac{\int_0^\infty\pr(\mbox{Treatment wins by } t)\dd G(t)}
+{\int_0^\infty\pr(\mbox{Control wins by } t)\dd G(t)}
+\]</span>
+<ul>
+<li><span class="math inline">\(G(t)\)</span>: Distribution function of <span class="math inline">\(C^\t\wedge C^\c\)</span></li>
+</ul></li>
+</ul></li>
+<li><strong>Alternative hypothesis</strong>
+<ul>
+<li><strong>Treatment wins <em>consistently</em></strong> against control over time <span class="citation" data-cites="Mao2019">(<a href="#/references" role="doc-biblioref" onclick="">Mao, 2019</a>)</span> <span class="math display">\[
+H_A: \pr(\mbox{Treatment wins by } t)\geq \pr(\mbox{Control wins by } t)
+\mbox{ for all } t
+\]</span></li>
+<li><strong>Sufficient condition</strong>: joint stochastic order of death and nonfatal events <span class="math display">\[
+H_A: H^\t(s, t) \geq  H^\c(s, t)\mbox{ for all } t\leq s
+\]</span></li>
+</ul></li>
+</ul>
+</section>
+<section id="variations" class="slide level2">
+<h2>Variations</h2>
+<ul>
+<li><p><strong>Weighting</strong></p>
+<ul>
+<li>Unweighted pairwise comparisons <span class="math inline">\(\to\)</span> Gehan test</li>
+<li>Weight win/loss by time of follow-up <span class="math inline">\(\to\)</span> log-rank (more efficient) <span class="citation" data-cites="Luo2017">(<a href="#/references" role="doc-biblioref" onclick="">Luo et al., 2017</a>)</span></li>
+</ul></li>
+<li><p><strong>Stratification</strong></p>
+<ul>
+<li><strong>Stratified WR</strong>: within-stratum comparisons <span class="citation" data-cites="dong2017 dong2023">(<a href="#/references" role="doc-biblioref" onclick="">Dong et al., 2017</a>, <a href="#/references" role="doc-biblioref" onclick="">2023</a>)</span>
+<ul>
+<li>Sum of stratum-specific wins / sum of stratum-specific losses</li>
+</ul></li>
+<li>Adjust for confounding; increase efficiency</li>
+</ul></li>
+</ul>
+</section></section>
+<section>
+<section id="handling-recurrent-events" class="title-slide slide level1 center">
+<h1>Handling Recurrent Events</h1>
+
+</section>
+<section id="general-data" class="slide level2">
+<h2>General Data</h2>
+<ul>
+<li><strong>Outcome data</strong>
+<ul>
+<li>A subject in group <span class="math inline">\(a\)</span> <span class="math display">\[\mathcal H^{*{(a)}}(t)=\left\{N^{*{(a)}}_D(u), N^{*{(a)}}_1(u), \ldots, N^{*{(a)}}_K(u):0\leq u\leq t\right\}\]</span></li>
+<li><span class="math inline">\(N^{*{(a)}}_D(u), N^{*{(a)}}_1(u), \ldots, N^{*{(a)}}_K(u)\)</span>: counting processes for death and <span class="math inline">\(K\)</span> different types of nonfatal events</li>
+</ul></li>
+<li><strong>Observed data</strong>
+<ul>
+<li>Life history observed up to <span class="math inline">\(X^{(a)}= D^{(a)}\wedge C^{(a)}\)</span> <span class="math display">\[\{\mathcal H^{*{(a)}}(X^{(a)}), X^{(a)}\}\]</span></li>
+</ul></li>
+</ul>
+</section>
+<section id="general-rule-of-comparison" class="slide level2">
+<h2>General Rule of Comparison</h2>
+<ul>
+<li><strong>Win function</strong>
+<ul>
+<li><span class="math inline">\(\mathcal W(\mathcal H^{*{(a)}}, \mathcal H^{*{(1-a)}})(t) =I\left\{\mathcal H^{*{(a)}}(t) \mbox{ is more favorable than } \mathcal H^{*{(1-a)}}(t)\right\}\)</span></li>
+<li><strong>Basic requirements</strong>
+<ul>
+<li>(W1) <span class="math inline">\(\mathcal W(\mathcal H^{*{(a)}}, \mathcal H^{*{(1-a)}})(t)\)</span> is a function only of <span class="math inline">\(\mathcal H^{*{(a)}}(t)\)</span> and <span class="math inline">\(\mathcal H^{*{(1-a)}}(t)\)</span></li>
+<li>(W2) <span class="math inline">\(\mathcal W(\mathcal H^{*{(a)}}, \mathcal H^{*{(1-a)}})(t)+\mathcal W(\mathcal H^{*{(1-a)}}, \mathcal H^{*{(a)}})(t) \in \{0, 1\}\)</span></li>
+<li>(W3) <span class="math inline">\(\mathcal W(\mathcal H^{*{(a)}}, \mathcal H^{*{(1-a)}})(t)=\mathcal W(\mathcal H^{*{(a)}}, \mathcal H^{*{(1-a)}})(D^{(a)}\wedge D^{(1-a)}\wedge t)\)</span></li>
+</ul></li>
+<li><strong>Interpretations</strong>
+<ul>
+<li>(W1) Consistency of time frame</li>
+<li>(W2) Either win, loss, or tie</li>
+<li>(W3) No change of win-loss status after death (satisfied if death is prioritized)</li>
+</ul></li>
+</ul></li>
+</ul>
+</section>
+<section id="generalized-win-ratio" class="slide level2">
+<h2>Generalized Win Ratio</h2>
+<ul>
+<li><strong>Under general win function</strong> <span class="math inline">\(\mathcal W(\cdot,\cdot)\)</span>
+<ul>
+<li><strong>Win ratio statistic</strong> <span class="math display">\[\begin{equation}\label{eq:wr:gen_WR}
+\hat{\mathcal E}_n(\mathcal W)=\frac{(N_1N_0)^{-1}\sum_{i=1}^{N_1}\sum_{j=1}^{N_0}\mathcal W(\mathcal H^{*{(1)}}_{i}, \mathcal H^{*{(0)}}_{j})(X^{{(1)}}_{i}\wedge X^{{(0)}}_{j})}
+{(N_1N_0)^{-1}\sum_{i=1}^{N_1}\sum_{j=1}^{N_0}\mathcal W(\mathcal H^{*{(0)}}_{j}, \mathcal H^{*{(1)}}_{i})(X^{{(1)}}_{i}\wedge X^{{(0)}}_{j})}
+\end{equation}\]</span></li>
+<li>Still each pair is compared over <span class="math inline">\(\left[0, X^{{(1)}}_{i}\wedge X^{{(0)}}_{j}\right]\)</span>, but by a general rule <span class="math inline">\(\mathcal W\)</span></li>
+<li><strong>Stratified win ratio</strong>: ratio between weighted sum of <em>within-stratum</em> win/loss fractions</li>
+</ul></li>
+</ul>
+</section>
+<section id="examples" class="slide level2">
+<h2>Examples</h2>
+<ul>
+<li><strong>Pocock’s WR</strong>
+<ul>
+<li><span class="math inline">\(T^{(a)}_1\)</span>: time of first event in <span class="math inline">\(N^{*{(a)}}(t)=\sum_{k=1}^K N^{*{(a)}}_k(t)\)</span> <span class="math display">\[\begin{align}\label{eq:wr:PWR}
+\mathcal W_{\rm P}(\mathcal H^{*{(a)}}, \mathcal H^{*{(1-a)}})(t)&amp;=I\{D^{(1-a)}&lt;D^{(a)}\wedge t\}\notag\\
+&amp;\hspace{2mm}+I\{D^{(a)}\wedge D^{(1-a)}&gt;t, T_{1}^{(1-a)}&lt;T_{1}^{(a)}\wedge t\}
+\end{align}\]</span></li>
+<li><span class="math inline">\(\hat{\mathcal E}_n(\mathcal W_{\rm P})\)</span></li>
+</ul></li>
+<li><strong>TFE WR</strong>
+<ul>
+<li><span class="math inline">\(\tilde T^{(a)}=\min(D^{(a)}, T_1^{(a)})\)</span> <span class="math display">\[
+\mathcal W_{\rm TFE}(\mathcal H^{*{(a)}},\mathcal H^{*{(1-a)}})(t)=I(\tilde T^{(1-a)}&lt;\tilde T^{(a)}\wedge t)
+\]</span></li>
+<li><span class="math inline">\(\hat{\mathcal E}_n(\mathcal W_{\rm TFE})\)</span>: allowable but not desirable</li>
+</ul></li>
+</ul>
+</section>
+<section id="options-for-recurrent-events" class="slide level2">
+<h2>Options for Recurrent Events</h2>
+<ul>
+<li><strong>Three variations</strong> <span class="citation" data-cites="mao2022a">(<a href="#/references" role="doc-biblioref" onclick="">Mao et al., 2022</a>)</span>
+<ul>
+<li><strong>Naive</strong>: Death &gt; number of events <span class="citation" data-cites="finkelstein1999">(<a href="#/references" role="doc-biblioref" onclick="">Finkelstein &amp; Schoenfeld, 1999</a>)</span></li>
+<li><strong>First-event</strong>: Death &gt; number of events &gt; time to <em>first</em> event</li>
+<li><strong>Last-event</strong>: Death &gt; number of events &gt; time to <em>last</em> event</li>
+</ul></li>
+<li><strong>Properties</strong>
+<ul>
+<li><p>First/Last-event <em>fewer ties</em> than standard WR</p></li>
+<li><p>First/Last-event <span class="math inline">\(\to\)</span> Pocock’s WR with <em>nonrecurrent</em> event</p></li>
+<li><p>Last-event: longer-term endpoint (<em>recommended</em>)</p>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Exercise</strong></p>
+</div>
+<div class="callout-content">
+<p>Write out the win function <span class="math inline">\(\mathcal W\)</span> for the three versions of recurrent-event WR.</p>
+</div>
+</div>
+</div></li>
+</ul></li>
+</ul>
+</section>
+<section id="comparison-with-pococks" class="slide level2">
+<h2>Comparison with Pocock’s</h2>
+<ul>
+<li><strong>Last-event WR (LWR)</strong>
+<ul>
+<li>vs Pocock’s WR (PWR)</li>
+</ul></li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/test_comp_rwr.png" style="width:80.0%"></p>
+</figure>
+</div>
+</section>
+<section id="alternative-hypothesis-for-lwr" class="slide level2">
+<h2>Alternative Hypothesis for LWR</h2>
+<ul>
+<li><strong>LWR</strong>
+<ul>
+<li>Tests joint stochastic order of all events <span class="math display">\[
+  H_A: H^\t(s, t_1, t_2, \ldots) \geq  H^\c(s, t_1, t_2, \ldots)\mbox{ for all }
+  t_1\leq t_2\leq\cdots\leq s
+  \]</span>
+<ul>
+<li><span class="math inline">\(H^\t(s, t_1, t_2, \ldots)=\pr(D^\a &gt; s, T_1^\a &gt; t_1, T_2^\a &gt; t_2, \ldots)\)</span></li>
+<li><span class="math inline">\(T_k^\a\)</span>: <span class="math inline">\(k\)</span>th recurrent event in <span class="math inline">\(N^{*{(a)}}(t)\)</span> <span class="math inline">\((k=1, 2, \ldots)\)</span></li>
+</ul></li>
+<li>Treatment stochastically delays all events</li>
+<li>All variations of WR implemented in <a href="https://cran.r-project.org/package=WR" target="_blank"><code>WR</code></a> package
+<ul>
+<li>Simulations show LWR more powerful than rest <span class="citation" data-cites="mao2022a">(<a href="#/references" role="doc-biblioref" onclick="">Mao et al., 2022</a>)</span></li>
+</ul></li>
+</ul></li>
+</ul>
+</section>
+<section id="software-wrwrrec" class="slide level2">
+<h2>Software: <code>WR::WRrec()</code></h2>
+<ul>
+<li><strong>Basic syntax</strong>
+<ul>
+<li><strong>Long format</strong> <code>ID</code>: unique patient identifier; <code>time</code>: event times; <code>status</code>: event types (<code>1</code>: death; <code>2</code>: recurrent events; <code>0</code>: censoring); <code>trt</code>: binary treatment; <code>strata</code>: strata variable</li>
+<li><code>naive = TRUE</code>: calculates naive/FWR as well as LWR</li>
+</ul></li>
+</ul>
+<div class="big-code">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">library</span>(WR)</span>
+<span id="cb1-2"><a href="#cb1-2"></a>obj <span class="ot">&lt;-</span> <span class="fu">WRrec</span>(ID, time, status, trt, <span class="at">strata =</span> <span class="cn">NULL</span>, </span>
+<span id="cb1-3"><a href="#cb1-3"></a>              <span class="at">naive =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<ul>
+<li><strong>Output</strong>: a list of class <code>WRrec</code>
+<ul>
+<li><code>obj$log.WR</code>: log-LWR; <code>obj$se</code>: <span class="math inline">\(\hat\se(\mbox{log-LWR})\)</span></li>
+<li><code>print(obj)</code> to print summary results</li>
+</ul></li>
+</ul>
+</section>
+<section id="hf-action-data" class="slide level2">
+<h2>HF-ACTION: Data</h2>
+<ul>
+<li><p><strong>High-risk subset</strong> <span class="math inline">\((n=426)\)</span></p>
+<ul>
+<li><code>age60</code>: indicator of age <span class="math inline">\(\geq\)</span> 60 yrs</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="fu">library</span>(WR)</span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="do">##### Read in HF-ACTION DATA########</span></span>
+<span id="cb2-3"><a href="#cb2-3"></a><span class="co"># same as rmt::hfaction used in chap 1 </span></span>
+<span id="cb2-4"><a href="#cb2-4"></a><span class="co">#  (except for status coding)</span></span>
+<span id="cb2-5"><a href="#cb2-5"></a><span class="fu">data</span>(hfaction_cpx9)</span>
+<span id="cb2-6"><a href="#cb2-6"></a>hfaction <span class="ot">&lt;-</span> hfaction_cpx9</span>
+<span id="cb2-7"><a href="#cb2-7"></a><span class="fu">head</span>(hfaction)</span>
+<span id="cb2-8"><a href="#cb2-8"></a><span class="co">#        patid       time status trt_ab age60</span></span>
+<span id="cb2-9"><a href="#cb2-9"></a><span class="co">#&gt; 1 HFACT00001  7.2459016      2      0     1</span></span>
+<span id="cb2-10"><a href="#cb2-10"></a><span class="co">#&gt; 2 HFACT00001 12.5573770      0      0     1</span></span>
+<span id="cb2-11"><a href="#cb2-11"></a><span class="co">#&gt; 3 HFACT00002  0.7540984      2      0     1</span></span>
+<span id="cb2-12"><a href="#cb2-12"></a><span class="co">#&gt; 4 HFACT00002  4.2950820      2      0     1</span></span>
+<span id="cb2-13"><a href="#cb2-13"></a><span class="co">#&gt; 5 HFACT00002  4.7540984      2      0     1</span></span>
+<span id="cb2-14"><a href="#cb2-14"></a><span class="co">#&gt; 6 HFACT00002 45.9016393      0      0     1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></li>
+</ul>
+</section>
+<section id="hf-action-summary" class="slide level2">
+<h2>HF-ACTION: Summary</h2>
+<ul>
+<li><strong>Descriptive</strong></li>
+</ul>
+<div class="cell">
+<div class="cell-output-display">
+<div id="tbl-desc">
+<table>
+<caption>Table&nbsp;1: Summary statistics for a high-risk subgroup (n=426) in HF-ACTION trial.</caption>
+<colgroup>
+<col style="width: 21%">
+<col style="width: 15%">
+<col style="width: 27%">
+<col style="width: 36%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: center;"></th>
+<th style="text-align: center;">Usual care (N = 221)</th>
+<th style="text-align: center;">Exercise training (N = 205)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Age</td>
+<td style="text-align: center;">≤ 60 years</td>
+<td style="text-align: center;">122 (55.2%)</td>
+<td style="text-align: center;">128 (62.4%)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: center;">&gt; 60 years</td>
+<td style="text-align: center;">99 (44.8%)</td>
+<td style="text-align: center;">77 (37.6%)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Follow-up</td>
+<td style="text-align: center;">(months)</td>
+<td style="text-align: center;">28.6 (18.4, 39.3)</td>
+<td style="text-align: center;">27.6 (19, 40.2)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Death</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">57 (25.8%)</td>
+<td style="text-align: center;">36 (17.6%)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Hospitalizations</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">51 (23.1%)</td>
+<td style="text-align: center;">60 (29.3%)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: center;">1-3</td>
+<td style="text-align: center;">114 (51.6%)</td>
+<td style="text-align: center;">102 (49.8%)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: center;">4-10</td>
+<td style="text-align: center;">49 (22.2%)</td>
+<td style="text-align: center;">39 (19%)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: center;">&gt;10</td>
+<td style="text-align: center;">7 (3.2%)</td>
+<td style="text-align: center;">4 (2%)</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</section>
+<section id="hf-action-wr-analyses" class="slide level2">
+<h2>HF-ACTION: WR Analyses</h2>
+<ul>
+<li><p><strong>Naive (NWR), first-event (FWR), LWR</strong></p>
+<ul>
+<li>Stratified by age <span class="math inline">\(&lt;\)</span> or <span class="math inline">\(\geq 60\)</span></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>obj <span class="ot">&lt;-</span> <span class="fu">WRrec</span>(<span class="at">ID =</span> hfaction<span class="sc">$</span>patid, <span class="at">time =</span> hfaction<span class="sc">$</span>time, </span>
+<span id="cb3-2"><a href="#cb3-2"></a>             <span class="at">status =</span> hfaction<span class="sc">$</span>status, <span class="at">trt =</span> hfaction<span class="sc">$</span>trt_ab,</span>
+<span id="cb3-3"><a href="#cb3-3"></a>             <span class="at">strata =</span> hfaction<span class="sc">$</span>age60, <span class="at">naive =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>obj</span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="co">#&gt;             N Rec. Event Death Med. Follow-up</span></span>
+<span id="cb4-3"><a href="#cb4-3"></a><span class="co">#&gt; Control   221        571    57       28.62295</span></span>
+<span id="cb4-4"><a href="#cb4-4"></a><span class="co">#&gt; Treatment 205        451    36       27.57377</span></span>
+<span id="cb4-5"><a href="#cb4-5"></a><span class="co">#&gt; </span></span>
+<span id="cb4-6"><a href="#cb4-6"></a><span class="co">#&gt; WR analyses:</span></span>
+<span id="cb4-7"><a href="#cb4-7"></a><span class="co">#&gt;     Win prob Loss prob WR (95% CI)*      p-value</span></span>
+<span id="cb4-8"><a href="#cb4-8"></a><span class="co">#&gt; LWR 50.4%    38.2%     1.32 (1.05, 1.66) 0.0189 </span></span>
+<span id="cb4-9"><a href="#cb4-9"></a><span class="co">#&gt; FWR 50.4%    38.3%     1.32 (1.04, 1.66) 0.0202 </span></span>
+<span id="cb4-10"><a href="#cb4-10"></a><span class="co">#&gt; NWR 47%      35%       1.34 (1.05, 1.72) 0.0193 </span></span>
+<span id="cb4-11"><a href="#cb4-11"></a><span class="co">#&gt; -----</span></span>
+<span id="cb4-12"><a href="#cb4-12"></a><span class="co">#&gt; *Note: The scale of WR depends on censoring distribution.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></li>
+</ul>
+</section>
+<section id="hf-action-overall" class="slide level2">
+<h2>HF-ACTION: Overall</h2>
+<ul>
+<li><strong>Recurrent-event WRs more powerful than PWR</strong>
+<ul>
+<li>NWR/FWR/LWR similar as <span class="math inline">\(N\)</span> hosp is highly variable (0 - 26)</li>
+</ul></li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/test_hfaction_wr.png" style="width:70.0%"></p>
+</figure>
+</div>
+</section></section>
+<section>
+<section id="sample-size-calculations" class="title-slide slide level1 center">
+<h1>Sample Size Calculations</h1>
+
+</section>
+<section id="special-case-pwr" class="slide level2">
+<h2>Special Case: PWR</h2>
+<ul>
+<li><strong>Simplified outcome model</strong>
+<ul>
+<li><strong>Gumbel-Hougaard copula</strong> <span class="citation" data-cites="oakes1989">(<a href="#/references" role="doc-biblioref" onclick="">Oakes, 1989</a>)</span> <span class="math display">\[
+\pr(D^\a&gt;s, T_1^\a&gt;t) = \exp\left(-\left[\{\exp(a\xi_D)\lambda_D\}^\kappa + \{\exp(a\xi_H)\lambda_H\}^\kappa \right]^{1/\kappa}\right)
+\]</span></li>
+<li><strong>Parameters</strong>
+<ul>
+<li><span class="math inline">\(\lambda_D, \lambda_H\)</span>: baseline hazard rates for death/nonfatal event</li>
+<li><span class="math inline">\(\exp(\xi_D), \exp(\xi_H)\)</span>: treatment HR on death/nonfatal event (<em>effect sizes</em>)</li>
+<li><span class="math inline">\(\kappa\geq 1\)</span>: association parameter (Kendall’s rank correlation <span class="math inline">\(1-\kappa^{-1}\)</span>)</li>
+</ul></li>
+</ul></li>
+<li><strong>Study design</strong>
+<ul>
+<li>Uniform patient accrual over <span class="math inline">\([0, \tau_b]\)</span>; follow all until <span class="math inline">\(\tau&gt;\tau_b\)</span></li>
+<li>Random loss-to-follow-up (LTFU) rate <span class="math inline">\(\lambda_L\)</span></li>
+</ul></li>
+</ul>
+</section>
+<section id="sample-size-formula" class="slide level2">
+<h2>Sample Size Formula</h2>
+<ul>
+<li><strong>Total sample size needed</strong> <span class="math display">\[
+n = \frac{\zeta_0^2(\lambda_D,\lambda_H,\kappa,\tau_c,\tau,\lambda_L)(z_{1-\alpha/2} + z_\gamma)^2}
+{q(1-q)\delta(\lambda_D,\lambda_H,\kappa,\tau_c,\tau,\lambda_L)^\T\xi}
+\]</span>
+<ul>
+<li><span class="math inline">\(\alpha =0.05\)</span>: type I error; <span class="math inline">\(\gamma = 0.8, 0.9\)</span>: desired power (<span class="math inline">\(z_\gamma=\Phi^{-1}(\gamma)\)</span>)</li>
+<li><span class="math inline">\(\xi=(\xi_D,\xi_H)^\T\)</span>: component-wise log-HRs (<em>effect sizes</em>)</li>
+<li><span class="math inline">\(q=N_1/n\)</span>: proportion assigned to treatment</li>
+<li><strong>Nuisance parameters</strong>
+<ul>
+<li><span class="math inline">\(\zeta_0(\lambda_D,\lambda_H,\kappa,\tau_c,\tau,\lambda_L)\)</span>: individual-level noise parameter (cf.&nbsp;SD) in WR</li>
+<li><span class="math inline">\(\delta(\lambda_D,\lambda_H,\kappa,\tau_c,\tau,\lambda_L)\)</span>: differential vector for log-WR <span class="math inline">\(\to\)</span> log-HRs</li>
+<li>Calculable by <code>WR::base(lambda_D,lambda_H,kappa,tau_c,tau,lambda_L)</code></li>
+</ul></li>
+</ul></li>
+</ul>
+</section>
+<section id="parameter-specification" class="slide level2">
+<h2>Parameter Specification</h2>
+<ul>
+<li><p><strong>Baseline outcome parameters</strong> <span class="math inline">\((\lambda_D,\lambda_H,\kappa)\)</span></p>
+<ul>
+<li>Estimable from <em>pilot/historical data</em>
+<ul>
+<li><code>WR::gumbel.est(id, time, status)</code></li>
+</ul></li>
+</ul>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong><strong>Exercise</strong>: Under Gumbel-Hougaard copula</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li><p><span class="math inline">\(D^\c\sim\mbox{exponential}(\lambda_D)\)</span></p></li>
+<li><p><span class="math inline">\(\tilde T^\c = D^\c\wedge T_1^\c\sim\mbox{exponential}\left(\lambda_{CE}\right)\)</span>, where <span class="math inline">\(\lambda_{CE} = (\lambda_D^\kappa + \lambda_H^\kappa)^{1/\kappa}\)</span></p></li>
+<li><p>Cause-specific hazard for <span class="math inline">\(T_1^\c\)</span>: <span class="math inline">\(\lambda_H^\#=\lambda_H^\kappa\lambda_{CE}^{1-\kappa}\)</span></p>
+<p>Three parameters <span class="math inline">\(\to\)</span> three estimable quantities</p></li>
+</ul>
+</div>
+</div>
+</div></li>
+<li><p><strong>Design parameters</strong> <span class="math inline">\((\tau_c,\tau,\lambda_L)\)</span></p>
+<ul>
+<li>Self-specify</li>
+</ul></li>
+</ul>
+</section>
+<section id="software-wrwrss" class="slide level2">
+<h2>Software: <code>WR::WRSS()</code></h2>
+<ul>
+<li><p><strong>Basic steps</strong></p>
+<ul>
+<li><code>xi</code>: log-HRs <span class="math inline">\(\xi=(\xi_D, \xi_H)^T\)</span> (e.g., <span class="math inline">\(\log (0.8, 0.9)^\T\)</span>)</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="co"># Step 1: estimate (lambda_D, lambda_H, kappa) from pilot data</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a>outcome_base <span class="ot">&lt;-</span> <span class="fu">gumbel.est</span>(id, time, status)</span>
+<span id="cb5-3"><a href="#cb5-3"></a>lambda_D <span class="ot">&lt;-</span> outcome_base<span class="sc">$</span>lambda_D</span>
+<span id="cb5-4"><a href="#cb5-4"></a>lambda_H <span class="ot">&lt;-</span> outcome_base<span class="sc">$</span>lambda_H</span>
+<span id="cb5-5"><a href="#cb5-5"></a>kappa <span class="ot">&lt;-</span> obj_base<span class="sc">$</span>kappa</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="co"># Step 2: calculate zeta2 and delta from</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="co"># (lambda_D, lambda_H, kappa, tau_b, tau, lambda_L)</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a>bparam <span class="ot">&lt;-</span> <span class="fu">base</span>(lambda_D,lambda_H,kappa,tau_c,tau,lambda_L)</span>
+<span id="cb6-4"><a href="#cb6-4"></a><span class="do">## a list of zeta2 and delta </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="co"># Step 3: calculate sample size using bparam</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a>obj <span class="ot">&lt;-</span> <span class="fu">WRSS</span>(xi, bparam, <span class="at">q =</span> <span class="fl">0.5</span>, <span class="at">alpha =</span> <span class="fl">0.05</span>, <span class="at">side =</span> <span class="dv">2</span>, <span class="at">power =</span> <span class="fl">0.8</span>)</span>
+<span id="cb7-3"><a href="#cb7-3"></a>obj<span class="sc">$</span>n</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></li>
+</ul>
+</section>
+<section id="a-new-training-trial" class="slide level2">
+<h2>A New Training Trial</h2>
+<ul>
+<li><strong>Background</strong>
+<ul>
+<li>WR demonstrated beneficial effect of training on (death &gt; hosp) in HF patients with CPX <span class="math inline">\(\leq 9\)</span> min</li>
+</ul></li>
+<li><strong>Design of new trial</strong>
+<ul>
+<li><strong>Purpose</strong>: test a new training program with existing one as standard care</li>
+<li><strong>Design</strong>: <span class="math inline">\(\tau_b = 3\)</span> yrs patient accrual, follow until <span class="math inline">\(\tau = 4\)</span> yrs
+<ul>
+<li>Assume minimal LTFU <span class="math inline">\(\lambda_L = 0.01\)</span> per person-year</li>
+</ul></li>
+<li><strong>Baseline event rates/correlation</strong>: estimable from <span class="math inline">\(n=205\)</span> patients in HF-ACTION training arm</li>
+</ul></li>
+</ul>
+</section>
+<section id="hf-action-historical-data" class="slide level2">
+<h2>HF-ACTION: Historical Data</h2>
+<ul>
+<li><strong>Extract data from <code>hfaction</code></strong></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="co"># get training arm data</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a>pilot <span class="ot">&lt;-</span> hfaction <span class="sc">|&gt;</span> </span>
+<span id="cb8-3"><a href="#cb8-3"></a>  <span class="fu">filter</span>(trt_ab <span class="sc">==</span> <span class="dv">1</span>)</span>
+<span id="cb8-4"><a href="#cb8-4"></a><span class="fu">head</span>(pilot)</span>
+<span id="cb8-5"><a href="#cb8-5"></a><span class="co">#&gt;     patid      time status trt_ab age60</span></span>
+<span id="cb8-6"><a href="#cb8-6"></a><span class="co">#&gt; HFACT00007  3.47541      2      1     1</span></span>
+<span id="cb8-7"><a href="#cb8-7"></a><span class="co">#&gt; HFACT00007 21.60656      2      1     1</span></span>
+<span id="cb8-8"><a href="#cb8-8"></a><span class="co">#&gt; HFACT00007 29.04918      2      1     1</span></span>
+<span id="cb8-9"><a href="#cb8-9"></a><span class="co">#&gt; HFACT00007 32.16393      2      1     1</span></span>
+<span id="cb8-10"><a href="#cb8-10"></a><span class="co">#&gt; HFACT00007 34.88525      1      1     1</span></span>
+<span id="cb8-11"><a href="#cb8-11"></a><span class="co">#&gt; HFACT00035 48.88525      0      1     1</span></span>
+<span id="cb8-12"><a href="#cb8-12"></a><span class="co"># number of subjects</span></span>
+<span id="cb8-13"><a href="#cb8-13"></a>pilot <span class="sc">|&gt;</span> <span class="fu">distinct</span>(patid) <span class="sc">|&gt;</span> </span>
+<span id="cb8-14"><a href="#cb8-14"></a>  <span class="fu">count</span>()</span>
+<span id="cb8-15"><a href="#cb8-15"></a><span class="co">#&gt;   n</span></span>
+<span id="cb8-16"><a href="#cb8-16"></a><span class="co">#&gt; 205</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="hf-action-baseline-outcome" class="slide level2">
+<h2>HF-ACTION: Baseline Outcome</h2>
+<ul>
+<li><strong>Parameter estimates</strong>
+<ul>
+<li><span class="math inline">\(\lambda_D=0.07\)</span> year<span class="math inline">\(^{-1}\)</span>, <span class="math inline">\(\lambda_H=0.56\)</span> year<span class="math inline">\(^{-1}\)</span>, Kendall’s corr <span class="math inline">\(=36.1\%\)</span></li>
+</ul></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>outcome_base <span class="ot">&lt;-</span> <span class="fu">gumbel.est</span>(pilot<span class="sc">$</span>patid, pilot<span class="sc">$</span>time <span class="sc">/</span> <span class="dv">12</span>, pilot<span class="sc">$</span>status)</span>
+<span id="cb9-2"><a href="#cb9-2"></a>lambda_D <span class="ot">&lt;-</span> outcome_base<span class="sc">$</span>lambda_D</span>
+<span id="cb9-3"><a href="#cb9-3"></a>lambda_H <span class="ot">&lt;-</span> outcome_base<span class="sc">$</span>lambda_H</span>
+<span id="cb9-4"><a href="#cb9-4"></a>kappa <span class="ot">&lt;-</span> outcome_base<span class="sc">$</span>kappa</span>
+<span id="cb9-5"><a href="#cb9-5"></a></span>
+<span id="cb9-6"><a href="#cb9-6"></a>lambda_D</span>
+<span id="cb9-7"><a href="#cb9-7"></a><span class="co">#&gt; [1] 0.07307293</span></span>
+<span id="cb9-8"><a href="#cb9-8"></a>lambda_H</span>
+<span id="cb9-9"><a href="#cb9-9"></a><span class="co">#&gt; 1] 0.5596186</span></span>
+<span id="cb9-10"><a href="#cb9-10"></a>kappa</span>
+<span id="cb9-11"><a href="#cb9-11"></a><span class="co">#&gt; [1] 1.564485</span></span>
+<span id="cb9-12"><a href="#cb9-12"></a><span class="do">## Kendall's rank correlation</span></span>
+<span id="cb9-13"><a href="#cb9-13"></a><span class="dv">1</span> <span class="sc">-</span> <span class="dv">1</span><span class="sc">/</span>kappa</span>
+<span id="cb9-14"><a href="#cb9-14"></a><span class="co">#&gt; [1] 0.360812</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="sample-size-example" class="slide level2">
+<h2>Sample Size: Example</h2>
+<ul>
+<li><strong>One scenario</strong>
+<ul>
+<li>HRs on death &amp; hospitalization: 0.9, 0.8</li>
+<li>Sample size needed for power 80%: <span class="math inline">\(n=1261\)</span></li>
+</ul></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="co"># set design parameters</span></span>
+<span id="cb10-2"><a href="#cb10-2"></a>tau_b <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb10-3"><a href="#cb10-3"></a>tau <span class="ot">&lt;-</span> <span class="dv">4</span></span>
+<span id="cb10-4"><a href="#cb10-4"></a>lambda_L <span class="ot">&lt;-</span> <span class="fl">0.001</span></span>
+<span id="cb10-5"><a href="#cb10-5"></a><span class="co"># Step 2: use base() function to compute zeta2 and delta</span></span>
+<span id="cb10-6"><a href="#cb10-6"></a>bparam <span class="ot">&lt;-</span> <span class="fu">base</span>(lambda_D, lambda_H, kappa, tau_b, tau, lambda_L)</span>
+<span id="cb10-7"><a href="#cb10-7"></a><span class="co"># Step 3: compute sample size under HRs 0.8 and 0.9</span></span>
+<span id="cb10-8"><a href="#cb10-8"></a>obj <span class="ot">&lt;-</span> <span class="fu">WRSS</span>(<span class="at">xi =</span> <span class="fu">log</span>(<span class="fu">c</span>(<span class="fl">0.9</span>, <span class="fl">0.8</span>)), <span class="at">bparam =</span> bparam, <span class="at">q =</span>  <span class="fl">0.5</span>, <span class="at">alpha =</span> <span class="fl">0.05</span>,</span>
+<span id="cb10-9"><a href="#cb10-9"></a>          <span class="at">power =</span> <span class="fl">0.8</span>)</span>
+<span id="cb10-10"><a href="#cb10-10"></a>obj<span class="sc">$</span>n</span>
+<span id="cb10-11"><a href="#cb10-11"></a><span class="co">#&gt;          [,1]</span></span>
+<span id="cb10-12"><a href="#cb10-12"></a><span class="co">#&gt; [1,] 1260.913</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="a-range-of-effect-sizes" class="slide level2">
+<h2>A Range of Effect Sizes</h2>
+<ul>
+<li>Different HRs: <span class="math inline">\(\exp(\xi)\in [0.6, 0.95]^{\otimes 2}\)</span></li>
+</ul>
+<p><img data-src="images/test_hfaction_ss.png" style="width:100.0%" data-fig-align="center"> # Conclusion</p>
+</section>
+<section id="notes" class="slide level2">
+<h2>Notes</h2>
+<ul>
+<li><strong>More on sample size</strong>
+<ul>
+<li>Simplified/approximate approaches in various scenarios <span class="citation" data-cites="yu2022 wang2023a gasparyan2021 zhou2022 seifu2022">(<a href="#/references" role="doc-biblioref" onclick="">Gasparyan et al., 2021</a>; <a href="#/references" role="doc-biblioref" onclick="">Seifu et al., 2022</a>, etc.; <a href="#/references" role="doc-biblioref" onclick="">Wang et al., 2023</a>; <a href="#/references" role="doc-biblioref" onclick="">Yu &amp; Ganju, 2022</a>; <a href="#/references" role="doc-biblioref" onclick="">Zhou et al., 2022</a>)</span></li>
+</ul></li>
+</ul>
+</section>
+<section id="summary" class="slide level2">
+<h2>Summary</h2>
+<ul>
+<li><strong>Win ratio test</strong>
+<ul>
+<li><strong>Standard</strong>: death &gt; one nonfatal event</li>
+<li><strong>Recurrent events</strong>: death &gt; frequency &gt; time to last/first event</li>
+<li><code>WR::WRrec(ID, time, status, trt, strata)</code></li>
+</ul></li>
+<li><strong>Sample size calculations</strong>
+<ul>
+<li><strong>Gumbel-Hougaard copula</strong> for death &amp; nonfatal event <span class="math display">\[\pr(D^\a&gt;s, T_1^\a&gt;t) = \exp\left(-\left[\{\exp(a\xi_D)\lambda_D\}^\kappa + \{\exp(a\xi_H)\lambda_H\}^\kappa \right]^{1/\kappa}\right)
+\]</span>
+<ul>
+<li>Step 1: estimate <span class="math inline">\((\lambda_D,\lambda_H,\kappa)\)</span> <code>WR::gumbel.est(id, time, status)</code></li>
+<li>Step 2: calculate <span class="math inline">\(\zeta^2_0(\lambda_D,\lambda_H,\kappa,\tau_b,\tau,\lambda_L)\)</span> and <span class="math inline">\(\delta(\lambda_D,\lambda_H,\kappa,\tau_b,\tau,\lambda_L)\)</span> <code>WR::base()</code></li>
+<li>Step 3: <span class="math inline">\(n=\frac{\zeta_0^2(\lambda_D,\lambda_H,\kappa,\tau_c,\tau,\lambda_L)(z_{1-\alpha/2} + z_\gamma)^2}{q(1-q)\delta(\lambda_D,\lambda_H,\kappa,\tau_c,\tau,\lambda_L)^\T\xi}\)</span> <code>WR::WRSS()</code></li>
+</ul></li>
+</ul></li>
+</ul>
+</section>
+<section id="references" class="slide level2 smaller scrollable">
+<h2>References</h2>
+<div class="footer footer-default">
+
+</div>
+<div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="list">
+<div id="ref-Bebu2016" class="csl-entry" role="listitem">
+Bebu, I., &amp; Lachin, J. M. (2016). Large sample inference for a win ratio analysis of a composite outcome based on prioritized components. <em>Biostatistics</em>, <em>17</em>(1), 178–187. <a href="https://doi.org/10.1093/biostatistics/kxv032">https://doi.org/10.1093/biostatistics/kxv032</a>
+</div>
+<div id="ref-brunner2021" class="csl-entry" role="listitem">
+Brunner, E., Vandemeulebroecke, M., &amp; Mütze, T. (2021). Win odds: An adaptation of the win ratio to include ties. <em>Statistics in Medicine</em>, <em>40</em>(14), 3367–3384. <a href="https://doi.org/10.1002/sim.8967">https://doi.org/10.1002/sim.8967</a>
+</div>
+<div id="ref-buyse2010" class="csl-entry" role="listitem">
+Buyse, M. (2010). Generalized pairwise comparisons of prioritized outcomes in the two<span>-</span>sample problem. <em>Statistics in Medicine</em>, <em>29</em>(30), 3245–3257. <a href="https://doi.org/10.1002/sim.3923">https://doi.org/10.1002/sim.3923</a>
+</div>
+<div id="ref-dong2023" class="csl-entry" role="listitem">
+Dong, G., Hoaglin, D. C., Huang, B., Cui, Y., Wang, D., Cheng, Y., &amp; Gamalo-Siebers, M. (2023). The stratified win statistics (win ratio, win odds, and net benefit). <em>Pharmaceutical Statistics</em>, <em>22</em>(4), 748–756. <a href="https://doi.org/10.1002/pst.2293">https://doi.org/10.1002/pst.2293</a>
+</div>
+<div id="ref-dong2016" class="csl-entry" role="listitem">
+Dong, G., Li, D., Ballerstedt, S., &amp; Vandemeulebroecke, M. (2016). A generalized analytic solution to the win ratio to analyze a composite endpoint considering the clinical importance order among components. <em>Pharmaceutical Statistics</em>, <em>15</em>(5), 430–437. <a href="https://doi.org/10.1002/pst.1763">https://doi.org/10.1002/pst.1763</a>
+</div>
+<div id="ref-dong2017" class="csl-entry" role="listitem">
+Dong, G., Qiu, J., Wang, D., &amp; Vandemeulebroecke, M. (2017). The stratified win ratio. <em>Journal of Biopharmaceutical Statistics</em>, <em>28</em>(4), 778–796. <a href="https://doi.org/10.1080/10543406.2017.1397007">https://doi.org/10.1080/10543406.2017.1397007</a>
+</div>
+<div id="ref-finkelstein1999" class="csl-entry" role="listitem">
+Finkelstein, D. M., &amp; Schoenfeld, D. A. (1999). Combining mortality and longitudinal measures in clinical trials. <em>Statistics in Medicine</em>, <em>18</em>(11), 1341–1354. <a href="https://doi.org/10.1002/(sici)1097-0258(19990615)18:11<1341::aid-sim129>3.0.co;2-7">https://doi.org/10.1002/(sici)1097-0258(19990615)18:11&lt;1341::aid-sim129&gt;3.0.co;2-7</a>
+</div>
+<div id="ref-gasparyan2021" class="csl-entry" role="listitem">
+Gasparyan, S. B., Kowalewski, E. K., Folkvaljon, F., Bengtsson, O., Buenconsejo, J., Adler, J., &amp; Koch, G. G. (2021). Power and sample size calculation for the win odds test: application to an ordinal endpoint in COVID-19 trials. <em>Journal of Biopharmaceutical Statistics</em>, <em>31</em>(6), 765–787. <a href="https://doi.org/10.1080/10543406.2021.1968893">https://doi.org/10.1080/10543406.2021.1968893</a>
+</div>
+<div id="ref-Luo2017" class="csl-entry" role="listitem">
+Luo, X., Qiu, J., Bai, S., &amp; Tian, H. (2017). Weighted win loss approach for analyzing prioritized outcomes. <em>Statistics in Medicine</em>, <em>36</em>(15), 2452–2465. <a href="https://doi.org/10.1002/sim.7284">https://doi.org/10.1002/sim.7284</a>
+</div>
+<div id="ref-Luo2015" class="csl-entry" role="listitem">
+Luo, X., Tian, H., Mohanty, S., &amp; Tsai, W. Y. (2015). An Alternative Approach to Confidence Interval Estimation for the Win Ratio Statistic. <em>Biometrics</em>, <em>71</em>(1), 139–145. <a href="https://doi.org/10.1111/biom.12225">https://doi.org/10.1111/biom.12225</a>
+</div>
+<div id="ref-Mao2019" class="csl-entry" role="listitem">
+Mao, L. (2019). On the Alternative Hypotheses for the Win Ratio. <em>Biometrics</em>, <em>75</em>(1), 347–351. <a href="https://doi.org/10.1111/biom.12954">https://doi.org/10.1111/biom.12954</a>
+</div>
+<div id="ref-mao2022a" class="csl-entry" role="listitem">
+Mao, L., Kim, K., &amp; Li, Y. (2022). On recurrent-event win ratio. <em>Statistical Methods in Medical Research</em>, <em>31</em>(6), 1120–1134. <a href="https://doi.org/10.1177/09622802221084134">https://doi.org/10.1177/09622802221084134</a>
+</div>
+<div id="ref-oakes1989" class="csl-entry" role="listitem">
+Oakes, D. (1989). Bivariate Survival Models Induced by Frailties. <em>Journal of the American Statistical Association</em>, <em>84</em>(406), 487–493. <a href="https://doi.org/10.1080/01621459.1989.10478795">https://doi.org/10.1080/01621459.1989.10478795</a>
+</div>
+<div id="ref-oakes2016" class="csl-entry" role="listitem">
+Oakes, D. (2016). On the win-ratio statistic in clinical trials with multiple types of event. <em>Biometrika</em>, <em>103</em>(3), 742–745. <a href="https://doi.org/10.1093/biomet/asw026">https://doi.org/10.1093/biomet/asw026</a>
+</div>
+<div id="ref-pocock2012" class="csl-entry" role="listitem">
+Pocock, S. J., Ariti, C. A., Collier, T. J., &amp; Wang, D. (2012). The win ratio: a new approach to the analysis of composite endpoints in clinical trials based on clinical priorities. <em>European Heart Journal</em>, <em>33</em>(2), 176–182. <a href="https://doi.org/10.1093/eurheartj/ehr352">https://doi.org/10.1093/eurheartj/ehr352</a>
+</div>
+<div id="ref-seifu2022" class="csl-entry" role="listitem">
+Seifu, Y., Mt-Isa, S., Duke, K., Gamalo-Siebers, M., Wang, W., Dong, G., &amp; Kolassa, J. (2022). Design of paediatric trials with benefit-risk endpoints using a composite score of adverse events of interest (AEI) and win-statistics. <em>Journal of Biopharmaceutical Statistics</em>, <em>33</em>(6), 696–707. <a href="https://doi.org/10.1080/10543406.2022.2153202">https://doi.org/10.1080/10543406.2022.2153202</a>
+</div>
+<div id="ref-wang2023a" class="csl-entry" role="listitem">
+Wang, B., Zhou, D., Zhang, J., Kim, Y., Chen, L.-W., Dunnmon, P., Bai, S., Liu, Q., &amp; Ishida, E. (2023). Statistical power considerations in the use of win ratio in cardiovascular outcome trials. <em>Contemporary Clinical Trials</em>, <em>124</em>, 107040. <a href="https://doi.org/10.1016/j.cct.2022.107040">https://doi.org/10.1016/j.cct.2022.107040</a>
+</div>
+<div id="ref-yu2022" class="csl-entry" role="listitem">
+Yu, R. X., &amp; Ganju, J. (2022). Sample size formula for a win ratio endpoint. <em>Statistics in Medicine</em>, <em>41</em>(6), 950–963. <a href="https://doi.org/10.1002/sim.9297">https://doi.org/10.1002/sim.9297</a>
+</div>
+<div id="ref-zhou2022" class="csl-entry" role="listitem">
+Zhou, T. J., LaValley, M. P., Nelson, K. P., Cabral, H. J., &amp; Massaro, J. M. (2022). Calculating power for the Finkelstein and Schoenfeld test statistic for a composite endpoint with two components. <em>Statistics in Medicine</em>, <em>41</em>(17), 3321–3335. <a href="https://doi.org/10.1002/sim.9419">https://doi.org/10.1002/sim.9419</a>
+</div>
+</div>
+</section></section>
+    </div>
+  </div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="chap2_files/libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="chap2_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="chap2_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="chap2_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="chap2_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="chap2_files/libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="chap2_files/libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="chap2_files/libs/revealjs/plugin/search/search.js"></script>
+  <script src="chap2_files/libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="chap2_files/libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': false,
+'smaller': false,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: false,
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'none',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1050,
+
+        height: 700,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+
+        math: {
+          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    
+    <script>
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+      // slide changes (different for each slide format).
+      (function () {
+        // dispatch for htmlwidgets
+        function fireSlideEnter() {
+          const event = window.document.createEvent("Event");
+          event.initEvent("slideenter", true, true);
+          window.document.dispatchEvent(event);
+        }
+
+        function fireSlideChanged(previousSlide, currentSlide) {
+          fireSlideEnter();
+
+          // dispatch for shiny
+          if (window.jQuery) {
+            if (previousSlide) {
+              window.jQuery(previousSlide).trigger("hidden");
+            }
+            if (currentSlide) {
+              window.jQuery(currentSlide).trigger("shown");
+            }
+          }
+        }
+
+        // hookup for slidy
+        if (window.w3c_slidy) {
+          window.w3c_slidy.add_observer(function (slide_num) {
+            // slide_num starts at position 1
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+          });
+        }
+
+      })();
+    </script>
+
+    <script id="quarto-html-after-body" type="application/javascript">
+    window.document.addEventListener("DOMContentLoaded", function (event) {
+      const toggleBodyColorMode = (bsSheetEl) => {
+        const mode = bsSheetEl.getAttribute("data-mode");
+        const bodyEl = window.document.querySelector("body");
+        if (mode === "dark") {
+          bodyEl.classList.add("quarto-dark");
+          bodyEl.classList.remove("quarto-light");
+        } else {
+          bodyEl.classList.add("quarto-light");
+          bodyEl.classList.remove("quarto-dark");
+        }
+      }
+      const toggleBodyColorPrimary = () => {
+        const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+        if (bsSheetEl) {
+          toggleBodyColorMode(bsSheetEl);
+        }
+      }
+      toggleBodyColorPrimary();  
+      const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+      tabsets.forEach(function(tabset) {
+        const tabby = new Tabby('#' + tabset.id);
+      });
+      const isCodeAnnotation = (el) => {
+        for (const clz of el.classList) {
+          if (clz.startsWith('code-annotation-')) {                     
+            return true;
+          }
+        }
+        return false;
+      }
+      const clipboard = new window.ClipboardJS('.code-copy-button', {
+        text: function(trigger) {
+          const codeEl = trigger.previousElementSibling.cloneNode(true);
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+        }
+      });
+      clipboard.on('success', function(e) {
+        // button target
+        const button = e.trigger;
+        // don't keep focus
+        button.blur();
+        // flash "checked"
+        button.classList.add('code-copy-button-checked');
+        var currentTitle = button.getAttribute("title");
+        button.setAttribute("title", "Copied!");
+        let tooltip;
+        if (window.bootstrap) {
+          button.setAttribute("data-bs-toggle", "tooltip");
+          button.setAttribute("data-bs-placement", "left");
+          button.setAttribute("data-bs-title", "Copied!");
+          tooltip = new bootstrap.Tooltip(button, 
+            { trigger: "manual", 
+              customClass: "code-copy-button-tooltip",
+              offset: [0, -8]});
+          tooltip.show();    
+        }
+        setTimeout(function() {
+          if (tooltip) {
+            tooltip.hide();
+            button.removeAttribute("data-bs-title");
+            button.removeAttribute("data-bs-toggle");
+            button.removeAttribute("data-bs-placement");
+          }
+          button.setAttribute("title", currentTitle);
+          button.classList.remove('code-copy-button-checked');
+        }, 1000);
+        // clear code selection
+        e.clearSelection();
+      });
+      function tippyHover(el, contentFn) {
+        const config = {
+          allowHTML: true,
+          content: contentFn,
+          maxWidth: 500,
+          delay: 100,
+          arrow: false,
+          appendTo: function(el) {
+              return el.closest('section.slide') || el.parentElement;
+          },
+          interactive: true,
+          interactiveBorder: 10,
+          theme: 'light-border',
+          placement: 'bottom-start'
+        };
+          config['offset'] = [0,0];
+          config['maxWidth'] = 700;
+        window.tippy(el, config); 
+      }
+      const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+      for (var i=0; i<noterefs.length; i++) {
+        const ref = noterefs[i];
+        tippyHover(ref, function() {
+          // use id or data attribute instead here
+          let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+          try { href = new URL(href).hash; } catch {}
+          const id = href.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          return note.innerHTML;
+        });
+      }
+      const findCites = (el) => {
+        const parentEl = el.parentElement;
+        if (parentEl) {
+          const cites = parentEl.dataset.cites;
+          if (cites) {
+            return {
+              el,
+              cites: cites.split(' ')
+            };
+          } else {
+            return findCites(el.parentElement)
+          }
+        } else {
+          return undefined;
+        }
+      };
+      var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+      for (var i=0; i<bibliorefs.length; i++) {
+        const ref = bibliorefs[i];
+        const citeInfo = findCites(ref);
+        if (citeInfo) {
+          tippyHover(citeInfo.el, function() {
+            var popup = window.document.createElement('div');
+            citeInfo.cites.forEach(function(cite) {
+              var citeDiv = window.document.createElement('div');
+              citeDiv.classList.add('hanging-indent');
+              citeDiv.classList.add('csl-entry');
+              var biblioDiv = window.document.getElementById('ref-' + cite);
+              if (biblioDiv) {
+                citeDiv.innerHTML = biblioDiv.innerHTML;
+              }
+              popup.appendChild(citeDiv);
+            });
+            return popup.innerHTML;
+          });
+        }
+      }
+    });
+    </script>
+    
+
+</body></html>

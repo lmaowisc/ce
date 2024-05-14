@@ -20,7 +20,7 @@
 
 
 .math.inline {
-  font-size: 88%  !important;
+  font-size: 85%  !important;
 }
 
 .MathJax, .MathJax_Display  {
@@ -28,7 +28,7 @@
 }
 
 code.sourceCode {
-  font-size: 1.08em;
+  font-size: 1.05em;
   /* or try font-size: xx-large; */
 }
 
