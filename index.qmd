@@ -7,3 +7,24 @@ given on May 19, 2024 at Boston Marriott Copley Place in Boston, MA.
 ## Slides
 
 Course information slides [here](outline.html){target="_blank"}. (To convert html to pdf, press E $\to$ Print $\to$ Destination: Save to pdf)
+
+## R-packages
+
+To proceed, install/load the following packages
+
+```{r}
+#| eval: false
+# install packages --------------------------------
+install.packages("Wcompo")
+install.packages("WR")
+install.packages("rmt")
+install.packages("WA")
+# load packages -----------------------------------
+library(tidyverse)
+library(survival)
+library(Wcompo)
+library(WR)
+library(rmt)
+library(WA)
+```
+
