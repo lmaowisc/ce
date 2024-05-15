@@ -96,8 +96,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 </head>
 
@@ -189,8 +187,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
   <li><a href="#preface" id="toc-preface" class="nav-link active" data-scroll-target="#preface">Preface</a>
   <ul class="collapse">
-  <li><a href="#slides" id="toc-slides" class="nav-link" data-scroll-target="#slides">Slides</a></li>
-  <li><a href="#r-packages" id="toc-r-packages" class="nav-link" data-scroll-target="#r-packages">R-packages</a></li>
+  <li><a href="#instructor-profile" id="toc-instructor-profile" class="nav-link" data-scroll-target="#instructor-profile">Instructor Profile</a></li>
+  <li><a href="#learning-outcomes" id="toc-learning-outcomes" class="nav-link" data-scroll-target="#learning-outcomes">Learning Outcomes</a></li>
+  <li><a href="#syllabus" id="toc-syllabus" class="nav-link" data-scroll-target="#syllabus">Syllabus</a></li>
+  <li><a href="#r-packages" id="toc-r-packages" class="nav-link" data-scroll-target="#r-packages">R-Packages</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -225,12 +225,102 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="preface" class="level1 unnumbered">
 <h1 class="unnumbered">Preface</h1>
 <p>This is a companion site for the same-titled <strong>workshop</strong> at the <a href="https://www.sctweb.org/meeting/" target="_blank">2024 Society for Clinical Trials (SCT) Annual Meeting</a> given on May 19, 2024 at Boston Marriott Copley Place in Boston, MA.</p>
-<section id="slides" class="level2">
-<h2 class="anchored" data-anchor-id="slides">Slides</h2>
-<p>Course information slides <a href="outline.html" target="_blank">here</a>. (To convert html to pdf, press E <span class="math inline">\(\to\)</span> Print <span class="math inline">\(\to\)</span> Destination: Save to pdf)</p>
+<section id="instructor-profile" class="level2">
+<h2 class="anchored" data-anchor-id="instructor-profile">Instructor Profile</h2>
+<ul>
+<li><a href="https://sites.google.com/view/lmaowisc" target="_blank">Lu Mao, PhD</a>
+<ul>
+<li><strong>Associate Professor</strong> of Biostatistics at UW-Madison</li>
+<li><strong>Methodologic research</strong>
+<ul>
+<li><a href="https://reporter.nih.gov/search/9aSu5u3xlE26GrjbF_4cBg/project-details/10734551" target="_blank">R01HL149875</a>: <em>Novel Statistical Methods for Complex Time-to-Event Data in Cardiovascular Clinical Trials</em> (12/01/2019 – 07/31/2028)</li>
+<li><a href="https://www.nsf.gov/awardsearch/showAward?AWD_ID=2015526" target="_blank">DMS2015526</a>: <em>Randomized Trials with Non-Compliance</em> (07/01/2020 – 06/30/2024)</li>
+</ul></li>
+<li><strong>Collaborative research</strong>
+<ul>
+<li>Cardiovascular disease, cancer, radiology, behavioral health interventions</li>
+</ul></li>
+<li><strong>Teaching</strong>
+<ul>
+<li><a href="https://lmaowisc.github.io/BMI741" target="_blank">Survival Analysis: Theory and Methods</a> (UW; 2020 - 2024)</li>
+</ul></li>
+<li><strong>Editorial service</strong>
+<ul>
+<li><a href="https://www.jacc.org/journal/heart-failure/editorial-board" target="_blank">Statistical Editor</a>, <em>JACC Journals</em></li>
+<li><a href="https://www.tandfonline.com/action/journalInformation?show=editorialBoard&amp;journalCode=usbr20" target="_blank">Associate Editor</a>, <em>Statistics for Biopharmaceutical Research</em></li>
+</ul></li>
+</ul></li>
+</ul>
+</section>
+<section id="learning-outcomes" class="level2">
+<h2 class="anchored" data-anchor-id="learning-outcomes">Learning Outcomes</h2>
+<ul>
+<li><strong>Course site</strong>: <a href="https://lmaowisc.github.io/ce" target="_blank">https://lmaowisc.github.io/ce</a></li>
+<li><strong>After this course, you will</strong>
+<ul>
+<li>Understand the statistical and scientific challenges with composite endpoints as well as regulatory guidelines/requirements</li>
+<li>Learn the basics of statistical methodology, e.g., testing, power analysis, nonparametric estimation, and semiparametric regression to address these challenges</li>
+<li>Get hands-on experience with real data using publicly available R-packages</li>
+</ul></li>
+</ul>
+</section>
+<section id="syllabus" class="level2">
+<h2 class="anchored" data-anchor-id="syllabus">Syllabus</h2>
+<ul>
+<li><strong>1. Introduction</strong> (30 min)
+<ul>
+<li>1.1 Examples &amp; guidelines</li>
+<li>1.2 Traditional methods and limitations</li>
+<li>1.3 Win ratio methods and limitations</li>
+</ul></li>
+<li><strong>2. Hypothesis Testing</strong> (40 min)
+<ul>
+<li>2.1 Win ratio by Pocock et al.&nbsp;(2012)</li>
+<li>2.2 Statistical properties</li>
+<li>2.3 Handling recurrent events (R-package <a href="https://cran.r-project.org/package=WR" target="_blank"><code>WR</code></a>)</li>
+<li>2.4 Sample size calculation (R-package <a href="https://cran.r-project.org/package=WR" target="_blank"><code>WR</code></a>)</li>
+</ul></li>
+<li><strong>3. Nonparametric Estimation</strong> (60 min)
+<ul>
+<li>3.1 Restricted win ratio</li>
+<li>3.2 Average win time analysis (R-package <a href="https://cran.r-project.org/package=rmt" target="_blank"><code>rmt</code></a>)
+<ul>
+<li>3.1.1 Restricted mean time in favor of treatment</li>
+<li>3.1.2 Estimation, inference, and graphics</li>
+<li>3.1.3 Real Examples</li>
+</ul></li>
+<li>3.3 While-alive loss rate (R-package <a href="https://cran.r-project.org/package=WA" target="_blank"><code>WA</code></a>)
+<ul>
+<li>3.2.1 Definition, interpretation, and estimation</li>
+<li>3.2.3 Real Examples</li>
+</ul></li>
+</ul></li>
+<li><strong>4. Semiparametric Regression</strong> (30 min)
+<ul>
+<li>4.1 Proportional win-fractions model (R-package <a href="https://cran.r-project.org/package=WR" target="_blank"><code>WR</code></a>)
+<ul>
+<li>4.1.1 Model assumptions</li>
+<li>4.1.2 Estimation, inference, and model diagnostics</li>
+<li>4.1.3 Real Examples</li>
+</ul></li>
+<li>4.2 Generalized proportional odds model (tentative)
+<ul>
+<li>4.2.1 Model specification and possible estimation</li>
+</ul></li>
+</ul></li>
+<li><strong>5. Discussions</strong> (20 min)
+<ul>
+<li>5.1. Course summary</li>
+<li>5.2. Future work
+<ul>
+<li>5.2.1 Covariate adjustment</li>
+<li>5.2.2 Intercurrent events</li>
+</ul></li>
+</ul></li>
+</ul>
 </section>
 <section id="r-packages" class="level2">
-<h2 class="anchored" data-anchor-id="r-packages">R-packages</h2>
+<h2 class="anchored" data-anchor-id="r-packages">R-Packages</h2>
 <p>To proceed, install/load the following packages:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install packages --------------------------------</span></span>
