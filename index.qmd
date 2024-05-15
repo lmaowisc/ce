@@ -1,6 +1,11 @@
-# Preface {.unnumbered}
+# Course Info {.unnumbered}
 
-This is a companion site for the same-titled **workshop** at the [2024 Society for Clinical Trials (SCT) Annual Meeting](https://www.sctweb.org/meeting/){target="_blank"} given on May 19, 2024 at Boston Marriott Copley Place in Boston, MA.
+This is a companion site for the same-titled **workshop** at the [2024 Society for Clinical Trials (SCT) Annual Meeting](https://www.sctweb.org/meeting/){target="_blank"} given on May 19, 2024 at Boston Marriott Copley Place ([map](https://www.google.com/maps/place/Boston+Marriott+Copley+Place/@42.3467509,-71.0815269,17z/data=!3m1!5s0x89e37a0d93723ac1:0x7edf0a3a678073b5!4m10!3m9!1s0x89e37a0de7e77a4b:0x1a77f7939c6472fb!5m3!1s2024-07-28!4m1!1i2!8m2!3d42.346747!4d-71.078952!16s%2Fm%2F0wfgs85?entry=ttu){target="_blank"}) in Boston, MA.
+
+## Time and Place
+
+-   Sun, May 19 | 8:00AM - 12:00 PM
+-   Room: Suffolk (3rd Floor)
 
 ## Instructor Profile
 
@@ -35,9 +40,6 @@ This is a companion site for the same-titled **workshop** at the [2024 Society f
     -   2.2 Statistical properties
     -   2.3 Handling recurrent events (R-package [`WR`](https://cran.r-project.org/package=WR){target="_blank"})
     -   2.4 Sample size calculation (R-package [`WR`](https://cran.r-project.org/package=WR){target="_blank"})
-
-
-
 -   **3. Nonparametric Estimation** (60 min)
     -   3.1 Restricted win ratio
     -   3.2 Average win time analysis (R-package [`rmt`](https://cran.r-project.org/package=rmt){target="_blank"})
@@ -47,8 +49,6 @@ This is a companion site for the same-titled **workshop** at the [2024 Society f
     -   3.3 While-alive loss rate (R-package [`WA`](https://cran.r-project.org/package=WA){target="_blank"})
         -   3.2.1 Definition, interpretation, and estimation
         -   3.2.3 Real Examples
-
-
 -   **4. Semiparametric Regression** (30 min)
     -   4.1 Proportional win-fractions model (R-package [`WR`](https://cran.r-project.org/package=WR){target="_blank"})
         -   4.1.1 Model assumptions
@@ -61,7 +61,6 @@ This is a companion site for the same-titled **workshop** at the [2024 Society f
     -   5.2. Future work
         -   5.2.1 Covariate adjustment
         -   5.2.2 Intercurrent events
-
 
 ## R-Packages
 
