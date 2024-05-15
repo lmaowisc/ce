@@ -620,7 +620,7 @@ W^{(a, 1-a)}(\tau)=\int_0^\tau I\{Y^\a(t)&lt;Y^\b(t)\}\d t
 <ul>
 <li><strong>Etimand of treatment effect</strong>
 <ul>
-<li><strong>RMT-IF</strong> of treatment <span class="citation" data-cites="Mao2023">(<a href="#/references" role="doc-biblioref" onclick="">Mao, 2023</a>)</span> <span class="math display">\[
+<li><strong>RMT-IF</strong> of treatment <span class="citation" data-cites="Mao2023">(<a href="#/references" role="doc-biblioref" onclick="">Mao, 2023b</a>)</span> <span class="math display">\[
 \mu(\tau) = w_{1, 0}(\tau) - w_{0, 1}(\tau)
 \]</span>
 <ul>
@@ -686,8 +686,7 @@ W^{(a, 1-a)}(\tau)=\int_0^\tau I\{Y^\a(t)&lt;Y^\b(t)\}\d t
 <li><strong>Average win time on state</strong> <span class="math inline">\(k\)</span>
 <ul>
 <li><strong>Re-expression</strong> with <span class="math inline">\(S_k^{(a)}(t)=\pr\{T_k^{(a)}&gt; t\}\)</span> <span class="math display">\[\begin{align}
-w_{a, 1-a, k}(\tau)&amp;=E\left\{\int_0^\tau I\{Y^{(a)}(t)&lt;Y^{(1-a)}(t) = k\}{\rm d}t\right\}\\
-&amp;=\int_0^\tau \pr\{Y^{(a)}(t)&lt; k\}\pr\{Y^{(1-a)}(t) = k\}{\rm d}t\\
+w_{a, 1-a, k}(\tau)&amp;=\int_0^\tau \pr\{Y^{(a)}(t)&lt; k\}\pr\{Y^{(1-a)}(t) = k\}{\rm d}t\\
 &amp;=\int_0^\tau \pr\{T_k^{(a)}&gt; t\}\pr\{T_k^{(1-a)}\leq t &lt; T_{k+1}^{(1-a)}\}{\rm d}t\\
 &amp;=\int_0^\tau S_k^{(a)}(t)\left\{S_{k+1}^{(1-a)}(t) - S_k^{(1-a)}(t)\right\}{\rm d}t\\
 \end{align}\]</span></li>
@@ -707,11 +706,10 @@ w_{a, 1-a, k}(\tau)&amp;=E\left\{\int_0^\tau I\{Y^{(a)}(t)&lt;Y^{(1-a)}(t) = k\}
 <ul>
 <li><span class="math inline">\(X_k^{(a)}= \min(T_k^{(a)}, C^{(a)})\)</span>; <span class="math inline">\(\delta_k^{(a)}= I(T_k^{(a)}\leq C^{(a)})\)</span>; <span class="math inline">\(C^{(a)}=\)</span> censoring time</li>
 </ul></li>
-<li>Kaplan–Meier estimator <span class="math inline">\(\hat S_k^{(a)}(t)\)</span></li>
 </ul></li>
 <li><strong>Estimation</strong>
 <ul>
-<li>Plug-in KM estimator <span class="math display">\[
+<li>Plug-in KM estimator <span class="math inline">\(\hat S_k^{(a)}(t)\)</span> <span class="math display">\[
 \hat\mu_k(\tau)=
   \int_0^\tau \left\{\hat S_k^{(1)}(t)\hat S_{k+1}^{(0)}(t) - \hat S_k^{(0)}(t)\hat S_{k+1}^{(1)}(t)\right\}{\rm d}t
 \]</span></li>
@@ -736,6 +734,32 @@ H_0: \mu_1(\tau)=\cdots=\mu_K(\tau)=\mu_\infty(\tau)
 <ul>
 <li>May be more powerful against differential component-wise effects</li>
 <li>Test individual components for secondary analyses</li>
+</ul></li>
+</ul></li>
+</ul>
+</section>
+<section id="sample-size-calculation" class="slide level2">
+<h2>Sample Size Calculation</h2>
+<ul>
+<li><strong>Bivariate illness-death</strong>
+<ul>
+<li>Gumbel–Hougaard copula <span class="citation" data-cites="mao2023a">(<a href="#/references" role="doc-biblioref" onclick="">Mao, 2023c</a>)</span>
+<ul>
+<li>Same model used for sample size calculation for WR</li>
+</ul></li>
+<li>Input parameters
+<ul>
+<li><strong>Baseline</strong>: Hazards for death &amp; relapse, association parameter</li>
+<li><strong>Effect sizes</strong>: Component-wise hazard ratios</li>
+</ul></li>
+</ul></li>
+<li><strong>Recurrent events with death</strong>
+<ul>
+<li>Homogeneous Markov model <span class="citation" data-cites="mao2023b">(<a href="#/references" role="doc-biblioref" onclick="">Mao, 2023d</a>)</span></li>
+<li>Input parameters
+<ul>
+<li><strong>Baseline</strong>: Intensities for another hospitalization or death, having had <span class="math inline">\(k-1\)</span> hospitalizations <span class="math inline">\((k=1,2,\ldots)\)</span></li>
+<li><strong>Effect sizes</strong>: Intensity (risk) ratios for all transitions</li>
 </ul></li>
 </ul></li>
 </ul>
@@ -916,15 +940,289 @@ H_0: \mu_1(\tau)=\cdots=\mu_K(\tau)=\mu_\infty(\tau)
 </div>
 </div>
 </section></section>
-<section id="while-alive-estimands" class="title-slide slide level1 center">
-<h1>While-Alive Estimands</h1>
+<section>
+<section id="while-alive-weighted-loss" class="title-slide slide level1 center">
+<h1>While-Alive Weighted Loss</h1>
 
 </section>
-
+<section id="length-of-exposure" class="slide level2">
+<h2>Length of Exposure</h2>
+<ul>
+<li><strong>HF-ACTION</strong>
+<ul>
+<li>Trained survive longer <span class="math inline">\(\to\)</span> more hospitalizations</li>
+</ul></li>
+</ul>
+<table>
+<colgroup>
+<col style="width: 36%">
+<col style="width: 27%">
+<col style="width: 36%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th style="text-align: center;">Usual care (N = 221)</th>
+<th style="text-align: center;">Exercise training (N = 205)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Death</td>
+<td style="text-align: center;">57 (25.8%)</td>
+<td style="text-align: center;">36 (17.6%)</td>
+</tr>
+<tr class="even">
+<td>Avg # hospitalization (SD)</td>
+<td style="text-align: center;">2.6 (3.1)</td>
+<td style="text-align: center;">2.2 (3.1)</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>Impact of differential survival time</strong>
+<ul>
+<li><strong>Hierarchical</strong>: WR, RMT-IF (death &gt; nonfatal)
+<ul>
+<li>Hospitalizations considered only with tied (equal) survival</li>
+</ul></li>
+<li><strong>Quantitative weighting</strong>: cumulative mean (death = <span class="math inline">\(w_D\times\)</span> nonfatal; <a href="chap1.html#/total-events" target="_blank">Ch 1</a>)
+<ul>
+<li>Need to adjust for length of exposure (survival)</li>
+</ul></li>
+</ul></li>
+</ul>
+</section>
+<section id="weighted-endpoints" class="slide level2">
+<h2>Weighted Endpoints</h2>
+<ul>
+<li><strong>Weighted composite event process</strong> (<a href="chap1.html#/total-events" target="_blank">Ch 1</a>)
+<ul>
+<li><span class="math inline">\(N^{*\a}_{\rm R}(t)=w_DN^{*\a}_D(t)+\sum_{k=1}^Kw_kN^{*\a}_k(t)\)</span>
+<ul>
+<li><span class="math inline">\({\rm d}N_{\rm R}^{*(a)}(t)=0\)</span> for <span class="math inline">\(t&gt;D^{(a)}\)</span>: no event after death <img data-src="images/intro_wcompo.png" style="width:75.0%" data-fig-align="right"></li>
+</ul></li>
+</ul></li>
+<li><strong>Traditional methods</strong>
+<ul>
+<li><strong>Cause-specific rate</strong> (death as censoring): <span class="math inline">\(E\left\{{\rm d}N_{\rm R}^{*(a)}(t)\mid D^{(a)}\geq t\right\}\)</span>
+<ul>
+<li>Lacking in causal interpretation: <span class="math inline">\(\left\{\cdot\mid D^\t\geq t\right\}\)</span> vs <span class="math inline">\(\left\{\cdot\mid D^\c\geq t\right\}\)</span> at post-randomization <span class="math inline">\(t\)</span></li>
+</ul></li>
+<li><strong>Cumulative mean</strong>: <span class="math inline">\(E\left\{N_{\rm R}^{*(a)}(t)\right\}\)</span> <span class="citation" data-cites="ghosh2000 Mao2016">(<a href="#/references" role="doc-biblioref" onclick="">Ghosh &amp; Lin, 2000</a>; <a href="#/references" role="doc-biblioref" onclick="">Mao &amp; Lin, 2016</a>)</span>
+<ul>
+<li>Ignores length of exposure</li>
+</ul></li>
+</ul></li>
+</ul>
+</section>
+<section id="exposure-adjusted-rate" class="slide level2">
+<h2>Exposure-Adjusted Rate</h2>
+<ul>
+<li><strong>While-alive event rate</strong>
+<ul>
+<li><strong>Estimand</strong> <span class="math display">\[\ell^{(a)}(\tau) = \frac{E\left\{N_{\rm R}^{*(a)}(\tau)\right\}}{E\left(D^{(a)}\wedge\tau\right)}
+=\frac{\mbox{Mean # of weighted events by $\tau$}}{\mbox{Mean survival time by $\tau$}}
+\]</span></li>
+<li>Average (weighted) event rate in <span class="math inline">\([0, \tau]\)</span> per person-time alive</li>
+<li>Proposed as a clinically interpretable measure to Committee for Medicinal Products for Human Use (CHMP) of European Medicines Agency <span class="citation" data-cites="akacha:2018 CHMP:2020">(<a href="#/references" role="doc-biblioref" onclick="">Akacha et al., 2018</a>; <a href="#/references" role="doc-biblioref" onclick="">CHMP, 2020</a>)</span>
+<ul>
+<li>Also called “exposure-weighted” event rate</li>
+</ul></li>
+</ul></li>
+</ul>
+</section>
+<section id="general-estimands-definition" class="slide level2">
+<h2>General Estimands: Definition</h2>
+<ul>
+<li><strong>While-alive <em>loss</em> rate</strong> <span class="citation" data-cites="mao2023c">(<a href="#/references" role="doc-biblioref" onclick="">Mao, 2023a</a>)</span> <span class="math display">\[\ell^{(a)}(\tau) = \frac{E\left\{\mathcal L\left(\mathcal H^{*(a)}\right)(\tau)\right\}}{E\left(D^{(a)}\wedge\tau\right)}\]</span>
+<ul>
+<li><span class="math inline">\(\mathcal H^{*{(a)}}(t)=\left\{N^{*{(a)}}_D(u), N^{*{(a)}}_1(u), \ldots, N^{*{(a)}}_K(u):0\leq u\leq t\right\}\)</span></li>
+<li><span class="math inline">\(\mathcal L\left(\mathcal H^{(a)}\right)(t)\)</span>: user-specified <em>loss function</em> satisfying
+<ul>
+<li>A function only of <span class="math inline">\(\mathcal H^{(a)}(t)\)</span></li>
+<li><span class="math inline">\(\mathcal L\left(\mathcal H^{(a)}\right)({\rm d}t)\equiv 0\)</span> for <span class="math inline">\(t&gt;D^{(a)}\)</span> (accrue loss only when alive)</li>
+</ul></li>
+<li>Average <em>loss</em> rate in <span class="math inline">\([0, \tau]\)</span> per person-time alive</li>
+</ul></li>
+</ul>
+</section>
+<section id="general-estimands-examples" class="slide level2">
+<h2>General Estimands: Examples</h2>
+<ul>
+<li><strong>Difference choices of loss function</strong>
+<ul>
+<li><strong>Original while-alive event rate</strong> <span class="math display">\[\mathcal L\left(\mathcal H^{*(a)}\right)(t) = N_{\rm R}^{*(a)}(t)\]</span></li>
+<li><strong>Per-person-time mortality rate</strong> <span class="citation" data-cites="Uno2023">(<a href="#/references" role="doc-biblioref" onclick="">Uno &amp; Horiguchi, 2023</a>)</span> <span class="math display">\[\mathcal L\left(\mathcal H^{*(a)}\right)(t) = N_D^{*(a)}(t)\]</span></li>
+<li><strong>More generally</strong>… <span class="math display">\[\mathcal L\left(\mathcal H^{*(a)}\right)(t)
+    = \int_0^t \left\{w_{D, N^{*(a)}(u-)}(u)\dd N^{*\a}_D(t)+\sum_{k=1}^Kw_{k, N^{*(a)}(u-)}(u)\dd N^{*\a}_k(t)\right\}\]</span>
+<ul>
+<li><span class="math inline">\(w_{D,m}(u), w_{k,m}(u)\)</span>: weights for incident death/nonfatal events at <span class="math inline">\(u\)</span> with <span class="math inline">\(m\)</span> existing events</li>
+</ul></li>
+</ul></li>
+</ul>
+</section>
+<section id="cumulative-and-differentials" class="slide level2">
+<h2>Cumulative and Differentials</h2>
+<ul>
+<li><strong>Cumulative version</strong>
+<ul>
+<li><strong>Survival-completed cumulative loss</strong> <span class="math display">\[L^{(a)}(\tau)=\ell^{(a)}(\tau)\tau\]</span>
+<ul>
+<li>Better graphics: <span class="math inline">\(\ell^{(a)}(\tau)\approx 0/0\)</span> unstable for <span class="math inline">\(\tau\approx 0\)</span></li>
+<li>Properties: <span class="math inline">\(L^{(a)}(0)=0\)</span>, <span class="math inline">\(L^{(a)}(t)\uparrow\)</span> with <span class="math inline">\(t\)</span>, and <span class="math inline">\(L^{(a)}(t)\geq E\{\mathcal L(\mathcal H^{(a)})(t)\}\)</span></li>
+</ul></li>
+</ul></li>
+<li><strong>Measuring treatment effect</strong>
+<ul>
+<li><strong>Risk (loss rate) ratio</strong> (RR): <span class="math inline">\(r(\tau)=\ell^{(1)}(\tau)/\ell^{(0)}(\tau)\)</span>
+<ul>
+<li>Treatment reduces average loss rate by <span class="math inline">\(100\{1-r(\tau)\}\%\)</span></li>
+</ul></li>
+<li><strong>Absolute risk reduction</strong>: <span class="math inline">\(d(\tau)=\ell^{(1)}(\tau)-\ell^{(0)}(\tau)\)</span>
+<ul>
+<li>Treatment reduces average loss rate by <span class="math inline">\(-d(\tau)\)</span> (per person-time alive)</li>
+</ul></li>
+</ul></li>
+</ul>
+</section>
+<section id="nonparametric-estimation" class="slide level2">
+<h2>Nonparametric Estimation</h2>
+<ul>
+<li><strong>With patients censored before</strong> <span class="math inline">\(\tau\)</span>
+<ul>
+<li><del>Sample averages for numerator/denominator</del> <span class="math display">\[\ell^{(a)}(\tau) = \frac{E\left\{\mathcal L\left(\mathcal H^{*(a)}\right)(\tau)\right\}}{E\left(D^{(a)}\wedge\tau\right)}\]</span></li>
+<li><strong>Denominator</strong> (easy): RMST <span class="math inline">\(=\int_0^\tau S^{(a)}(t){\rm d}t\)</span> <span class="citation" data-cites="royston2011">(<a href="#/references" role="doc-biblioref" onclick="">Royston &amp; Parmar, 2011</a>)</span>
+<ul>
+<li>Plug-in KM estimator</li>
+</ul></li>
+<li><strong>Numerator</strong> (moderate) <span class="math inline">\(=\int_0^\tau S^{(a)}(t-)E\{\mathcal L(\mathcal H^{(a)})({\rm d}t)\mid D^{(a)}\geq t\}\)</span>
+<ul>
+<li>Nelsen-Aalen-type estimator for <span class="math inline">\(E\{\mathcal L(\mathcal H^{(a)})({\rm d}t)\mid D^{(a)}\geq t\}\)</span></li>
+</ul></li>
+<li><strong>Robust variance</strong> estimation</li>
+<li>Implementation in <a href="https://cran.r-project.org/package=WA" target="_blank"><code>WA</code></a> package</li>
+</ul></li>
+</ul>
+</section>
+<section id="software-walrfit" class="slide level2">
+<h2>Software: <code>WA::LRfit()</code></h2>
+<ul>
+<li><strong>Basic syntax</strong>
+<ul>
+<li><code>id</code>: unique patient identifier; <code>time</code>: event times; <code>status</code>: event types (<code>1</code>: recurrent event, <code>2</code>: death, <code>0</code>: censoring)</li>
+<li><code>Dweight</code>: weight for death relative to nonfatal</li>
+</ul></li>
+</ul>
+<div class="big-code">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="fu">library</span>(WA)</span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="co"># trt: categorical treatment</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a>obj <span class="ot">&lt;-</span> <span class="fu">LRfit</span>(id, time, status, trt, <span class="at">Dweight =</span> <span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<ul>
+<li><strong>Output</strong>: a list of class <code>LRfit</code>
+<ul>
+<li><code>summary(obj, tau)</code> to summarize results for <span class="math inline">\(r(\tau)=\ell^{(1)}(\tau)/\ell^{(0)}(\tau)\)</span>
+<ul>
+<li>Add <code>joint.test = TRUE</code> to include joint test with RMST</li>
+</ul></li>
+<li><code>plot(obj)</code> to plot the cumulative (WA) loss <span class="math inline">\(L^\a(t)\)</span> (<span class="math inline">\(a= 1, 0\)</span>)</li>
+</ul></li>
+</ul>
+</section>
+<section id="hf-action-weighted-composite" class="slide level2">
+<h2>HF-ACTION: Weighted Composite</h2>
+<ul>
+<li><strong>4y-loss rate (death = <span class="math inline">\(2\times\)</span> hosp)</strong>
+<ul>
+<li><strong>Risk ratio</strong>: <span class="math inline">\(79.8\%\)</span> (<span class="math inline">\(P=0.102\)</span>) reduction in risk
+<ul>
+<li>cf.&nbsp;<strong>Cumulative mean ratio</strong> (unadjusted): 85.7% (<span class="math inline">\(P=0.170\)</span>) (<a href="chap1.html#/hf-action-weighted-total" target="_blank">Ch 1</a>)</li>
+</ul></li>
+</ul></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>obj <span class="ot">&lt;-</span> <span class="fu">LRfit</span>(hfaction<span class="sc">$</span>patid, hfaction<span class="sc">$</span>time, hfaction<span class="sc">$</span>status, </span>
+<span id="cb6-2"><a href="#cb6-2"></a>              hfaction<span class="sc">$</span>trt_ab, <span class="at">Dweight =</span> <span class="dv">2</span>)</span>
+<span id="cb6-3"><a href="#cb6-3"></a><span class="fu">summary</span>(obj, <span class="at">tau =</span> <span class="fl">3.97</span>)</span>
+<span id="cb6-4"><a href="#cb6-4"></a><span class="co"># Analysis of log loss rate (LR) by tau = 3.97:</span></span>
+<span id="cb6-5"><a href="#cb6-5"></a><span class="co">#                Estimate   Std.Err Z value Pr(&gt;|z|)   </span></span>
+<span id="cb6-6"><a href="#cb6-6"></a><span class="co"># Ref (Group 0)  0.262765  0.086018  3.0548 0.002252 **</span></span>
+<span id="cb6-7"><a href="#cb6-7"></a><span class="co"># Group 1 vs 0  -0.226116  0.138131 -1.6370 0.101637 </span></span>
+<span id="cb6-8"><a href="#cb6-8"></a><span class="co"># ---</span></span>
+<span id="cb6-9"><a href="#cb6-9"></a><span class="co"># Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1</span></span>
+<span id="cb6-10"><a href="#cb6-10"></a></span>
+<span id="cb6-11"><a href="#cb6-11"></a><span class="co"># Point and interval estimates for the LR ratio:</span></span>
+<span id="cb6-12"><a href="#cb6-12"></a><span class="co">#               LR ratio 95% lower CL 95% higher CL</span></span>
+<span id="cb6-13"><a href="#cb6-13"></a><span class="co"># Group 1 vs 0 0.7976253    0.6084453      1.045626</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="hf-action-survival-adjustment" class="slide level2">
+<h2>HF-ACTION: Survival Adjustment</h2>
+<ul>
+<li><strong>Survival-adjusted vs unadjusted cumulative loss</strong>
+<ul>
+<li>Unadjusted shows attenuated effect <img data-src="images/est_hfaction_wa.png" style="width:80.0%" data-fig-align="center"></li>
+</ul></li>
+</ul>
+</section></section>
 <section>
 <section id="conclusion" class="title-slide slide level1 center">
 <h1>Conclusion</h1>
 
+</section>
+<section id="notes" class="slide level2">
+<h2>Notes</h2>
+<ul>
+<li><strong>Analysis of win-loss times</strong>
+<ul>
+<li>Variations including RMT-IF in comparison with WR <span class="citation" data-cites="troendle2024">(<a href="#/references" role="doc-biblioref" onclick="">Troendle et al., 2024</a>)</span></li>
+</ul></li>
+<li><strong>While-alive estimands</strong>
+<ul>
+<li>Papers following CHMP discussion <span class="citation" data-cites="schmidli2021 wei2021a fritsch2021 schmidli2023">(<a href="#/references" role="doc-biblioref" onclick="">Fritsch et al., 2023</a>; <a href="#/references" role="doc-biblioref" onclick="">Schmidli et al., 2023a</a>, <a href="#/references" role="doc-biblioref" onclick="">2023b</a>; <a href="#/references" role="doc-biblioref" onclick="">Wei et al., 2023</a>)</span>…</li>
+</ul></li>
+<li><strong>RMT-IF vs WA</strong> in HF-ACTION
+<ul>
+<li><strong>RMT-IF</strong> appears more powerful <span class="math inline">\(\to\)</span> adds significance to mortality alone
+<ul>
+<li><span class="math inline">\(P=0.037 \to 0.018\)</span></li>
+</ul></li>
+<li><strong>WA</strong> still sees a dilution of effect
+<ul>
+<li><span class="math inline">\(P=0.033 \to 0.102\)</span></li>
+</ul></li>
+</ul></li>
+</ul>
+</section>
+<section id="summary" class="slide level2">
+<h2>Summary</h2>
+<p>Nonparametric estimands by time restriction</p>
+<ul>
+<li><strong>Restricted WR</strong>
+<ul>
+<li>WR on all patients followed to <span class="math inline">\(\tau\)</span>
+<ul>
+<li>IPCW (<a href="https://cran.r-project.org/package=WINS" target="_blank"><code>WINS</code></a>) or MI</li>
+</ul></li>
+</ul></li>
+<li><strong>RMT-IF</strong>
+<ul>
+<li>Net average win time on hierarchical states by <span class="math inline">\(\tau\)</span>
+<ul>
+<li><code>rmt::rmtfit(id, time, status, trt)</code></li>
+</ul></li>
+</ul></li>
+<li><strong>While-alive weighted events</strong>
+<ul>
+<li>Compensate for differential survival by <span class="math inline">\(\tau\)</span>
+<ul>
+<li><code>WA::LRfit(id, time, status, trt, Dweight)</code></li>
+</ul></li>
+</ul></li>
+</ul>
 </section>
 <section id="references" class="slide level2 smaller scrollable">
 <h2>References</h2>
@@ -932,6 +1230,12 @@ H_0: \mu_1(\tau)=\cdots=\mu_K(\tau)=\mu_\infty(\tau)
 
 </div>
 <div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="list">
+<div id="ref-akacha:2018" class="csl-entry" role="listitem">
+Akacha, M., Binkowitz, B., Bretz, F., Fritsch, A., Hougaard, P., Jahn-Eimermacher, A., &amp; al., et. (2018). <em>Request for CHMP qualification opinion: Clinically interpretable treatment effect measures based on recurrent event endpoints that allow for efficient statistical analyses</em>. <a href="http://www.ema.europa.eu/documents/other/qualification-opinion-treatment-effect-measures-when-using-recurrent-event-endpoints-applicants_en.pdf" class="uri">http://www.ema.europa.eu/documents/other/qualification-opinion-treatment-effect-measures-when-using-recurrent-event-endpoints-applicants_en.pdf</a>.
+</div>
+<div id="ref-CHMP:2020" class="csl-entry" role="listitem">
+CHMP. (2020). <em>Qualification opinion of clinically interpretable treatment effect measures based on recurrent event endpoints that allow for efficient statistical analyses</em>. <a href="https://www.ema.europa.eu/en/documents/other/qualification-opinion-clinically-interpretable-treatment-effect-measures-based-recurrent-event_en.pdf" class="uri">https://www.ema.europa.eu/en/documents/other/qualification-opinion-clinically-interpretable-treatment-effect-measures-based-recurrent-event_en.pdf</a>.
+</div>
 <div id="ref-WINS" class="csl-entry" role="listitem">
 Cui, Y., &amp; Huang, B. (2023). <em>WINS: The r WINS package</em>. <a href="https://CRAN.R-project.org/package=WINS">https://CRAN.R-project.org/package=WINS</a>
 </div>
@@ -941,17 +1245,53 @@ Dong, G., Huang, B., Wang, D., Verbeeck, J., Wang, J., &amp; Hoaglin, D. C. (202
 <div id="ref-Dong2020" class="csl-entry" role="listitem">
 Dong, G., Mao, L., Huang, B., Gamalo-Siebers, M., Wang, J., Yu, G., &amp; Hoaglin, D. C. (2020b). The inverse-probability-of-censoring weighting (IPCW) adjusted win ratio statistic: an unbiased estimator in the presence of independent censoring. <em>Journal of Biopharmaceutical Statistics</em>, <em>30</em>(5), 882–899. <a href="https://doi.org/10.1080/10543406.2020.1757692">https://doi.org/10.1080/10543406.2020.1757692</a>
 </div>
+<div id="ref-fritsch2021" class="csl-entry" role="listitem">
+Fritsch, A., Schlömer, P., Mendolia, F., Mütze, T., &amp; Jahn-Eimermacher, A. (2023). Efficiency Comparison of Analysis Methods for Recurrent Event and Time-to-First Event Endpoints in the Presence of Terminal Events<span></span>Application to Clinical Trials in Chronic Heart Failure. <em>Statistics in Biopharmaceutical Research</em>, <em>15</em>(2), 268–279. <a href="https://doi.org/10.1080/19466315.2021.1945488">https://doi.org/10.1080/19466315.2021.1945488</a>
+</div>
+<div id="ref-ghosh2000" class="csl-entry" role="listitem">
+Ghosh, D., &amp; Lin, D. Y. (2000). Nonparametric Analysis of Recurrent Events and Death. <em>Biometrics</em>, <em>56</em>(2), 554–562. <a href="https://doi.org/10.1111/j.0006-341x.2000.00554.x">https://doi.org/10.1111/j.0006-341x.2000.00554.x</a>
+</div>
+<div id="ref-mao2023c" class="csl-entry" role="listitem">
+Mao, L. (2023a). Nonparametric Inference of General While-Alive Estimands for Recurrent Events. <em>Biometrics</em>, <em>79</em>(3), 1749–1760. <a href="https://doi.org/10.1111/biom.13709">https://doi.org/10.1111/biom.13709</a>
+</div>
 <div id="ref-Mao2023" class="csl-entry" role="listitem">
-Mao, L. (2023). On restricted mean time in favor of treatment. <em>Biometrics</em>, <em>79</em>(1), 61–72. <a href="https://doi.org/10.1111/biom.13570">https://doi.org/10.1111/biom.13570</a>
+Mao, L. (2023b). On restricted mean time in favor of treatment. <em>Biometrics</em>, <em>79</em>(1), 61–72. <a href="https://doi.org/10.1111/biom.13570">https://doi.org/10.1111/biom.13570</a>
+</div>
+<div id="ref-mao2023a" class="csl-entry" role="listitem">
+Mao, L. (2023c). Power and Sample Size Calculations for the Restricted Mean Time Analysis of Prioritized Composite Endpoints. <em>Statistics in Biopharmaceutical Research</em>, <em>15</em>(3), 540–548. <a href="https://doi.org/10.1080/19466315.2022.2110936">https://doi.org/10.1080/19466315.2022.2110936</a>
+</div>
+<div id="ref-mao2023b" class="csl-entry" role="listitem">
+Mao, L. (2023d). Study Design for Restricted Mean Time Analysis of Recurrent Events and Death. <em>Biometrics</em>, <em>79</em>(4), 3701–3714. <a href="https://doi.org/10.1111/biom.13923">https://doi.org/10.1111/biom.13923</a>
+</div>
+<div id="ref-Mao2016" class="csl-entry" role="listitem">
+Mao, L., &amp; Lin, D. Y. (2016). Semiparametric regression for the weighted composite endpoint of recurrent and terminal events. <em>Biostatistics</em>, <em>17</em>(2), 390–403. <a href="https://doi.org/10.1093/biostatistics/kxv050">https://doi.org/10.1093/biostatistics/kxv050</a>
 </div>
 <div id="ref-maow2024" class="csl-entry" role="listitem">
 Mao, L., &amp; Wang, T. (2024). Dissecting the restricted mean time in favor of treatment. <em>Journal of Biopharmaceutical Statistics</em>, <em>34</em>(1), 111–126. <a href="https://doi.org/10.1080/10543406.2023.2210658">https://doi.org/10.1080/10543406.2023.2210658</a>
+</div>
+<div id="ref-royston2011" class="csl-entry" role="listitem">
+Royston, P., &amp; Parmar, M. K. B. (2011). The use of restricted mean survival time to estimate the treatment effect in randomized clinical trials when the proportional hazards assumption is in doubt. <em>Statistics in Medicine</em>, <em>30</em>(19), 2409–2421. <a href="https://doi.org/10.1002/sim.4274">https://doi.org/10.1002/sim.4274</a>
+</div>
+<div id="ref-schmidli2021" class="csl-entry" role="listitem">
+Schmidli, H., Roger, J. H., &amp; Akacha, M. (2023a). Estimands for Recurrent Event Endpoints in the Presence of a Terminal Event. <em>Statistics in Biopharmaceutical Research</em>, <em>15</em>(2), 238–248. <a href="https://doi.org/10.1080/19466315.2021.1895883">https://doi.org/10.1080/19466315.2021.1895883</a>
+</div>
+<div id="ref-schmidli2023" class="csl-entry" role="listitem">
+Schmidli, H., Roger, J. H., &amp; Akacha, M. (2023b). Rejoinder to Commentaries on <span>“</span>Estimands for Recurrent Event Endpoints in the Presence of a Terminal Event<span>”</span>. <em>Statistics in Biopharmaceutical Research</em>, <em>15</em>(2), 255–256. <a href="https://doi.org/10.1080/19466315.2023.2166098">https://doi.org/10.1080/19466315.2023.2166098</a>
+</div>
+<div id="ref-troendle2024" class="csl-entry" role="listitem">
+Troendle, J. F., Leifer, E. S., Yang, S., Jeffries, N., Kim, D.-Y., Joo, J., &amp; O’Connor, C. M. (2024). Use of win time for ordered composite endpoints in clinical trials. <em>Statistics in Medicine</em>, <em>43</em>(10), 1920–1932. <a href="https://doi.org/10.1002/sim.10045">https://doi.org/10.1002/sim.10045</a>
+</div>
+<div id="ref-Uno2023" class="csl-entry" role="listitem">
+Uno, H., &amp; Horiguchi, M. (2023). Ratio and difference of average hazard with survival weight: New measures to quantify survival benefit of new therapy. <em>Statistics in Medicine</em>, <em>42</em>(7), 936–952. <a href="https://doi.org/10.1002/sim.9651">https://doi.org/10.1002/sim.9651</a>
 </div>
 <div id="ref-wang2024" class="csl-entry" role="listitem">
 Wang, T., Li, Y., &amp; Qu, Y. (2024). Restricted time win ratio: from estimands to estimation. <em>Statistics in Biopharmaceutical Research</em>, 1–18. <a href="https://doi.org/10.1080/19466315.2024.2332675">https://doi.org/10.1080/19466315.2024.2332675</a>
 </div>
 <div id="ref-wang2023" class="csl-entry" role="listitem">
 Wang, T., Zilinskas, R., Li, Y., &amp; Qu, Y. (2023). Missing Data Imputation for a Multivariate Outcome of Mixed Variable Types. <em>Statistics in Biopharmaceutical Research</em>, <em>15</em>(4), 826–837. <a href="https://doi.org/10.1080/19466315.2023.2169753">https://doi.org/10.1080/19466315.2023.2169753</a>
+</div>
+<div id="ref-wei2021a" class="csl-entry" role="listitem">
+Wei, J., Mütze, T., Jahn-Eimermacher, A., &amp; Roger, J. (2023). Properties of Two While-Alive Estimands for Recurrent Events and Their Potential Estimators. <em>Statistics in Biopharmaceutical Research</em>, <em>15</em>(2), 257–267. <a href="https://doi.org/10.1080/19466315.2021.1994457">https://doi.org/10.1080/19466315.2021.1994457</a>
 </div>
 </div>
 </section></section>
