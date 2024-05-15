@@ -5,38 +5,37 @@ This is a companion site for the same-titled **workshop** at the [2024 Society f
 ## Instructor Profile
 
 -   [Lu Mao, PhD](https://sites.google.com/view/lmaowisc){target="_blank"}
-    -   **Associate Professor** of Biostatistics at UW-Madison
-    -   **Methodologic research**
+    -   Associate Professor of Biostatistics at UW-Madison
+    -   Methodologic research
         -   [R01HL149875](https://reporter.nih.gov/search/9aSu5u3xlE26GrjbF_4cBg/project-details/10734551){target="_blank"}: *Novel Statistical Methods for Complex Time-to-Event Data in Cardiovascular Clinical Trials* (12/01/2019 – 07/31/2028)
         -   [DMS2015526](https://www.nsf.gov/awardsearch/showAward?AWD_ID=2015526){target="_blank"}: *Randomized Trials with Non-Compliance* (07/01/2020 – 06/30/2024)
-    -   **Collaborative research**
+    -   Collaborative research
         -   Cardiovascular disease, cancer, radiology, behavioral health interventions
-    -   **Teaching**
+    -   Teaching
         -   [Survival Analysis: Theory and Methods](https://lmaowisc.github.io/BMI741){target="_blank"} (UW; 2020 - 2024)
-    -   **Editorial service**
+    -   Editorial service
         -   [Statistical Editor](https://www.jacc.org/journal/heart-failure/editorial-board){target="_blank"}, *JACC Journals*
         -   [Associate Editor](https://www.tandfonline.com/action/journalInformation?show=editorialBoard&journalCode=usbr20){target="_blank"}, *Statistics for Biopharmaceutical Research*
 
 ## Learning Outcomes
 
--   **Course site**: [https://lmaowisc.github.io/ce](https://lmaowisc.github.io/ce){target="_blank"}
--   **After this course, you will**
-    -   Understand the statistical and scientific challenges with composite endpoints as well as regulatory guidelines/requirements
-    -   Learn the basics of statistical methodology, e.g., testing, power analysis, nonparametric estimation, and semiparametric regression to address these challenges
-    -   Get hands-on experience with real data using publicly available R-packages
+
+-   Understand the statistical and scientific challenges with composite endpoints as well as regulatory guidelines/requirements
+-   Learn the basics of statistical methodology, e.g., testing, power analysis, nonparametric estimation, and semiparametric regression to address these challenges
+-   Get hands-on experience with real data using publicly available R-packages
 
 ## Syllabus
 
--   **1. Introduction** (30 min)
+-   1. Introduction (30 min)
     -   1.1 Examples & guidelines
     -   1.2 Traditional methods and limitations
     -   1.3 Win ratio methods and limitations
--   **2. Hypothesis Testing** (40 min)
+-   2. Hypothesis Testing (40 min)
     -   2.1 Win ratio by @pocock2012
     -   2.2 Statistical properties
     -   2.3 Handling recurrent events (R-package [`WR`](https://cran.r-project.org/package=WR){target="_blank"})
     -   2.4 Sample size calculation (R-package [`WR`](https://cran.r-project.org/package=WR){target="_blank"})
--   **3. Nonparametric Estimation** (60 min)
+-   3. Nonparametric Estimation (60 min)
     -   3.1 Restricted win ratio
     -   3.2 Average win time analysis (R-package [`rmt`](https://cran.r-project.org/package=rmt){target="_blank"})
         -   3.1.1 Restricted mean time in favor of treatment
@@ -45,14 +44,14 @@ This is a companion site for the same-titled **workshop** at the [2024 Society f
     -   3.3 While-alive loss rate (R-package [`WA`](https://cran.r-project.org/package=WA){target="_blank"})
         -   3.2.1 Definition, interpretation, and estimation
         -   3.2.3 Real Examples
--   **4. Semiparametric Regression** (30 min)
+-   4. Semiparametric Regression (30 min)
     -   4.1 Proportional win-fractions model (R-package [`WR`](https://cran.r-project.org/package=WR){target="_blank"})
         -   4.1.1 Model assumptions
         -   4.1.2 Estimation, inference, and model diagnostics
         -   4.1.3 Real Examples
     -   4.2 Generalized proportional odds model (tentative)
         -   4.2.1 Model specification and possible estimation
--   **5. Discussions** (20 min)
+-   5. Discussions (20 min)
     -   5.1. Course summary
     -   5.2. Future work
         -   5.2.1 Covariate adjustment
