@@ -1,8 +1,6 @@
 # Preface {.unnumbered}
 
-This is a companion site for the same-titled **workshop** at the 
-[2024 Society for Clinical Trials (SCT) Annual Meeting](https://www.sctweb.org/meeting/){target="_blank"}
-given on May 19, 2024 at Boston Marriott Copley Place in Boston, MA.
+This is a companion site for the same-titled **workshop** at the [2024 Society for Clinical Trials (SCT) Annual Meeting](https://www.sctweb.org/meeting/){target="_blank"} given on May 19, 2024 at Boston Marriott Copley Place in Boston, MA.
 
 ## Instructor Profile
 
@@ -27,19 +25,17 @@ given on May 19, 2024 at Boston Marriott Copley Place in Boston, MA.
     -   Learn the basics of statistical methodology, e.g., testing, power analysis, nonparametric estimation, and semiparametric regression to address these challenges
     -   Get hands-on experience with real data using publicly available R-packages
 
-## Syllabus 
+## Syllabus
 
 -   **1. Introduction** (30 min)
     -   1.1 Examples & guidelines
     -   1.2 Traditional methods and limitations
     -   1.3 Win ratio methods and limitations
 -   **2. Hypothesis Testing** (40 min)
-    -   2.1 Win ratio by Pocock et al. (2012)
+    -   2.1 Win ratio by @pocock2012
     -   2.2 Statistical properties
     -   2.3 Handling recurrent events (R-package [`WR`](https://cran.r-project.org/package=WR){target="_blank"})
     -   2.4 Sample size calculation (R-package [`WR`](https://cran.r-project.org/package=WR){target="_blank"})
-
-
 -   **3. Nonparametric Estimation** (60 min)
     -   3.1 Restricted win ratio
     -   3.2 Average win time analysis (R-package [`rmt`](https://cran.r-project.org/package=rmt){target="_blank"})
@@ -49,7 +45,6 @@ given on May 19, 2024 at Boston Marriott Copley Place in Boston, MA.
     -   3.3 While-alive loss rate (R-package [`WA`](https://cran.r-project.org/package=WA){target="_blank"})
         -   3.2.1 Definition, interpretation, and estimation
         -   3.2.3 Real Examples
-
 -   **4. Semiparametric Regression** (30 min)
     -   4.1 Proportional win-fractions model (R-package [`WR`](https://cran.r-project.org/package=WR){target="_blank"})
         -   4.1.1 Model assumptions
@@ -63,8 +58,7 @@ given on May 19, 2024 at Boston Marriott Copley Place in Boston, MA.
         -   5.2.1 Covariate adjustment
         -   5.2.2 Intercurrent events
 
-## R-Packages 
-
+## R-Packages
 
 To proceed, install/load the following packages:
 
@@ -83,4 +77,3 @@ library(WR)
 library(rmt)
 library(WA)
 ```
-

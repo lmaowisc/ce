@@ -55,7 +55,26 @@ div.sourceCode
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -275,7 +294,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul></li>
 <li><strong>2. Hypothesis Testing</strong> (40 min)
 <ul>
-<li>2.1 Win ratio by Pocock et al.&nbsp;(2012)</li>
+<li>2.1 Win ratio by <span class="citation" data-cites="pocock2012">Pocock et al. (<a href="references.html#ref-pocock2012" role="doc-biblioref">2012</a>)</span></li>
 <li>2.2 Statistical properties</li>
 <li>2.3 Handling recurrent events (R-package <a href="https://cran.r-project.org/package=WR" target="_blank"><code>WR</code></a>)</li>
 <li>2.4 Sample size calculation (R-package <a href="https://cran.r-project.org/package=WR" target="_blank"><code>WR</code></a>)</li>
@@ -338,6 +357,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="list" style="display: none">
+<div id="ref-pocock2012" class="csl-entry" role="listitem">
+Pocock, S. J., Ariti, C. A., Collier, T. J., &amp; Wang, D. (2012). The win ratio: a new approach to the analysis of composite endpoints in clinical trials based on clinical priorities. <em>European Heart Journal</em>, <em>33</em>(2), 176–182. <a href="https://doi.org/10.1093/eurheartj/ehr352">https://doi.org/10.1093/eurheartj/ehr352</a>
+</div>
+</div>
 </section>
 </section>
 
