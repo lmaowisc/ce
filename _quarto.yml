@@ -16,7 +16,7 @@ book:
     - references.qmd
 
 bibliography: references.bib
-
+csl: apa.csl
 format:
   html:
     theme: cosmo

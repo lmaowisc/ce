@@ -10,7 +10,7 @@ Course information slides [here](outline.html){target="_blank"}. (To convert htm
 
 ## R-packages
 
-To proceed, install/load the following packages
+To proceed, install/load the following packages:
 
 ```{r}
 #| eval: false
