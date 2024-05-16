@@ -2,3 +2,4 @@
 
 ## Slides {.unnumbered}
 
+Chapter slides [here](chap5.html){target="_blank"}. (To convert html to pdf, press E $\to$ Print $\to$ Destination: Save to pdf)
