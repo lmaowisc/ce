@@ -2,4 +2,269 @@
 
 ## Slides {.unnumbered}
 
+Chapter slides [here](chap4.html){target="_blank"}. (To convert html to pdf, press E $\to$ Print $\to$ Destination: Save to pdf)
 
+## R-code {.unnumbered}
+
+```{r}
+#| code-fold: true
+#| code-summary: "Show the code"
+#| eval: true
+#| warning: false
+#| label: tbl-hfaction-reg-tabone
+#| tbl-cap: Patient characteristics in non-ischemic cohort of HF-ACTION 
+
+
+##################################################################
+# This code generates the numerical results in  chapter 4       ##
+##################################################################
+
+
+# install.packages("WR")
+library(WR)
+library(tidyverse)
+library(knitr) # for formatted table output
+
+
+# load the data
+data(non_ischemic)
+# head(non_ischemic)
+
+
+
+# Descriptive analysis ----------------------------------------------------
+
+# function to convert 1-0 to Yes-No
+one_zero_to_yn <- function(x){
+  if_else(x == 1, "Yes", "No")
+}
+
+
+# clean up data
+df <- non_ischemic |> 
+  filter(status != 2) |>  # de-duplicate
+  mutate( # clean up the levels of categorical variables
+    trt_ab = fct(if_else(trt_ab == 0, "Usual care", "Training")),
+    sex = if_else(sex == 1, "Male", "Feale"),
+    race = case_when(
+      Black.vs.White == 1 ~ "Black",
+      Other.vs.White == 1 ~ "Other",
+      Black.vs.White == 0 & Other.vs.White == 0 ~ "White"
+    ),
+    race = fct(race),
+    across(hyperten:smokecurr, one_zero_to_yn)
+  ) 
+
+
+## a function to compute median (IQR) for x
+## rounded to the rth decimal place
+med_iqr <- function(x, r = 1){
+  qt <- quantile(x, na.rm = TRUE)
+  
+  str_c(round(qt[3], r), " (", 
+        round(qt[2], r), ", ",
+        round(qt[4], r), ")")
+}
+
+# create summary table for quantitative variables
+# age, size, nodes, prog, estrg
+tab_quant <- df |> 
+  group_by(trt_ab) |> 
+  summarize(
+    across(c(age, bmi, bipllvef), med_iqr)
+  ) |> 
+  pivot_longer( # long format: value = median (IQR); name = variable names
+    !trt_ab,
+    values_to = "value",
+    names_to = "name"
+  ) |> 
+  pivot_wider( # wide format: name = variable names; trt_ab as columns
+    values_from = value,
+    names_from = trt_ab
+  ) |> 
+  mutate(
+    name = case_when( # format the variable names
+      name == "age" ~ "Age (years)",
+      name == "bmi" ~ "BMI",
+      name == "bipllvef" ~ "LVEF (%)"
+    )
+  )
+
+
+## a function that computes N (%) for each level of var
+## by group in data frame df (percent rounded to rth point)
+freq_pct<- function(df, group, var, r = 1){
+  # compute the N for each level of var by group
+  var_counts <- df |> 
+    group_by({{ group }}, {{ var }}) |> 
+    summarize(
+      n = n(),
+      .groups = "drop"
+    ) 
+  # compute N (%)
+  var_counts |> 
+    left_join( # compute the total number (demoninator) in each group
+      # and joint it back to the numerator
+      var_counts |> group_by({{ group }}) |> summarize(N = sum(n)),
+      by = join_by({{ group }})
+    ) |> 
+    mutate( # N (%)
+      value = str_c(n, " (", round(100 * n / N, r), "%)")
+    ) |> 
+    select(- c(n, N)) |> 
+    pivot_wider( # put group levels on columns
+      names_from = {{ group }},
+      values_from = value
+    ) |> 
+    rename(
+      name = {{ var }} # name = variable names 
+    )
+}
+
+# Apply this function to sex, race, hyperten:smokecurr 
+  
+# sex
+sex <- df |>
+  freq_pct(trt_ab, sex) |> 
+  mutate(
+    name = str_c("Sex - ", name)
+  )
+
+# race
+race <- df |>
+  freq_pct(trt_ab, race) |> 
+  mutate(
+    name = str_c("Race - ", name)
+  )
+
+hyperten <- df |>
+  freq_pct(trt_ab, hyperten) |> 
+  filter(name == "Yes") |> 
+  mutate(
+    name = "Hypertension"
+  )
+
+hyperten <- df |>
+  freq_pct(trt_ab, hyperten) |> 
+  filter(name == "Yes") |> 
+  mutate(
+    name = "Hypertension"
+  )
+
+
+COPD <- df |>
+  freq_pct(trt_ab, COPD) |> 
+  filter(name == "Yes") |> 
+  mutate(
+    name = "COPD"
+)  
+
+diabetes <- df |>
+  freq_pct(trt_ab, diabetes) |> 
+  filter(name == "Yes") |> 
+  mutate(
+    name = "Diabetes"
+  )  
+
+acei <- df |>
+   freq_pct(trt_ab, acei) |> 
+   filter(name == "Yes") |> 
+   mutate(
+     name = "ACE Inhibitor"
+   ) 
+   
+betab <- df |>
+  freq_pct(trt_ab, betab) |> 
+  filter(name == "Yes") |> 
+  mutate(
+    name = "Beta Blocker"
+  )     
+
+
+smokecurr <- df |>
+  freq_pct(trt_ab, betab) |> 
+  filter(name == "smokecurr") |> 
+  mutate(
+    name = "Smoker"
+  )     
+
+
+tabone <- bind_rows(
+  tab_quant[1, ],
+  sex, race,
+  tab_quant[2:3, ],
+  hyperten, COPD, diabetes, acei, betab, smokecurr    
+)
+
+
+## add N to group names  
+colnames(tabone) <- c(" ", str_c(colnames(tabone)[2:3], " (N=", table(df$trt_ab),")"))
+## print out the table
+kable(tabone, align = c("lcc"))
+```
+
+
+
+```{r}
+#| code-fold: true
+#| code-summary: "Show the code"
+#| eval: false
+
+# PW regression analysis --------------------------------------------------
+
+# re-label the covariates with informative names.
+
+colnames(non_ischemic)[4:16]=c(
+  "Training vs Usual","Age (year)","Male vs Female","Black vs White", 
+  "Other vs White", "BMI","LVEF","Hypertension","COPD","Diabetes",
+  "ACE Inhibitor","Beta Blocker", "Smoker"
+)
+
+
+p <- ncol(non_ischemic)-3
+
+# extract ID, time, status and covariates matrix Z from the data.
+# note that: ID, time and status should be column vector
+ID <- non_ischemic[,"ID"]
+time <- non_ischemic[,"time"] / 30.5 # days to months
+status <- non_ischemic[,"status"]
+Z <- as.matrix(non_ischemic[,4:(3+p)])
+
+# pass the parameters into the function
+obj <- pwreg(ID, time, status, Z)
+obj
+
+# extract estimates of (beta_4, beta_5)
+beta <- matrix(obj$beta[4:5])
+# extract estimated covariance matrix for (beta_4, beta_5)
+Sigma <- obj$Var[4:5, 4:5]
+# compute chisq statistic in quadratic form
+chistats <- t(beta) %*% solve(Sigma) %*% beta  
+
+# compare the Wald statistic with the reference
+# distribution of chisq(2) to obtain the p-value
+1 - pchisq(chistats, df = 2)
+#>           [,1]
+#> [1,] 0.1016988
+
+
+# compute score processes
+score_obj <- score.proc(obj)
+# plot scores for all 13 covariates
+par(mfrow = c(4, 4))
+for(i in c(1:13)){
+  plot(score_obj, k = i, xlab = "Time (months)")
+  # add reference lines
+  abline(a = 2, b = 0, lty = 3)
+  abline(a = 0, b = 0, lty = 3)
+  abline(a = - 2, b = 0, lty = 3)
+}
+
+
+### Exercise: Stratify by sex ###
+sex <- Z[, 3]
+Zs <- Z[, -3]
+obj_str<-pwreg(ID, time, status, Zs, strata = sex)
+obj_str
+
+```
