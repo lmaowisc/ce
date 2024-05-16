@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en"><head>
-<script src="outline_files/libs/clipboard/clipboard.min.js"></script>
-<script src="outline_files/libs/quarto-html/tabby.min.js"></script>
-<script src="outline_files/libs/quarto-html/popper.min.js"></script>
-<script src="outline_files/libs/quarto-html/tippy.umd.min.js"></script>
-<link href="outline_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="outline_files/libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="outline_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
-<link href="outline_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+<script src="chap5_files/libs/clipboard/clipboard.min.js"></script>
+<script src="chap5_files/libs/quarto-html/tabby.min.js"></script>
+<script src="chap5_files/libs/quarto-html/popper.min.js"></script>
+<script src="chap5_files/libs/quarto-html/tippy.umd.min.js"></script>
+<link href="chap5_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="chap5_files/libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="chap5_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
+<link href="chap5_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.3.450">
 
   <meta name="author" content="Lu Mao">
@@ -15,8 +15,8 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
-  <link rel="stylesheet" href="outline_files/libs/revealjs/dist/reset.css">
-  <link rel="stylesheet" href="outline_files/libs/revealjs/dist/reveal.css">
+  <link rel="stylesheet" href="chap5_files/libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="chap5_files/libs/revealjs/dist/reveal.css">
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
@@ -29,78 +29,32 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
-    /* CSS for syntax highlighting */
-    pre > code.sourceCode { white-space: pre; position: relative; }
-    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-    pre > code.sourceCode > span:empty { height: 1.2em; }
-    .sourceCode { overflow: visible; }
-    code.sourceCode > span { color: inherit; text-decoration: inherit; }
-    div.sourceCode { margin: 1em 0; }
-    pre.sourceCode { margin: 0; }
-    @media screen {
-    div.sourceCode { overflow: auto; }
+    /* CSS for citations */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
     }
-    @media print {
-    pre > code.sourceCode { white-space: pre-wrap; }
-    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    .hanging-indent div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
     }
-    pre.numberSource code
-      { counter-reset: source-line 0; }
-    pre.numberSource code > span
-      { position: relative; left: -4em; counter-increment: source-line; }
-    pre.numberSource code > span > a:first-child::before
-      { content: counter(source-line);
-        position: relative; left: -1em; text-align: right; vertical-align: baseline;
-        border: none; display: inline-block;
-        -webkit-touch-callout: none; -webkit-user-select: none;
-        -khtml-user-select: none; -moz-user-select: none;
-        -ms-user-select: none; user-select: none;
-        padding: 0 4px; width: 4em;
-        color: #aaaaaa;
-      }
-    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-    div.sourceCode
-      { color: #003b4f; background-color: #f1f3f5; }
-    @media screen {
-    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
     }
-    code span { color: #003b4f; } /* Normal */
-    code span.al { color: #ad0000; } /* Alert */
-    code span.an { color: #5e5e5e; } /* Annotation */
-    code span.at { color: #657422; } /* Attribute */
-    code span.bn { color: #ad0000; } /* BaseN */
-    code span.bu { } /* BuiltIn */
-    code span.cf { color: #003b4f; } /* ControlFlow */
-    code span.ch { color: #20794d; } /* Char */
-    code span.cn { color: #8f5902; } /* Constant */
-    code span.co { color: #5e5e5e; } /* Comment */
-    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
-    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
-    code span.dt { color: #ad0000; } /* DataType */
-    code span.dv { color: #ad0000; } /* DecVal */
-    code span.er { color: #ad0000; } /* Error */
-    code span.ex { } /* Extension */
-    code span.fl { color: #ad0000; } /* Float */
-    code span.fu { color: #4758ab; } /* Function */
-    code span.im { color: #00769e; } /* Import */
-    code span.in { color: #5e5e5e; } /* Information */
-    code span.kw { color: #003b4f; } /* Keyword */
-    code span.op { color: #5e5e5e; } /* Operator */
-    code span.ot { color: #003b4f; } /* Other */
-    code span.pp { color: #ad0000; } /* Preprocessor */
-    code span.sc { color: #5e5e5e; } /* SpecialChar */
-    code span.ss { color: #20794d; } /* SpecialString */
-    code span.st { color: #20794d; } /* String */
-    code span.va { color: #111111; } /* Variable */
-    code span.vs { color: #20794d; } /* VerbatimString */
-    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
-  </style>
-  <link rel="stylesheet" href="outline_files/libs/revealjs/dist/theme/quarto.css">
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }  </style>
+  <link rel="stylesheet" href="chap5_files/libs/revealjs/dist/theme/quarto.css">
   <link rel="stylesheet" href="style.css">
-  <link href="outline_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
-  <link href="outline_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
-  <link href="outline_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
-  <link href="outline_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <link href="chap5_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="chap5_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="chap5_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="chap5_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
   <style type="text/css">
 
   .callout {
@@ -385,9 +339,13 @@
       margin-right: 0; 
     }
   </style>
+  
   <style type="text/css">
   ul li ul li {
-    font-size: 0.75em;
+    font-size: 0.78em;
+  }
+  .custom-small table {
+    font-size: .55em
   }
   </style>
 </head>
@@ -397,7 +355,7 @@
 
 <section id="title-slide" class="quarto-title-block center">
   <h1 class="title">Statistical Methods for Composite Endpoints: Win Ratio and Beyond</h1>
-  <p class="subtitle">Course Information</p>
+  <p class="subtitle">Chapter 5 - Discussion</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -426,153 +384,230 @@ Lu Mao
 </div>
 
 </section>
-<section id="instructor-profile" class="slide level2">
-<h2>Instructor Profile</h2>
+<section>
+<section id="open-problems" class="title-slide slide level1 center">
+<h1>Open Problems</h1>
+
+</section>
+<section id="covariate-adjustment" class="slide level2">
+<h2>Covariate Adjustment</h2>
 <ul>
-<li><a href="https://sites.google.com/view/lmaowisc" target="_blank"><strong>Lu Mao</strong>, PhD</a>
+<li><strong>Different from regression</strong>
 <ul>
-<li><strong>Associate Professor</strong> of Biostatistics at UW-Madison</li>
-<li><strong>Methodologic research</strong>
+<li><strong>Marginal estimands</strong> for <span class="math inline">\(\mathcal H^{*(1)}\)</span> vs <span class="math inline">\(\mathcal H^{*(0)}\)</span>, not conditioning on <span class="math inline">\(Z\)</span></li>
+<li><strong>Gain efficiency</strong> when outcome-covariate model is true, otherwise still valid (robustness)</li>
+<li><strong>Standard endpoints</strong>
 <ul>
-<li><a href="https://reporter.nih.gov/search/9aSu5u3xlE26GrjbF_4cBg/project-details/10734551" target="_blank"><strong>R01HL149875</strong></a>: <em>Novel Statistical Methods for Complex Time-to-Event Data in Cardiovascular Clinical Trials</em> (12/01/2019 – 07/31/2028)</li>
-<li><a href="https://www.nsf.gov/awardsearch/showAward?AWD_ID=2015526" target="_blank"><strong>DMS2015526</strong></a>: <em>Randomized Trials with Non-Compliance</em> (07/01/2020 – 06/30/2024)</li>
+<li>Continuous, binary, univariate survival, etc. <span class="citation" data-cites="tsiatis2008 wang2021 ye2022">(<a href="#/references" role="doc-biblioref" onclick="">Tsiatis et al., 2008</a>; <a href="#/references" role="doc-biblioref" onclick="">Wang et al., 2021</a>; <a href="#/references" role="doc-biblioref" onclick="">Ye et al., 2022</a>)</span></li>
+<li>FDA recommendation <span class="citation" data-cites="fda:2023">(<a href="#/references" role="doc-biblioref" onclick="">FDA, 2023</a>)</span></li>
 </ul></li>
-<li><strong>Collaborative research</strong>
-<ul>
-<li>Cardiovascular disease, cancer, radiology, behavioral health interventions</li>
 </ul></li>
-<li><strong>Teaching</strong>
+<li><strong>Challenges with WR</strong>
 <ul>
-<li><a href="https://lmaowisc.github.io/BMI741" target="_blank"><strong>Survival Analysis: Theory and Methods</strong></a> (UW; 2020 - 2024)</li>
+<li><span class="math inline">\(U\)</span>-statistic structure</li>
+<li>Lack of likelihood structure</li>
 </ul></li>
-<li><strong>Editorial service</strong>
+</ul>
+</section>
+<section id="interim-analysis" class="slide level2">
+<h2>Interim Analysis</h2>
 <ul>
-<li><a href="https://www.jacc.org/journal/heart-failure/editorial-board" target="_blank"><strong>Statistical Editor</strong></a>, <em>JACC Journals</em></li>
-<li><a href="https://www.tandfonline.com/action/journalInformation?show=editorialBoard&amp;journalCode=usbr20" target="_blank"><strong>Associate Editor</strong></a>, <em>Statistics for Biopharmaceutical Research</em></li>
+<li><strong>Purpose</strong>
+<ul>
+<li>Analyze interim data for signs of efficacy/futility <span class="math inline">\(\to\)</span> stop trial early</li>
+<li>Univariate survival: information accrued <span class="math inline">\(\propto\)</span> number of events</li>
+</ul></li>
+<li><strong>Challenges with WR</strong>
+<ul>
+<li>Information time not event-driven
+<ul>
+<li>Case study: RMST <span class="citation" data-cites="luo2019 lu2021">(<a href="#/references" role="doc-biblioref" onclick="">Lu &amp; Tian, 2021</a>; <a href="#/references" role="doc-biblioref" onclick="">Luo et al., 2019</a>)</span></li>
+</ul></li>
+<li>Correlations between component events
+<ul>
+<li><em>Dependent</em> increments</li>
 </ul></li>
 </ul></li>
 </ul>
 </section>
-<section id="learning-outcomes" class="slide level2">
-<h2>Learning Outcomes</h2>
+<section id="intercurrent-events" class="slide level2">
+<h2>Intercurrent Events</h2>
 <ul>
-<li><strong>Course site</strong>: <a href="https://lmaowisc.github.io/ce" target="_blank">https://lmaowisc.github.io/ce</a></li>
-<li><strong>After this course, you will</strong>
+<li><strong>Definition and examples</strong>
 <ul>
-<li>Understand the statistical and scientific challenges with composite endpoints as well as regulatory guidelines/requirements</li>
-<li>Learn the basics of statistical methodology, e.g., testing, power analysis, nonparametric estimation, and semiparametric regression to address these challenges</li>
-<li>Get hands-on experience with real data using publicly available R-packages</li>
+<li><p>Post-randomization events affecting interpretation/existence of subsequent outcomes <span class="citation" data-cites="ich2020">(<a href="#/references" role="doc-biblioref" onclick="">ICH, 2020</a>)</span></p></li>
+<li><p>Death or treatment failure/toxicity/discontinuation <span class="citation" data-cites="ich2020">(<a href="#/references" role="doc-biblioref" onclick="">ICH, 2020</a>)</span></p></li>
+</ul></li>
+<li><strong>Strategies by ICH E9 (R1)</strong>
+<ul>
+<li><strong>Hypothetical</strong>: win/loss had treatment continued <span class="math inline">\(\to\)</span> MI/IPCW?</li>
+<li><strong>Composite</strong>: death &gt; <em>treatment failure</em> &gt; lesser events?</li>
+<li><strong>Principal strata</strong>: win/lose among those who would not experience treatment failure if assigned to either group
+<ul>
+<li>Counterfactual pairwise comparisons <span class="citation" data-cites="mao2018 wu2013 fay2018">(<a href="#/references" role="doc-biblioref" onclick="">Fay et al., 2018</a>; <a href="#/references" role="doc-biblioref" onclick="">Mao, 2018</a>; <a href="#/references" role="doc-biblioref" onclick="">Wu et al., 2013</a>)</span></li>
+<li>More work needed</li>
+</ul></li>
+</ul></li>
+</ul>
+</section></section>
+<section>
+<section id="conclusion" class="title-slide slide level1 center">
+<h1>Conclusion</h1>
+
+</section>
+<section id="summary-i" class="slide level2">
+<h2>Summary (I)</h2>
+<ul>
+<li><strong>Composite endpoints</strong>
+<ul>
+<li>Death + hospitalization/progression/relapse</li>
+<li>Regulatory recommendation</li>
+</ul></li>
+<li><strong>Traditional</strong>
+<ul>
+<li><strong>Time to first</strong>: death = nonfatal (<code>survival::coxph()</code>)</li>
+<li><strong>Weighted total</strong>: death = <span class="math inline">\(w_D\times\)</span> nonfatal (<code>Wcompo::compoML()</code>)</li>
+</ul></li>
+<li><strong>Hierarchical</strong>
+<ul>
+<li>Win ratio, net benifit, win odds: death &gt; nonfatal</li>
+<li>Estimand issue (ICH E9 (R1))</li>
 </ul></li>
 </ul>
 </section>
-<section id="syllabus-i" class="slide level2">
-<h2>Syllabus (I)</h2>
+<section id="summary-ii" class="slide level2">
+<h2>Summary (II)</h2>
 <ul>
-<li><strong>1. Introduction</strong> (30 min)
+<li><strong>Win ratio test</strong>
 <ul>
-<li>1.1 Examples &amp; guidelines</li>
-<li>1.2 Traditional methods and limitations</li>
-<li>1.3 Win ratio methods and limitations</li>
+<li><strong>Standard</strong>: death &gt; one nonfatal event</li>
+<li><strong>Recurrent events</strong>: death &gt; frequency &gt; time to last/first event
+<ul>
+<li><code>WR::WRrec(ID, time, status, trt, strata)</code></li>
 </ul></li>
-<li><strong>2. Hypothesis Testing</strong> (40 min)
+<li><strong>Sample size calculations</strong>
 <ul>
-<li>2.1 Win ratio by Pocock et al.&nbsp;(2012)</li>
-<li>2.2 Statistical properties</li>
-<li>2.3 Handling recurrent events (R-package <a href="https://cran.r-project.org/package=WR" target="_blank"><code>WR</code></a>)</li>
-<li>2.4 Sample size calculation (R-package <a href="https://cran.r-project.org/package=WR" target="_blank"><code>WR</code></a>)</li>
+<li><strong>Gumbel-Hougaard copula</strong> for death &amp; nonfatal event</li>
+<li>Baseline parameters + component-wise HR</li>
+<li><code>WR::WRSS(xi, ...)</code></li>
 </ul></li>
-</ul>
-</section>
-<section id="syllabus-ii" class="slide level2">
-<h2>Syllabus (II)</h2>
-<ul>
-<li><strong>3. Nonparametric Estimation</strong> (60 min)
-<ul>
-<li>3.1 Restricted win ratio</li>
-<li>3.2 Average win time analysis (R-package <a href="https://cran.r-project.org/package=rmt" target="_blank"><code>rmt</code></a>)
-<ul>
-<li>3.1.1 Restricted mean time in favor of treatment</li>
-<li>3.1.2 Estimation, inference, and graphics</li>
-<li>3.1.3 Real Examples</li>
 </ul></li>
-<li>3.3 While-alive loss rate (R-package <a href="https://cran.r-project.org/package=WA" target="_blank"><code>WA</code></a>)
+<li><strong>RMT-IF</strong>
 <ul>
-<li>3.2.1 Definition, interpretation, and estimation</li>
-<li>3.2.3 Real Examples</li>
+<li>Net average win time on hierarchical states by <span class="math inline">\(\tau\)</span>
+<ul>
+<li><code>rmt::rmtfit(id, time, status, trt)</code></li>
 </ul></li>
 </ul></li>
 </ul>
 </section>
-<section id="syllabus-iii" class="slide level2">
-<h2>Syllabus (III)</h2>
+<section id="summary-iii" class="slide level2">
+<h2>Summary (III)</h2>
 <ul>
-<li><strong>4. Semiparametric Regression</strong> (30 min)
+<li><strong>While-alive weighted events</strong>
 <ul>
-<li>4.1 Proportional win-fractions model (R-package <a href="https://cran.r-project.org/package=WR" target="_blank"><code>WR</code></a>)
+<li>Compensate for differential survival by <span class="math inline">\(\tau\)</span>
 <ul>
-<li>4.1.1 Model assumptions</li>
-<li>4.1.2 Estimation, inference, and model diagnostics</li>
-<li>4.1.3 Real Examples</li>
-</ul></li>
-<li>4.2 Generalized proportional odds model (tentative)
-<ul>
-<li>4.2.1 Model specification and possible estimation</li>
+<li><code>WA::LRfit(id, time, status, trt, Dweight)</code></li>
 </ul></li>
 </ul></li>
-<li><strong>5. Discussions</strong> (20 min)
+<li><strong>WR regression</strong>
 <ul>
-<li>5.1. Open problems
+<li>PW model <span class="math display">\[
+WR(t\mid Z_i, Z_j;\mathcal W)=\exp\left\{\beta^{\rm T}\left(Z_i- Z_j\right)\right\}
+\]</span>
 <ul>
-<li>5.1.1 Covariate adjustment</li>
-<li>5.1.2 Interim monitoring</li>
-<li>5.1.3 Intercurrent events</li>
+<li><span class="math inline">\(\exp(\beta)\)</span>: WRs with unit increases in covariates</li>
+<li><code>WR::pwreg(ID, time, status, Z, strata)</code></li>
 </ul></li>
-<li>5.2. Course summary</li>
+</ul></li>
+<li><strong>Generalized PO</strong>
+<ul>
+<li>OR of having worse and early outcomes</li>
 </ul></li>
 </ul>
 </section>
-<section id="r-packages-needed" class="slide level2">
-<h2>R-Packages Needed</h2>
+<section id="learning-objectives-a-revisit" class="slide level2">
+<h2>Learning Objectives: A Revisit</h2>
 <ul>
-<li>Install/load following packages</li>
+<li><strong>Have you</strong>
+<ul>
+<li>Understood the statistical and scientific challenges with composite endpoints as well as regulatory guidelines/requirements</li>
+<li>Learned the basics of statistical methodology, e.g., testing, power analysis, nonparametric estimation, and semiparametric regression to address these challenges</li>
+<li>Got hands-on experience with real data using publicly available R-packages</li>
+</ul></li>
 </ul>
-<div class="big-code">
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># install packages --------------------------------</span></span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="fu">install.packages</span>(<span class="st">"Wcompo"</span>)</span>
-<span id="cb1-3"><a href="#cb1-3"></a><span class="fu">install.packages</span>(<span class="st">"WR"</span>)</span>
-<span id="cb1-4"><a href="#cb1-4"></a><span class="fu">install.packages</span>(<span class="st">"rmt"</span>)</span>
-<span id="cb1-5"><a href="#cb1-5"></a><span class="fu">install.packages</span>(<span class="st">"WA"</span>)</span>
-<span id="cb1-6"><a href="#cb1-6"></a><span class="co"># load packages -----------------------------------</span></span>
-<span id="cb1-7"><a href="#cb1-7"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb1-8"><a href="#cb1-8"></a><span class="fu">library</span>(survival)</span>
-<span id="cb1-9"><a href="#cb1-9"></a><span class="fu">library</span>(Wcompo)</span>
-<span id="cb1-10"><a href="#cb1-10"></a><span class="fu">library</span>(WR)</span>
-<span id="cb1-11"><a href="#cb1-11"></a><span class="fu">library</span>(rmt)</span>
-<span id="cb1-12"><a href="#cb1-12"></a><span class="fu">library</span>(WA)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</div>
+<p>Visit back at <a href="https://lmaowisc.github.io/ce/">https://lmaowisc.github.io/ce/</a></p>
+</section>
+<section id="acknowledgments" class="slide level2">
+<h2>Acknowledgments</h2>
+<ul>
+<li><p><strong>Funding</strong></p>
+<ul>
+<li><a href="https://reporter.nih.gov/search/9aSu5u3xlE26GrjbF_4cBg/project-details/10734551" target="_blank">R01HL149875</a> (11/2019 – 7/2028)</li>
+<li><a href="https://www.nsf.gov/awardsearch/showAward?AWD_ID=2015526" target="_blank">DMS2015526</a> (7/2020 – 6/2024) <img data-src="images/funds.png" style="width:70.0%" data-fig-align="center"></li>
+</ul></li>
+<li><p><strong>Collaborators</strong></p>
+<ul>
+<li><a href="https://biostat.wiscweb.wisc.edu/staff/kim-kyungmann/" target="_blank">KyungMann Kim</a>, <a href="https://tuowang.rbind.io/" target="_blank">Tuo Wang</a>, Po-Kuei Chen, Gaohong Dong, Bo Huang, Yi Li, <a href="https://xinranmiao.github.io/" target="_blank">Xinran Miao</a>, <a href="https://dlin.web.unc.edu/" target="_blank">Danyu Lin</a>, etc.</li>
+</ul></li>
+</ul>
+</section>
+<section id="references" class="slide level2 smaller scrollable">
+<h2>References</h2>
 <div class="footer footer-default">
 
 </div>
-</section>
+<div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="list">
+<div id="ref-fay2018" class="csl-entry" role="listitem">
+Fay, M. P., Brittain, E. H., Shih, J. H., Follmann, D. A., &amp; Gabriel, E. E. (2018). Causal estimands and confidence intervals associated with Wilcoxon<span>-</span>Mann<span>-</span>Whitney tests in randomized experiments. <em>Statistics in Medicine</em>, <em>37</em>(20), 2923–2937. <a href="https://doi.org/10.1002/sim.7799">https://doi.org/10.1002/sim.7799</a>
+</div>
+<div id="ref-fda:2023" class="csl-entry" role="listitem">
+FDA. (2023). <em>Guidance document: Adjusting for covariates in randomized clinical trials for drugs and biological products</em>. US Food and Drug Adminstration. <a href="https://www.fda.gov/regulatory-information/search-fda-guidance-documents/adjusting-covariates-randomized-clinical-trials-drugs-and-biological-products">https://www.fda.gov/regulatory-information/search-fda-guidance-documents/adjusting-covariates-randomized-clinical-trials-drugs-and-biological-products</a>
+</div>
+<div id="ref-ich2020" class="csl-entry" role="listitem">
+ICH. (2020). <em>ICH E9 (R1) addendum on estimands and sensitivity analysis in clinical trials to the guideline on statistical principles for clinical trials, step 5</em>. London: European Medicines Evaluation Agency.
+</div>
+<div id="ref-lu2021" class="csl-entry" role="listitem">
+Lu, Y., &amp; Tian, L. (2021). Statistical Considerations for Sequential Analysis of the Restricted Mean Survival Time for Randomized Clinical Trials. <em>Statistics in Biopharmaceutical Research</em>, <em>13</em>(2), 210–218. <a href="https://doi.org/10.1080/19466315.2020.1816491">https://doi.org/10.1080/19466315.2020.1816491</a>
+</div>
+<div id="ref-luo2019" class="csl-entry" role="listitem">
+Luo, X., Huang, B., &amp; Quan, H. (2019). Design and monitoring of survival trials based on restricted mean survival times. <em>Clinical Trials</em>, <em>16</em>(6), 616–625. <a href="https://doi.org/10.1177/1740774519871447">https://doi.org/10.1177/1740774519871447</a>
+</div>
+<div id="ref-mao2018" class="csl-entry" role="listitem">
+Mao, L. (2018). On causal estimation using <span>$</span>U<span>$</span>-statistics. <em>Biometrika</em>, <em>105</em>(1), 215–220. <a href="https://doi.org/10.1093/biomet/asx071">https://doi.org/10.1093/biomet/asx071</a>
+</div>
+<div id="ref-tsiatis2008" class="csl-entry" role="listitem">
+Tsiatis, A. A., Davidian, M., Zhang, M., &amp; Lu, X. (2008). Covariate adjustment for two<span>-</span>sample treatment comparisons in randomized clinical trials: A principled yet flexible approach. <em>Statistics in Medicine</em>, <em>27</em>(23), 4658–4677. <a href="https://doi.org/10.1002/sim.3113">https://doi.org/10.1002/sim.3113</a>
+</div>
+<div id="ref-wang2021" class="csl-entry" role="listitem">
+Wang, B., Susukida, R., Mojtabai, R., Amin-Esmaeili, M., &amp; Rosenblum, M. (2021). Model-Robust Inference for Clinical Trials that Improve Precision by Stratified Randomization and Covariate Adjustment. <em>Journal of the American Statistical Association</em>, <em>118</em>(542), 1152–1163. <a href="https://doi.org/10.1080/01621459.2021.1981338">https://doi.org/10.1080/01621459.2021.1981338</a>
+</div>
+<div id="ref-wu2013" class="csl-entry" role="listitem">
+Wu, P., Han, Y., Chen, T., &amp; Tu, X. M. (2013). Causal inference for Mann-Whitney-Wilcoxon rank sum and other nonparametric statistics. <em>Statistics in Medicine</em>, <em>33</em>(8), 1261–1271. <a href="https://doi.org/10.1002/sim.6026">https://doi.org/10.1002/sim.6026</a>
+</div>
+<div id="ref-ye2022" class="csl-entry" role="listitem">
+Ye, T., Shao, J., Yi, Y., &amp; Zhao, Q. (2022). Toward Better Practice of Covariate Adjustment in Analyzing Randomized Clinical Trials. <em>Journal of the American Statistical Association</em>, <em>118</em>(544), 2370–2382. <a href="https://doi.org/10.1080/01621459.2022.2049278">https://doi.org/10.1080/01621459.2022.2049278</a>
+</div>
+</div>
+</section></section>
     </div>
   </div>
 
   <script>window.backupDefine = window.define; window.define = undefined;</script>
-  <script src="outline_files/libs/revealjs/dist/reveal.js"></script>
+  <script src="chap5_files/libs/revealjs/dist/reveal.js"></script>
   <!-- reveal.js plugins -->
-  <script src="outline_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
-  <script src="outline_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
-  <script src="outline_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
-  <script src="outline_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
-  <script src="outline_files/libs/revealjs/plugin/quarto-support/support.js"></script>
+  <script src="chap5_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="chap5_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="chap5_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="chap5_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="chap5_files/libs/revealjs/plugin/quarto-support/support.js"></script>
   
 
-  <script src="outline_files/libs/revealjs/plugin/notes/notes.js"></script>
-  <script src="outline_files/libs/revealjs/plugin/search/search.js"></script>
-  <script src="outline_files/libs/revealjs/plugin/zoom/zoom.js"></script>
-  <script src="outline_files/libs/revealjs/plugin/math/math.js"></script>
+  <script src="chap5_files/libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="chap5_files/libs/revealjs/plugin/search/search.js"></script>
+  <script src="chap5_files/libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="chap5_files/libs/revealjs/plugin/math/math.js"></script>
   <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
 
   <script>
@@ -767,44 +802,6 @@ Lu Mao
         ]
       });
     </script>
-    
-    <script>
-      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
-      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
-      // slide changes (different for each slide format).
-      (function () {
-        // dispatch for htmlwidgets
-        function fireSlideEnter() {
-          const event = window.document.createEvent("Event");
-          event.initEvent("slideenter", true, true);
-          window.document.dispatchEvent(event);
-        }
-
-        function fireSlideChanged(previousSlide, currentSlide) {
-          fireSlideEnter();
-
-          // dispatch for shiny
-          if (window.jQuery) {
-            if (previousSlide) {
-              window.jQuery(previousSlide).trigger("hidden");
-            }
-            if (currentSlide) {
-              window.jQuery(currentSlide).trigger("shown");
-            }
-          }
-        }
-
-        // hookup for slidy
-        if (window.w3c_slidy) {
-          window.w3c_slidy.add_observer(function (slide_num) {
-            // slide_num starts at position 1
-            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
-          });
-        }
-
-      })();
-    </script>
-
     <script id="quarto-html-after-body" type="application/javascript">
     window.document.addEventListener("DOMContentLoaded", function (event) {
       const toggleBodyColorMode = (bsSheetEl) => {

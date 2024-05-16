@@ -883,7 +883,7 @@ M_{ij}(t\mid Z_i, Z_j;\beta)=\underbrace{\delta_{ij}(t)}_{\rm observed\,\,win} -
 <section id="hf-action-race-effect" class="slide level2">
 <h2>HF-ACTION: Race Effect</h2>
 <ul>
-<li><strong>Joint test <span class="math inline">\((\chi_2^2)\)</span> on race categories</strong>
+<li><strong>Joint test</strong> <span class="math inline">\((\chi_2^2)\)</span> on race categories
 <ul>
 <li>Black/African American, white, other</li>
 </ul></li>
@@ -971,7 +971,7 @@ M_{ij}(t\mid Z_i, Z_j;\beta)=\underbrace{\delta_{ij}(t)}_{\rm observed\,\,win} -
 \log\left\{\frac{\pr(D\leq t)}{\pr(D &gt; t)}\right\}=h(t) + \beta^\T Z
 \]</span>
 <ul>
-<li><span class="math inline">\(\exp(\beta)\)</span>: Odds ratios (OR) for having early death (regardless of time cut-off)</li>
+<li><span class="math inline">\(\exp(\beta)\)</span>: Odds ratios (OR) of having early death (regardless of time cut-off)</li>
 </ul></li>
 </ul></li>
 </ul>
@@ -1015,13 +1015,10 @@ M_{ij}(t\mid Z_i, Z_j;\beta)=\underbrace{\delta_{ij}(t)}_{\rm observed\,\,win} -
 \log\left[\frac{\pr\{Y(t)&gt;k\}}{\pr\{Y(t)\leq k\}}\right]=h_k(t) + \beta^\T Z
 \]</span>
 <ul>
-<li><span class="math inline">\(\exp(\beta)\)</span>: ORs for having early and less favorable outcomes (regardless of time and favorability cut-off)
+<li><span class="math inline">\(\exp(\beta)\)</span>: ORs of having early and less favorable outcomes (regardless of time and favorability cut-off)
 <ul>
 <li>Two-way (time &amp; order) proportionality</li>
-</ul></li>
-<li><strong>Refinement</strong>: <span class="math inline">\(\beta^\T Z \to \beta^\T Z_{(1)} + \gamma_k^\T Z_{(2)}\)</span>
-<ul>
-<li>Relaxes order-proportionality for <span class="math inline">\(Z_{(2)}\)</span></li>
+<li><span class="math inline">\(K=0\)</span> <span class="math inline">\(\to\)</span> Univariate PO</li>
 </ul></li>
 </ul></li>
 </ul>
@@ -1054,18 +1051,22 @@ M_{ij}(t\mid Z_i, Z_j;\beta)=\underbrace{\delta_{ij}(t)}_{\rm observed\,\,win} -
 <ul>
 <li><strong>More on PW</strong>
 <ul>
-<li>Check functional form (linear, quadratic, grouped) of <span class="math inline">\(Z\)</span> <span class="citation" data-cites="lin1993">(<a href="#/references" role="doc-biblioref" onclick="">Lin et al., 1993</a>)</span>
+<li><p>Check functional form (linear, quadratic, grouped) of <span class="math inline">\(Z\)</span> <span class="citation" data-cites="lin1993">(<a href="#/references" role="doc-biblioref" onclick="">Lin et al., 1993</a>)</span></p>
 <ul>
 <li>E.g., is age effect linear?</li>
 </ul>
-<span class="math display">\[
+<p><span class="math display">\[
     \mbox{plot} \sum_{i, j: Z_i - Z_j\leq z}(Z_i - Z_j)M(\infty \mid Z_i, Z_j;\hat\beta) \mbox{ against } z\in\mathbb R
-    \]</span></li>
-<li>Currently <code>WR::pwreg()</code> implements only PW(<span class="math inline">\(\mathcal W_{\rm P}\)</span>)
+    \]</span></p></li>
+<li><p>Currently <code>WR::pwreg()</code> implements only PW(<span class="math inline">\(\mathcal W_{\rm P}\)</span>)</p>
 <ul>
 <li>More functionalities to be added</li>
 </ul></li>
-<li>Variations: regression of win ratio/odds <span class="citation" data-cites="follmann2019 song2022">(<a href="#/references" role="doc-biblioref" onclick="">Follmann et al., 2019</a>; <a href="#/references" role="doc-biblioref" onclick="">Song et al., 2022</a>)</span></li>
+<li><p>Variations: regression of win ratio/odds <span class="citation" data-cites="follmann2019 song2022">(<a href="#/references" role="doc-biblioref" onclick="">Follmann et al., 2019</a>; <a href="#/references" role="doc-biblioref" onclick="">Song et al., 2022</a>)</span></p></li>
+</ul></li>
+<li><strong>Refinement of PO</strong>
+<ul>
+<li><span class="math inline">\(\beta^\T Z \to \beta^\T Z_{(1)} + \gamma_k^\T Z_{(2)}\)</span>: relaxes order-proportionality on <span class="math inline">\(Z_{(2)}\)</span></li>
 </ul></li>
 </ul>
 </section>
