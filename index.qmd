@@ -82,4 +82,4 @@ library(rmt)
 library(WA)
 ```
 
-![](docs/images/intro_Ntrial_title.png)
+![](images/intro_Ntrial_title.png)
