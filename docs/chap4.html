@@ -488,12 +488,7 @@ Lu Mao
 </ul></li>
 </ul></li>
 </ul>
-<table style="width:99%;">
-<colgroup>
-<col style="width: 39%">
-<col style="width: 22%">
-<col style="width: 37%">
-</colgroup>
+<table>
 <thead>
 <tr class="header">
 <th></th>
@@ -505,12 +500,12 @@ Lu Mao
 <tr class="odd">
 <td><strong>Hypothesis testing</strong></td>
 <td style="text-align: center;">Gehan, log-rank</td>
-<td style="text-align: center;">Win ratio/odds, net benefit</td>
+<td style="text-align: center;">Win ratio/odds, net benefit (<a href="chap2.html#/alternative-hypothesis" target="_blank">Ch 2</a>)</td>
 </tr>
 <tr class="even">
 <td><strong>Nonparametric estimation</strong></td>
 <td style="text-align: center;">RMST</td>
-<td style="text-align: center;">RMT-IF</td>
+<td style="text-align: center;">RMT-IF (<a href="chap3.html#/alternative-hypothesis" target="_blank">Ch 3</a>)</td>
 </tr>
 <tr class="odd">
 <td><strong>Semiparametric regression</strong></td>
@@ -536,7 +531,7 @@ Lu Mao
 <li><span class="math inline">\(E\{\mathcal W(\mathcal H^*_j,\mathcal H^*_i)(t)\mid Z_i, Z_j\}\)</span>: Conditional win fraction (probability) for <span class="math inline">\(j\)</span> against <span class="math inline">\(i\)</span> at <span class="math inline">\(t\)</span></li>
 </ul></li>
 <li><strong>Covariate-specific win ratio</strong> <span class="math display">\[\begin{equation}\label{eq:cov_spec_curtail_wr}
-WR(t; Z_i, Z_j;\mathcal W):= \frac{E\{\mathcal W(\mathcal H^*_i,\mathcal H^*_j)(t)\mid Z_i,Z_j\}}{E\{\mathcal W(\mathcal H_j,\mathcal H_i)(t)\mid Z_i, Z_j\}}
+WR(t; Z_i, Z_j;\mathcal W):= \frac{E\{\mathcal W(\mathcal H^*_i,\mathcal H^*_j)(t)\mid Z_i,Z_j\}}{E\{\mathcal W(\mathcal H^*_j,\mathcal H^*_i)(t)\mid Z_i, Z_j\}}
 \end{equation}\]</span></li>
 <li><strong>Regress</strong> <span class="math inline">\(WR(t; Z_i, Z_j;\mathcal W)\)</span> vs <span class="math inline">\((Z_i, Z_j)\)</span>
 <ul>
@@ -560,7 +555,7 @@ WR(t\mid Z_i, Z_j;\mathcal W)=\exp\left\{\beta^{\rm T}\left(Z_i- Z_j\right)\righ
 </ul></li>
 <li><p><span class="math inline">\(\beta\)</span>: log-WR associated with unit increases in covariates (regardless of follow-up time)</p></li>
 <li><p><strong>Semiparametric</strong>: Parametric covariate effects, nonparametric otherwise</p></li>
-<li><p>Denote model by PW<span class="math inline">\((\mathcal W)\)</span></p>
+<li><p>Denote model by PW(<span class="math inline">\(\mathcal W\)</span>)</p>
 <ul>
 <li>Stresses dependency on win function</li>
 </ul></li>
@@ -577,7 +572,7 @@ WR(t\mid Z_i, Z_j;\mathcal W)=\exp\left\{\beta^{\rm T}\left(Z_i- Z_j\right)\righ
 <li><strong>Cox PH model</strong>
 <ul>
 <li>PW<span class="math inline">\((\mathcal W_{\rm TFE})\)</span> <span class="math inline">\(\Leftrightarrow\)</span> Cox PH model on TFE <span class="math inline">\(\tilde T\)</span> <span class="math display">\[
-\pr(t\leq \tilde T&lt;t+\dd t\mid \tilde T\geq t; Z) =\exp(-\beta)\lambda_0(t)\dd t
+\pr(t\leq \tilde T&lt;t+\dd t\mid \tilde T\geq t; Z) =\exp(-\beta^\T Z)\lambda_0(t)\dd t
 \]</span></li>
 </ul></li>
 <li><strong>Bivariate Lehmann model</strong>
@@ -597,7 +592,7 @@ WR(t\mid Z_i, Z_j;\mathcal W)=\exp\left\{\beta^{\rm T}\left(Z_i- Z_j\right)\righ
 <li><strong>Observed outcomes</strong>
 <ul>
 <li><span class="math inline">\(\mathcal H^*(X_i)\)</span>: outcomes up to <span class="math inline">\(X_i=D_i\wedge C_i\)</span></li>
-<li><strong>Observed win process</strong> <span class="math inline">\(\delta_{ij}(t)=\mathcal W(\mathcal H_i,\mathcal H_j)(X_i\wedge X_j\wedge t)\)</span></li>
+<li><strong>Observed win process</strong> <span class="math inline">\(\delta_{ij}(t)=\mathcal W(\mathcal H^*_i,\mathcal H^*_j)(X_i\wedge X_j\wedge t)\)</span></li>
 <li><strong>Determinacy (win or loss) indicator</strong>: <span class="math inline">\(R_{ij}(t)=\delta_{ij}(t)+\delta_{ji}(t)\)</span></li>
 </ul></li>
 <li><strong>Win residuals</strong>
@@ -614,10 +609,11 @@ M_{ij}(t\mid Z_i, Z_j;\beta)=\underbrace{\delta_{ij}(t)}_{\rm observed\,\,win} -
 <section id="estimation-and-inference" class="slide level2">
 <h2>Estimation and Inference</h2>
 <ul>
-<li><strong>Estimating equation</strong> <span class="math display">\[\begin{equation}\label{eq:wr:ee}
-    \Ut\int_0^\infty (Z_i - Z_j) h(t; Z_i, Z_j)\dd M_{ij}(t \mid Z_i, Z_j;\beta)=0
-    \end{equation}\]</span>
+<li><strong>Estimating equation</strong>
 <ul>
+<li>Sum of all possible pairs of covariate-/time-weighted residuals <span class="math display">\[\begin{equation}\label{eq:wr:ee}
+\Ut\int_0^\infty (Z_i - Z_j) h(t; Z_i, Z_j)\dd M_{ij}(t \mid Z_i, Z_j;\beta)=0
+\end{equation}\]</span></li>
 <li>Weight function <span class="math inline">\(h(t; Z_i, Z_j)\equiv 1\)</span></li>
 <li>Newton-Raphson to get root <span class="math inline">\(\hat\beta\)</span></li>
 <li><span class="math inline">\(\hat\var(\hat\beta)\)</span>: <span class="math inline">\(U\)</span>-statistic variance</li>
@@ -629,7 +625,7 @@ M_{ij}(t\mid Z_i, Z_j;\beta)=\underbrace{\delta_{ij}(t)}_{\rm observed\,\,win} -
 <ul>
 <li><strong>Cumulative residuals</strong>
 <ul>
-<li>Rescaled <span class="math inline">\(\hat U_n(t)=\Ut(Z_i - Z_j)(t \mid Z_i, Z_j;\hat\beta)\)</span></li>
+<li>Rescaled <span class="math inline">\(\hat U_n(t)=\Ut(Z_i - Z_j)M(t \mid Z_i, Z_j;\hat\beta)\)</span></li>
 <li>Similar to score processes in Cox model <span class="citation" data-cites="lin1993">(<a href="#/references" role="doc-biblioref" onclick="">Lin et al., 1993</a>)</span></li>
 </ul></li>
 </ul>
@@ -654,7 +650,7 @@ M_{ij}(t\mid Z_i, Z_j;\beta)=\underbrace{\delta_{ij}(t)}_{\rm observed\,\,win} -
 \]</span>
 <ul>
 <li><span class="math inline">\((H^*_{li}, Z_{li}), (H^*_{lj}, Z_{lj})\)</span>: <span class="math inline">\(i\)</span>th and <span class="math inline">\(j\)</span>th outcome-covariates in <span class="math inline">\(l\)</span>th stratum <span class="math inline">\((l= 1,\ldots, L)\)</span></li>
-<li>Proportionality holds only within stratum, not between</li>
+<li>Proportionality required only within stratum, not between</li>
 </ul></li>
 </ul></li>
 </ul>
@@ -863,7 +859,7 @@ M_{ij}(t\mid Z_i, Z_j;\beta)=\underbrace{\delta_{ij}(t)}_{\rm observed\,\,win} -
 <ul>
 <li><strong>Inference table for</strong> <span class="math inline">\(\hat\beta\)</span>
 <ul>
-<li>age, black vs white, LVEF significant</li>
+<li>Age, black vs white, LVEF significant</li>
 </ul></li>
 </ul>
 <div class="cell">
@@ -887,7 +883,7 @@ M_{ij}(t\mid Z_i, Z_j;\beta)=\underbrace{\delta_{ij}(t)}_{\rm observed\,\,win} -
 <section id="hf-action-race-effect" class="slide level2">
 <h2>HF-ACTION: Race Effect</h2>
 <ul>
-<li><strong>Joint test</strong> <span class="math inline">\((\chi_2^2)\)</span> on race categories
+<li><strong>Joint test <span class="math inline">\((\chi_2^2)\)</span> on race categories</strong>
 <ul>
 <li>Black/African American, white, other</li>
 </ul></li>
@@ -979,12 +975,7 @@ M_{ij}(t\mid Z_i, Z_j;\beta)=\underbrace{\delta_{ij}(t)}_{\rm observed\,\,win} -
 </ul></li>
 </ul></li>
 </ul>
-<table style="width:99%;">
-<colgroup>
-<col style="width: 39%">
-<col style="width: 22%">
-<col style="width: 37%">
-</colgroup>
+<table>
 <thead>
 <tr class="header">
 <th></th>
@@ -996,18 +987,18 @@ M_{ij}(t\mid Z_i, Z_j;\beta)=\underbrace{\delta_{ij}(t)}_{\rm observed\,\,win} -
 <tr class="odd">
 <td><strong>Hypothesis testing</strong></td>
 <td style="text-align: center;">Gehan, log-rank</td>
-<td style="text-align: center;">Win ratio/odds, net benefit</td>
+<td style="text-align: center;">Win ratio/odds, net benefit (<a href="chap2.html#/alternative-hypothesis" target="_blank">Ch 2</a>)</td>
 </tr>
 <tr class="even">
 <td><strong>Nonparametric estimation</strong></td>
 <td style="text-align: center;">RMST</td>
-<td style="text-align: center;">RMT-IF</td>
+<td style="text-align: center;">RMT-IF (<a href="chap3.html#/alternative-hypothesis" target="_blank">Ch 3</a>)</td>
 </tr>
 <tr class="odd">
 <td><strong>Semiparametric regression</strong></td>
 <td style="text-align: center;"><p>Cox PH model</p>
 <p>PO model</p></td>
-<td style="text-align: center;"><p>PW model</p>
+<td style="text-align: center;"><p>PW model (Ch 4)</p>
 <p>?</p></td>
 </tr>
 </tbody>
@@ -1061,14 +1052,47 @@ M_{ij}(t\mid Z_i, Z_j;\beta)=\underbrace{\delta_{ij}(t)}_{\rm observed\,\,win} -
 <section id="notes" class="slide level2">
 <h2>Notes</h2>
 <ul>
-<li><strong>Variations of PW model</strong>
+<li><strong>More on PW</strong>
 <ul>
-<li>Regression of win ratio/odds <span class="citation" data-cites="follmann2019 song2022">(<a href="#/references" role="doc-biblioref" onclick="">Follmann et al., 2019</a>; <a href="#/references" role="doc-biblioref" onclick="">Song et al., 2022</a>)</span></li>
+<li>Check functional form (linear, quadratic, grouped) of <span class="math inline">\(Z\)</span> <span class="citation" data-cites="lin1993">(<a href="#/references" role="doc-biblioref" onclick="">Lin et al., 1993</a>)</span>
+<ul>
+<li>E.g., is age effect linear?</li>
+</ul>
+<span class="math display">\[
+    \mbox{plot} \sum_{i, j: Z_i - Z_j\leq z}(Z_i - Z_j)M(\infty \mid Z_i, Z_j;\hat\beta) \mbox{ against } z\in\mathbb R
+    \]</span></li>
+<li>Currently <code>WR::pwreg()</code> implements only PW(<span class="math inline">\(\mathcal W_{\rm P}\)</span>)
+<ul>
+<li>More functionalities to be added</li>
+</ul></li>
+<li>Variations: regression of win ratio/odds <span class="citation" data-cites="follmann2019 song2022">(<a href="#/references" role="doc-biblioref" onclick="">Follmann et al., 2019</a>; <a href="#/references" role="doc-biblioref" onclick="">Song et al., 2022</a>)</span></li>
 </ul></li>
 </ul>
 </section>
 <section id="summary" class="slide level2">
 <h2>Summary</h2>
+<ul>
+<li><strong>PW: WR regression</strong>
+<ul>
+<li>Proportionality and multiplicativity <span class="math display">\[
+WR(t\mid Z_i, Z_j;\mathcal W)=\exp\left\{\beta^{\rm T}\left(Z_i- Z_j\right)\right\}
+\]</span>
+<ul>
+<li><span class="math inline">\(\exp(\beta)\)</span>: WRs with unit increases in covariates</li>
+<li><code>WR::pwreg(ID, time, status, Z, strata)</code></li>
+</ul></li>
+</ul></li>
+<li><strong>Generalize PO model</strong>
+<ul>
+<li>Multistate process <span class="math inline">\(Y(t)=0, 1, \ldots, K, \infty\)</span> <span class="math display">\[
+\log\left[\frac{\pr\{Y(t)&gt;k\}}{\pr\{Y(t)\leq k\}}\right]=h_k(t) + \beta^\T Z
+\]</span>
+<ul>
+<li><span class="math inline">\(\exp(\beta)\)</span>: ORs with unit increases in covariates<br>
+<!-- -   Estimation: an open problem --></li>
+</ul></li>
+</ul></li>
+</ul>
 </section>
 <section id="references" class="slide level2 smaller scrollable">
 <h2>References</h2>
