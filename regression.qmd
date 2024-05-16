@@ -14,7 +14,6 @@ Chapter slides [here](chap4.html){target="_blank"}. (To convert html to pdf, pre
 #| label: tbl-hfaction-reg-tabone
 #| tbl-cap: Patient characteristics in non-ischemic cohort of HF-ACTION 
 
-
 ##################################################################
 # This code generates the numerical results in  chapter 4       ##
 ##################################################################
