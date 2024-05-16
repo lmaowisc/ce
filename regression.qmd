@@ -44,7 +44,7 @@ df <- non_ischemic |>
   filter(status != 2) |>  # de-duplicate
   mutate( # clean up the levels of categorical variables
     trt_ab = fct(if_else(trt_ab == 0, "Usual care", "Training")),
-    sex = if_else(sex == 1, "Male", "Feale"),
+    sex = if_else(sex == 1, "Female", "Male"),
     race = case_when(
       Black.vs.White == 1 ~ "Black",
       Other.vs.White == 1 ~ "Other",
