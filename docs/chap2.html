@@ -475,11 +475,13 @@ Lu Mao
 <li><strong>Two-sample comparison</strong> <span class="citation" data-cites="pocock2012">(<a href="#/references" role="doc-biblioref" onclick="">Pocock et al., 2012</a>)</span>
 <ul>
 <li><strong>Data</strong>: <span class="math inline">\(D_i^{(a)}, T_i^{(a)}, C_i^{(a)}\)</span>: survival, hospitalization, censoring times on <span class="math inline">\(i\)</span>th subject in group <span class="math inline">\(a\)</span> <span class="math inline">\((i=1,\ldots, N_a; a= 1, 0)\)</span></li>
-<li><strong>Hierarchical composite</strong>: Death &gt; hospitalization in <span class="math inline">\(\left[0, C_i^{(a)}\wedge C_j^{(1-a)}\right]\)</span></li>
-<li><strong>Pairwise comparisons</strong> <span class="math display">\[\begin{align}
+<li><strong>Pairwise comparisons</strong>: <span class="math inline">\(i\)</span>th in group <span class="math inline">\(a\)</span> vs <span class="math inline">\(j\)</span>th in group <span class="math inline">\(1-a\)</span>
+<ul>
+<li><strong>Hierarchical composite</strong>: Death &gt; hospitalization in <span class="math inline">\(\left[0, C_i^{(a)}\wedge C_j^{(1-a)}\right]\)</span> <span class="math display">\[\begin{align}
 \hat w^{(a, 1-a)}_{ij}&amp;= \underbrace{I(D_j^{(1-a)}&lt; D_i^{(a)}\wedge C_i^{(a)}\wedge C_j^{(1-a)})}_{\mbox{win on survival}}\\
-&amp; + \underbrace{I(\min(D_i^{(a)}, D_j^{(1-a)}) &gt; C_i^{(a)}\wedge C_j^{(1-a)}, T_j^{(1-a)}&lt; T_i^{(a)}\wedge C_i^{(1)}\wedge C_j^{(0)})}_{\mbox{inconclusive on survival, win on hospitalization}}
+&amp; + \underbrace{I(\min(D_i^{(a)}, D_j^{(1-a)}) &gt; C_i^{(a)}\wedge C_j^{(1-a)}, T_j^{(1-a)}&lt; T_i^{(a)}\wedge C_i^{(1)}\wedge C_j^{(0)})}_{\mbox{tie on survival, win on hospitalization}}
 \end{align}\]</span></li>
+</ul></li>
 </ul></li>
 </ul>
 </section>
@@ -507,7 +509,7 @@ WR = \hat w^{(1, 0)} / \hat w^{(0, 1)}
 <li><strong>Other measures</strong>
 <ul>
 <li><strong>Net benefit (proportion in favor)</strong>: <span class="math inline">\(\hat w^{(1, 0)} - \hat w^{(0, 1)}\)</span> <span class="citation" data-cites="buyse2010">(<a href="#/references" role="doc-biblioref" onclick="">Buyse, 2010</a>)</span></li>
-<li><strong>Win odds</strong>: <span class="math inline">\((\hat w^{(1, 0)} - \hat w^{(0, 1)} + 1)/ (\hat w^{(0, 1)} - \hat w^{(1, 0)} + 1)\)</span> <span class="citation" data-cites="brunner2021">(<a href="#/references" role="doc-biblioref" onclick="">Brunner et al., 2021</a>)</span></li>
+<li><strong>Win odds</strong>: <span class="math inline">\((\hat w^{(1, 0)} - \hat w^{(0, 1)} + 1)/ (\hat w^{(0, 1)} - \hat w^{(1, 0)} + 1)\)</span> <span class="citation" data-cites="dong2019">(<a href="#/references" role="doc-biblioref" onclick="">Dong et al., 2020</a>)</span></li>
 </ul></li>
 </ul></li>
 </ul>
@@ -572,7 +574,7 @@ H_0: H^\t(s, t) = H^\c(s, t)\mbox{ for all } t\leq s
 H_A: \pr(\mbox{Treatment wins by } t)\geq \pr(\mbox{Control wins by } t)
 \mbox{ for all } t
 \]</span></li>
-<li><strong>Sufficient condition</strong>: joint stochastic order of death and nonfatal events <span class="math display">\[
+<li><strong>Sufficient condition</strong>: joint stochastic order of death and nonfatal event <span class="math display">\[
 H_A: H^\t(s, t) \geq  H^\c(s, t)\mbox{ for all } t\leq s
 \]</span></li>
 </ul></li>
@@ -583,12 +585,12 @@ H_A: H^\t(s, t) \geq  H^\c(s, t)\mbox{ for all } t\leq s
 <ul>
 <li><p><strong>Weighting</strong></p>
 <ul>
-<li>Unweighted pairwise comparisons <span class="math inline">\(\to\)</span> Gehan test</li>
+<li>Unweighted pairwise comparisons <span class="math inline">\(\to\)</span> <span class="citation" data-cites="gehan1965">Gehan (<a href="#/references" role="doc-biblioref" onclick="">1965</a>)</span> test</li>
 <li>Weight win/loss by time of follow-up <span class="math inline">\(\to\)</span> log-rank (more efficient) <span class="citation" data-cites="Luo2017">(<a href="#/references" role="doc-biblioref" onclick="">Luo et al., 2017</a>)</span></li>
 </ul></li>
 <li><p><strong>Stratification</strong></p>
 <ul>
-<li><strong>Stratified WR</strong>: within-stratum comparisons <span class="citation" data-cites="dong2017 dong2023">(<a href="#/references" role="doc-biblioref" onclick="">Dong et al., 2017</a>, <a href="#/references" role="doc-biblioref" onclick="">2023</a>)</span>
+<li><strong>Stratified WR</strong>: within-stratum comparisons <span class="citation" data-cites="dong2017 gasparyan2020 dong2023">(<a href="#/references" role="doc-biblioref" onclick="">Dong et al., 2017</a>, <a href="#/references" role="doc-biblioref" onclick="">2023</a>; <a href="#/references" role="doc-biblioref" onclick="">Gasparyan et al., 2020</a>)</span>
 <ul>
 <li>Sum of stratum-specific wins / sum of stratum-specific losses</li>
 </ul></li>
@@ -604,14 +606,14 @@ H_A: H^\t(s, t) \geq  H^\c(s, t)\mbox{ for all } t\leq s
 <section id="general-data" class="slide level2">
 <h2>General Data</h2>
 <ul>
-<li><strong>Outcome data</strong>
+<li><strong>Full outcomes</strong>
 <ul>
-<li>A subject in group <span class="math inline">\(a\)</span> <span class="math display">\[\mathcal H^{*{(a)}}(t)=\left\{N^{*{(a)}}_D(u), N^{*{(a)}}_1(u), \ldots, N^{*{(a)}}_K(u):0\leq u\leq t\right\}\]</span></li>
+<li>A subject in group <span class="math inline">\(a\)</span> <span class="math inline">\((a=1, 0)\)</span> <span class="math display">\[\mathcal H^{*{(a)}}(t)=\left\{N^{*{(a)}}_D(u), N^{*{(a)}}_1(u), \ldots, N^{*{(a)}}_K(u):0\leq u\leq t\right\}\]</span></li>
 <li><span class="math inline">\(N^{*{(a)}}_D(u), N^{*{(a)}}_1(u), \ldots, N^{*{(a)}}_K(u)\)</span>: counting processes for death and <span class="math inline">\(K\)</span> different types of nonfatal events</li>
 </ul></li>
 <li><strong>Observed data</strong>
 <ul>
-<li>Life history observed up to <span class="math inline">\(X^{(a)}= D^{(a)}\wedge C^{(a)}\)</span> <span class="math display">\[\{\mathcal H^{*{(a)}}(X^{(a)}), X^{(a)}\}\]</span></li>
+<li><span class="math inline">\(\mathcal H^{*{(a)}}(X^{(a)})\)</span>: life history up to <span class="math inline">\(X^{(a)}= D^{(a)}\wedge C^{(a)}\)</span></li>
 </ul></li>
 </ul>
 </section>
@@ -620,14 +622,14 @@ H_A: H^\t(s, t) \geq  H^\c(s, t)\mbox{ for all } t\leq s
 <ul>
 <li><strong>Win function</strong>
 <ul>
-<li><span class="math inline">\(\mathcal W(\mathcal H^{*{(a)}}, \mathcal H^{*{(1-a)}})(t) =I\left\{\mathcal H^{*{(a)}}(t) \mbox{ is more favorable than } \mathcal H^{*{(1-a)}}(t)\right\}\)</span></li>
-<li><strong>Basic requirements</strong>
+<li><p><strong>Time frame of comparison</strong>: <span class="math inline">\([0, t]\)</span> <span class="math display">\[\mathcal W(\mathcal H^{*{(a)}}, \mathcal H^{*{(1-a)}})(t) =I\left\{\mathcal H^{*{(a)}}(t) \mbox{ is more favorable than } \mathcal H^{*{(1-a)}}(t)\right\}\]</span></p></li>
+<li><p><strong>Basic requirements</strong></p>
 <ul>
 <li>(W1) <span class="math inline">\(\mathcal W(\mathcal H^{*{(a)}}, \mathcal H^{*{(1-a)}})(t)\)</span> is a function only of <span class="math inline">\(\mathcal H^{*{(a)}}(t)\)</span> and <span class="math inline">\(\mathcal H^{*{(1-a)}}(t)\)</span></li>
 <li>(W2) <span class="math inline">\(\mathcal W(\mathcal H^{*{(a)}}, \mathcal H^{*{(1-a)}})(t)+\mathcal W(\mathcal H^{*{(1-a)}}, \mathcal H^{*{(a)}})(t) \in \{0, 1\}\)</span></li>
 <li>(W3) <span class="math inline">\(\mathcal W(\mathcal H^{*{(a)}}, \mathcal H^{*{(1-a)}})(t)=\mathcal W(\mathcal H^{*{(a)}}, \mathcal H^{*{(1-a)}})(D^{(a)}\wedge D^{(1-a)}\wedge t)\)</span></li>
 </ul></li>
-<li><strong>Interpretations</strong>
+<li><p><strong>Interpretations</strong></p>
 <ul>
 <li>(W1) Consistency of time frame</li>
 <li>(W2) Either win, loss, or tie</li>
@@ -1064,20 +1066,21 @@ n = \frac{\zeta_0^2(\lambda_D,\lambda_H,\kappa,\tau_c,\tau,\lambda_L)(z_{1-\alph
 </ul></li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>outcome_base <span class="ot">&lt;-</span> <span class="fu">gumbel.est</span>(pilot<span class="sc">$</span>patid, pilot<span class="sc">$</span>time <span class="sc">/</span> <span class="dv">12</span>, pilot<span class="sc">$</span>status)</span>
-<span id="cb9-2"><a href="#cb9-2"></a>lambda_D <span class="ot">&lt;-</span> outcome_base<span class="sc">$</span>lambda_D</span>
-<span id="cb9-3"><a href="#cb9-3"></a>lambda_H <span class="ot">&lt;-</span> outcome_base<span class="sc">$</span>lambda_H</span>
-<span id="cb9-4"><a href="#cb9-4"></a>kappa <span class="ot">&lt;-</span> outcome_base<span class="sc">$</span>kappa</span>
-<span id="cb9-5"><a href="#cb9-5"></a></span>
-<span id="cb9-6"><a href="#cb9-6"></a>lambda_D</span>
-<span id="cb9-7"><a href="#cb9-7"></a><span class="co">#&gt; [1] 0.07307293</span></span>
-<span id="cb9-8"><a href="#cb9-8"></a>lambda_H</span>
-<span id="cb9-9"><a href="#cb9-9"></a><span class="co">#&gt; 1] 0.5596186</span></span>
-<span id="cb9-10"><a href="#cb9-10"></a>kappa</span>
-<span id="cb9-11"><a href="#cb9-11"></a><span class="co">#&gt; [1] 1.564485</span></span>
-<span id="cb9-12"><a href="#cb9-12"></a><span class="do">## Kendall's rank correlation</span></span>
-<span id="cb9-13"><a href="#cb9-13"></a><span class="dv">1</span> <span class="sc">-</span> <span class="dv">1</span><span class="sc">/</span>kappa</span>
-<span id="cb9-14"><a href="#cb9-14"></a><span class="co">#&gt; [1] 0.360812</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="co"># Step 1: estimate (lambda_D, lambda_H, kappa) from HF-ACTION data</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a>outcome_base <span class="ot">&lt;-</span> <span class="fu">gumbel.est</span>(pilot<span class="sc">$</span>patid, pilot<span class="sc">$</span>time <span class="sc">/</span> <span class="dv">12</span>, pilot<span class="sc">$</span>status)</span>
+<span id="cb9-3"><a href="#cb9-3"></a>lambda_D <span class="ot">&lt;-</span> outcome_base<span class="sc">$</span>lambda_D</span>
+<span id="cb9-4"><a href="#cb9-4"></a>lambda_H <span class="ot">&lt;-</span> outcome_base<span class="sc">$</span>lambda_H</span>
+<span id="cb9-5"><a href="#cb9-5"></a>kappa <span class="ot">&lt;-</span> outcome_base<span class="sc">$</span>kappa</span>
+<span id="cb9-6"><a href="#cb9-6"></a></span>
+<span id="cb9-7"><a href="#cb9-7"></a>lambda_D</span>
+<span id="cb9-8"><a href="#cb9-8"></a><span class="co">#&gt; [1] 0.07307293</span></span>
+<span id="cb9-9"><a href="#cb9-9"></a>lambda_H</span>
+<span id="cb9-10"><a href="#cb9-10"></a><span class="co">#&gt; 1] 0.5596186</span></span>
+<span id="cb9-11"><a href="#cb9-11"></a>kappa</span>
+<span id="cb9-12"><a href="#cb9-12"></a><span class="co">#&gt; [1] 1.564485</span></span>
+<span id="cb9-13"><a href="#cb9-13"></a><span class="do">## Kendall's rank correlation</span></span>
+<span id="cb9-14"><a href="#cb9-14"></a><span class="dv">1</span> <span class="sc">-</span> <span class="dv">1</span><span class="sc">/</span>kappa</span>
+<span id="cb9-15"><a href="#cb9-15"></a><span class="co">#&gt; [1] 0.360812</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="sample-size-example" class="slide level2">
@@ -1086,7 +1089,7 @@ n = \frac{\zeta_0^2(\lambda_D,\lambda_H,\kappa,\tau_c,\tau,\lambda_L)(z_{1-\alph
 <li><strong>One scenario</strong>
 <ul>
 <li>HRs on death &amp; hospitalization: 0.9, 0.8</li>
-<li>Sample size needed for power 80%: <span class="math inline">\(n=1261\)</span></li>
+<li>Sample size needed for power 80%: <span class="math inline">\(n=1241\)</span></li>
 </ul></li>
 </ul>
 <div class="cell">
@@ -1095,13 +1098,13 @@ n = \frac{\zeta_0^2(\lambda_D,\lambda_H,\kappa,\tau_c,\tau,\lambda_L)(z_{1-\alph
 <span id="cb10-3"><a href="#cb10-3"></a>tau <span class="ot">&lt;-</span> <span class="dv">4</span></span>
 <span id="cb10-4"><a href="#cb10-4"></a>lambda_L <span class="ot">&lt;-</span> <span class="fl">0.001</span></span>
 <span id="cb10-5"><a href="#cb10-5"></a><span class="co"># Step 2: use base() function to compute zeta2 and delta</span></span>
-<span id="cb10-6"><a href="#cb10-6"></a>bparam <span class="ot">&lt;-</span> <span class="fu">base</span>(lambda_D, lambda_H, kappa, tau_b, tau, lambda_L)</span>
-<span id="cb10-7"><a href="#cb10-7"></a><span class="co"># Step 3: compute sample size under HRs 0.8 and 0.9</span></span>
-<span id="cb10-8"><a href="#cb10-8"></a>obj <span class="ot">&lt;-</span> <span class="fu">WRSS</span>(<span class="at">xi =</span> <span class="fu">log</span>(<span class="fu">c</span>(<span class="fl">0.9</span>, <span class="fl">0.8</span>)), <span class="at">bparam =</span> bparam, <span class="at">q =</span>  <span class="fl">0.5</span>, <span class="at">alpha =</span> <span class="fl">0.05</span>,</span>
-<span id="cb10-9"><a href="#cb10-9"></a>          <span class="at">power =</span> <span class="fl">0.8</span>)</span>
-<span id="cb10-10"><a href="#cb10-10"></a>obj<span class="sc">$</span>n</span>
-<span id="cb10-11"><a href="#cb10-11"></a><span class="co">#&gt;          [,1]</span></span>
-<span id="cb10-12"><a href="#cb10-12"></a><span class="co">#&gt; [1,] 1260.913</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb10-6"><a href="#cb10-6"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>) <span class="co"># Monte-Carlo integration in base()</span></span>
+<span id="cb10-7"><a href="#cb10-7"></a>bparam <span class="ot">&lt;-</span> <span class="fu">base</span>(lambda_D, lambda_H, kappa, tau_b, tau, lambda_L)</span>
+<span id="cb10-8"><a href="#cb10-8"></a><span class="co"># Step 3: compute sample size under HRs 0.8 and 0.9</span></span>
+<span id="cb10-9"><a href="#cb10-9"></a>obj <span class="ot">&lt;-</span> <span class="fu">WRSS</span>(<span class="at">xi =</span> <span class="fu">log</span>(<span class="fu">c</span>(<span class="fl">0.9</span>, <span class="fl">0.8</span>)), <span class="at">bparam =</span> bparam, <span class="at">q =</span>  <span class="fl">0.5</span>, <span class="at">alpha =</span> <span class="fl">0.05</span>,</span>
+<span id="cb10-10"><a href="#cb10-10"></a>          <span class="at">power =</span> <span class="fl">0.8</span>)</span>
+<span id="cb10-11"><a href="#cb10-11"></a>obj<span class="sc">$</span>n</span>
+<span id="cb10-12"><a href="#cb10-12"></a><span class="co">#&gt; [1] 1240.958</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="a-range-of-effect-sizes" class="slide level2">
@@ -1123,6 +1126,10 @@ n = \frac{\zeta_0^2(\lambda_D,\lambda_H,\kappa,\tau_c,\tau,\lambda_L)(z_{1-\alph
 <section id="notes" class="slide level2">
 <h2>Notes</h2>
 <ul>
+<li><strong>Event-specific win ratio</strong>
+<ul>
+<li>Win/loss on which component <span class="citation" data-cites="yang2020 yang2022">(<a href="#/references" role="doc-biblioref" onclick="">Yang et al., 2022</a>; <a href="#/references" role="doc-biblioref" onclick="">Yang &amp; Troendle, 2020</a>)</span></li>
+</ul></li>
 <li><strong>More on sample size</strong>
 <ul>
 <li>Simplified/approximate approaches in various scenarios <span class="citation" data-cites="yu2022 wang2023a gasparyan2021 zhou2022 seifu2022">(<a href="#/references" role="doc-biblioref" onclick="">Gasparyan et al., 2021</a>; <a href="#/references" role="doc-biblioref" onclick="">Seifu et al., 2022</a>, etc.; <a href="#/references" role="doc-biblioref" onclick="">Wang et al., 2023</a>; <a href="#/references" role="doc-biblioref" onclick="">Yu &amp; Ganju, 2022</a>; <a href="#/references" role="doc-biblioref" onclick="">Zhou et al., 2022</a>)</span></li>
@@ -1161,14 +1168,14 @@ n = \frac{\zeta_0^2(\lambda_D,\lambda_H,\kappa,\tau_c,\tau,\lambda_L)(z_{1-\alph
 <div id="ref-Bebu2016" class="csl-entry" role="listitem">
 Bebu, I., &amp; Lachin, J. M. (2016). Large sample inference for a win ratio analysis of a composite outcome based on prioritized components. <em>Biostatistics</em>, <em>17</em>(1), 178–187. <a href="https://doi.org/10.1093/biostatistics/kxv032">https://doi.org/10.1093/biostatistics/kxv032</a>
 </div>
-<div id="ref-brunner2021" class="csl-entry" role="listitem">
-Brunner, E., Vandemeulebroecke, M., &amp; Mütze, T. (2021). Win odds: An adaptation of the win ratio to include ties. <em>Statistics in Medicine</em>, <em>40</em>(14), 3367–3384. <a href="https://doi.org/10.1002/sim.8967">https://doi.org/10.1002/sim.8967</a>
-</div>
 <div id="ref-buyse2010" class="csl-entry" role="listitem">
 Buyse, M. (2010). Generalized pairwise comparisons of prioritized outcomes in the two<span>-</span>sample problem. <em>Statistics in Medicine</em>, <em>29</em>(30), 3245–3257. <a href="https://doi.org/10.1002/sim.3923">https://doi.org/10.1002/sim.3923</a>
 </div>
 <div id="ref-dong2023" class="csl-entry" role="listitem">
 Dong, G., Hoaglin, D. C., Huang, B., Cui, Y., Wang, D., Cheng, Y., &amp; Gamalo-Siebers, M. (2023). The stratified win statistics (win ratio, win odds, and net benefit). <em>Pharmaceutical Statistics</em>, <em>22</em>(4), 748–756. <a href="https://doi.org/10.1002/pst.2293">https://doi.org/10.1002/pst.2293</a>
+</div>
+<div id="ref-dong2019" class="csl-entry" role="listitem">
+Dong, G., Hoaglin, D. C., Qiu, J., Matsouaka, R. A., Chang, Y.-W., Wang, J., &amp; Vandemeulebroecke, M. (2020). The Win Ratio: On Interpretation and Handling of Ties. <em>Statistics in Biopharmaceutical Research</em>, <em>12</em>(1), 99–106. <a href="https://doi.org/10.1080/19466315.2019.1575279">https://doi.org/10.1080/19466315.2019.1575279</a>
 </div>
 <div id="ref-dong2016" class="csl-entry" role="listitem">
 Dong, G., Li, D., Ballerstedt, S., &amp; Vandemeulebroecke, M. (2016). A generalized analytic solution to the win ratio to analyze a composite endpoint considering the clinical importance order among components. <em>Pharmaceutical Statistics</em>, <em>15</em>(5), 430–437. <a href="https://doi.org/10.1002/pst.1763">https://doi.org/10.1002/pst.1763</a>
@@ -1179,8 +1186,14 @@ Dong, G., Qiu, J., Wang, D., &amp; Vandemeulebroecke, M. (2017). The stratified 
 <div id="ref-finkelstein1999" class="csl-entry" role="listitem">
 Finkelstein, D. M., &amp; Schoenfeld, D. A. (1999). Combining mortality and longitudinal measures in clinical trials. <em>Statistics in Medicine</em>, <em>18</em>(11), 1341–1354. <a href="https://doi.org/10.1002/(sici)1097-0258(19990615)18:11<1341::aid-sim129>3.0.co;2-7">https://doi.org/10.1002/(sici)1097-0258(19990615)18:11&lt;1341::aid-sim129&gt;3.0.co;2-7</a>
 </div>
+<div id="ref-gasparyan2020" class="csl-entry" role="listitem">
+Gasparyan, S. B., Folkvaljon, F., Bengtsson, O., Buenconsejo, J., &amp; Koch, G. G. (2020). Adjusted win ratio with stratification: Calculation methods and interpretation. <em>Statistical Methods in Medical Research</em>, <em>30</em>(2), 580–611. <a href="https://doi.org/10.1177/0962280220942558">https://doi.org/10.1177/0962280220942558</a>
+</div>
 <div id="ref-gasparyan2021" class="csl-entry" role="listitem">
 Gasparyan, S. B., Kowalewski, E. K., Folkvaljon, F., Bengtsson, O., Buenconsejo, J., Adler, J., &amp; Koch, G. G. (2021). Power and sample size calculation for the win odds test: application to an ordinal endpoint in COVID-19 trials. <em>Journal of Biopharmaceutical Statistics</em>, <em>31</em>(6), 765–787. <a href="https://doi.org/10.1080/10543406.2021.1968893">https://doi.org/10.1080/10543406.2021.1968893</a>
+</div>
+<div id="ref-gehan1965" class="csl-entry" role="listitem">
+Gehan, E. A. (1965). A generalized Wilcoxon test for comparing arbitrarily singly-censored samples. <em>Biometrika</em>, <em>52</em>(1-2), 203–224. <a href="https://doi.org/10.1093/biomet/52.1-2.203">https://doi.org/10.1093/biomet/52.1-2.203</a>
 </div>
 <div id="ref-Luo2017" class="csl-entry" role="listitem">
 Luo, X., Qiu, J., Bai, S., &amp; Tian, H. (2017). Weighted win loss approach for analyzing prioritized outcomes. <em>Statistics in Medicine</em>, <em>36</em>(15), 2452–2465. <a href="https://doi.org/10.1002/sim.7284">https://doi.org/10.1002/sim.7284</a>
@@ -1208,6 +1221,12 @@ Seifu, Y., Mt-Isa, S., Duke, K., Gamalo-Siebers, M., Wang, W., Dong, G., &amp; K
 </div>
 <div id="ref-wang2023a" class="csl-entry" role="listitem">
 Wang, B., Zhou, D., Zhang, J., Kim, Y., Chen, L.-W., Dunnmon, P., Bai, S., Liu, Q., &amp; Ishida, E. (2023). Statistical power considerations in the use of win ratio in cardiovascular outcome trials. <em>Contemporary Clinical Trials</em>, <em>124</em>, 107040. <a href="https://doi.org/10.1016/j.cct.2022.107040">https://doi.org/10.1016/j.cct.2022.107040</a>
+</div>
+<div id="ref-yang2020" class="csl-entry" role="listitem">
+Yang, S., &amp; Troendle, J. (2020). Event-specific win ratios and testing with terminal and non-terminal events. <em>Clinical Trials</em>, <em>18</em>(2), 180–187. <a href="https://doi.org/10.1177/1740774520972408">https://doi.org/10.1177/1740774520972408</a>
+</div>
+<div id="ref-yang2022" class="csl-entry" role="listitem">
+Yang, S., Troendle, J., Pak, D., &amp; Leifer, E. (2022). Event<span>-</span>specific win ratios for inference with terminal and non<span>-</span>terminal events. <em>Statistics in Medicine</em>, <em>41</em>(7), 1225–1241. <a href="https://doi.org/10.1002/sim.9266">https://doi.org/10.1002/sim.9266</a>
 </div>
 <div id="ref-yu2022" class="csl-entry" role="listitem">
 Yu, R. X., &amp; Ganju, J. (2022). Sample size formula for a win ratio endpoint. <em>Statistics in Medicine</em>, <em>41</em>(6), 950–963. <a href="https://doi.org/10.1002/sim.9297">https://doi.org/10.1002/sim.9297</a>

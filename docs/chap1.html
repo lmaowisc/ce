@@ -452,7 +452,7 @@ Lu Mao
 <li>Traditional methods
 <ul>
 <li>Time to first event</li>
-<li>Total events (<a href="https://cran.r-project.org/package=Wcompo" target="_blank"><code>Wcompo</code></a> package)</li>
+<li>Weighted total events (<a href="https://cran.r-project.org/package=Wcompo" target="_blank"><code>Wcompo</code></a> package)</li>
 </ul></li>
 <li>Win ratio and hierarchical endpoints
 <ul>
@@ -478,9 +478,9 @@ Lu Mao
 <ul>
 <li><strong>Population</strong>: 619 patients with stage C disease <span class="citation" data-cites="Moertel1990">(<a href="#/references" role="doc-biblioref" onclick="">Moertel et al., 1990</a>)</span></li>
 <li><strong>Arms</strong>: Levamisole + fluorouracil (<span class="math inline">\(n=304\)</span>) vs control (<span class="math inline">\(n=315\)</span>)</li>
-<li><strong>Endpoint</strong>: Relapse-free survival (log-rank test p&lt;0.001)
+<li><strong>Endpoint</strong>: relapse-free survival (log-rank test p&lt;0.001)
 <ul>
-<li>Death = Relapse</li>
+<li>Death = relapse</li>
 <li>258 deaths (89%) after relapse ignored</li>
 </ul></li>
 </ul></li>
@@ -500,7 +500,7 @@ Lu Mao
 <li><strong>Arms</strong>: Exercise training + usual care (<span class="math inline">\(n=205\)</span>) vs usual care (<span class="math inline">\(n=221\)</span>)</li>
 <li><strong>Endpoint</strong>: hospitalization-free survival (log-rank test p=0.100)
 <ul>
-<li>Hospitalization treated as same as death</li>
+<li>Death = hospitalization</li>
 <li>82 (88%) deaths + 707 (69%) recurrent hospitalizations ignored</li>
 </ul></li>
 </ul></li>
@@ -575,7 +575,7 @@ Lu Mao
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<p><strong>FDA Guidance for Industry: “Multiple Endpoints in Clinical Trials” <span class="citation" data-cites="fda2022">(<a href="#/references" role="doc-biblioref" onclick="">FDA, 2017</a>)</span></strong></p>
+<p><strong>FDA Guidance for Industry: “Multiple Endpoints in Clinical Trials” <span class="citation" data-cites="fda2022">(<a href="#/references" role="doc-biblioref" onclick="">FDA, 2022</a>)</span></strong></p>
 </div>
 <div class="callout-content">
 <ul>
@@ -659,7 +659,10 @@ Lu Mao
 <ul>
 <li><strong>Univariate endpoint</strong>
 <ul>
-<li><p><span class="math inline">\(N^*_{\rm TFE}(t) = I\{N^*_D(t)+\sum_{k=1}^KN^*_k(t)\geq 1\}\)</span></p></li>
+<li><p><span class="math inline">\(N^*_{\rm TFE}(t) = I\{N^*_D(t)+\sum_{k=1}^KN^*_k(t)\geq 1\}\)</span></p>
+<ul>
+<li><span class="math inline">\(I(\cdot)\)</span>: 0-1 indicator</li>
+</ul></li>
 <li><p><span class="math inline">\(\tilde T\)</span>: time to first event</p>
 <ul>
 <li>Kaplan–Meier curve, log-rank test, Cox model</li>
@@ -684,12 +687,12 @@ Lu Mao
 <ul>
 <li><strong>Weighted composite event process</strong>
 <ul>
-<li><span class="math inline">\(N_{\rm R}(t)=w_DN^*_D(t)+\sum_{k=1}^Kw_kN^*_k(t)\)</span>
+<li><span class="math inline">\(N^*_{\rm R}(t)=w_DN^*_D(t)+\sum_{k=1}^Kw_kN^*_k(t)\)</span>
 <ul>
 <li><span class="math inline">\(w_D, w_1, \ldots, w_K\)</span>: weights to death and nonfatal events <img data-src="images/intro_wcompo.png" style="width:75.0%" data-fig-align="right"></li>
 </ul></li>
 <li><strong>Proportional means model</strong> <span class="citation" data-cites="Mao2016">(<a href="#/references" role="doc-biblioref" onclick="">Mao &amp; Lin, 2016</a>)</span> <span class="math display">\[
-E\{N_{\rm R}(t)\mid Z\} = \exp(\beta^\T Z)\mu_0(t)
+E\{N^*_{\rm R}(t)\mid Z\} = \exp(\beta^\T Z)\mu_0(t)
 \]</span>
 <ul>
 <li><span class="math inline">\(\exp(\beta)\)</span>: mean ratio of weighted total events comparing treatment <span class="math inline">\((Z=1)\)</span> vs control <span class="math inline">\((Z=0)\)</span></li>
@@ -937,8 +940,8 @@ E\{N_{\rm R}(t)\mid Z\} = \exp(\beta^\T Z)\mu_0(t)
 </figure>
 </div>
 </section>
-<section id="lessions-learned" class="slide level2">
-<h2>Lessions Learned</h2>
+<section id="lessons-learned" class="slide level2">
+<h2>Lessons Learned</h2>
 <ul>
 <li><strong>Adding nonfatal events</strong> <span class="math inline">\(\neq\)</span> higher power
 <ul>
@@ -953,7 +956,7 @@ E\{N_{\rm R}(t)\mid Z\} = \exp(\beta^\T Z)\mu_0(t)
 </ul></li>
 <li>Quantitative weighting <span class="math inline">\(\to\)</span> adjust for survival time
 <ul>
-<li>Loss rate = Cumulative total / length of exposure <a href="chap3.html" target="_blank">Ch 3</a></li>
+<li>Loss rate = cumulative total / length of exposure (<a href="chap3.html" target="_blank">Ch 3</a>)</li>
 </ul></li>
 </ul></li>
 </ul>
@@ -979,7 +982,7 @@ E\{N_{\rm R}(t)\mid Z\} = \exp(\beta^\T Z)\mu_0(t)
 <li><strong>Alternative metrics</strong>
 <ul>
 <li><strong>Proportion in favor</strong> (net benefit): PIF <span class="math inline">\(=\)</span> wins <span class="math inline">\(-\)</span> losses <span class="citation" data-cites="buyse2010">(<a href="#/references" role="doc-biblioref" onclick="">Buyse, 2010</a>)</span></li>
-<li><strong>Win odds</strong>: WO <span class="math inline">\(=\)</span> (wins <span class="math inline">\(+\)</span> <span class="math inline">\(2^{-1}\)</span>ties) / (losses <span class="math inline">\(+\)</span> <span class="math inline">\(2^{-1}\)</span>ties) <span class="citation" data-cites="brunner2021">(<a href="#/references" role="doc-biblioref" onclick="">Brunner et al., 2021</a>)</span></li>
+<li><strong>Win odds</strong>: WO <span class="math inline">\(=\)</span> (wins <span class="math inline">\(+\)</span> <span class="math inline">\(2^{-1}\)</span>ties) / (losses <span class="math inline">\(+\)</span> <span class="math inline">\(2^{-1}\)</span>ties) <span class="citation" data-cites="dong2019 brunner2021">(<a href="#/references" role="doc-biblioref" onclick="">Brunner et al., 2021</a>; <a href="#/references" role="doc-biblioref" onclick="">Dong et al., 2020</a>)</span></li>
 </ul></li>
 </ul>
 </section>
@@ -1021,7 +1024,7 @@ E\{N_{\rm R}(t)\mid Z\} = \exp(\beta^\T Z)\mu_0(t)
 <li>Longer follow-up …
 <ul>
 <li><strong>Parameters</strong>: win/loss proportions <span class="math inline">\(\uparrow\)</span> (WR uncertain); tie proportion <span class="math inline">\(\downarrow\)</span></li>
-<li><strong>Relative contribution</strong>: prioritized <span class="math inline">\(\uparrow\)</span>; deprioritized <span class="math inline">\(\downarrow\)</span></li>
+<li><strong>Component contributions</strong>: prioritized <span class="math inline">\(\uparrow\)</span>; deprioritized <span class="math inline">\(\downarrow\)</span></li>
 </ul></li>
 </ul></li>
 </ul>
@@ -1045,7 +1048,7 @@ E\{N_{\rm R}(t)\mid Z\} = \exp(\beta^\T Z)\mu_0(t)
 </ul></li>
 <li><strong>Estimation (quantitative)</strong>: not okay
 <ul>
-<li>Pre-define restriction time <span class="math inline">\(\to\)</span> use censoring weighting for unbiased estimation (<a href="chap3.html" target="_blank">Ch 3</a>)</li>
+<li>Pre-define restriction time <span class="math inline">\(\to\)</span> use censoring weight for unbiased estimation (<a href="chap3.html" target="_blank">Ch 3</a>)</li>
 <li>Specify a time-constant WR model (<a href="chap4.html" target="_blank">Ch 4</a>)</li>
 </ul></li>
 </ul></li>
@@ -1063,13 +1066,13 @@ E\{N_{\rm R}(t)\mid Z\} = \exp(\beta^\T Z)\mu_0(t)
 <ul>
 <li>Regulatory guidelines for composite endpoints <span class="citation" data-cites="mao2021">(<a href="#/references" role="doc-biblioref" onclick="">Mao &amp; Kim, 2021</a>)</span></li>
 <li>ICH E9 (R1) implementation <span class="citation" data-cites="akacha2017 ratitch2020 qu2021 ionan2022">(<a href="#/references" role="doc-biblioref" onclick="">Akacha et al., 2017</a>; <a href="#/references" role="doc-biblioref" onclick="">Ionan et al., 2022</a>; <a href="#/references" role="doc-biblioref" onclick="">Qu &amp; Lipkovich, 2021</a>; <a href="#/references" role="doc-biblioref" onclick="">Ratitch et al., 2020</a>)</span></li>
+<li>Practical guidance on win ratio <span class="citation" data-cites="redfors2020">(<a href="#/references" role="doc-biblioref" onclick="">Redfors et al., 2020</a>)</span></li>
 <li>Defining estimand for win ratio <span class="citation" data-cites="mao2024">(<a href="#/references" role="doc-biblioref" onclick="">Mao, 2024</a>)</span></li>
-<li>Generalized pariwise comparisons <span class="citation" data-cites="deltuvaite-thomas2022 verbeeck2023">(<a href="#/references" role="doc-biblioref" onclick="">Deltuvaite-Thomas et al., 2022</a>; <a href="#/references" role="doc-biblioref" onclick="">Verbeeck et al., 2023</a>)</span></li>
+<li>Generalized pairwise comparisons <span class="citation" data-cites="péron2016 deltuvaite-thomas2022 dong2022 verbeeck2023">(<a href="#/references" role="doc-biblioref" onclick="">Deltuvaite-Thomas et al., 2022</a>; <a href="#/references" role="doc-biblioref" onclick="">Dong et al., 2022</a>; <a href="#/references" role="doc-biblioref" onclick="">Péron et al., 2016</a>; <a href="#/references" role="doc-biblioref" onclick="">Verbeeck et al., 2023</a>)</span></li>
 </ul></li>
 <li><strong>Cumulative total events</strong>
 <ul>
-<li>Based on cumulative incidence of competing risks <span class="citation" data-cites="gray1988 fine1999">(<a href="#/references" role="doc-biblioref" onclick="">Fine &amp; Gray, 1999</a>; <a href="#/references" role="doc-biblioref" onclick="">Gray, 1988</a>)</span></li>
-<li>Extended from <span class="citation" data-cites="ghosh2000">Ghosh &amp; Lin (<a href="#/references" role="doc-biblioref" onclick="">2000</a>)</span> to include death</li>
+<li>Based on cumulative incidence/frequency under competing risks <span class="citation" data-cites="gray1988 fine1999 ghosh2000">(<a href="#/references" role="doc-biblioref" onclick="">Fine &amp; Gray, 1999</a>; <a href="#/references" role="doc-biblioref" onclick="">Ghosh &amp; Lin, 2000</a>; <a href="#/references" role="doc-biblioref" onclick="">Gray, 1988</a>)</span></li>
 </ul></li>
 </ul>
 </section>
@@ -1089,7 +1092,7 @@ E\{N_{\rm R}(t)\mid Z\} = \exp(\beta^\T Z)\mu_0(t)
 <li><strong>Hierarchical</strong>
 <ul>
 <li>Win ratio, net benifit, win odds: death &gt; nonfatal</li>
-<li>Estimand issue (ICH E9 (R1))</li>
+<li>Estimand issue - ICH E9 (R1)</li>
 </ul></li>
 </ul>
 </section>
@@ -1114,14 +1117,20 @@ Buyse, M. (2010). Generalized pairwise comparisons of prioritized outcomes in th
 <div id="ref-deltuvaite-thomas2022" class="csl-entry" role="listitem">
 Deltuvaite-Thomas, V., Verbeeck, J., Burzykowski, T., Buyse, M., Tournigand, C., Molenberghs, G., &amp; Thas, O. (2022). Generalized pairwise comparisons for censored data: An overview. <em>Biometrical Journal</em>, <em>65</em>(2). <a href="https://doi.org/10.1002/bimj.202100354">https://doi.org/10.1002/bimj.202100354</a>
 </div>
+<div id="ref-dong2019" class="csl-entry" role="listitem">
+Dong, G., Hoaglin, D. C., Qiu, J., Matsouaka, R. A., Chang, Y.-W., Wang, J., &amp; Vandemeulebroecke, M. (2020). The Win Ratio: On Interpretation and Handling of Ties. <em>Statistics in Biopharmaceutical Research</em>, <em>12</em>(1), 99–106. <a href="https://doi.org/10.1080/19466315.2019.1575279">https://doi.org/10.1080/19466315.2019.1575279</a>
+</div>
 <div id="ref-Dong2020a" class="csl-entry" role="listitem">
 Dong, G., Huang, B., Chang, Y.-W., Seifu, Y., Song, J., &amp; Hoaglin, D. C. (2020a). The win ratio: Impact of censoring and follow<span>-</span>up time and use with nonproportional hazards. <em>Pharmaceutical Statistics</em>, <em>19</em>(3), 168–177. <a href="https://doi.org/10.1002/pst.1977">https://doi.org/10.1002/pst.1977</a>
+</div>
+<div id="ref-dong2022" class="csl-entry" role="listitem">
+Dong, G., Huang, B., Verbeeck, J., Cui, Y., Song, J., Gamalo-Siebers, M., Wang, D., Hoaglin, D. C., Seifu, Y., Mütze, T., &amp; Kolassa, J. (2022). Win statistics (win ratio, win odds, and net benefit) can complement one another to show the strength of the treatment effect on time<span>-</span>to<span>-</span>event outcomes. <em>Pharmaceutical Statistics</em>, <em>22</em>(1), 20–33. <a href="https://doi.org/10.1002/pst.2251">https://doi.org/10.1002/pst.2251</a>
 </div>
 <div id="ref-EUnetHTA2015" class="csl-entry" role="listitem">
 EUnetHTA. (2015). <em>Guidance for industry: Multiple endpoints in clinical trials</em>. <a href="https://www.eunethta.eu/wp-content/uploads/2018/01/Endpoints-used-for-Relative-Effectiveness-Assessment-Composite-endpoints_Amended-JA1-Guideline_Final-Nov-2015_0.pdf">https://www.eunethta.eu/wp-content/uploads/2018/01/Endpoints-used-for-Relative-Effectiveness-Assessment-Composite-endpoints_Amended-JA1-Guideline_Final-Nov-2015_0.pdf</a>
 </div>
 <div id="ref-fda2022" class="csl-entry" role="listitem">
-FDA. (2017). <em>Guidance for industry: Multiple endpoints in clinical trials</em>. <a href="https://www.fda.gov/regulatory-information/search-fda-guidance-documents/multiple-endpoints-clinical-trials-guidance-industry">https://www.fda.gov/regulatory-information/search-fda-guidance-documents/multiple-endpoints-clinical-trials-guidance-industry</a>
+FDA. (2022). <em>Guidance for industry: Multiple endpoints in clinical trials</em>. <a href="https://www.fda.gov/regulatory-information/search-fda-guidance-documents/multiple-endpoints-clinical-trials-guidance-industry">https://www.fda.gov/regulatory-information/search-fda-guidance-documents/multiple-endpoints-clinical-trials-guidance-industry</a>
 </div>
 <div id="ref-fine1999" class="csl-entry" role="listitem">
 Fine, J. P., &amp; Gray, R. J. (1999). A Proportional Hazards Model for the Subdistribution of a Competing Risk. <em>Journal of the American Statistical Association</em>, <em>94</em>(446), 496–509. <a href="https://doi.org/10.1080/01621459.1999.10474144">https://doi.org/10.1080/01621459.1999.10474144</a>
@@ -1133,7 +1142,7 @@ Freemantle, N., Calvert, M., Wood, J., Eastaugh, J., &amp; Griffin, C. (2003). C
 Ghosh, D., &amp; Lin, D. Y. (2000). Nonparametric Analysis of Recurrent Events and Death. <em>Biometrics</em>, <em>56</em>(2), 554–562. <a href="https://doi.org/10.1111/j.0006-341x.2000.00554.x">https://doi.org/10.1111/j.0006-341x.2000.00554.x</a>
 </div>
 <div id="ref-gray1988" class="csl-entry" role="listitem">
-Gray, R. J. (1988). A class of <span>$</span>k<span>$</span>-sample tests for comparing the cumulative incidence of a competing risk. <em>The Annals of Statistics</em>, <em>16</em>(3). <a href="https://doi.org/10.1214/aos/1176350951">https://doi.org/10.1214/aos/1176350951</a>
+Gray, R. J. (1988). A class of <span class="math inline">\(K\)</span>-sample tests for comparing the cumulative incidence of a competing risk. <em>The Annals of Statistics</em>, <em>16</em>(3). <a href="https://doi.org/10.1214/aos/1176350951">https://doi.org/10.1214/aos/1176350951</a>
 </div>
 <div id="ref-ich1998" class="csl-entry" role="listitem">
 ICH. (1998). <em>Statistical principles for clinical trials.</em> London: European Medicines Evaluation Agency.
@@ -1171,6 +1180,9 @@ O’Connor, C. M., Whellan, D. J., Lee, K. L., Keteyian, S. J., Cooper, L. S., E
 <div id="ref-oakes2016" class="csl-entry" role="listitem">
 Oakes, D. (2016). On the win-ratio statistic in clinical trials with multiple types of event. <em>Biometrika</em>, <em>103</em>(3), 742–745. <a href="https://doi.org/10.1093/biomet/asw026">https://doi.org/10.1093/biomet/asw026</a>
 </div>
+<div id="ref-péron2016" class="csl-entry" role="listitem">
+Péron, J., Buyse, M., Ozenne, B., Roche, L., &amp; Roy, P. (2016). An extension of generalized pairwise comparisons for prioritized outcomes in the presence of censoring. <em>Statistical Methods in Medical Research</em>, <em>27</em>(4), 1230–1239. <a href="https://doi.org/10.1177/0962280216658320">https://doi.org/10.1177/0962280216658320</a>
+</div>
 <div id="ref-pocock2012" class="csl-entry" role="listitem">
 Pocock, S. J., Ariti, C. A., Collier, T. J., &amp; Wang, D. (2012). The win ratio: a new approach to the analysis of composite endpoints in clinical trials based on clinical priorities. <em>European Heart Journal</em>, <em>33</em>(2), 176–182. <a href="https://doi.org/10.1093/eurheartj/ehr352">https://doi.org/10.1093/eurheartj/ehr352</a>
 </div>
@@ -1180,11 +1192,14 @@ Qu, Y., &amp; Lipkovich, I. (2021). Implementation of ICH E9 (R1): A Few Points 
 <div id="ref-ratitch2020" class="csl-entry" role="listitem">
 Ratitch, B., Bell, J., Mallinckrodt, C., Bartlett, J. W., Goel, N., Molenberghs, G., O’Kelly, M., Singh, P., &amp; Lipkovich, I. (2020). Choosing Estimands in Clinical Trials: Putting the ICH E9(R1) Into Practice. <em>Therapeutic Innovation &amp; Regulatory Science</em>, <em>54</em>(2), 324–341. <a href="https://doi.org/10.1007/s43441-019-00061-x">https://doi.org/10.1007/s43441-019-00061-x</a>
 </div>
+<div id="ref-redfors2020" class="csl-entry" role="listitem">
+Redfors, B., Gregson, J., Crowley, A., McAndrew, T., Ben-Yehuda, O., Stone, G. W., &amp; Pocock, S. J. (2020). The win ratio approach for composite endpoints: practical guidance based on previous experience. <em>European Heart Journal</em>, <em>41</em>(46), 4391–4399. <a href="https://doi.org/10.1093/eurheartj/ehaa665">https://doi.org/10.1093/eurheartj/ehaa665</a>
+</div>
 <div id="ref-schmidli2023" class="csl-entry" role="listitem">
-Schmidli, H., Roger, J. H., &amp; Akacha, M. (2023). Estimands for Recurrent Event Endpoints in the Presence of a Terminal Event. <em>Statistics in Biopharmaceutical Research</em>, <em>15</em>(2), 238–248. <a href="https://doi.org/10.1080/19466315.2021.1895883">https://doi.org/10.1080/19466315.2021.1895883</a>
+Schmidli, H., Roger, J. H., &amp; Akacha, M. (2023). Rejoinder to Commentaries on <span>“</span>Estimands for Recurrent Event Endpoints in the Presence of a Terminal Event<span>”</span>. <em>Statistics in Biopharmaceutical Research</em>, <em>15</em>(2), 255–256. <a href="https://doi.org/10.1080/19466315.2023.2166098">https://doi.org/10.1080/19466315.2023.2166098</a>
 </div>
 <div id="ref-verbeeck2023" class="csl-entry" role="listitem">
-Verbeeck, J., De Backer, M., Verwerft, J., Salvaggio, S., Valgimigli, M., Vranckx, P., Buyse, M., &amp; Brunner, E. (2023). Generalized Pairwise Comparisons to&nbsp;Assess Treatment Effects. <em>Journal of the American College of Cardiology</em>, <em>82</em>(13), 1360–1372. <a href="https://doi.org/10.1016/j.jacc.2023.06.047">https://doi.org/10.1016/j.jacc.2023.06.047</a>
+Verbeeck, J., De Backer, M., Verwerft, J., Salvaggio, S., Valgimigli, M., Vranckx, P., Buyse, M., &amp; Brunner, E. (2023). Generalized Pairwise Comparisons to Assess Treatment Effects. <em>Journal of the American College of Cardiology</em>, <em>82</em>(13), 1360–1372. <a href="https://doi.org/10.1016/j.jacc.2023.06.047">https://doi.org/10.1016/j.jacc.2023.06.047</a>
 </div>
 <div id="ref-Zinman2015" class="csl-entry" role="listitem">
 Zinman, B., Wanner, C., Lachin, J. M., Fitchett, D., Bluhmki, E., Hantel, S., Mattheus, M., Devins, T., Johansen, O. E., Woerle, H. J., Broedl, U. C., &amp; Inzucchi, S. E. (2015). Empagliflozin, Cardiovascular Outcomes, and Mortality in Type 2 Diabetes. <em>New England Journal of Medicine</em>, <em>373</em>(22), 2117–2128. <a href="https://doi.org/10.1056/nejmoa1504720">https://doi.org/10.1056/nejmoa1504720</a>

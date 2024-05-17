@@ -94,7 +94,26 @@
     code span.va { color: #111111; } /* Variable */
     code span.vs { color: #20794d; } /* VerbatimString */
     code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
-  </style>
+    /* CSS for citations */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+    }
+    .hanging-indent div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }  </style>
   <link rel="stylesheet" href="outline_files/libs/revealjs/dist/theme/quarto.css">
   <link rel="stylesheet" href="style.css">
   <link href="outline_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
@@ -439,7 +458,7 @@ Lu Mao
 </ul></li>
 <li><strong>Collaborative research</strong>
 <ul>
-<li>Cardiovascular disease, cancer, radiology, behavioral health interventions</li>
+<li>Cardiovascular disease, cancer, radiology, behavioral health interventions, etc.</li>
 </ul></li>
 <li><strong>Teaching</strong>
 <ul>
@@ -476,7 +495,7 @@ Lu Mao
 </ul></li>
 <li><strong>2. Hypothesis Testing</strong> (40 min)
 <ul>
-<li>2.1 Win ratio by Pocock et al.&nbsp;(2012)</li>
+<li>2.1 Win ratio by <span class="citation" data-cites="pocock2012">Pocock et al. (<a href="#/references" role="doc-biblioref" onclick="">2012</a>)</span></li>
 <li>2.2 Statistical properties</li>
 <li>2.3 Handling recurrent events (R-package <a href="https://cran.r-project.org/package=WR" target="_blank"><code>WR</code></a>)</li>
 <li>2.4 Sample size calculation (R-package <a href="https://cran.r-project.org/package=WR" target="_blank"><code>WR</code></a>)</li>
@@ -552,8 +571,16 @@ Lu Mao
 <span id="cb1-12"><a href="#cb1-12"></a><span class="fu">library</span>(WA)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
+</section>
+<section id="references" class="slide level2 smaller scrollable">
+<h2>References</h2>
 <div class="footer footer-default">
 
+</div>
+<div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-pocock2012" class="csl-entry" role="listitem">
+Pocock, S. J., C. A. Ariti, T. J. Collier, and D. Wang. 2012. <span>“The Win Ratio: A New Approach to the Analysis of Composite Endpoints in Clinical Trials Based on Clinical Priorities.”</span> <em>European Heart Journal</em> 33 (2): 176–82. <a href="https://doi.org/10.1093/eurheartj/ehr352">https://doi.org/10.1093/eurheartj/ehr352</a>.
+</div>
 </div>
 </section>
     </div>
