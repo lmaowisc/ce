@@ -119,8 +119,7 @@ pD + pTFE + plot_layout(guides = "collect") &
 
 # analyze the data using rmtfit()
 obj <- rmtfit(rec(patid, time, status) ~ trt_ab, data = hfaction)
-# Alternatively
-# obj=rmtfit(id,time,status,trt,type="recurrent")
+
 
 summary(obj, Kmax = 1, tau = 3.97)
 
