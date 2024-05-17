@@ -578,7 +578,7 @@ WR(t\mid Z_i, Z_j;\mathcal W)=\exp\left\{\beta^{\rm T}\left(Z_i- Z_j\right)\righ
 <li><strong>Bivariate Lehmann model</strong>
 <ul>
 <li>PW<span class="math inline">\((\mathcal W_{\rm P})\)</span> <span class="math inline">\(\Leftarrow\)</span> Lehmann model on <span class="math inline">\((D, T_1)\)</span> <span class="math display">\[
-\pr(D&gt;s, T_1 &gt; t) = H_0(s, t)^{\exp(-\beta^\T Z)}
+\pr(D&gt;s, T_1 &gt; t\mid Z) = H_0(s, t)^{\exp(-\beta^\T Z)}
 \]</span>
 <ul>
 <li>PH on both <span class="math inline">\(D\)</span> and <span class="math inline">\(\{T_1\mid D\}\)</span> with same HRs <span class="math inline">\(\exp(-\beta)\)</span></li>
@@ -625,7 +625,7 @@ M_{ij}(t\mid Z_i, Z_j;\beta)=\underbrace{\delta_{ij}(t)}_{\rm observed\,\,win} -
 <ul>
 <li><strong>Cumulative residuals</strong>
 <ul>
-<li>Rescaled <span class="math inline">\(\hat U_n(t)=\Ut(Z_i - Z_j)M(t \mid Z_i, Z_j;\hat\beta)\)</span></li>
+<li>Rescaled <span class="math inline">\(\hat U_n(t)=\Ut(Z_i - Z_j)M_{ij}(t \mid Z_i, Z_j;\hat\beta)\)</span></li>
 <li>Similar to score processes in Cox model <span class="citation" data-cites="lin1993">(<a href="#/references" role="doc-biblioref" onclick="">Lin et al., 1993</a>)</span></li>
 </ul></li>
 </ul>
@@ -646,7 +646,7 @@ M_{ij}(t\mid Z_i, Z_j;\beta)=\underbrace{\delta_{ij}(t)}_{\rm observed\,\,win} -
 <ul>
 <li><strong>Idea</strong>: within-stratum comparisons <span class="citation" data-cites="dong2017 dong2023">(<a href="#/references" role="doc-biblioref" onclick="">Dong et al., 2017</a>, <a href="#/references" role="doc-biblioref" onclick="">2023</a>)</span></li>
 <li><strong>Model specification</strong> <span class="citation" data-cites="Wang2022">(<a href="#/references" role="doc-biblioref" onclick="">Wang &amp; Mao, 2022</a>)</span> <span class="math display">\[
-\frac{E\{\mathcal W(\mathcal H^*_{li},\mathcal H^*_{lj})(t)\mid Z_{li},Z_{lj}\}}{E\{\mathcal W(\mathcal H^*_{li},\mathcal H^*_{lj})(t)\mid Z_{lj}, Z_{li}\}} = \exp\left\{\beta^{\rm T}\left(Z_{li}- Z_{lj}\right)\right\}
+\frac{E\{\mathcal W(\mathcal H^*_{li},\mathcal H^*_{lj})(t)\mid Z_{li},Z_{lj}\}}{E\{\mathcal W(\mathcal H^*_{lj},\mathcal H^*_{li})(t)\mid Z_{li}, Z_{lj}\}} = \exp\left\{\beta^{\rm T}\left(Z_{li}- Z_{lj}\right)\right\}
 \]</span>
 <ul>
 <li><span class="math inline">\((H^*_{li}, Z_{li}), (H^*_{lj}, Z_{lj})\)</span>: <span class="math inline">\(i\)</span>th and <span class="math inline">\(j\)</span>th outcome-covariates in <span class="math inline">\(l\)</span>th stratum <span class="math inline">\((l= 1,\ldots, L)\)</span></li>
@@ -666,8 +666,9 @@ M_{ij}(t\mid Z_i, Z_j;\beta)=\underbrace{\delta_{ij}(t)}_{\rm observed\,\,win} -
 </ul>
 <div class="big-code">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># fit PW model (death &gt; nonfatal event)</span></span>
-<span id="cb1-2"><a href="#cb1-2"></a>obj <span class="ot">&lt;-</span> <span class="fu">pwreg</span>(ID, time, status, Z, <span class="at">strata =</span> <span class="cn">NULL</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">library</span>(WR)</span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="co"># fit PW model (death &gt; nonfatal event)</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a>obj <span class="ot">&lt;-</span> <span class="fu">pwreg</span>(ID, time, status, Z, <span class="at">strata =</span> <span class="cn">NULL</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 <ul>
@@ -1056,7 +1057,7 @@ M_{ij}(t\mid Z_i, Z_j;\beta)=\underbrace{\delta_{ij}(t)}_{\rm observed\,\,win} -
 <li>E.g., is age effect linear?</li>
 </ul>
 <p><span class="math display">\[
-    \mbox{plot} \sum_{i, j: Z_i - Z_j\leq z}(Z_i - Z_j)M(\infty \mid Z_i, Z_j;\hat\beta) \mbox{ against } z\in\mathbb R
+    \mbox{plot} \sum_{i, j: Z_i - Z_j\leq z}(Z_i - Z_j)M_{ij}(\infty \mid Z_i, Z_j;\hat\beta) \mbox{ against } z\in\mathbb R
     \]</span></p></li>
 <li><p>Currently <code>WR::pwreg()</code> implements only PW(<span class="math inline">\(\mathcal W_{\rm P}\)</span>)</p>
 <ul>
