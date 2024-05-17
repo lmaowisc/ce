@@ -102,7 +102,7 @@ pD + pTFE + plot_layout(guides = "collect") &
     legend.text = element_text(size = 12)
     )
 
-ggsave("images/intro_hfaction_unis.png", width = 8, height = 4.5)
+# ggsave("images/intro_hfaction_unis.png", width = 8, height = 4.5)
 
 # Total events (proportional mean) ----------------------------------------
 ## fit proportional means model with death = 2 x hosp
