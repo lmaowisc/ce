@@ -10,6 +10,10 @@ This is a companion site for the same-titled **workshop** at the [2024 Society f
 ## Instructor Profile
 
 [Lu Mao, PhD](https://sites.google.com/view/lmaowisc){target="_blank"} 
+$\hspace{0.5em}$
+[![X](images/x-social-media-black-icon.png){width="17"}](https://x.com/LuMaoWisc) [![GitHub](images/GitHub-Mark-ea2971cee799.png){width="25"}](https://github.com/lmaowisc)
+[![LinkedIn](images/linkedin_3128219.png){width="24"}](https://www.linkedin.com/in/lu-mao-63589b14/)
+
 
 -   Associate Professor of Biostatistics at UW-Madison
 -   Methodologic research
@@ -62,7 +66,6 @@ This is a companion site for the same-titled **workshop** at the [2024 Society f
         -   5.1.2 Interim monitoring
         -   5.1.3 Intercurrent events
     -   5.2. Course summary
-
 
 ## R-Packages
 
