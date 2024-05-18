@@ -9,7 +9,7 @@ This is a companion site for the same-titled **workshop** at the [2024 Society f
 
 ## Instructor Profile
 
-[Lu Mao, PhD](https://sites.google.com/view/lmaowisc){target="_blank"}
+[Lu Mao, PhD](https://sites.google.com/view/lmaowisc){target="_blank"} 
 
 -   Associate Professor of Biostatistics at UW-Madison
 -   Methodologic research
