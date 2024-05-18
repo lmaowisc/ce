@@ -5,7 +5,6 @@ book:
   title: "Statistical Methods for Composite Endpoints"
   subtitle: "Win Ratio and Beyond"
   author: "Lu Mao"
-  favicon: logo.png
   twitter-card: true
   site-url: https://lmaowisc.github.io/ce/
   # date: "5/12/2024"
