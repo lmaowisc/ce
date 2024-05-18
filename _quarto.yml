@@ -15,17 +15,7 @@ book:
     - regression.qmd
     - discussions.qmd
     - references.qmd
-  navbar:
-    right:
-    - icon: twitter
-      text: Twitter
-      href: https://x.com/LuMaoWisc
-    - icon: linkedin
-      text: LinkedIn
-      href: https://www.linkedin.com/in/lu-mao-63589b14/
-    - icon: github
-      text: Github
-      href: https://github.com/lmaowisc
+
 
 
 # about: 
