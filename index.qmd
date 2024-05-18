@@ -9,7 +9,7 @@ This is a companion site for the same-titled **workshop** at the [2024 Society f
 
 ## Instructor Profile
 
-##### [Lu Mao, PhD](https://sites.google.com/view/lmaowisc){target="_blank"} $\hspace{0.2em}$ [![X](images/x-social-media-black-icon.png){width="16.2" height="16"}](https://x.com/LuMaoWisc){target="_blank"} [![GitHub](images/GitHub-Mark-ea2971cee799.png){width="22.5" height="22.5"}](https://github.com/lmaowisc){target="_blank"} [![LinkedIn](images/linkedin_3128219.png){width="22.5" height="22.5"}](https://www.linkedin.com/in/lu-mao-63589b14/){target="_black"}
+##### [Lu Mao, PhD](https://sites.google.com/view/lmaowisc){target="_blank"} $\hspace{0.2em}$ [![X](images/x-social-media-black-icon.png){width="15.5" height="15.5"}](https://x.com/LuMaoWisc){target="_blank"} [![GitHub](images/GitHub-Mark-ea2971cee799.png){width="22.5" height="22.5"}](https://github.com/lmaowisc){target="_blank"} [![LinkedIn](images/linkedin_3128219.png){width="22.5" height="22.5"}](https://www.linkedin.com/in/lu-mao-63589b14/){target="_black"}
 
 -   Associate Professor of Biostatistics at UW-Madison
 -   Methodologic research
