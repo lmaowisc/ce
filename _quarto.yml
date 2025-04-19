@@ -37,6 +37,9 @@ csl: apa.csl
 format:
   html:
     theme: cosmo
+    css: styles.css
+    linkcolor: "#C5050C"
+    backgroundcolor: "#FFFFFF"
   pdf:
     documentclass: scrreprt
 

@@ -1,18 +1,21 @@
 # Course Info {.unnumbered}
 
-This is a companion site for the same-titled **workshop** at the 
+This is a companion site for the same-titled **workshop** for the 
 <!-- [2024 Society for Clinical Trials (SCT) Annual Meeting](https://www.sctweb.org/meeting/){target="_blank"}  -->
-[2024 Joint Statistical Meetings](https://ww2.amstat.org/meetings/jsm/2024/){target="_blank"}
-given on August 3, 2024 at the Oregon Convention Center  ([map](https://www.google.com/maps/place/Oregon+Convention+Center/@45.5286643,-122.6644354,17z/data=!3m1!5s0x5495a0ac4baa7e7d:0x15944efeed85f980!4m10!1m2!2m1!1sOregon+Convention+Center+!3m6!1s0x5495a0adc5ff1af5:0x610cf37babf5b9df!8m2!3d45.5286606!4d-122.6618605!15sChhPcmVnb24gQ29udmVudGlvbiBDZW50ZXKSARFjb252ZW50aW9uX2NlbnRlcuABAA!16zL20vMDdzdHM0?entry=ttu){target="_blank"}) in Portland, OR.
+<!-- [2024 Joint Statistical Meetings](https://ww2.amstat.org/meetings/jsm/2024/){target="_blank"} -->
+<!-- given on August 3, 2024 at the Oregon Convention Center  ([map](https://www.google.com/maps/place/Oregon+Convention+Center/@45.5286643,-122.6644354,17z/data=!3m1!5s0x5495a0ac4baa7e7d:0x15944efeed85f980!4m10!1m2!2m1!1sOregon+Convention+Center+!3m6!1s0x5495a0adc5ff1af5:0x610cf37babf5b9df!8m2!3d45.5286606!4d-122.6618605!15sChhPcmVnb24gQ29udmVudGlvbiBDZW50ZXKSARFjb252ZW50aW9uX2NlbnRlcuABAA!16zL20vMDdzdHM0?entry=ttu){target="_blank"}) in Portland, OR. -->
+44th annual Applied Statistics Workshop hosted by the Southern California
+Chapter of the ASA. 
 
 ## Time and Place
 
--   Sat, Aug 3 \| 8:00 AM - 12:00 PM
--   Room: B116 (Level 1)
+-   Friday, April 25 · 9am - 4pm PDT
+-   Platt Conference Center, Cooper Auditorium, at City of Hope, 1500 East Duarte
+Road Duarte, CA 91010
 
 ## Instructor Profile
 
-##### [Lu Mao, PhD](https://sites.google.com/view/lmaowisc){target="_blank"} $\hspace{0.2em}$ [![X](images/x-social-media-black-icon.png){width="15.5" height="15.5"}](https://x.com/LuMaoWisc){target="_blank"} [![GitHub](images/GitHub-Mark-ea2971cee799.png){width="22.5" height="22.5"}](https://github.com/lmaowisc){target="_blank"} [![LinkedIn](images/linkedin_3128219.png){width="23" height="23"}](https://www.linkedin.com/in/lu-mao-63589b14/){target="_black"}
+##### [Lu Mao, PhD](https://lmaowisc.github.io/){target="_blank"} 
 
 -   Associate Professor of Biostatistics at UW-Madison
 -   Methodologic research
@@ -57,13 +60,13 @@ given on August 3, 2024 at the Oregon Convention Center  ([map](https://www.goog
         -   4.1.1 Model assumptions
         -   4.1.2 Estimation, inference, and model diagnostics
         -   4.1.3 Real Examples
-    -   4.2 Generalized proportional odds model (tentative)
-        -   4.2.1 Model specification and possible estimation
+    -   4.2 Variable selection and risk prediction
+        -   4.2.1 WRNet ([website](https://lmaowisc.github.io/wrnet){target="_blank"})
 -   **5. Discussions** (20 min)
     -   5.1. Open problems
         -   5.1.1 Covariate adjustment
         -   5.1.2 Interim monitoring
-        -   5.1.3 Intercurrent events
+        -   5.1.3 Meta analysis
     -   5.2. Course summary
 
 ## R-Packages
