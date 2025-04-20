@@ -554,12 +554,15 @@ E\{N^*_{\rm R}(t)\mid Z\} = \exp(\beta^\T Z)\mu_0(t)
 </section>
 <section id="hf-action-an-example" class="slide level2">
 <h2>HF-ACTION: An Example</h2>
+<div class="fragment">
 <ul>
 <li><strong>High-risk subgroup (n=426)</strong>
 <ul>
 <li>Baseline cardiopulmonary exercise (CPX) test <span class="math inline">\(\leq\)</span> 9 min</li>
 </ul></li>
 </ul>
+</div>
+<div class="fragment">
 <div class="cell">
 <div id="tbl-desc" class="cell quarto-float quarto-figure quarto-figure-center">
 <figure class="quarto-float quarto-float-tbl">
@@ -639,19 +642,21 @@ Table&nbsp;1: Summary statistics for a high-risk subgroup (n=426) in HF-ACTION t
 </figure>
 </div>
 </div>
+</div>
 </section>
 <section id="hf-action-preparation" class="slide level2">
 <h2>HF-ACTION: Preparation</h2>
+<div class="fragment">
 <ul>
 <li><strong>Load packages and data</strong></li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a><span class="fu">library</span>(survival)</span>
-<span id="cb2-2"><a></a><span class="co"># install.packages("Wcompo")</span></span>
-<span id="cb2-3"><a></a><span class="fu">library</span>(Wcompo) <span class="co"># for weighted total events</span></span>
-<span id="cb2-4"><a></a><span class="fu">library</span>(rmt) <span class="co"># for hfaction data</span></span>
-<span id="cb2-5"><a></a><span class="fu">library</span>(tidyverse) <span class="co"># for data wrangling</span></span>
-<span id="cb2-6"><a></a><span class="co"># load data</span></span>
+<div class="sourceCode cell-code" id="cb2" data-code-line-numbers="1-4|6-16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a><span class="fu">library</span>(survival) <span class="co"># for standard survival analysis</span></span>
+<span id="cb2-2"><a></a><span class="fu">library</span>(Wcompo) <span class="co"># for weighted total events</span></span>
+<span id="cb2-3"><a></a><span class="fu">library</span>(rmt) <span class="co"># for hfaction data</span></span>
+<span id="cb2-4"><a></a><span class="fu">library</span>(tidyverse) <span class="co"># for data wrangling</span></span>
+<span id="cb2-5"><a></a></span>
+<span id="cb2-6"><a></a><span class="co"># Load data</span></span>
 <span id="cb2-7"><a></a><span class="fu">data</span>(hfaction)</span>
 <span id="cb2-8"><a></a><span class="fu">head</span>(hfaction) <span class="co"># trt_ab=1: training; 0: usual care</span></span>
 <span id="cb2-9"><a></a><span class="co">#&gt;        patid       time status trt_ab age60</span></span>
@@ -662,34 +667,37 @@ Table&nbsp;1: Summary statistics for a high-risk subgroup (n=426) in HF-ACTION t
 <span id="cb2-14"><a></a><span class="co">#&gt; 5 HFACT00002 0.39698836      1      0     1</span></span>
 <span id="cb2-15"><a></a><span class="co">#&gt; 6 HFACT00002 3.83299110      0      0     1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+</div>
 </section>
 <section id="hf-action-data" class="slide level2">
 <h2>HF-ACTION: Data</h2>
+<div class="fragment">
 <ul>
 <li><strong>Data processing</strong></li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a><span class="co"># for weighted total by compoML()</span></span>
-<span id="cb3-2"><a></a><span class="do">## convert status=1 for death, 2=hospitalization</span></span>
+<div class="sourceCode cell-code" id="cb3" data-code-line-numbers="1-9|11-16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a><span class="co"># For weighted total analysis by compoML()</span></span>
+<span id="cb3-2"><a></a><span class="co"># Convert status=1 for death, 2=hospitalization</span></span>
 <span id="cb3-3"><a></a>hfaction <span class="ot">&lt;-</span> hfaction <span class="sc">|&gt;</span> </span>
 <span id="cb3-4"><a></a>  <span class="fu">mutate</span>(</span>
 <span id="cb3-5"><a></a>    <span class="at">status =</span> <span class="fu">case_when</span>(</span>
 <span id="cb3-6"><a></a>      status <span class="sc">==</span> <span class="dv">1</span> <span class="sc">~</span> <span class="dv">2</span>,</span>
 <span id="cb3-7"><a></a>      status <span class="sc">==</span> <span class="dv">2</span> <span class="sc">~</span> <span class="dv">1</span>,</span>
 <span id="cb3-8"><a></a>      status <span class="sc">==</span> <span class="dv">0</span> <span class="sc">~</span> <span class="dv">0</span>)</span>
-<span id="cb3-9"><a></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-9"><a></a>  )</span>
+<span id="cb3-10"><a></a></span>
+<span id="cb3-11"><a></a><span class="co"># TFE: take the first event per patient id</span></span>
+<span id="cb3-12"><a></a>hfaction_TFE <span class="ot">&lt;-</span> hfaction <span class="sc">|&gt;</span> </span>
+<span id="cb3-13"><a></a>  <span class="fu">arrange</span>(patid, time) <span class="sc">|&gt;</span> <span class="co"># sort by patid and time</span></span>
+<span id="cb3-14"><a></a>  <span class="fu">group_by</span>(patid) <span class="sc">|&gt;</span> </span>
+<span id="cb3-15"><a></a>  <span class="fu">slice_head</span>() <span class="sc">|&gt;</span> <span class="co"># take first row</span></span>
+<span id="cb3-16"><a></a>  <span class="fu">ungroup</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a><span class="co"># TFE: take the first event per patient id</span></span>
-<span id="cb4-2"><a></a>hfaction_TFE <span class="ot">&lt;-</span> hfaction <span class="sc">|&gt;</span> </span>
-<span id="cb4-3"><a></a>  <span class="fu">arrange</span>(patid, time) <span class="sc">|&gt;</span> </span>
-<span id="cb4-4"><a></a>  <span class="fu">group_by</span>(patid) <span class="sc">|&gt;</span> </span>
-<span id="cb4-5"><a></a>  <span class="fu">slice_head</span>() <span class="sc">|&gt;</span> </span>
-<span id="cb4-6"><a></a>  <span class="fu">ungroup</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="hf-action-mortality" class="slide level2">
 <h2>HF-ACTION: Mortality</h2>
+<div class="fragment">
 <ul>
 <li><strong>Cox model for death</strong>
 <ul>
@@ -698,20 +706,22 @@ Table&nbsp;1: Summary statistics for a high-risk subgroup (n=426) in HF-ACTION t
 </ul></li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a><span class="do">## get mortality data</span></span>
-<span id="cb5-2"><a></a>hfaction_D <span class="ot">&lt;-</span> hfaction <span class="sc">|&gt;</span> </span>
-<span id="cb5-3"><a></a>  <span class="fu">filter</span>(status <span class="sc">!=</span> <span class="dv">2</span>) <span class="co"># remove hospitalization records</span></span>
-<span id="cb5-4"><a></a></span>
-<span id="cb5-5"><a></a><span class="do">## Cox model for death against trt_ab</span></span>
-<span id="cb5-6"><a></a>obj_D <span class="ot">&lt;-</span> <span class="fu">coxph</span>(<span class="fu">Surv</span>(time, status) <span class="sc">~</span> trt_ab, <span class="at">data =</span> hfaction_D)</span>
-<span id="cb5-7"><a></a><span class="fu">summary</span>(obj_D)</span>
-<span id="cb5-8"><a></a><span class="co">#&gt; n= 426, number of events= 93 </span></span>
-<span id="cb5-9"><a></a><span class="co">#&gt;           coef exp(coef) se(coef)      z      p</span></span>
-<span id="cb5-10"><a></a><span class="co">#&gt; trt_ab -0.3973    0.6721   0.2129 -1.866 0.0621</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4" data-code-line-numbers="1-3|5-10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a><span class="do">## Get mortality data</span></span>
+<span id="cb4-2"><a></a>hfaction_D <span class="ot">&lt;-</span> hfaction <span class="sc">|&gt;</span> </span>
+<span id="cb4-3"><a></a>  <span class="fu">filter</span>(status <span class="sc">!=</span> <span class="dv">2</span>) <span class="co"># remove hospitalization records</span></span>
+<span id="cb4-4"><a></a></span>
+<span id="cb4-5"><a></a><span class="do">## Cox model for death against trt_ab</span></span>
+<span id="cb4-6"><a></a>obj_D <span class="ot">&lt;-</span> <span class="fu">coxph</span>(<span class="fu">Surv</span>(time, status) <span class="sc">~</span> trt_ab, <span class="at">data =</span> hfaction_D)</span>
+<span id="cb4-7"><a></a><span class="fu">summary</span>(obj_D)</span>
+<span id="cb4-8"><a></a><span class="co">#&gt; n= 426, number of events= 93 </span></span>
+<span id="cb4-9"><a></a><span class="co">#&gt;           coef exp(coef) se(coef)      z      p</span></span>
+<span id="cb4-10"><a></a><span class="co">#&gt; trt_ab -0.3973    0.6721   0.2129 -1.866 0.0621</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </div>
 </section>
 <section id="hf-action-tfe" class="slide level2">
 <h2>HF-ACTION: TFE</h2>
+<div class="fragment">
 <ul>
 <li><strong>Cox model for hospitalization-free survival</strong>
 <ul>
@@ -720,25 +730,29 @@ Table&nbsp;1: Summary statistics for a high-risk subgroup (n=426) in HF-ACTION t
 </ul></li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a><span class="co"># Cox model for TFE against trt_ab</span></span>
-<span id="cb6-2"><a></a>obj_TFE <span class="ot">&lt;-</span> <span class="fu">coxph</span>(<span class="fu">Surv</span>(time, status <span class="sc">&gt;</span> <span class="dv">0</span>) <span class="sc">~</span> trt_ab, <span class="at">data =</span> hfaction_TFE)</span>
-<span id="cb6-3"><a></a><span class="fu">summary</span>(obj_TFE)</span>
-<span id="cb6-4"><a></a><span class="co">#&gt;   n= 426, number of events= 326 </span></span>
-<span id="cb6-5"><a></a><span class="co">#&gt;           coef exp(coef) se(coef)      z Pr(&gt;|z|)</span></span>
-<span id="cb6-6"><a></a><span class="co">#&gt; trt_ab -0.1770    0.8378   0.1112 -1.592    0.111</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a><span class="co"># Cox model for TFE against trt_ab</span></span>
+<span id="cb5-2"><a></a>obj_TFE <span class="ot">&lt;-</span> <span class="fu">coxph</span>(<span class="fu">Surv</span>(time, status <span class="sc">&gt;</span> <span class="dv">0</span>) <span class="sc">~</span> trt_ab, <span class="at">data =</span> hfaction_TFE)</span>
+<span id="cb5-3"><a></a><span class="fu">summary</span>(obj_TFE)</span>
+<span id="cb5-4"><a></a><span class="co">#&gt;   n= 426, number of events= 326 </span></span>
+<span id="cb5-5"><a></a><span class="co">#&gt;           coef exp(coef) se(coef)      z Pr(&gt;|z|)</span></span>
+<span id="cb5-6"><a></a><span class="co">#&gt; trt_ab -0.1770    0.8378   0.1112 -1.592    0.111</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </div>
 </section>
 <section id="hf-action-death-vs-tfe" class="slide level2">
 <h2>HF-ACTION: Death vs TFE</h2>
+<div class="fragment">
 <ul>
 <li>Hospitalizations dilute effect on death …
 <ul>
 <li>An <em>EMPA-REG</em>-like situation <img data-src="images/intro_hfaction_unis.png" class="quarto-figure quarto-figure-center" style="width:80.0%"></li>
 </ul></li>
 </ul>
+</div>
 </section>
 <section id="hf-action-weighted-total" class="slide level2">
 <h2>HF-ACTION: Weighted Total</h2>
+<div class="fragment">
 <ul>
 <li><p><strong>Proportional means model</strong> (death = <span class="math inline">\(2\times\)</span> hosp)</p>
 <ul>
@@ -747,41 +761,49 @@ Table&nbsp;1: Summary statistics for a high-risk subgroup (n=426) in HF-ACTION t
 <li><strong>Limitation</strong>: Survival <span class="math inline">\(\uparrow\)</span> <span class="math inline">\(\to\)</span> cumulative total <span class="math inline">\(\uparrow\)</span> <span class="math inline">\(\to\)</span> attenuated effect</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a><span class="co"># Total events (proportional mean) -------------------------------</span></span>
-<span id="cb7-2"><a></a>obj_ML <span class="ot">&lt;-</span> <span class="fu">CompoML</span>(hfaction<span class="sc">$</span>patid, hfaction<span class="sc">$</span>time, hfaction<span class="sc">$</span>status, </span>
-<span id="cb7-3"><a></a>                  hfaction<span class="sc">$</span>trt_ab, <span class="at">w =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">1</span>))</span>
-<span id="cb7-4"><a></a>obj_ML</span>
-<span id="cb7-5"><a></a><span class="co">#&gt;         Event 1 (Death) Event 2</span></span>
-<span id="cb7-6"><a></a><span class="co">#&gt; Weight               2       1</span></span>
-<span id="cb7-7"><a></a><span class="co">#&gt;         Estimate      se z.value p.value</span></span>
-<span id="cb7-8"><a></a><span class="co">#&gt; trt_ab -0.15398  0.11215 -1.3729  0.1698</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a><span class="co"># Total events (proportional mean) -------------------------------</span></span>
+<span id="cb6-2"><a></a>obj_ML <span class="ot">&lt;-</span> <span class="fu">CompoML</span>(hfaction<span class="sc">$</span>patid, hfaction<span class="sc">$</span>time, hfaction<span class="sc">$</span>status, </span>
+<span id="cb6-3"><a></a>                  hfaction<span class="sc">$</span>trt_ab, <span class="at">w =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">1</span>))</span>
+<span id="cb6-4"><a></a>obj_ML</span>
+<span id="cb6-5"><a></a><span class="co">#&gt;         Event 1 (Death) Event 2</span></span>
+<span id="cb6-6"><a></a><span class="co">#&gt; Weight               2       1</span></span>
+<span id="cb6-7"><a></a><span class="co">#&gt;         Estimate      se z.value p.value</span></span>
+<span id="cb6-8"><a></a><span class="co">#&gt; trt_ab -0.15398  0.11215 -1.3729  0.1698</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></li>
 </ul>
+</div>
 </section>
 <section id="hf-action-cumulative-means" class="slide level2">
-<h2>HF-ACTION: Cumulative means</h2>
+<h2>HF-ACTION: Cumulative Means</h2>
+<div class="fragment">
 <ul>
 <li><strong>Model-based mean functions</strong></li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a><span class="fu">plot</span>(obj_ML, <span class="dv">0</span>, <span class="at">ylim=</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">5</span>), <span class="at">xlab=</span><span class="st">"Time (years)"</span>, <span class="at">col=</span> <span class="st">"red"</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
-<span id="cb8-2"><a></a><span class="fu">plot</span>(obj_ML, <span class="dv">1</span>, <span class="at">add =</span> <span class="cn">TRUE</span>, <span class="at">col =</span> <span class="st">"blue"</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
-<span id="cb8-3"><a></a><span class="fu">legend</span>(<span class="dv">0</span>, <span class="dv">5</span>, <span class="at">col=</span><span class="fu">c</span>(<span class="st">"red"</span>,<span class="st">"blue"</span>), <span class="fu">c</span>(<span class="st">"Usual care"</span>, <span class="st">"Training"</span>), <span class="at">lwd =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a><span class="fu">plot</span>(obj_ML, <span class="dv">0</span>, <span class="at">ylim=</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">5</span>), <span class="at">xlab=</span><span class="st">"Time (years)"</span>, <span class="at">col=</span> <span class="st">"red"</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb7-2"><a></a><span class="fu">plot</span>(obj_ML, <span class="dv">1</span>, <span class="at">add =</span> <span class="cn">TRUE</span>, <span class="at">col =</span> <span class="st">"blue"</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb7-3"><a></a><span class="fu">legend</span>(<span class="dv">0</span>, <span class="dv">5</span>, <span class="at">col=</span><span class="fu">c</span>(<span class="st">"red"</span>,<span class="st">"blue"</span>), <span class="fu">c</span>(<span class="st">"Usual care"</span>, <span class="st">"Training"</span>), <span class="at">lwd =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="images/intro_hfaction_mean.png" class="quarto-figure quarto-figure-center" style="width:65.0%"></p>
 </figure>
 </div>
+</div>
 </section>
 <section id="lessons-learned" class="slide level2">
 <h2>Lessons Learned</h2>
+<div class="fragment">
 <ul>
 <li><strong>Adding nonfatal events</strong> <span class="math inline">\(\neq\)</span> higher power
 <ul>
 <li>Component may be less discriminating <span class="citation" data-cites="freemantle2003a">(<a href="#/references" role="doc-biblioref" onclick="">Freemantle et al., 2003</a>)</span></li>
 <li>Length of exposure (death as competing risk) <span class="citation" data-cites="schmidli2023">(<a href="#/references" role="doc-biblioref" onclick="">Schmidli et al., 2023</a>)</span></li>
 </ul></li>
+</ul>
+</div>
+<div class="fragment">
+<ul>
 <li><strong>Solutions</strong>
 <ul>
 <li>Hierarchically prioritize death
@@ -794,6 +816,7 @@ Table&nbsp;1: Summary statistics for a high-risk subgroup (n=426) in HF-ACTION t
 </ul></li>
 </ul></li>
 </ul>
+</div>
 </section></section>
 <section>
 <section id="hierarchical-composites" class="title-slide slide level1 center">
@@ -802,6 +825,7 @@ Table&nbsp;1: Summary statistics for a high-risk subgroup (n=426) in HF-ACTION t
 </section>
 <section id="win-ratio-basics" class="slide level2">
 <h2>Win Ratio: Basics</h2>
+<div class="fragment">
 <ul>
 <li><strong>A common approach to HCE</strong>
 <ul>
@@ -813,31 +837,45 @@ Table&nbsp;1: Summary statistics for a high-risk subgroup (n=426) in HF-ACTION t
 </ul></li>
 <li><strong>Effect size</strong>: WR <span class="math inline">\(=\)</span> wins / losses</li>
 </ul></li>
+</ul>
+</div>
+<div class="fragment">
+<ul>
 <li><strong>Alternative metrics</strong>
 <ul>
 <li><strong>Proportion in favor</strong> (net benefit): PIF <span class="math inline">\(=\)</span> wins <span class="math inline">\(-\)</span> losses <span class="citation" data-cites="buyse2010">(<a href="#/references" role="doc-biblioref" onclick="">Buyse, 2010</a>)</span></li>
 <li><strong>Win odds</strong>: WO <span class="math inline">\(=\)</span> (wins <span class="math inline">\(+\)</span> <span class="math inline">\(2^{-1}\)</span>ties) / (losses <span class="math inline">\(+\)</span> <span class="math inline">\(2^{-1}\)</span>ties) <span class="citation" data-cites="dong2019 brunner2021">(<a href="#/references" role="doc-biblioref" onclick="">Brunner et al., 2021</a>; <a href="#/references" role="doc-biblioref" onclick="">Dong et al., 2020</a>)</span></li>
 </ul></li>
 </ul>
+</div>
 </section>
 <section id="win-ratio-gaining-popularity" class="slide level2">
 <h2>Win Ratio: Gaining Popularity</h2>
+<div class="fragment">
 <ul>
 <li>More trials are using it…</li>
 </ul>
+</div>
+<div class="fragment">
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="images/intro_Ntrial_title.png" class="quarto-figure quarto-figure-center" style="width:100.0%"></p>
 </figure>
 </div>
+</div>
 </section>
 <section id="an-important-caveat" class="slide level2">
 <h2>An Important Caveat</h2>
+<div class="fragment">
 <ul>
 <li><p><strong>WR’s estimand depends on censoring …</strong></p>
 <ul>
 <li><span class="citation" data-cites="Luo2015">Luo et al. (<a href="#/references" role="doc-biblioref" onclick="">2015</a>)</span>, <span class="citation" data-cites="Bebu2016">Bebu &amp; Lachin (<a href="#/references" role="doc-biblioref" onclick="">2016</a>)</span>, <span class="citation" data-cites="oakes2016">Oakes (<a href="#/references" role="doc-biblioref" onclick="">2016</a>)</span>, <span class="citation" data-cites="Mao2019">Mao (<a href="#/references" role="doc-biblioref" onclick="">2019</a>)</span>, <span class="citation" data-cites="Dong2020a">Dong et al. (<a href="#/references" role="doc-biblioref" onclick="">2020a</a>)</span>, <span class="citation" data-cites="li2024">Li et al. (<a href="#/references" role="doc-biblioref" onclick="">2024</a>)</span>, etc.</li>
 </ul></li>
+</ul>
+</div>
+<div class="fragment">
+<ul>
 <li><p><strong>What is an estimand?</strong></p>
 <ul>
 <li>Population-level quantity to be estimated
@@ -848,9 +886,11 @@ Table&nbsp;1: Summary statistics for a high-risk subgroup (n=426) in HF-ACTION t
 <li><strong>ICH E9 (R1) addendum</strong>: estimand construction one of the “<em>central questions for drug development and licensing</em>” <span class="citation" data-cites="ich2020">(<a href="#/references" role="doc-biblioref" onclick="">ICH, 2020</a>)</span></li>
 </ul></li>
 </ul>
+</div>
 </section>
 <section id="win-loss-changes-with-time" class="slide level2">
 <h2>Win-Loss Changes with Time</h2>
+<div class="fragment">
 <ul>
 <li><strong>Illustration</strong>
 <ul>
@@ -862,9 +902,11 @@ Table&nbsp;1: Summary statistics for a high-risk subgroup (n=426) in HF-ACTION t
 </ul></li>
 </ul></li>
 </ul>
+</div>
 </section>
 <section id="trial-dependent-estimand" class="slide level2">
 <h2>Trial-Dependent Estimand</h2>
+<div class="fragment">
 <ul>
 <li><strong>Actual estimand</strong>
 <ul>
@@ -874,6 +916,10 @@ Table&nbsp;1: Summary statistics for a high-risk subgroup (n=426) in HF-ACTION t
 <li>Staggered entry, random withdrawal <span class="math inline">\(\to\)</span> non-scientific</li>
 </ul></li>
 </ul></li>
+</ul>
+</div>
+<div class="fragment">
+<ul>
 <li><strong>Testing vs estimation</strong>
 <ul>
 <li><strong>Testing (qualitative)</strong>: okay
@@ -887,6 +933,7 @@ Table&nbsp;1: Summary statistics for a high-risk subgroup (n=426) in HF-ACTION t
 </ul></li>
 </ul></li>
 </ul>
+</div>
 </section></section>
 <section>
 <section id="conclusion" class="title-slide slide level1 center">
@@ -900,7 +947,7 @@ Table&nbsp;1: Summary statistics for a high-risk subgroup (n=426) in HF-ACTION t
 <ul>
 <li>Regulatory guidelines for composite endpoints <span class="citation" data-cites="mao2021">(<a href="#/references" role="doc-biblioref" onclick="">Mao &amp; Kim, 2021</a>)</span></li>
 <li>ICH E9 (R1) implementation <span class="citation" data-cites="akacha2017 ratitch2020 qu2021 ionan2022">(<a href="#/references" role="doc-biblioref" onclick="">Akacha et al., 2017</a>; <a href="#/references" role="doc-biblioref" onclick="">Ionan et al., 2022</a>; <a href="#/references" role="doc-biblioref" onclick="">Qu &amp; Lipkovich, 2021</a>; <a href="#/references" role="doc-biblioref" onclick="">Ratitch et al., 2020</a>)</span></li>
-<li>Practical guidance on win ratio <span class="citation" data-cites="redfors2020">(<a href="#/references" role="doc-biblioref" onclick="">Redfors et al., 2020</a>)</span></li>
+<li>Practical guidance <span class="citation" data-cites="redfors2020 pocock:2024">(<a href="#/references" role="doc-biblioref" onclick="">Pocock et al., 2024</a>; <a href="#/references" role="doc-biblioref" onclick="">Redfors et al., 2020</a>)</span></li>
 <li>Defining estimand for win ratio <span class="citation" data-cites="mao2024">(<a href="#/references" role="doc-biblioref" onclick="">Mao, 2024</a>)</span></li>
 <li>Generalized pairwise comparisons <span class="citation" data-cites="péron2016 deltuvaite-thomas2022 dong2022 verbeeck2023">(<a href="#/references" role="doc-biblioref" onclick="">Deltuvaite-Thomas et al., 2022</a>; <a href="#/references" role="doc-biblioref" onclick="">Dong et al., 2022</a>; <a href="#/references" role="doc-biblioref" onclick="">Péron et al., 2016</a>; <a href="#/references" role="doc-biblioref" onclick="">Verbeeck et al., 2023</a>)</span></li>
 </ul></li>
@@ -996,7 +1043,7 @@ Luo, X., Tian, H., Mohanty, S., &amp; Tsai, W. Y. (2015). An Alternative Approac
 Mao, L. (2019). On the Alternative Hypotheses for the Win Ratio. <em>Biometrics</em>, <em>75</em>(1), 347–351. <a href="https://doi.org/10.1111/biom.12954">https://doi.org/10.1111/biom.12954</a>
 </div>
 <div id="ref-mao2024" class="csl-entry" role="listitem">
-Mao, L. (2024). Defining estimand for the win ratio: separate the true effect from censoring. <em>Clinical Trials</em>, In press.
+Mao, L. (2024). Defining estimand for the win ratio: Separate the true effect from censoring. <em>Clinical Trials</em>, <em>21</em>(5), 584–594.
 </div>
 <div id="ref-mao2021" class="csl-entry" role="listitem">
 Mao, L., &amp; Kim, K. (2021). Statistical Models for Composite Endpoints of Death and Nonfatal Events: A Review. <em>Statistics in Biopharmaceutical Research</em>, <em>13</em>(3), 260–269. <a href="https://doi.org/10.1080/19466315.2021.1927824">https://doi.org/10.1080/19466315.2021.1927824</a>
@@ -1018,6 +1065,9 @@ Péron, J., Buyse, M., Ozenne, B., Roche, L., &amp; Roy, P. (2016). An extension
 </div>
 <div id="ref-pocock2012" class="csl-entry" role="listitem">
 Pocock, S. J., Ariti, C. A., Collier, T. J., &amp; Wang, D. (2012). The win ratio: a new approach to the analysis of composite endpoints in clinical trials based on clinical priorities. <em>European Heart Journal</em>, <em>33</em>(2), 176–182. <a href="https://doi.org/10.1093/eurheartj/ehr352">https://doi.org/10.1093/eurheartj/ehr352</a>
+</div>
+<div id="ref-pocock:2024" class="csl-entry" role="listitem">
+Pocock, S. J., Gregson, J., Collier, T. J., Ferreira, J. P., &amp; Stone, G. W. (2024). The win ratio in cardiology trials: Lessons learnt, new developments, and wise future use. <em>European Heart Journal</em>, <em>45</em>(44), 4684–4699.
 </div>
 <div id="ref-qu2021" class="csl-entry" role="listitem">
 Qu, Y., &amp; Lipkovich, I. (2021). Implementation of ICH E9 (R1): A Few Points Learned During the COVID-19 Pandemic. <em>Therapeutic Innovation &amp; Regulatory Science</em>, <em>55</em>(5), 984–988. <a href="https://doi.org/10.1007/s43441-021-00297-6">https://doi.org/10.1007/s43441-021-00297-6</a>
