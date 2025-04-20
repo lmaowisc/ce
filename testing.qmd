@@ -4,7 +4,7 @@
 
 Chapter slides [here](chap2.html){target="_blank"}. (To convert html to pdf, press E $\to$ Print $\to$ Destination: Save to pdf)
 
-## R-code {.unnumbered}
+## R code {.unnumbered}
 
 ```{r}
 #| code-fold: true
