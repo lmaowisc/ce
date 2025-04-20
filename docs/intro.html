@@ -414,13 +414,13 @@ window.Quarto = {
 <p>In trials where patients may experience both fatal and nonfatal events, time-to-first-event analyses can obscure clinically meaningful treatment effects. For instance, in a colon cancer trial of 619 patients, relapse-free survival was used as the primary endpoint. Although the treatment significantly delayed relapse (log-rank <span class="math inline">\(p &lt; 0.001\)</span>), 89% of deaths occurred after relapse and were ignored in the analysis.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="images/intro_colon.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:60.0%"></p>
+<p><img src="images/intro_colon.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:70.0%"></p>
 </figure>
 </div>
 <p>Similarly, in the HF-ACTION trial of heart failure patients, a composite of death and hospitalization failed to show a statistically significant benefit (log-rank <span class="math inline">\(p = 0.10\)</span>), even though 88% of patients died and 69% had recurrent hospitalizations. By equating hospitalization with death and counting only the first event, the analysis diluted the observed mortality effect.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="images/intro_hfaction.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:65.0%"></p>
+<p><img src="images/intro_hfaction.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:75.0%"></p>
 </figure>
 </div>
 <p>These examples highlight the limitations of standard composite endpoints and motivate approaches that account for the clinical hierarchy and full event history.</p>
@@ -502,7 +502,11 @@ E\{ N^*_{\text{R}}(t) \mid Z \} = \exp(\beta^\mathrm{T} Z) \mu_0(t).
 </section>
 <section id="toward-model-based-estimands" class="level2" data-number="1.7">
 <h2 data-number="1.7" class="anchored" data-anchor-id="toward-model-based-estimands"><span class="header-section-number">1.7</span> Toward Model-Based Estimands</h2>
-<p>Limitations of traditional and empirical approaches motivate model-based alternatives: - The <strong>restricted mean time in favor (RMT-IF)</strong> quantifies the net amount of time one group remains in a more favorable state. - The <strong>proportional win-fractions (PW) model</strong> expresses the win ratio as a function of covariates, enabling estimation of treatment effects under a semiparametric framework.</p>
+<p>Limitations of traditional and empirical approaches motivate model-based alternatives:</p>
+<ul>
+<li>The <strong>restricted mean time in favor (RMT-IF)</strong> quantifies the net amount of time one group remains in a more favorable state.</li>
+<li>The <strong>proportional win-fractions (PW) model</strong> expresses the win ratio as a function of covariates, enabling estimation of treatment effects under a semiparametric framework.</li>
+</ul>
 <p>Both methods respect clinical hierarchies and avoid dependence on arbitrary censoring patterns. They form the foundation of the methods introduced in subsequent chapters.</p>
 </section>
 <section id="example-r-code" class="level2" data-number="1.8">
@@ -545,7 +549,7 @@ E\{ N^*_{\text{R}}(t) \mid Z \} = \exp(\beta^\mathrm{T} Z) \mu_0(t).
 <span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Weighted total events analysis</span></span>
 <span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a><span class="do">########################################</span></span>
 <span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(Wcompo)</span>
-<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a><span class="co"># Assume weights: death = 2, nonfatal = 1</span></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a><span class="co"># Weighting: death:nonfatal = 2:1</span></span>
 <span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>fit_wte <span class="ot">&lt;-</span> <span class="fu">CompoML</span>(id, time, status, <span class="at">Z =</span> trt, <span class="at">data =</span> df, <span class="at">w =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
