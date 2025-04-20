@@ -1,5 +1,5 @@
 project:
-  type: book
+  type: website
   output-dir: docs
 book:
   title: "Statistical Methods for Composite Endpoints"
