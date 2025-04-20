@@ -239,12 +239,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="course-info" class="level1 unnumbered">
 <h1 class="unnumbered">Course Info</h1>
-<p>This is a companion site for the same-titled <strong>workshop</strong> for the <!-- [2024 Society for Clinical Trials (SCT) Annual Meeting](https://www.sctweb.org/meeting/){target="_blank"}  --> <!-- [2024 Joint Statistical Meetings](https://ww2.amstat.org/meetings/jsm/2024/){target="_blank"} --> <!-- given on August 3, 2024 at the Oregon Convention Center  ([map](https://www.google.com/maps/place/Oregon+Convention+Center/@45.5286643,-122.6644354,17z/data=!3m1!5s0x5495a0ac4baa7e7d:0x15944efeed85f980!4m10!1m2!2m1!1sOregon+Convention+Center+!3m6!1s0x5495a0adc5ff1af5:0x610cf37babf5b9df!8m2!3d45.5286606!4d-122.6618605!15sChhPcmVnb24gQ29udmVudGlvbiBDZW50ZXKSARFjb252ZW50aW9uX2NlbnRlcuABAA!16zL20vMDdzdHM0?entry=ttu){target="_blank"}) in Portland, OR. --> 44th annual Applied Statistics Workshop hosted by the Southern California Chapter of the ASA.</p>
+<p>This is a companion site for the same-titled <strong>workshop</strong> for the 44th annual Applied Statistics Workshop hosted by the Southern California Chapter of the ASA.</p>
 <section id="time-and-place" class="level2">
 <h2 class="anchored" data-anchor-id="time-and-place">Time and Place</h2>
 <ul>
 <li>Friday, April 25 · 9am - 4pm PDT</li>
-<li>Platt Conference Center, Cooper Auditorium, at City of Hope, 1500 East Duarte Road Duarte, CA 91010</li>
+<li>Platt Conference Center, Cooper Auditorium<br>
+City of Hope, 1500 East Duarte Road, Duarte, CA 91010</li>
 </ul>
 </section>
 <section id="instructor-profile" class="level2">
@@ -277,9 +278,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="learning-outcomes" class="level2">
 <h2 class="anchored" data-anchor-id="learning-outcomes">Learning Outcomes</h2>
 <ul>
-<li>Understand the statistical and scientific challenges with composite endpoints as well as regulatory guidelines/requirements</li>
-<li>Learn the basics of statistical methodology, e.g., testing, power analysis, nonparametric estimation, and semiparametric regression to address these challenges</li>
-<li>Get hands-on experience with real data using publicly available R-packages</li>
+<li>Identify statistical and regulatory challenges with composite endpoints<br>
+</li>
+<li>Apply key methods such as hypothesis testing, power analysis, and regression<br>
+</li>
+<li>Gain hands-on experience with real data using R packages</li>
 </ul>
 </section>
 <section id="syllabus" class="level2">
@@ -313,7 +316,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>3.2.3 Real Examples</li>
 </ul></li>
 </ul></li>
-<li><strong>4. Semiparametric Regression</strong> (30 min)
+<li><strong>4. Semiparametric Regression</strong> (45 min)
 <ul>
 <li>4.1 Proportional win-fractions model (R-package <a href="https://cran.r-project.org/package=WR" target="_blank"><code>WR</code></a>)
 <ul>
@@ -323,10 +326,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul></li>
 <li>4.2 Variable selection and risk prediction
 <ul>
-<li>4.2.1 WRNet (<a href="https://lmaowisc.github.io/wrnet" target="_blank">website</a>)</li>
+<li>4.2.1 Elastic net approach (<a href="https://lmaowisc.github.io/wrnet" target="_blank"><code>WRNet</code></a>)</li>
 </ul></li>
 </ul></li>
-<li><strong>5. Discussions</strong> (20 min)
+<li><strong>5. Discussions</strong> (25 min)
 <ul>
 <li>5.1. Open problems
 <ul>
@@ -340,20 +343,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="r-packages" class="level2">
 <h2 class="anchored" data-anchor-id="r-packages">R-Packages</h2>
-<p>To proceed, install/load the following packages:</p>
+<p>You will need the following R packages for this workshop:<br>
+<code>Wcompo</code>, <code>WR</code>, <code>rmt</code>, and <code>WA</code>, along with base packages like <code>tidyverse</code> and <code>survival</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install packages --------------------------------</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"Wcompo"</span>)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"WR"</span>)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"rmt"</span>)</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"WA"</span>)</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># load packages -----------------------------------</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(survival)</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(Wcompo)</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(WR)</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rmt)</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(WA)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="fu">c</span>(<span class="st">"Wcompo"</span>, <span class="st">"WR"</span>, <span class="st">"rmt"</span>, <span class="st">"WA"</span>))</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(survival)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(Wcompo)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(WR)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rmt)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(WA)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><img src="images/intro_Ntrial_title.png" class="img-fluid"></p>
 

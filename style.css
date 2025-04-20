@@ -20,10 +20,10 @@
 
 
 .math.inline {
-  font-size: 84%  !important;
+  font-size: 85%  !important;
 }
 
-.MathJax, .MathJax_Display  {
+.MathJax_Display  {
     font-size: 78%  !important;
 }
 

@@ -4,7 +4,7 @@
     "href": "index.html",
     "title": "Statistical Methods for Composite Endpoints",
     "section": "",
-    "text": "Course Info\nThis is a companion site for the same-titled workshop for the    44th annual Applied Statistics Workshop hosted by the Southern California Chapter of the ASA.",
+    "text": "Course Info\nThis is a companion site for the same-titled workshop for the 44th annual Applied Statistics Workshop hosted by the Southern California Chapter of the ASA.",
     "crumbs": [
       "Course Info"
     ]
@@ -14,7 +14,7 @@
     "href": "index.html#time-and-place",
     "title": "Statistical Methods for Composite Endpoints",
     "section": "Time and Place",
-    "text": "Time and Place\n\nFriday, April 25 · 9am - 4pm PDT\nPlatt Conference Center, Cooper Auditorium, at City of Hope, 1500 East Duarte Road Duarte, CA 91010",
+    "text": "Time and Place\n\nFriday, April 25 · 9am - 4pm PDT\nPlatt Conference Center, Cooper Auditorium\nCity of Hope, 1500 East Duarte Road, Duarte, CA 91010",
     "crumbs": [
       "Course Info"
     ]
@@ -34,7 +34,7 @@
     "href": "index.html#learning-outcomes",
     "title": "Statistical Methods for Composite Endpoints",
     "section": "Learning Outcomes",
-    "text": "Learning Outcomes\n\nUnderstand the statistical and scientific challenges with composite endpoints as well as regulatory guidelines/requirements\nLearn the basics of statistical methodology, e.g., testing, power analysis, nonparametric estimation, and semiparametric regression to address these challenges\nGet hands-on experience with real data using publicly available R-packages",
+    "text": "Learning Outcomes\n\nIdentify statistical and regulatory challenges with composite endpoints\n\nApply key methods such as hypothesis testing, power analysis, and regression\n\nGain hands-on experience with real data using R packages",
     "crumbs": [
       "Course Info"
     ]
@@ -44,7 +44,7 @@
     "href": "index.html#syllabus",
     "title": "Statistical Methods for Composite Endpoints",
     "section": "Syllabus",
-    "text": "Syllabus\n\n1. Introduction (30 min)\n\n1.1 Examples & guidelines\n1.2 Traditional methods and limitations\n1.3 Win ratio methods and limitations\n\n2. Hypothesis Testing (40 min)\n\n2.1 Win ratio by Pocock et al. (2012)\n2.2 Statistical properties\n2.3 Handling recurrent events (R-package WR)\n2.4 Sample size calculation (R-package WR)\n\n3. Nonparametric Estimation (60 min)\n\n3.1 Restricted win ratio\n3.2 Average win time analysis (R-package rmt)\n\n3.1.1 Restricted mean time in favor of treatment\n3.1.2 Estimation, inference, and graphics\n3.1.3 Real Examples\n\n3.3 While-alive loss rate (R-package WA)\n\n3.2.1 Definition, interpretation, and estimation\n3.2.3 Real Examples\n\n\n4. Semiparametric Regression (30 min)\n\n4.1 Proportional win-fractions model (R-package WR)\n\n4.1.1 Model assumptions\n4.1.2 Estimation, inference, and model diagnostics\n4.1.3 Real Examples\n\n4.2 Variable selection and risk prediction\n\n4.2.1 WRNet (website)\n\n\n5. Discussions (20 min)\n\n5.1. Open problems\n\n5.1.1 Covariate adjustment\n5.1.2 Interim monitoring\n5.1.3 Meta analysis\n\n5.2. Course summary",
+    "text": "Syllabus\n\n1. Introduction (30 min)\n\n1.1 Examples & guidelines\n1.2 Traditional methods and limitations\n1.3 Win ratio methods and limitations\n\n2. Hypothesis Testing (40 min)\n\n2.1 Win ratio by Pocock et al. (2012)\n2.2 Statistical properties\n2.3 Handling recurrent events (R-package WR)\n2.4 Sample size calculation (R-package WR)\n\n3. Nonparametric Estimation (60 min)\n\n3.1 Restricted win ratio\n3.2 Average win time analysis (R-package rmt)\n\n3.1.1 Restricted mean time in favor of treatment\n3.1.2 Estimation, inference, and graphics\n3.1.3 Real Examples\n\n3.3 While-alive loss rate (R-package WA)\n\n3.2.1 Definition, interpretation, and estimation\n3.2.3 Real Examples\n\n\n4. Semiparametric Regression (45 min)\n\n4.1 Proportional win-fractions model (R-package WR)\n\n4.1.1 Model assumptions\n4.1.2 Estimation, inference, and model diagnostics\n4.1.3 Real Examples\n\n4.2 Variable selection and risk prediction\n\n4.2.1 Elastic net approach (WRNet)\n\n\n5. Discussions (25 min)\n\n5.1. Open problems\n\n5.1.1 Covariate adjustment\n5.1.2 Interim monitoring\n5.1.3 Meta analysis\n\n5.2. Course summary",
     "crumbs": [
       "Course Info"
     ]
@@ -54,7 +54,7 @@
     "href": "index.html#r-packages",
     "title": "Statistical Methods for Composite Endpoints",
     "section": "R-Packages",
-    "text": "R-Packages\nTo proceed, install/load the following packages:\n\n# install packages --------------------------------\ninstall.packages(\"Wcompo\")\ninstall.packages(\"WR\")\ninstall.packages(\"rmt\")\ninstall.packages(\"WA\")\n# load packages -----------------------------------\nlibrary(tidyverse)\nlibrary(survival)\nlibrary(Wcompo)\nlibrary(WR)\nlibrary(rmt)\nlibrary(WA)",
+    "text": "R-Packages\nYou will need the following R packages for this workshop:\nWcompo, WR, rmt, and WA, along with base packages like tidyverse and survival.\n\ninstall.packages(c(\"Wcompo\", \"WR\", \"rmt\", \"WA\"))\nlibrary(tidyverse)\nlibrary(survival)\nlibrary(Wcompo)\nlibrary(WR)\nlibrary(rmt)\nlibrary(WA)",
     "crumbs": [
       "Course Info"
     ]
@@ -70,8 +70,8 @@
     "objectID": "intro.html#r-code",
     "href": "intro.html#r-code",
     "title": "1  Introduction",
-    "section": "R-code",
-    "text": "R-code\n\n\nShow the code\n##################################################################\n# This code generates the numerical results in  chapter 1       ##\n##################################################################\n\n# load the survival package\nlibrary(survival)\n# install.packages(\"Wcompo\")\nlibrary(Wcompo) # for weighted total events\nlibrary(rmt) # for hfaction data\nlibrary(tidyverse) # for data wrangling\n\n# load hfaction data\ndata(hfaction)\nhead(hfaction)\n\n# convert status=1 for death, 2=hospitalization\nhfaction &lt;- hfaction |&gt; \n  mutate(\n    status = case_when(\n      status == 1 ~ 2,\n      status == 2 ~ 1,\n      status == 0 ~ 0\n    )\n  )\n\nhead(hfaction)\n\n# count unique patients in each arm\nhfaction |&gt; \n  group_by(trt_ab) |&gt; \n  distinct(patid) |&gt; \n  count(trt_ab)\n\n# TFE: take the first event per patient id\nhfaction_TFE &lt;- hfaction |&gt; \n  arrange(patid, time) |&gt; \n  group_by(patid) |&gt; \n  slice_head() |&gt; \n  ungroup()\n\n# Mortality analysis ------------------------------------------------------\n\n## get mortality data\nhfaction_D &lt;- hfaction |&gt; \n  filter(status != 2) # remove hospitalization records\n\n## Cox model for death against trt_ab\nobj_D &lt;- coxph(Surv(time, status) ~ trt_ab, data = hfaction_D)\nsummary(obj_D)\n#&gt; n= 426, number of events= 93 \n#&gt; coef exp(coef) se(coef)      z Pr(&gt;|z|)  \n#&gt; trt_ab -0.3973    0.6721   0.2129 -1.866   0.0621 .\n\n# TFE analysis --------------------------------------------------------\n\n## how many of first events are death (1) or hosp (2)\nhfaction_TFE |&gt; \n  count(status)\n\n# Cox model for TFE against trt_ab\nobj_TFE &lt;- coxph(Surv(time, status &gt; 0) ~ trt_ab, data = hfaction_TFE)\nsummary(obj_TFE)\n\n\n# Mortality vs TFE --------------------------------------------------------\n\nlibrary(ggsurvfit)\nlibrary(patchwork)\n\npD &lt;- survfit2(Surv(time, status) ~ trt_ab, data = hfaction_D) |&gt;\n  ggsurvfit(linewidth = 1) +\n  scale_ggsurvfit() +\n  scale_color_discrete(labels = c(\"Usual care\", \"Training\")) +\n  scale_x_continuous(\"Time (years)\", limits = c(0, 4)) +\n  labs(y = \"Overall survival\")\n\npTFE &lt;- survfit2(Surv(time, status &gt; 0) ~ trt_ab, data = hfaction_TFE) |&gt;\n  ggsurvfit(linewidth = 1) +\n  scale_ggsurvfit() +\n  scale_color_discrete(labels = c(\"Usual care\", \"Training\")) +\n  scale_x_continuous(\"Time (years)\", limits = c(0, 4)) +\n  labs(y = \"Hospitalization-free survival\")\n\n\npD + pTFE + plot_layout(guides = \"collect\") & \n  theme(\n    legend.position = \"top\", \n    legend.text = element_text(size = 12)\n    )\n\n# ggsave(\"images/intro_hfaction_unis.png\", width = 8, height = 4.5)\n\n# Total events (proportional mean) ----------------------------------------\n## fit proportional means model with death = 2 x hosp\nobj_ML &lt;- CompoML(hfaction$patid, hfaction$time, hfaction$status, \n                  hfaction$trt_ab, w = c(2, 1))\n## summary results\nobj_ML\n\n## plot model-based mean functions\nplot(obj_ML, 0, ylim= c(0, 5), xlim= c(0, 4), xlab=\"Time (years)\", \n     col = \"red\", lwd = 2)\nplot(obj_ML, 1, add = TRUE, col = \"blue\", lwd=2)\nlegend(0, 5, col = c(\"red\", \"blue\"), c(\"Usual care\",\"Training\"), lwd = 2)",
+    "section": "R code",
+    "text": "R code\n\n\nShow the code\n##################################################################\n# This code generates the numerical results in  chapter 1       ##\n##################################################################\n\n# load the survival package\nlibrary(survival)\n# install.packages(\"Wcompo\")\nlibrary(Wcompo) # for weighted total events\nlibrary(rmt) # for hfaction data\nlibrary(tidyverse) # for data wrangling\n\n# load hfaction data\ndata(hfaction)\nhead(hfaction)\n\n# convert status=1 for death, 2=hospitalization\nhfaction &lt;- hfaction |&gt; \n  mutate(\n    status = case_when(\n      status == 1 ~ 2,\n      status == 2 ~ 1,\n      status == 0 ~ 0\n    )\n  )\n\nhead(hfaction)\n\n# count unique patients in each arm\nhfaction |&gt; \n  group_by(trt_ab) |&gt; \n  distinct(patid) |&gt; \n  count(trt_ab)\n\n# TFE: take the first event per patient id\nhfaction_TFE &lt;- hfaction |&gt; \n  arrange(patid, time) |&gt; \n  group_by(patid) |&gt; \n  slice_head() |&gt; \n  ungroup()\n\n# Mortality analysis ------------------------------------------------------\n\n## get mortality data\nhfaction_D &lt;- hfaction |&gt; \n  filter(status != 2) # remove hospitalization records\n\n## Cox model for death against trt_ab\nobj_D &lt;- coxph(Surv(time, status) ~ trt_ab, data = hfaction_D)\nsummary(obj_D)\n#&gt; n= 426, number of events= 93 \n#&gt; coef exp(coef) se(coef)      z Pr(&gt;|z|)  \n#&gt; trt_ab -0.3973    0.6721   0.2129 -1.866   0.0621 .\n\n# TFE analysis --------------------------------------------------------\n\n## how many of first events are death (1) or hosp (2)\nhfaction_TFE |&gt; \n  count(status)\n\n# Cox model for TFE against trt_ab\nobj_TFE &lt;- coxph(Surv(time, status &gt; 0) ~ trt_ab, data = hfaction_TFE)\nsummary(obj_TFE)\n\n\n# Mortality vs TFE --------------------------------------------------------\n\nlibrary(ggsurvfit)\nlibrary(patchwork)\n\npD &lt;- survfit2(Surv(time, status) ~ trt_ab, data = hfaction_D) |&gt;\n  ggsurvfit(linewidth = 1) +\n  scale_ggsurvfit() +\n  scale_color_discrete(labels = c(\"Usual care\", \"Training\")) +\n  scale_x_continuous(\"Time (years)\", limits = c(0, 4)) +\n  labs(y = \"Overall survival\")\n\npTFE &lt;- survfit2(Surv(time, status &gt; 0) ~ trt_ab, data = hfaction_TFE) |&gt;\n  ggsurvfit(linewidth = 1) +\n  scale_ggsurvfit() +\n  scale_color_discrete(labels = c(\"Usual care\", \"Training\")) +\n  scale_x_continuous(\"Time (years)\", limits = c(0, 4)) +\n  labs(y = \"Hospitalization-free survival\")\n\n\npD + pTFE + plot_layout(guides = \"collect\") & \n  theme(\n    legend.position = \"top\", \n    legend.text = element_text(size = 12)\n    )\n\n# ggsave(\"images/intro_hfaction_unis.png\", width = 8, height = 4.5)\n\n# Total events (proportional mean) ----------------------------------------\n## fit proportional means model with death = 2 x hosp\nobj_ML &lt;- CompoML(hfaction$patid, hfaction$time, hfaction$status, \n                  hfaction$trt_ab, w = c(2, 1))\n## summary results\nobj_ML\n\n## plot model-based mean functions\nplot(obj_ML, 0, ylim= c(0, 5), xlim= c(0, 4), xlab=\"Time (years)\", \n     col = \"red\", lwd = 2)\nplot(obj_ML, 1, add = TRUE, col = \"blue\", lwd=2)\nlegend(0, 5, col = c(\"red\", \"blue\"), c(\"Usual care\",\"Training\"), lwd = 2)",
     "crumbs": [
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introduction</span>"
     ]
@@ -138,6 +138,96 @@
     "title": "1  Introduction",
     "section": "",
     "text": "Slides\nChapter slides here. (To convert html to pdf, press E \\(\\to\\) Print \\(\\to\\) Destination: Save to pdf)",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introduction</span>"
+    ]
+  },
+  {
+    "objectID": "intro.html#chapter-summary",
+    "href": "intro.html#chapter-summary",
+    "title": "1  Introduction",
+    "section": "1.1 Chapter Summary",
+    "text": "1.1 Chapter Summary\n\n1.1.1 Motivating Examples\nIn trials where patients may experience both fatal and nonfatal events, time-to-first-event analyses can obscure clinically meaningful treatment effects. For instance, in a colon cancer trial of 619 patients, relapse-free survival was used as the primary endpoint. Although the treatment significantly delayed relapse (log-rank \\(p &lt; 0.001\\)), 89% of deaths occurred after relapse and were ignored in the analysis.\nSimilarly, in the HF-ACTION trial of heart failure patients, a composite of death and hospitalization failed to show a statistically significant benefit (log-rank \\(p = 0.10\\)), even though 88% of patients died and 69% had recurrent hospitalizations. By equating hospitalization with death and counting only the first event, the analysis diluted the observed mortality effect.\nThese examples highlight the limitations of standard composite endpoints and motivate approaches that account for the clinical hierarchy and full event history.\n\n\n1.1.2 Composite Endpoints and Guidelines\nComposite endpoints increase statistical power by aggregating different event types, reducing the need for multiple testing and improving trial efficiency. However, their validity hinges on appropriate construction and interpretation.\nRegulatory guidelines provide direction:\n\nICH E9 recommends using a single primary variable or a composite when individual outcomes cannot capture the treatment effect.\nFDA allows time-to-first or total-event analysis but emphasizes component-wise interpretation.\nEuropean HTA bodies advise combining outcomes of similar severity and always including mortality when relevant, especially if it censors other outcomes.\n\nThese guidelines support the use of composite endpoints while cautioning against misinterpretation.\n\n\n1.1.3 Traditional Composite Methods\nLet \\(\\mathcal{H}^*(t)\\) denote the cumulative history of death and \\(K\\) nonfatal events up to time \\(t\\).\n\n1.1.3.1 Time to First Event\nThe standard approach defines: \\[\nN^*_{\\text{TFE}}(t) = I\\left\\{ N_D^*(t) + \\sum_{k=1}^K N_k^*(t) \\geq 1 \\right\\},\n\\] where \\(N_D^*(t)\\) and \\(N_k^*(t)\\) are counting processes for death and nonfatal event \\(k\\), respectively. This method reduces all outcome complexity to a single event time, analyzed via Kaplan–Meier, log-rank, or Cox models.\n\n\n1.1.3.2 Weighted Total Events\nTo incorporate more information, the total number of events can be weighted: \\[\nN^*_{\\text{R}}(t) = w_D N_D^*(t) + \\sum_{k=1}^K w_k N_k^*(t),\n\\] with \\(w_D, w_k\\) representing clinical importance. Estimation is performed under a proportional means model: \\[\nE\\{ N^*_{\\text{R}}(t) \\mid Z \\} = \\exp(\\beta^\\mathrm{T} Z) \\mu_0(t).\n\\]\nThe Wcompo R package provides tools for this approach via the CompoML() function.\n\n\n\n1.1.4 HF-ACTION Revisited\nIn the HF-ACTION trial, separate analyses illustrate the limitations of standard methods:\n\nCox model for death showed a 32.8% risk reduction (HR = 0.672, \\(p = 0.062\\)).\nCox model for TFE (death or first hospitalization) showed only a 16.2% reduction (HR = 0.838, \\(p = 0.111\\)).\nWeighted total events (death weighted twice) estimated a 14.3% reduction in event burden, but the \\(p\\)-value was still nonsignificant.\n\nThese results demonstrate how frequent nonfatal events can mask treatment benefits on mortality, particularly in analyses that do not prioritize outcome severity or account for survival time.\n\n\n1.1.5 Win Ratio and Hierarchical Approaches\nThe win ratio (WR) offers a solution by comparing patient pairs across treatment arms. Each pair is evaluated hierarchically:\n\nLonger survival indicates a win.\nIf both survive, fewer or later nonfatal events confer a win.\nIf tied, functional outcomes may be compared.\n\nThe win ratio is defined as: \\[\n\\widehat{\\text{WR}} = \\frac{\\text{\\# of treatment wins}}{\\text{\\# of control wins}}.\n\\]\nAlternative metrics include:\n\nNet benefit (PIF): wins minus losses.\nWin odds (WO): accounts for ties: \\[\n\\text{WO} = \\frac{\\text{wins} + \\frac{1}{2} \\text{ties}}{\\text{losses} + \\frac{1}{2} \\text{ties}}.\n\\]\n\nThese measures align with clinical priorities and are increasingly used in practice.\n\n\n1.1.6 Estimand Challenges\nA critical limitation of the win ratio is its dependency on censoring. Because patients may be censored at different times, the win/loss status of a pair can change over time. The observed win ratio thus reflects an average over the censoring distribution, not a fixed population quantity.\nThis raises concerns for interpretation and estimation:\n\nTesting remains valid under the null hypothesis, especially if the treatment consistently outperforms control.\nEstimation, however, is biased unless a fixed follow-up time is defined or a model constrains the win ratio to be constant over time.\n\nThe ICH E9 (R1) addendum emphasizes that a clearly defined estimand is essential for interpreting treatment effects. For the win ratio, this requires careful attention to follow-up duration and censoring.\n\n\n1.1.7 Toward Model-Based Estimands\nLimitations of traditional and empirical approaches motivate model-based alternatives: - The restricted mean time in favor (RMT-IF) quantifies the net amount of time one group remains in a more favorable state. - The proportional win-fractions (PW) model expresses the win ratio as a function of covariates, enabling estimation of treatment effects under a semiparametric framework.\nBoth methods respect clinical hierarchies and avoid dependence on arbitrary censoring patterns. They form the foundation of the methods introduced in subsequent chapters.\n\n\n\n1.1.8 Example R code\n\n########################################\n# 1. Proportional means model using Wcompo\n########################################\nlibrary(Wcompo)\nobj &lt;- CompoML(id, time, status, Z, w = c(2, 1))\nsummary(obj)\nplot(obj)",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introduction</span>"
+    ]
+  },
+  {
+    "objectID": "intro.html#motivating-examples",
+    "href": "intro.html#motivating-examples",
+    "title": "1  Introduction",
+    "section": "1.1 Motivating Examples",
+    "text": "1.1 Motivating Examples\nIn trials where patients may experience both fatal and nonfatal events, time-to-first-event analyses can obscure clinically meaningful treatment effects. For instance, in a colon cancer trial of 619 patients, relapse-free survival was used as the primary endpoint. Although the treatment significantly delayed relapse (log-rank \\(p &lt; 0.001\\)), 89% of deaths occurred after relapse and were ignored in the analysis.\nSimilarly, in the HF-ACTION trial of heart failure patients, a composite of death and hospitalization failed to show a statistically significant benefit (log-rank \\(p = 0.10\\)), even though 88% of patients died and 69% had recurrent hospitalizations. By equating hospitalization with death and counting only the first event, the analysis diluted the observed mortality effect.\nThese examples highlight the limitations of standard composite endpoints and motivate approaches that account for the clinical hierarchy and full event history.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introduction</span>"
+    ]
+  },
+  {
+    "objectID": "intro.html#composite-endpoints-and-guidelines",
+    "href": "intro.html#composite-endpoints-and-guidelines",
+    "title": "1  Introduction",
+    "section": "1.2 Composite Endpoints and Guidelines",
+    "text": "1.2 Composite Endpoints and Guidelines\nComposite endpoints increase statistical power by aggregating different event types, reducing the need for multiple testing and improving trial efficiency. However, their validity hinges on appropriate construction and interpretation.\nRegulatory guidelines provide direction:\n\nICH E9 recommends using a single primary variable or a composite when individual outcomes cannot capture the treatment effect.\nFDA allows time-to-first or total-event analysis but emphasizes component-wise interpretation.\nEuropean HTA bodies advise combining outcomes of similar severity and always including mortality when relevant, especially if it censors other outcomes.\n\nThese guidelines support the use of composite endpoints while cautioning against misinterpretation.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introduction</span>"
+    ]
+  },
+  {
+    "objectID": "intro.html#traditional-composite-methods",
+    "href": "intro.html#traditional-composite-methods",
+    "title": "1  Introduction",
+    "section": "1.3 Traditional Composite Methods",
+    "text": "1.3 Traditional Composite Methods\nLet \\(\\mathcal{H}^*(t)\\) denote the cumulative history of death and \\(K\\) nonfatal events up to time \\(t\\).\n\n1.3.1 Time to First Event\nThe standard approach defines: \\[\nN^*_{\\text{TFE}}(t) = I\\left\\{ N_D^*(t) + \\sum_{k=1}^K N_k^*(t) \\geq 1 \\right\\},\n\\] where \\(N_D^*(t)\\) and \\(N_k^*(t)\\) are counting processes for death and nonfatal event \\(k\\), respectively. This method reduces all outcome complexity to a single event time, analyzed via Kaplan–Meier, log-rank, or Cox models.\n\n\n1.3.2 Weighted Total Events\nTo incorporate more information, the total number of events can be weighted: \\[\nN^*_{\\text{R}}(t) = w_D N_D^*(t) + \\sum_{k=1}^K w_k N_k^*(t),\n\\] with \\(w_D, w_k\\) representing clinical importance. Estimation is performed under a proportional means model: \\[\nE\\{ N^*_{\\text{R}}(t) \\mid Z \\} = \\exp(\\beta^\\mathrm{T} Z) \\mu_0(t).\n\\]\nThe Wcompo R package provides tools for this approach via the CompoML() function.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introduction</span>"
+    ]
+  },
+  {
+    "objectID": "intro.html#hf-action-revisited",
+    "href": "intro.html#hf-action-revisited",
+    "title": "1  Introduction",
+    "section": "1.4 HF-ACTION Revisited",
+    "text": "1.4 HF-ACTION Revisited\nIn the HF-ACTION trial, separate analyses illustrate the limitations of standard methods:\n\nCox model for death showed a 32.8% risk reduction (HR = 0.672, \\(p = 0.062\\)).\nCox model for TFE (death or first hospitalization) showed only a 16.2% reduction (HR = 0.838, \\(p = 0.111\\)).\nWeighted total events (death weighted twice) estimated a 14.3% reduction in event burden, but the \\(p\\)-value was still nonsignificant.\n\nThese results demonstrate how frequent nonfatal events can mask treatment benefits on mortality, particularly in analyses that do not prioritize outcome severity or account for survival time.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introduction</span>"
+    ]
+  },
+  {
+    "objectID": "intro.html#win-ratio-and-hierarchical-approaches",
+    "href": "intro.html#win-ratio-and-hierarchical-approaches",
+    "title": "1  Introduction",
+    "section": "1.5 Win Ratio and Hierarchical Approaches",
+    "text": "1.5 Win Ratio and Hierarchical Approaches\nThe win ratio (WR) offers a solution by comparing patient pairs across treatment arms. Each pair is evaluated hierarchically:\n\nLonger survival indicates a win.\nIf both survive, fewer or later nonfatal events confer a win.\nIf tied, functional outcomes may be compared.\n\nThe win ratio is defined as: \\[\n\\widehat{\\text{WR}} = \\frac{\\text{\\# of treatment wins}}{\\text{\\# of control wins}}.\n\\]\nAlternative metrics include:\n\nNet benefit (PIF): wins minus losses.\nWin odds (WO): accounts for ties: \\[\n\\text{WO} = \\frac{\\text{wins} + \\frac{1}{2} \\text{ties}}{\\text{losses} + \\frac{1}{2} \\text{ties}}.\n\\]\n\nThese measures align with clinical priorities and are increasingly used in practice.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introduction</span>"
+    ]
+  },
+  {
+    "objectID": "intro.html#estimand-challenges",
+    "href": "intro.html#estimand-challenges",
+    "title": "1  Introduction",
+    "section": "1.6 Estimand Challenges",
+    "text": "1.6 Estimand Challenges\nA critical limitation of the win ratio is its dependency on censoring. Because patients may be censored at different times, the win/loss status of a pair can change over time. The observed win ratio thus reflects an average over the censoring distribution, not a fixed population quantity.\nThis raises concerns for interpretation and estimation:\n\nTesting remains valid under the null hypothesis, especially if the treatment consistently outperforms control.\nEstimation, however, is biased unless a fixed follow-up time is defined or a model constrains the win ratio to be constant over time.\n\nThe ICH E9 (R1) addendum emphasizes that a clearly defined estimand is essential for interpreting treatment effects. For the win ratio, this requires careful attention to follow-up duration and censoring.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introduction</span>"
+    ]
+  },
+  {
+    "objectID": "intro.html#toward-model-based-estimands",
+    "href": "intro.html#toward-model-based-estimands",
+    "title": "1  Introduction",
+    "section": "1.7 Toward Model-Based Estimands",
+    "text": "1.7 Toward Model-Based Estimands\nLimitations of traditional and empirical approaches motivate model-based alternatives: - The restricted mean time in favor (RMT-IF) quantifies the net amount of time one group remains in a more favorable state. - The proportional win-fractions (PW) model expresses the win ratio as a function of covariates, enabling estimation of treatment effects under a semiparametric framework.\nBoth methods respect clinical hierarchies and avoid dependence on arbitrary censoring patterns. They form the foundation of the methods introduced in subsequent chapters.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introduction</span>"
+    ]
+  },
+  {
+    "objectID": "intro.html#example-r-code",
+    "href": "intro.html#example-r-code",
+    "title": "1  Introduction",
+    "section": "1.8 Example R code",
+    "text": "1.8 Example R code\n\n########################################\n# 1. Proportional means model using Wcompo\n########################################\nlibrary(Wcompo)\nobj &lt;- CompoML(id, time, status, Z, w = c(2, 1))\nsummary(obj)\nplot(obj)",
     "crumbs": [
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introduction</span>"
     ]

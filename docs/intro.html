@@ -74,7 +74,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-e26003cea8cd680ca0c55a263523d882.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-8da5b4427184b79ecddefad3d342027e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-3fa07f995375b3a6eabf8b337cbf22a5.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -226,7 +226,19 @@ window.Quarto = {
    
   <ul>
   <li><a href="#slides" id="toc-slides" class="nav-link active" data-scroll-target="#slides">Slides</a></li>
-  <li><a href="#r-code" id="toc-r-code" class="nav-link" data-scroll-target="#r-code">R-code</a></li>
+  <li><a href="#r-code" id="toc-r-code" class="nav-link" data-scroll-target="#r-code">R code</a></li>
+  <li><a href="#motivating-examples" id="toc-motivating-examples" class="nav-link" data-scroll-target="#motivating-examples"><span class="header-section-number">1.1</span> Motivating Examples</a></li>
+  <li><a href="#composite-endpoints-and-guidelines" id="toc-composite-endpoints-and-guidelines" class="nav-link" data-scroll-target="#composite-endpoints-and-guidelines"><span class="header-section-number">1.2</span> Composite Endpoints and Guidelines</a></li>
+  <li><a href="#traditional-composite-methods" id="toc-traditional-composite-methods" class="nav-link" data-scroll-target="#traditional-composite-methods"><span class="header-section-number">1.3</span> Traditional Composite Methods</a>
+  <ul class="collapse">
+  <li><a href="#time-to-first-event" id="toc-time-to-first-event" class="nav-link" data-scroll-target="#time-to-first-event"><span class="header-section-number">1.3.1</span> Time to First Event</a></li>
+  <li><a href="#weighted-total-events" id="toc-weighted-total-events" class="nav-link" data-scroll-target="#weighted-total-events"><span class="header-section-number">1.3.2</span> Weighted Total Events</a></li>
+  </ul></li>
+  <li><a href="#hf-action-revisited" id="toc-hf-action-revisited" class="nav-link" data-scroll-target="#hf-action-revisited"><span class="header-section-number">1.4</span> HF-ACTION Revisited</a></li>
+  <li><a href="#win-ratio-and-hierarchical-approaches" id="toc-win-ratio-and-hierarchical-approaches" class="nav-link" data-scroll-target="#win-ratio-and-hierarchical-approaches"><span class="header-section-number">1.5</span> Win Ratio and Hierarchical Approaches</a></li>
+  <li><a href="#estimand-challenges" id="toc-estimand-challenges" class="nav-link" data-scroll-target="#estimand-challenges"><span class="header-section-number">1.6</span> Estimand Challenges</a></li>
+  <li><a href="#toward-model-based-estimands" id="toc-toward-model-based-estimands" class="nav-link" data-scroll-target="#toward-model-based-estimands"><span class="header-section-number">1.7</span> Toward Model-Based Estimands</a></li>
+  <li><a href="#example-r-code" id="toc-example-r-code" class="nav-link" data-scroll-target="#example-r-code"><span class="header-section-number">1.8</span> Example R code</a></li>
   </ul>
 </nav>
     </div>
@@ -257,7 +269,7 @@ window.Quarto = {
 <p>Chapter slides <a href="chap1.html" target="_blank">here</a>. (To convert html to pdf, press E <span class="math inline">\(\to\)</span> Print <span class="math inline">\(\to\)</span> Destination: Save to pdf)</p>
 </section>
 <section id="r-code" class="level2 unnumbered">
-<h2 class="unnumbered anchored" data-anchor-id="r-code">R-code</h2>
+<h2 class="unnumbered anchored" data-anchor-id="r-code">R code</h2>
 <div class="cell">
 <details class="code-fold">
 <summary>Show the code</summary>
@@ -366,6 +378,100 @@ window.Quarto = {
 <span id="cb1-103"><a href="#cb1-103" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(obj_ML, <span class="dv">1</span>, <span class="at">add =</span> <span class="cn">TRUE</span>, <span class="at">col =</span> <span class="st">"blue"</span>, <span class="at">lwd=</span><span class="dv">2</span>)</span>
 <span id="cb1-104"><a href="#cb1-104" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="dv">0</span>, <span class="dv">5</span>, <span class="at">col =</span> <span class="fu">c</span>(<span class="st">"red"</span>, <span class="st">"blue"</span>), <span class="fu">c</span>(<span class="st">"Usual care"</span>,<span class="st">"Training"</span>), <span class="at">lwd =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
+</div>
+</section>
+<section id="motivating-examples" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="motivating-examples"><span class="header-section-number">1.1</span> Motivating Examples</h2>
+<p>In trials where patients may experience both fatal and nonfatal events, time-to-first-event analyses can obscure clinically meaningful treatment effects. For instance, in a colon cancer trial of 619 patients, relapse-free survival was used as the primary endpoint. Although the treatment significantly delayed relapse (log-rank <span class="math inline">\(p &lt; 0.001\)</span>), 89% of deaths occurred after relapse and were ignored in the analysis.</p>
+<p>Similarly, in the HF-ACTION trial of heart failure patients, a composite of death and hospitalization failed to show a statistically significant benefit (log-rank <span class="math inline">\(p = 0.10\)</span>), even though 88% of patients died and 69% had recurrent hospitalizations. By equating hospitalization with death and counting only the first event, the analysis diluted the observed mortality effect.</p>
+<p>These examples highlight the limitations of standard composite endpoints and motivate approaches that account for the clinical hierarchy and full event history.</p>
+</section>
+<section id="composite-endpoints-and-guidelines" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="composite-endpoints-and-guidelines"><span class="header-section-number">1.2</span> Composite Endpoints and Guidelines</h2>
+<p>Composite endpoints increase statistical power by aggregating different event types, reducing the need for multiple testing and improving trial efficiency. However, their validity hinges on appropriate construction and interpretation.</p>
+<p>Regulatory guidelines provide direction:</p>
+<ul>
+<li><strong>ICH E9</strong> recommends using a single primary variable or a composite when individual outcomes cannot capture the treatment effect.</li>
+<li><strong>FDA</strong> allows time-to-first or total-event analysis but emphasizes component-wise interpretation.</li>
+<li><strong>European HTA bodies</strong> advise combining outcomes of similar severity and always including mortality when relevant, especially if it censors other outcomes.</li>
+</ul>
+<p>These guidelines support the use of composite endpoints while cautioning against misinterpretation.</p>
+</section>
+<section id="traditional-composite-methods" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="traditional-composite-methods"><span class="header-section-number">1.3</span> Traditional Composite Methods</h2>
+<p>Let <span class="math inline">\(\mathcal{H}^*(t)\)</span> denote the cumulative history of death and <span class="math inline">\(K\)</span> nonfatal events up to time <span class="math inline">\(t\)</span>.</p>
+<section id="time-to-first-event" class="level3" data-number="1.3.1">
+<h3 data-number="1.3.1" class="anchored" data-anchor-id="time-to-first-event"><span class="header-section-number">1.3.1</span> Time to First Event</h3>
+<p>The standard approach defines: <span class="math display">\[
+N^*_{\text{TFE}}(t) = I\left\{ N_D^*(t) + \sum_{k=1}^K N_k^*(t) \geq 1 \right\},
+\]</span> where <span class="math inline">\(N_D^*(t)\)</span> and <span class="math inline">\(N_k^*(t)\)</span> are counting processes for death and nonfatal event <span class="math inline">\(k\)</span>, respectively. This method reduces all outcome complexity to a single event time, analyzed via Kaplan–Meier, log-rank, or Cox models.</p>
+</section>
+<section id="weighted-total-events" class="level3" data-number="1.3.2">
+<h3 data-number="1.3.2" class="anchored" data-anchor-id="weighted-total-events"><span class="header-section-number">1.3.2</span> Weighted Total Events</h3>
+<p>To incorporate more information, the total number of events can be weighted: <span class="math display">\[
+N^*_{\text{R}}(t) = w_D N_D^*(t) + \sum_{k=1}^K w_k N_k^*(t),
+\]</span> with <span class="math inline">\(w_D, w_k\)</span> representing clinical importance. Estimation is performed under a proportional means model: <span class="math display">\[
+E\{ N^*_{\text{R}}(t) \mid Z \} = \exp(\beta^\mathrm{T} Z) \mu_0(t).
+\]</span></p>
+<p>The <code>Wcompo</code> R package provides tools for this approach via the <code>CompoML()</code> function.</p>
+</section>
+</section>
+<section id="hf-action-revisited" class="level2" data-number="1.4">
+<h2 data-number="1.4" class="anchored" data-anchor-id="hf-action-revisited"><span class="header-section-number">1.4</span> HF-ACTION Revisited</h2>
+<p>In the HF-ACTION trial, separate analyses illustrate the limitations of standard methods:</p>
+<ul>
+<li><strong>Cox model for death</strong> showed a 32.8% risk reduction (HR = 0.672, <span class="math inline">\(p = 0.062\)</span>).</li>
+<li><strong>Cox model for TFE</strong> (death or first hospitalization) showed only a 16.2% reduction (HR = 0.838, <span class="math inline">\(p = 0.111\)</span>).</li>
+<li><strong>Weighted total events</strong> (death weighted twice) estimated a 14.3% reduction in event burden, but the <span class="math inline">\(p\)</span>-value was still nonsignificant.</li>
+</ul>
+<p>These results demonstrate how frequent nonfatal events can mask treatment benefits on mortality, particularly in analyses that do not prioritize outcome severity or account for survival time.</p>
+</section>
+<section id="win-ratio-and-hierarchical-approaches" class="level2" data-number="1.5">
+<h2 data-number="1.5" class="anchored" data-anchor-id="win-ratio-and-hierarchical-approaches"><span class="header-section-number">1.5</span> Win Ratio and Hierarchical Approaches</h2>
+<p>The <strong>win ratio (WR)</strong> offers a solution by comparing patient pairs across treatment arms. Each pair is evaluated hierarchically:</p>
+<ol type="1">
+<li>Longer survival indicates a win.</li>
+<li>If both survive, fewer or later nonfatal events confer a win.</li>
+<li>If tied, functional outcomes may be compared.</li>
+</ol>
+<p>The win ratio is defined as: <span class="math display">\[
+\widehat{\text{WR}} = \frac{\text{\# of treatment wins}}{\text{\# of control wins}}.
+\]</span></p>
+<p>Alternative metrics include:</p>
+<ul>
+<li><strong>Net benefit</strong> (PIF): wins minus losses.</li>
+<li><strong>Win odds</strong> (WO): accounts for ties: <span class="math display">\[
+\text{WO} = \frac{\text{wins} + \frac{1}{2} \text{ties}}{\text{losses} + \frac{1}{2} \text{ties}}.
+\]</span></li>
+</ul>
+<p>These measures align with clinical priorities and are increasingly used in practice.</p>
+</section>
+<section id="estimand-challenges" class="level2" data-number="1.6">
+<h2 data-number="1.6" class="anchored" data-anchor-id="estimand-challenges"><span class="header-section-number">1.6</span> Estimand Challenges</h2>
+<p>A critical limitation of the win ratio is its dependency on censoring. Because patients may be censored at different times, the win/loss status of a pair can change over time. The observed win ratio thus reflects an average over the censoring distribution, not a fixed population quantity.</p>
+<p>This raises concerns for interpretation and estimation:</p>
+<ul>
+<li><strong>Testing</strong> remains valid under the null hypothesis, especially if the treatment consistently outperforms control.</li>
+<li><strong>Estimation</strong>, however, is biased unless a fixed follow-up time is defined or a model constrains the win ratio to be constant over time.</li>
+</ul>
+<p>The ICH E9 (R1) addendum emphasizes that a clearly defined <strong>estimand</strong> is essential for interpreting treatment effects. For the win ratio, this requires careful attention to follow-up duration and censoring.</p>
+</section>
+<section id="toward-model-based-estimands" class="level2" data-number="1.7">
+<h2 data-number="1.7" class="anchored" data-anchor-id="toward-model-based-estimands"><span class="header-section-number">1.7</span> Toward Model-Based Estimands</h2>
+<p>Limitations of traditional and empirical approaches motivate model-based alternatives: - The <strong>restricted mean time in favor (RMT-IF)</strong> quantifies the net amount of time one group remains in a more favorable state. - The <strong>proportional win-fractions (PW) model</strong> expresses the win ratio as a function of covariates, enabling estimation of treatment effects under a semiparametric framework.</p>
+<p>Both methods respect clinical hierarchies and avoid dependence on arbitrary censoring patterns. They form the foundation of the methods introduced in subsequent chapters.</p>
+<hr>
+</section>
+<section id="example-r-code" class="level2" data-number="1.8">
+<h2 data-number="1.8" class="anchored" data-anchor-id="example-r-code"><span class="header-section-number">1.8</span> Example R code</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="do">########################################</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Proportional means model using Wcompo</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="do">########################################</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(Wcompo)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>obj <span class="ot">&lt;-</span> <span class="fu">CompoML</span>(id, time, status, Z, <span class="at">w =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">1</span>))</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(obj)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(obj)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 
