@@ -144,7 +144,6 @@ legend(0, 5, col = c("red", "blue"), c("Usual care","Training"), lwd = 2)
 
 ```
 
-
 ## Motivating Examples
 
 In trials where patients may experience both fatal and nonfatal events, time-to-first-event analyses can obscure clinically meaningful treatment effects. For instance, in a colon cancer trial of 619 patients, relapse-free survival was used as the primary endpoint. Although the treatment significantly delayed relapse (log-rank $p < 0.001$), 89% of deaths occurred after relapse and were ignored in the analysis.
@@ -163,9 +162,9 @@ Composite endpoints increase statistical power by aggregating different event ty
 
 Regulatory guidelines provide direction:
 
-- **ICH E9** recommends using a single primary variable or a composite when individual outcomes cannot capture the treatment effect.
-- **FDA** allows time-to-first or total-event analysis but emphasizes component-wise interpretation.
-- **European HTA bodies** advise combining outcomes of similar severity and always including mortality when relevant, especially if it censors other outcomes.
+-   **ICH E9** recommends using a single primary variable or a composite when individual outcomes cannot capture the treatment effect.
+-   **FDA** allows time-to-first or total-event analysis but emphasizes component-wise interpretation.
+-   **European HTA bodies** advise combining outcomes of similar severity and always including mortality when relevant, especially if it censors other outcomes.
 
 These guidelines support the use of composite endpoints while cautioning against misinterpretation.
 
@@ -175,22 +174,15 @@ Let $\mathcal{H}^*(t)$ denote the cumulative history of death and $K$ nonfatal e
 
 ### Time to First Event
 
-The standard approach defines:
-$$
+The standard approach defines: $$
 N^*_{\text{TFE}}(t) = I\left\{ N_D^*(t) + \sum_{k=1}^K N_k^*(t) \geq 1 \right\},
-$$
-where $N_D^*(t)$ and $N_k^*(t)$ are counting processes for death and nonfatal event $k$, respectively. This method reduces all outcome complexity to a single event time, analyzed via Kaplan–Meier, log-rank, or Cox models.
-
-
+$$ where $N_D^*(t)$ and $N_k^*(t)$ are counting processes for death and nonfatal event $k$, respectively. This method reduces all outcome complexity to a single event time, analyzed via Kaplan–Meier, log-rank, or Cox models.
 
 ### Weighted Total Events
 
-To incorporate more information, the total number of events can be weighted:
-$$
+To incorporate more information, the total number of events can be weighted: $$
 N^*_{\text{R}}(t) = w_D N_D^*(t) + \sum_{k=1}^K w_k N_k^*(t),
-$$
-with $w_D, w_k$ representing clinical importance. Estimation is performed under a proportional means model:
-$$
+$$ with $w_D, w_k$ representing clinical importance. Estimation is performed under a proportional means model: $$
 E\{ N^*_{\text{R}}(t) \mid Z \} = \exp(\beta^\mathrm{T} Z) \mu_0(t).
 $$
 
@@ -200,9 +192,9 @@ The `Wcompo` R package provides tools for this approach via the `CompoML()` func
 
 In the HF-ACTION trial, separate analyses illustrate the limitations of standard methods:
 
-- **Cox model for death** showed a 32.8% risk reduction (HR = 0.672, *p* = 0.062).
-- **Cox model for TFE** (death or first hospitalization) showed only a 16.2% reduction (HR = 0.838, *p* = 0.111).
-- **Weighted total events** (death weighted twice) estimated a 14.3% reduction in event burden, but the *p*-value was still nonsignificant.
+-   **Cox model for death** showed a 32.8% risk reduction (HR = 0.672, *p* = 0.062).
+-   **Cox model for TFE** (death or first hospitalization) showed only a 16.2% reduction (HR = 0.838, *p* = 0.111).
+-   **Weighted total events** (death weighted twice) estimated a 14.3% reduction in event burden, but the *p*-value was still nonsignificant.
 
 These results demonstrate how frequent nonfatal events can mask treatment benefits on mortality, particularly in analyses that do not prioritize outcome severity or account for survival time.
 
@@ -210,22 +202,20 @@ These results demonstrate how frequent nonfatal events can mask treatment benefi
 
 The **win ratio (WR)** offers a solution by comparing patient pairs across treatment arms. Each pair is evaluated hierarchically:
 
-1. Longer survival indicates a win.
-2. If both survive, fewer or later nonfatal events confer a win.
-3. If tied, functional outcomes may be compared.
+1.  Longer survival indicates a win.
+2.  If both survive, fewer or later nonfatal events confer a win.
+3.  If tied, functional outcomes may be compared.
 
-The win ratio is defined as:
-$$
+The win ratio is defined as: $$
 \widehat{\text{WR}} = \frac{\text{\# of treatment wins}}{\text{\# of control wins}}.
 $$
 
 Alternative metrics include:
 
-- **Net benefit** (PIF): wins minus losses.
-- **Win odds** (WO): accounts for ties:
-$$
-\text{WO} = \frac{\text{wins} + 2^{-1} \text{ties}}{\text{losses} + 2^{-1} \text{ties}}.
-$$
+-   **Net benefit** (PIF): wins minus losses.
+-   **Win odds** (WO): accounts for ties: $$
+    \text{WO} = \frac{\text{wins} + 2^{-1} \text{ties}}{\text{losses} + 2^{-1} \text{ties}}.
+    $$
 
 These measures align with clinical priorities and are increasingly used in practice.
 
@@ -237,8 +227,8 @@ A critical limitation of the win ratio is its dependency on censoring. Because p
 
 This raises concerns for interpretation and estimation:
 
-- **Testing** remains valid under the null hypothesis, especially if the treatment consistently outperforms control.
-- **Estimation**, however, is biased unless a fixed follow-up time is defined or a model constrains the win ratio to be constant over time.
+-   **Testing** remains valid under the null hypothesis, especially if the treatment consistently outperforms control.
+-   **Estimation**, however, is biased unless a fixed follow-up time is defined or a model constrains the win ratio to be constant over time.
 
 The ICH E9 (R1) addendum emphasizes that a clearly defined **estimand** is essential for interpreting treatment effects. For the win ratio, this requires careful attention to follow-up duration and censoring.
 
@@ -246,20 +236,19 @@ The ICH E9 (R1) addendum emphasizes that a clearly defined **estimand** is essen
 
 Limitations of traditional and empirical approaches motivate model-based alternatives:
 
-- The **restricted mean time in favor (RMT-IF)** quantifies the net amount of time one group remains in a more favorable state.
-- The **proportional win-fractions (PW) model** expresses the win ratio as a function of covariates, enabling estimation of treatment effects under a semiparametric framework.
+-   The **restricted mean time in favor (RMT-IF)** quantifies the net amount of time one group remains in a more favorable state.
+-   The **proportional win-fractions (PW) model** expresses the win ratio as a function of covariates, enabling estimation of treatment effects under a semiparametric framework.
 
 Both methods respect clinical hierarchies and avoid dependence on arbitrary censoring patterns. They form the foundation of the methods introduced in subsequent chapters.
-
 
 ## Example R code
 
 The following example assumes a data frame `df` in long format, with columns:
 
-- `id`: subject identifier  
-- `time`: event or censoring time  
-- `status`: event type (0 = censoring, 1 = death, 2 = nonfatal)  
-- `trt`: treatment group (0 = control, 1 = treatment)
+-   `id`: subject identifier\
+-   `time`: event or censoring time\
+-   `status`: event type (0 = censoring, 1 = death, 2 = nonfatal)\
+-   `trt`: treatment group (0 = control, 1 = treatment)
 
 ```{r}
 #| eval: false
@@ -298,6 +287,3 @@ fit_wte <- CompoML(id, time, status, Z = trt, data = df, w = c(2, 1))
 ## Conclusion
 
 Standard methods for analyzing composite endpoints—such as time to first event or weighted event counts---often oversimplify patient trajectories and obscure clinically important effects. Hierarchical approaches like the win ratio offer a more principled alternative but require careful attention to the estimand, especially in the presence of censoring. Modern methods such as RMT-IF and the proportional win-fractions model provide robust and interpretable tools for analyzing composite outcomes in a way that respects both clinical priority and statistical rigor.
-
-
-
