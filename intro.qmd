@@ -11,52 +11,56 @@ Chapter slides [here](chap1.html){target="_blank"}. (To convert html to pdf, pre
 #| code-summary: "Show the code"
 #| eval: false
 
+#################################################################
+# This code generates the numerical results in chapter 1       ##
+#################################################################
 
-##################################################################
-# This code generates the numerical results in  chapter 1       ##
-##################################################################
-
-# load the survival package
-library(survival)
-# install.packages("Wcompo")
-library(Wcompo) # for weighted total events
-library(rmt) # for hfaction data
-library(tidyverse) # for data wrangling
+library(survival)  # For standard (univariate) survival analysis
+library(Wcompo)    # For weighted total events (CompoML function)
+library(rmt)       # For the hfaction data set (Heart Failure ACTION trial)
+library(tidyverse) # For data wrangling (dplyr, ggplot2, etc.)
 
 # load hfaction data
 data(hfaction)
-head(hfaction)
+head(hfaction) 
+#> Shows the first rows of the hfaction data frame
 
 # convert status=1 for death, 2=hospitalization
-hfaction <- hfaction |> 
+# (Swapping the original coding of event types in hfaction)
+hfaction <- hfaction |>
   mutate(
     status = case_when(
-      status == 1 ~ 2,
-      status == 2 ~ 1,
-      status == 0 ~ 0
+      status == 1 ~ 2, # status previously "1" becomes "2" now
+      status == 2 ~ 1, # status previously "2" becomes "1" now
+      status == 0 ~ 0  # status "0" remains "0" (censoring)
     )
   )
 
 head(hfaction)
+#> Check that the status values have been reassigned correctly
 
 # count unique patients in each arm
 hfaction |> 
-  group_by(trt_ab) |> 
-  distinct(patid) |> 
+  group_by(trt_ab) |>
+  distinct(patid) |>
   count(trt_ab)
+#> Summarizes how many unique patients are in each treatment arm (trt_ab)
 
 # TFE: take the first event per patient id
-hfaction_TFE <- hfaction |> 
-  arrange(patid, time) |> 
-  group_by(patid) |> 
-  slice_head() |> 
+# This means each patient is represented by their earliest event (or censoring)
+hfaction_TFE <- hfaction |>
+  arrange(patid, time) |>
+  group_by(patid) |>
+  slice_head() |>
   ungroup()
 
-# Mortality analysis ------------------------------------------------------
+# -------------------------------------------------------------------------
+# Mortality analysis
+# -------------------------------------------------------------------------
 
-## get mortality data
-hfaction_D <- hfaction |> 
-  filter(status != 2) # remove hospitalization records
+## Get mortality data
+hfaction_D <- hfaction |>
+  filter(status != 2) # remove hospitalization records (now coded as "2")
 
 ## Cox model for death against trt_ab
 obj_D <- coxph(Surv(time, status) ~ trt_ab, data = hfaction_D)
@@ -64,22 +68,31 @@ summary(obj_D)
 #> n= 426, number of events= 93 
 #> coef exp(coef) se(coef)      z Pr(>|z|)  
 #> trt_ab -0.3973    0.6721   0.2129 -1.866   0.0621 .
+# Interpretation: a hazard ratio < 1 suggests lower hazard of death in the 
+# training arm, though p-value is ~0.06.
 
-# TFE analysis --------------------------------------------------------
+# -------------------------------------------------------------------------
+# TFE analysis
+# -------------------------------------------------------------------------
 
 ## how many of first events are death (1) or hosp (2)
-hfaction_TFE |> 
+hfaction_TFE |>
   count(status)
+#> Tells how many first events were coded as status=1 or status=2
 
 # Cox model for TFE against trt_ab
+# Here "status > 0" means any event (death or hospitalization) vs. censoring
 obj_TFE <- coxph(Surv(time, status > 0) ~ trt_ab, data = hfaction_TFE)
 summary(obj_TFE)
+#> Similar interpretation as above, now for time to first event 
+# (either death or hospitalization).
 
+# -------------------------------------------------------------------------
+# Mortality vs TFE
+# -------------------------------------------------------------------------
 
-# Mortality vs TFE --------------------------------------------------------
-
-library(ggsurvfit)
-library(patchwork)
+library(ggsurvfit) # For Kaplan-Meier plots using ggplot2
+library(patchwork) # For combining plots side by side
 
 pD <- survfit2(Surv(time, status) ~ trt_ab, data = hfaction_D) |>
   ggsurvfit(linewidth = 1) +
@@ -87,6 +100,7 @@ pD <- survfit2(Surv(time, status) ~ trt_ab, data = hfaction_D) |>
   scale_color_discrete(labels = c("Usual care", "Training")) +
   scale_x_continuous("Time (years)", limits = c(0, 4)) +
   labs(y = "Overall survival")
+#> pD is the plot of overall survival (death only) for each arm
 
 pTFE <- survfit2(Surv(time, status > 0) ~ trt_ab, data = hfaction_TFE) |>
   ggsurvfit(linewidth = 1) +
@@ -94,38 +108,52 @@ pTFE <- survfit2(Surv(time, status > 0) ~ trt_ab, data = hfaction_TFE) |>
   scale_color_discrete(labels = c("Usual care", "Training")) +
   scale_x_continuous("Time (years)", limits = c(0, 4)) +
   labs(y = "Hospitalization-free survival")
+#> pTFE is the plot for time to first event (death or hospitalization)
 
-
+# Combine pD and pTFE plots side by side, sharing legends
 pD + pTFE + plot_layout(guides = "collect") & 
   theme(
     legend.position = "top", 
     legend.text = element_text(size = 12)
-    )
+  )
 
 # ggsave("images/intro_hfaction_unis.png", width = 8, height = 4.5)
+#> Uncomment to save the plot (if needed)
 
-# Total events (proportional mean) ----------------------------------------
+# -------------------------------------------------------------------------
+# Total events (proportional mean)
+# -------------------------------------------------------------------------
+
 ## fit proportional means model with death = 2 x hosp
 obj_ML <- CompoML(hfaction$patid, hfaction$time, hfaction$status, 
                   hfaction$trt_ab, w = c(2, 1))
+#> This model weights death as "2" and hospitalization as "1". 
+#> CompoML fits a marginal proportional means model for these outcomes.
+
 ## summary results
 obj_ML
+#> Provides estimates of the weighted event rates in each arm, etc.
 
 ## plot model-based mean functions
 plot(obj_ML, 0, ylim= c(0, 5), xlim= c(0, 4), xlab="Time (years)", 
      col = "red", lwd = 2)
 plot(obj_ML, 1, add = TRUE, col = "blue", lwd=2)
 legend(0, 5, col = c("red", "blue"), c("Usual care","Training"), lwd = 2)
+#> Illustrates the cumulative mean count of "weighted" events over time
+
 
 ```
-
 
 
 ## Motivating Examples
 
 In trials where patients may experience both fatal and nonfatal events, time-to-first-event analyses can obscure clinically meaningful treatment effects. For instance, in a colon cancer trial of 619 patients, relapse-free survival was used as the primary endpoint. Although the treatment significantly delayed relapse (log-rank $p < 0.001$), 89% of deaths occurred after relapse and were ignored in the analysis.
 
+![](images/intro_colon.png){fig-align="center" width="60%"}
+
 Similarly, in the HF-ACTION trial of heart failure patients, a composite of death and hospitalization failed to show a statistically significant benefit (log-rank $p = 0.10$), even though 88% of patients died and 69% had recurrent hospitalizations. By equating hospitalization with death and counting only the first event, the analysis diluted the observed mortality effect.
+
+![](images/intro_hfaction.png){fig-align="center" width="65%"}
 
 These examples highlight the limitations of standard composite endpoints and motivate approaches that account for the clinical hierarchy and full event history.
 
@@ -153,6 +181,8 @@ N^*_{\text{TFE}}(t) = I\left\{ N_D^*(t) + \sum_{k=1}^K N_k^*(t) \geq 1 \right\},
 $$
 where $N_D^*(t)$ and $N_k^*(t)$ are counting processes for death and nonfatal event $k$, respectively. This method reduces all outcome complexity to a single event time, analyzed via Kaplan–Meier, log-rank, or Cox models.
 
+
+
 ### Weighted Total Events
 
 To incorporate more information, the total number of events can be weighted:
@@ -170,9 +200,9 @@ The `Wcompo` R package provides tools for this approach via the `CompoML()` func
 
 In the HF-ACTION trial, separate analyses illustrate the limitations of standard methods:
 
-- **Cox model for death** showed a 32.8% risk reduction (HR = 0.672, $p = 0.062$).
-- **Cox model for TFE** (death or first hospitalization) showed only a 16.2% reduction (HR = 0.838, $p = 0.111$).
-- **Weighted total events** (death weighted twice) estimated a 14.3% reduction in event burden, but the $p$-value was still nonsignificant.
+- **Cox model for death** showed a 32.8% risk reduction (HR = 0.672, *p* = 0.062).
+- **Cox model for TFE** (death or first hospitalization) showed only a 16.2% reduction (HR = 0.838, *p* = 0.111).
+- **Weighted total events** (death weighted twice) estimated a 14.3% reduction in event burden, but the *p*-value was still nonsignificant.
 
 These results demonstrate how frequent nonfatal events can mask treatment benefits on mortality, particularly in analyses that do not prioritize outcome severity or account for survival time.
 
@@ -194,7 +224,7 @@ Alternative metrics include:
 - **Net benefit** (PIF): wins minus losses.
 - **Win odds** (WO): accounts for ties:
 $$
-\text{WO} = \frac{\text{wins} + \frac{1}{2} \text{ties}}{\text{losses} + \frac{1}{2} \text{ties}}.
+\text{WO} = \frac{\text{wins} + 2^{-1} \text{ties}}{\text{losses} + 2^{-1} \text{ties}}.
 $$
 
 These measures align with clinical priorities and are increasingly used in practice.
@@ -202,6 +232,8 @@ These measures align with clinical priorities and are increasingly used in pract
 ## Estimand Challenges
 
 A critical limitation of the win ratio is its dependency on censoring. Because patients may be censored at different times, the win/loss status of a pair can change over time. The observed win ratio thus reflects an average over the censoring distribution, not a fixed population quantity.
+
+![](images/exmp.png){fig-align="center" width="85%"}
 
 This raises concerns for interpretation and estimation:
 
@@ -218,20 +250,53 @@ Limitations of traditional and empirical approaches motivate model-based alterna
 
 Both methods respect clinical hierarchies and avoid dependence on arbitrary censoring patterns. They form the foundation of the methods introduced in subsequent chapters.
 
----
 
 ## Example R code
+
+The following example assumes a data frame `df` in long format, with columns:
+
+- `id`: subject identifier  
+- `time`: event or censoring time  
+- `status`: event type (0 = censoring, 1 = death, 2 = nonfatal)  
+- `trt`: treatment group (0 = control, 1 = treatment)
 
 ```{r}
 #| eval: false
 ########################################
-# 1. Proportional means model using Wcompo
+# 1. Prepare data for survival analyses
+########################################
+library(dplyr)
+# For time-to-death analysis: remove nonfatal events
+df_death <- df |> 
+  filter(status != 2)
+# For time-to-first-event (TFE): take earliest record per subject
+df_tfe <- df |>
+  arrange(id, time) |>
+  group_by(id) |>
+  slice_head() |>
+  ungroup()
+
+########################################
+# 2. Cox models for death and TFE
+########################################
+library(survival)
+# Time to death
+cox_death <- coxph(Surv(time, status == 1) ~ trt, data = df_death)
+# Time to first event (death or nonfatal)
+cox_tfe <- coxph(Surv(time, status > 0) ~ trt, data = df_tfe)
+
+########################################
+# 3. Weighted total events analysis
 ########################################
 library(Wcompo)
-obj <- CompoML(id, time, status, Z, w = c(2, 1))
-summary(obj)
-plot(obj)
+# Assume weights: death = 2, nonfatal = 1
+fit_wte <- CompoML(id, time, status, Z = trt, data = df, w = c(2, 1))
+
 ```
+
+## Conclusion
+
+Standard methods for analyzing composite endpoints—such as time to first event or weighted event counts---often oversimplify patient trajectories and obscure clinically important effects. Hierarchical approaches like the win ratio offer a more principled alternative but require careful attention to the estimand, especially in the presence of censoring. Modern methods such as RMT-IF and the proportional win-fractions model provide robust and interpretable tools for analyzing composite outcomes in a way that respects both clinical priority and statistical rigor.
 
 
 
