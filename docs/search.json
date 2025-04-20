@@ -272,49 +272,49 @@
     "href": "chap1.html#regulatory-guidelines-fda",
     "title": "Statistical Methods for Composite Endpoints: Win Ratio and Beyond",
     "section": "Regulatory Guidelines: FDA",
-    "text": "Regulatory Guidelines: FDA\n\nMain points\n\nTypically first event but can do total events\nComponent-wise analysis important for interpretation\n\n\n\n\n\n\n\nFDA Guidance for Industry: “Multiple Endpoints in Clinical Trials” (FDA, 2022)\n\n\n\n“Composite endpoints are often assessed as the time to first occurrence of any one of the components, …, it also may be possible to analyze total endpoint events”\n“The treatment effect on the composite rate can be interpreted as characterizing the overall clinical effect when the individual events all have reasonably similar clinical importance”\n“…analyses of the components of the composite endpoint are important and can influence interpretation of the overall study results”"
+    "text": "Regulatory Guidelines: FDA\n\n\nMain points\n\nTypically first event but can do total events\nComponent-wise analysis important for interpretation\n\n\n\n\n\n\n\nFDA Guidance for Industry: “Multiple Endpoints in Clinical Trials” (FDA, 2022)\n\n\n\n“Composite endpoints are often assessed as the time to first occurrence of any one of the components, …, it also may be possible to analyze total endpoint events”\n“The treatment effect on the composite rate can be interpreted as characterizing the overall clinical effect when the individual events all have reasonably similar clinical importance”\n“…analyses of the components of the composite endpoint are important and can influence interpretation of the overall study results”"
   },
   {
     "objectID": "chap1.html#regulatory-guidelines-europe",
     "href": "chap1.html#regulatory-guidelines-europe",
     "title": "Statistical Methods for Composite Endpoints: Win Ratio and Beyond",
     "section": "Regulatory Guidelines: Europe",
-    "text": "Regulatory Guidelines: Europe\n\nMain points\n\nCombine events of similar importance\nInclude mortality as a component\n\n\n\n\n\n\n\nEuropean Network for Health Technology Assessment “Endpoints used for Relative Effectiveness Assessment – Composite Endpoints” (EUnetHTA, 2015)\n\n\n\n“All components of a composite endpoint should be separately defined as secondary endpoints and reported with the results of the primary analysis”\n“Components of similar clinical importance and sensitivity to intervention should preferably be combined”\n“If adequate, mortality should however be included if it is likely to have a censoring effect on the observation of other components”"
+    "text": "Regulatory Guidelines: Europe\n\n\nMain points\n\nCombine events of similar importance\nInclude mortality as a component\n\n\n\n\n\n\n\nEuropean Network for Health Technology Assessment “Endpoints used for Relative Effectiveness Assessment – Composite Endpoints” (EUnetHTA, 2015)\n\n\n\n“All components of a composite endpoint should be separately defined as secondary endpoints and reported with the results of the primary analysis”\n“Components of similar clinical importance and sensitivity to intervention should preferably be combined”\n“If adequate, mortality should however be included if it is likely to have a censoring effect on the observation of other components”"
   },
   {
     "objectID": "chap1.html#a-tricky-example",
     "href": "chap1.html#a-tricky-example",
     "title": "Statistical Methods for Composite Endpoints: Win Ratio and Beyond",
     "section": "A Tricky Example",
-    "text": "A Tricky Example\n\nThe EMPA-REG Trial (NCT01131676)\n\nPopulation: 7,020 patients with type 2 diabetes (Zinman et al., 2015)\nTreatment arms: Empagliflozin vs control\nEndpoint: Time to first CV death, nonfatal MI, nonfatal stroke"
+    "text": "A Tricky Example\n\n\nThe EMPA-REG Trial (NCT01131676)\n\nPopulation: 7,020 patients with type 2 diabetes (Zinman et al., 2015)\nTreatment arms: Empagliflozin vs control\nEndpoint: Time to first CV death, nonfatal MI, nonfatal stroke"
   },
   {
     "objectID": "chap1.html#data-and-notation",
     "href": "chap1.html#data-and-notation",
     "title": "Statistical Methods for Composite Endpoints: Win Ratio and Beyond",
     "section": "Data and Notation",
-    "text": "Data and Notation\n\nFull data \\(\\mathcal H^*(\\infty)\\)\n\n\\(D\\): survival time; \\(N^*_D(t)=I(D\\leq t)\\)\n\\(N^*_1(t), \\ldots, N^*_K(t)\\): counting processes for \\(K\\) nonfatal event types\nCumulative data: \\(\\mathcal H^*(t)=\\{N^*_D(u), N^*_1(u), \\ldots, N^*_K(u):0\\leq u\\leq t\\}\\)\n\nObserved (censored) data \\(\\{\\mathcal H^*(X), X\\}\\)\n\n\\(\\mathcal H^*(X)\\): outcomes up to time \\(X\\)\n\\(X=D\\wedge C\\): length of follow-up (\\(a\\wedge b = \\min(a, b)\\))\n\\(C\\): independent censoring time\nGoal: estimate/test features of \\(\\mathcal H^*(\\infty)\\) using \\(\\{\\mathcal H^*(X), X\\}\\)"
+    "text": "Data and Notation\n\n\nFull data \\(\\mathcal H^*(\\infty)\\)\n\n\\(D\\): survival time; \\(N^*_D(t)=I(D\\leq t)\\)\n\\(N^*_1(t), \\ldots, N^*_K(t)\\): counting processes for \\(K\\) nonfatal event types\nCumulative data: \\(\\mathcal H^*(t)=\\{N^*_D(u), N^*_1(u), \\ldots, N^*_K(u):0\\leq u\\leq t\\}\\)\n\n\n\n\n\nObserved (censored) data \\(\\{\\mathcal H^*(X), X\\}\\)\n\n\\(\\mathcal H^*(X)\\): outcomes up to time \\(X\\)\n\\(X=D\\wedge C\\): length of follow-up (\\(a\\wedge b = \\min(a, b)\\))\n\\(C\\): independent censoring time\nGoal: estimate/test features of \\(\\mathcal H^*(\\infty)\\) using \\(\\{\\mathcal H^*(X), X\\}\\)"
   },
   {
     "objectID": "chap1.html#first-event",
     "href": "chap1.html#first-event",
     "title": "Statistical Methods for Composite Endpoints: Win Ratio and Beyond",
     "section": "First Event",
-    "text": "First Event\n\nUnivariate endpoint\n\n\\(N^*_{\\rm TFE}(t) = I\\{N^*_D(t)+\\sum_{k=1}^KN^*_k(t)\\geq 1\\}\\)\n\n\\(I(\\cdot)\\): 0-1 indicator\n\n\\(\\tilde T\\): time to first event\n\nKaplan–Meier curve, log-rank test, Cox model\n\n\nComponent-wise weighting\n\nUpweight death over nonfatal events\n\nE.g., Death = 2 \\(\\times\\) hospitalization"
+    "text": "First Event\n\n\nUnivariate endpoint\n\n\\(N^*_{\\rm TFE}(t) = I\\{N^*_D(t)+\\sum_{k=1}^KN^*_k(t)\\geq 1\\}\\)\n\n\\(I(\\cdot)\\): 0-1 indicator\n\n\\(\\tilde T\\): time to first event\n\nKaplan–Meier curve, log-rank test, Cox model\n\n\n\n\n\n\nComponent-wise weighting\n\nUpweight death over nonfatal events\n\nE.g., Death = 2 \\(\\times\\) hospitalization"
   },
   {
     "objectID": "chap1.html#total-events",
     "href": "chap1.html#total-events",
     "title": "Statistical Methods for Composite Endpoints: Win Ratio and Beyond",
     "section": "Total Events",
-    "text": "Total Events\n\nWeighted composite event process\n\n\\(N^*_{\\rm R}(t)=w_DN^*_D(t)+\\sum_{k=1}^Kw_kN^*_k(t)\\)\n\n\\(w_D, w_1, \\ldots, w_K\\): weights to death and nonfatal events \n\nProportional means model (Mao & Lin, 2016) \\[\nE\\{N^*_{\\rm R}(t)\\mid Z\\} = \\exp(\\beta^\\T Z)\\mu_0(t)\n\\]\n\n\\(\\exp(\\beta)\\): mean ratio of weighted total events comparing treatment \\((Z=1)\\) vs control \\((Z=0)\\)\n\nR-package: Wcompo"
+    "text": "Total Events\n\n\nWeighted composite event process\n\n\\(N^*_{\\rm R}(t)=w_DN^*_D(t)+\\sum_{k=1}^Kw_kN^*_k(t)\\)\n\n\\(w_D, w_1, \\ldots, w_K\\): weights to death and nonfatal events \n\nProportional means model (Mao & Lin, 2016) \\[\nE\\{N^*_{\\rm R}(t)\\mid Z\\} = \\exp(\\beta^\\T Z)\\mu_0(t)\n\\]\n\n\\(\\exp(\\beta)\\): mean ratio of weighted total events comparing treatment \\((Z=1)\\) vs control \\((Z=0)\\)\n\nR-package: Wcompo"
   },
   {
     "objectID": "chap1.html#software-wcompocompoml",
     "href": "chap1.html#software-wcompocompoml",
     "title": "Statistical Methods for Composite Endpoints: Win Ratio and Beyond",
     "section": "Software: Wcompo::CompoML()",
-    "text": "Software: Wcompo::CompoML()\n\nBasic syntax\n\nid: unique patient identifier; time: event times; status: event types (1: death; 2,...,K nonfatal event types; Z: covariate matrix)\nw: \\(K\\)-vector of weights to event types 1 (death), 2,...,K (nonfatal events); default is unweighted\n\n\n\n\nlibrary(Wcompo)\nobj &lt;- CompoML(id, time, status, Z, w = c(2, 1))\n\n\n\nOutput: a list of class CompoML\n\nobj$beta: \\(\\hat\\beta\\); obj$var: \\(\\hat\\var(\\hat\\beta)\\)\nplot(obj, z): plot mean function \\(\\exp(\\hat\\beta^{\\rm T} z)\\hat\\mu_0(t)\\)"
+    "text": "Software: Wcompo::CompoML()\n\n\nBasic syntax\n\nid: unique patient identifier; time: event times; status: event types (1: death; 2,...,K nonfatal event types; Z: covariate matrix)\nw: \\(K\\)-vector of weights to event types 1,...K; default is unweighted\n\n\n\n\nlibrary(Wcompo)\nobj &lt;- CompoML(id, time, status, Z, w = c(2, 1))\n\n\n\n\n\nOutput: a list of class CompoML\n\nobj$beta: \\(\\hat\\beta\\); obj$var: \\(\\hat\\var(\\hat\\beta)\\)\nplot(obj, z): plot mean function \\(\\exp(\\hat\\beta^{\\rm T} z)\\hat\\mu_0(t)\\)"
   },
   {
     "objectID": "chap1.html#hf-action-an-example",

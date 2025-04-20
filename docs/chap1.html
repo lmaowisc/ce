@@ -372,6 +372,7 @@ Lu Mao
 </section>
 <section id="regulatory-guidelines-fda" class="slide level2">
 <h2>Regulatory Guidelines: FDA</h2>
+<div class="fragment">
 <ul>
 <li><p><strong>Main points</strong></p>
 <ul>
@@ -396,9 +397,11 @@ Lu Mao
 </div>
 </div></li>
 </ul>
+</div>
 </section>
 <section id="regulatory-guidelines-europe" class="slide level2">
 <h2>Regulatory Guidelines: Europe</h2>
+<div class="fragment">
 <ul>
 <li><p><strong>Main points</strong></p>
 <ul>
@@ -423,9 +426,11 @@ Lu Mao
 </div>
 </div></li>
 </ul>
+</div>
 </section>
 <section id="a-tricky-example" class="slide level2">
 <h2>A Tricky Example</h2>
+<div class="fragment">
 <ul>
 <li><strong>The EMPA-REG Trial</strong> (NCT01131676)
 <ul>
@@ -439,6 +444,7 @@ Lu Mao
 <p><img data-src="images/intro_empa.png" class="quarto-figure quarto-figure-center" style="width:50.0%"></p>
 </figure>
 </div>
+</div>
 </section></section>
 <section>
 <section id="traditional-composites" class="title-slide slide level1 center">
@@ -447,6 +453,7 @@ Lu Mao
 </section>
 <section id="data-and-notation" class="slide level2">
 <h2>Data and Notation</h2>
+<div class="fragment">
 <ul>
 <li><strong>Full data</strong> <span class="math inline">\(\mathcal H^*(\infty)\)</span>
 <ul>
@@ -454,6 +461,10 @@ Lu Mao
 <li><span class="math inline">\(N^*_1(t), \ldots, N^*_K(t)\)</span>: counting processes for <span class="math inline">\(K\)</span> nonfatal event types</li>
 <li>Cumulative data: <span class="math inline">\(\mathcal H^*(t)=\{N^*_D(u), N^*_1(u), \ldots, N^*_K(u):0\leq u\leq t\}\)</span></li>
 </ul></li>
+</ul>
+</div>
+<div class="fragment">
+<ul>
 <li><strong>Observed (censored) data</strong> <span class="math inline">\(\{\mathcal H^*(X), X\}\)</span>
 <ul>
 <li><span class="math inline">\(\mathcal H^*(X)\)</span>: outcomes up to time <span class="math inline">\(X\)</span></li>
@@ -462,9 +473,11 @@ Lu Mao
 <li><strong>Goal</strong>: estimate/test features of <span class="math inline">\(\mathcal H^*(\infty)\)</span> using <span class="math inline">\(\{\mathcal H^*(X), X\}\)</span></li>
 </ul></li>
 </ul>
+</div>
 </section>
 <section id="first-event" class="slide level2">
 <h2>First Event</h2>
+<div class="fragment">
 <ul>
 <li><strong>Univariate endpoint</strong>
 <ul>
@@ -477,22 +490,23 @@ Lu Mao
 <li>Kaplan–Meier curve, log-rank test, Cox model</li>
 </ul></li>
 </ul></li>
+</ul>
+</div>
+<div class="fragment">
+<ul>
 <li><strong>Component-wise weighting</strong>
 <ul>
 <li>Upweight death over nonfatal events
 <ul>
-<li>E.g., Death = 2 <span class="math inline">\(\times\)</span> hospitalization</li>
+<li>E.g., Death = 2 <span class="math inline">\(\times\)</span> hospitalization <img data-src="images/intro_tfe.png" class="quarto-figure quarto-figure-center" style="width:50.0%"></li>
 </ul></li>
 </ul></li>
 </ul>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="images/intro_tfe.png" class="quarto-figure quarto-figure-center" style="width:50.0%"></p>
-</figure>
 </div>
 </section>
 <section id="total-events" class="slide level2">
 <h2>Total Events</h2>
+<div class="fragment">
 <ul>
 <li><strong>Weighted composite event process</strong>
 <ul>
@@ -509,14 +523,16 @@ E\{N^*_{\rm R}(t)\mid Z\} = \exp(\beta^\T Z)\mu_0(t)
 <li><strong>R-package</strong>: <a href="https://cran.r-project.org/package=Wcompo" target="_blank"><code>Wcompo</code></a></li>
 </ul></li>
 </ul>
+</div>
 </section>
 <section id="software-wcompocompoml" class="slide level2">
 <h2>Software: <code>Wcompo::CompoML()</code></h2>
+<div class="fragment">
 <ul>
 <li><strong>Basic syntax</strong>
 <ul>
 <li><code>id</code>: unique patient identifier; <code>time</code>: event times; <code>status</code>: event types (<code>1</code>: death; <code>2,...,K</code> nonfatal event types; <code>Z</code>: covariate matrix)</li>
-<li><code>w</code>: <span class="math inline">\(K\)</span>-vector of weights to event types <code>1</code> (death), <code>2,...,K</code> (nonfatal events); default is unweighted</li>
+<li><code>w</code>: <span class="math inline">\(K\)</span>-vector of weights to event types <code>1,...K</code>; default is unweighted</li>
 </ul></li>
 </ul>
 <div class="big-code">
@@ -525,6 +541,8 @@ E\{N^*_{\rm R}(t)\mid Z\} = \exp(\beta^\T Z)\mu_0(t)
 <span id="cb1-2"><a></a>obj <span class="ot">&lt;-</span> <span class="fu">CompoML</span>(id, time, status, Z, <span class="at">w =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
+</div>
+<div class="fragment">
 <ul>
 <li><strong>Output</strong>: a list of class <code>CompoML</code>
 <ul>
@@ -532,6 +550,7 @@ E\{N^*_{\rm R}(t)\mid Z\} = \exp(\beta^\T Z)\mu_0(t)
 <li><code>plot(obj, z)</code>: plot mean function <span class="math inline">\(\exp(\hat\beta^{\rm T} z)\hat\mu_0(t)\)</span></li>
 </ul></li>
 </ul>
+</div>
 </section>
 <section id="hf-action-an-example" class="slide level2">
 <h2>HF-ACTION: An Example</h2>

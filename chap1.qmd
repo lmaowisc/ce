@@ -111,7 +111,7 @@ $$
 :::
 
 ## Regulatory Guidelines: FDA
-
+:::{.fragment}
 -   **Main points**
 
     -   Typically first event but can do total events
@@ -124,9 +124,9 @@ $$
     -   “The treatment effect on the composite rate can be interpreted as characterizing the overall clinical effect when the individual events all have reasonably similar clinical importance”
     -   “…analyses of the components of the composite endpoint are important and can influence interpretation of the overall study results”
     :::
-
+:::
 ## Regulatory Guidelines: Europe
-
+:::{.fragment}
 -   **Main points**
 
     -   Combine events of similar importance
@@ -139,32 +139,37 @@ $$
     -   “Components of similar clinical importance and sensitivity to intervention should preferably be combined”
     -   “If adequate, mortality should however be included if it is likely to have a censoring effect on the observation of other components”
     :::
+:::
 
 ## A Tricky Example
-
+:::{.fragment}
 -   **The EMPA-REG Trial** (NCT01131676)
     -   **Population**: 7,020 patients with type 2 diabetes [@Zinman2015]
     -   **Treatment arms**: Empagliflozin vs control
     -   **Endpoint**: Time to first CV death, nonfatal MI, nonfatal stroke
 
 ![](images/intro_empa.png){fig-align="center" width="50%"}
+:::
 
 # Traditional Composites
 
 ## Data and Notation
-
+:::{.fragment}
 -   **Full data** $\mathcal H^*(\infty)$
     -   $D$: survival time; $N^*_D(t)=I(D\leq t)$
     -   $N^*_1(t), \ldots, N^*_K(t)$: counting processes for $K$ nonfatal event types
     -   Cumulative data: $\mathcal H^*(t)=\{N^*_D(u), N^*_1(u), \ldots, N^*_K(u):0\leq u\leq t\}$
+:::
+:::{.fragment}
 -   **Observed (censored) data** $\{\mathcal H^*(X), X\}$
     -   $\mathcal H^*(X)$: outcomes up to time $X$
     -   $X=D\wedge C$: length of follow-up ($a\wedge b = \min(a, b)$)
     -   $C$: independent censoring time
     -   **Goal**: estimate/test features of $\mathcal H^*(\infty)$ using $\{\mathcal H^*(X), X\}$
+:::
 
 ## First Event
-
+:::{.fragment}
 -   **Univariate endpoint**
     -   $N^*_{\rm TFE}(t) = I\{N^*_D(t)+\sum_{k=1}^KN^*_k(t)\geq 1\}$
 
@@ -173,14 +178,16 @@ $$
     -   $\tilde T$: time to first event
 
         -   Kaplan--Meier curve, log-rank test, Cox model
+:::
+:::{.fragment}
 -   **Component-wise weighting**
     -   Upweight death over nonfatal events
         -   E.g., Death = 2 $\times$ hospitalization
-
 ![](images/intro_tfe.png){fig-align="center" width="50%"}
+:::
 
 ## Total Events
-
+:::{.fragment}
 -   **Weighted composite event process**
     -   $N^*_{\rm R}(t)=w_DN^*_D(t)+\sum_{k=1}^Kw_kN^*_k(t)$
         -   $w_D, w_1, \ldots, w_K$: weights to death and nonfatal events ![](images/intro_wcompo.png){fig-align="right" width="75%"}
@@ -189,12 +196,13 @@ $$
         $$
         -   $\exp(\beta)$: mean ratio of weighted total events comparing treatment $(Z=1)$ vs control $(Z=0)$
     -   **R-package**: [`Wcompo`](https://cran.r-project.org/package=Wcompo){target="_blank"}
+:::
 
 ## Software: `Wcompo::CompoML()`
-
+:::{.fragment}
 -   **Basic syntax**
     -   `id`: unique patient identifier; `time`: event times; `status`: event types (`1`: death; `2,...,K` nonfatal event types; `Z`: covariate matrix)
-    -   `w`: $K$-vector of weights to event types `1` (death), `2,...,K` (nonfatal events); default is unweighted
+    -   `w`: $K$-vector of weights to event types `1,...K`; default is unweighted
 
 ::: big-code
 ```{r}
@@ -202,10 +210,12 @@ library(Wcompo)
 obj <- CompoML(id, time, status, Z, w = c(2, 1))
 ```
 :::
-
+:::
+:::{.fragment}
 -   **Output**: a list of class `CompoML`
     -   `obj$beta`: $\hat\beta$; `obj$var`: $\hat\var(\hat\beta)$
     -   `plot(obj, z)`: plot mean function $\exp(\hat\beta^{\rm T} z)\hat\mu_0(t)$
+:::
 
 ## HF-ACTION: An Example
 
