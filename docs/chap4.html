@@ -1,22 +1,21 @@
 <!DOCTYPE html>
 <html lang="en"><head>
-<script src="chap4_files/libs/clipboard/clipboard.min.js"></script>
-<script src="chap4_files/libs/quarto-html/tabby.min.js"></script>
-<script src="chap4_files/libs/quarto-html/popper.min.js"></script>
-<script src="chap4_files/libs/quarto-html/tippy.umd.min.js"></script>
-<link href="chap4_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="chap4_files/libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="chap4_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
-<link href="chap4_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.3.450">
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-html/tabby.min.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-e26003cea8cd680ca0c55a263523d882.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.6.39">
 
   <meta name="author" content="Lu Mao">
   <title>Statistical Methods for Composite Endpoints: Win Ratio and Beyond</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
-  <link rel="stylesheet" href="chap4_files/libs/revealjs/dist/reset.css">
-  <link rel="stylesheet" href="chap4_files/libs/revealjs/dist/reveal.css">
+  <link rel="stylesheet" href="site_libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="site_libs/revealjs/dist/reveal.css">
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
@@ -31,7 +30,7 @@
     }
     /* CSS for syntax highlighting */
     pre > code.sourceCode { white-space: pre; position: relative; }
-    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span { line-height: 1.25; }
     pre > code.sourceCode > span:empty { height: 1.2em; }
     .sourceCode { overflow: visible; }
     code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -42,7 +41,7 @@
     }
     @media print {
     pre > code.sourceCode { white-space: pre-wrap; }
-    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
     }
     pre.numberSource code
       { counter-reset: source-line 0; }
@@ -70,7 +69,7 @@
     code span.at { color: #657422; } /* Attribute */
     code span.bn { color: #ad0000; } /* BaseN */
     code span.bu { } /* BuiltIn */
-    code span.cf { color: #003b4f; } /* ControlFlow */
+    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
     code span.ch { color: #20794d; } /* Char */
     code span.cn { color: #8f5902; } /* Constant */
     code span.co { color: #5e5e5e; } /* Comment */
@@ -84,7 +83,7 @@
     code span.fu { color: #4758ab; } /* Function */
     code span.im { color: #00769e; } /* Import */
     code span.in { color: #5e5e5e; } /* Information */
-    code span.kw { color: #003b4f; } /* Keyword */
+    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
     code span.op { color: #5e5e5e; } /* Operator */
     code span.ot { color: #003b4f; } /* Other */
     code span.pp { color: #ad0000; } /* Preprocessor */
@@ -98,6 +97,7 @@
     div.csl-bib-body { }
     div.csl-entry {
       clear: both;
+      margin-bottom: 0em;
     }
     .hanging-indent div.csl-entry {
       margin-left:2em;
@@ -114,209 +114,12 @@
     div.csl-indent {
       margin-left: 2em;
     }  </style>
-  <link rel="stylesheet" href="chap4_files/libs/revealjs/dist/theme/quarto.css">
+  <link rel="stylesheet" href="site_libs/revealjs/dist/theme/quarto-423d414d36ce366a9d05f36d06304417.css">
   <link rel="stylesheet" href="style.css">
-  <link href="chap4_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
-  <link href="chap4_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
-  <link href="chap4_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
-  <link href="chap4_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
-  <style type="text/css">
-
-  .callout {
-    margin-top: 1em;
-    margin-bottom: 1em;  
-    border-radius: .25rem;
-  }
-
-  .callout.callout-style-simple { 
-    padding: 0em 0.5em;
-    border-left: solid #acacac .3rem;
-    border-right: solid 1px silver;
-    border-top: solid 1px silver;
-    border-bottom: solid 1px silver;
-    display: flex;
-  }
-
-  .callout.callout-style-default {
-    border-left: solid #acacac .3rem;
-    border-right: solid 1px silver;
-    border-top: solid 1px silver;
-    border-bottom: solid 1px silver;
-  }
-
-  .callout .callout-body-container {
-    flex-grow: 1;
-  }
-
-  .callout.callout-style-simple .callout-body {
-    font-size: 1rem;
-    font-weight: 400;
-  }
-
-  .callout.callout-style-default .callout-body {
-    font-size: 0.9rem;
-    font-weight: 400;
-  }
-
-  .callout.callout-titled.callout-style-simple .callout-body {
-    margin-top: 0.2em;
-  }
-
-  .callout:not(.callout-titled) .callout-body {
-      display: flex;
-  }
-
-  .callout:not(.no-icon).callout-titled.callout-style-simple .callout-content {
-    padding-left: 1.6em;
-  }
-
-  .callout.callout-titled .callout-header {
-    padding-top: 0.2em;
-    margin-bottom: -0.2em;
-  }
-
-  .callout.callout-titled .callout-title  p {
-    margin-top: 0.5em;
-    margin-bottom: 0.5em;
-  }
-    
-  .callout.callout-titled.callout-style-simple .callout-content  p {
-    margin-top: 0;
-  }
-
-  .callout.callout-titled.callout-style-default .callout-content  p {
-    margin-top: 0.7em;
-  }
-
-  .callout.callout-style-simple div.callout-title {
-    border-bottom: none;
-    font-size: .9rem;
-    font-weight: 600;
-    opacity: 75%;
-  }
-
-  .callout.callout-style-default  div.callout-title {
-    border-bottom: none;
-    font-weight: 600;
-    opacity: 85%;
-    font-size: 0.9rem;
-    padding-left: 0.5em;
-    padding-right: 0.5em;
-  }
-
-  .callout.callout-style-default div.callout-content {
-    padding-left: 0.5em;
-    padding-right: 0.5em;
-  }
-
-  .callout.callout-style-simple .callout-icon::before {
-    height: 1rem;
-    width: 1rem;
-    display: inline-block;
-    content: "";
-    background-repeat: no-repeat;
-    background-size: 1rem 1rem;
-  }
-
-  .callout.callout-style-default .callout-icon::before {
-    height: 0.9rem;
-    width: 0.9rem;
-    display: inline-block;
-    content: "";
-    background-repeat: no-repeat;
-    background-size: 0.9rem 0.9rem;
-  }
-
-  .callout-title {
-    display: flex
-  }
-    
-  .callout-icon::before {
-    margin-top: 1rem;
-    padding-right: .5rem;
-  }
-
-  .callout.no-icon::before {
-    display: none !important;
-  }
-
-  .callout.callout-titled .callout-body > .callout-content > :last-child {
-    margin-bottom: 0.5rem;
-  }
-
-  .callout.callout-titled .callout-icon::before {
-    margin-top: .5rem;
-    padding-right: .5rem;
-  }
-
-  .callout:not(.callout-titled) .callout-icon::before {
-    margin-top: 1rem;
-    padding-right: .5rem;
-  }
-
-  /* Callout Types */
-
-  div.callout-note {
-    border-left-color: #4582ec !important;
-  }
-
-  div.callout-note .callout-icon::before {
-    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAEU0lEQVRYCcVXTWhcVRQ+586kSUMMxkyaElstCto2SIhitS5Ek8xUKV2poatCcVHtUlFQk8mbaaziwpWgglJwVaquitBOfhQXFlqlzSJpFSpIYyXNjBNiTCck7x2/8/LeNDOZxDuEkgOXe++553zfefee+/OYLOXFk3+1LLrRdiO81yNqZ6K9cG0P3MeFaMIQjXssE8Z1JzLO9ls20MBZX7oG8w9GxB0goaPrW5aNMp1yOZIa7Wv6o2ykpLtmAPs/vrG14Z+6d4jpbSKuhdcSyq9wGMPXjonwmESXrriLzFGOdDBLB8Y6MNYBu0dRokSygMA/mrun8MGFN3behm6VVAwg4WR3i6FvYK1T7MHo9BK7ydH+1uurECoouk5MPRyVSBrBHMYwVobG2aOXM07sWrn5qgB60rc6mcwIDJtQrnrEr44kmy+UO9r0u9O5/YbkS9juQckLed3DyW2XV/qWBBB3ptvI8EUY3I9p/67OW+g967TNr3Sotn3IuVlfMLVnsBwH4fsnebJvyGm5GeIUA3jljERmrv49SizPYuq+z7c2H/jlGC+Ghhupn/hcapqmcudB9jwJ/3jvnvu6vu5lVzF1fXyZuZZ7U8nRmVzytvT+H3kilYvH09mLWrQdwFSsFEsxFVs5fK7A0g8gMZjbif4ACpKbjv7gNGaD8bUrlk8x+KRflttr22JEMRUbTUwwDQScyzPgedQHZT0xnx7ujw2jfVfExwYHwOsDTjLdJ2ebmeQIlJ7neo41s/DrsL3kl+W2lWvAga0tR3zueGr6GL78M3ifH0rGXrBC2aAR8uYcIA5gwV8zIE8onoh8u0Fca/ciF7j1uOzEnqcIm59sEXoGc0+z6+H45V1CvAvHcD7THztu669cnp+L0okAeIc6zjbM/24LgGM1gZk7jnRu1aQWoU9sfUOuhrmtaPIO3YY1KLLWZaEO5TKUbMY5zx8W9UJ6elpLwKXbsaZ4EFl7B4bMtDv0iRipKoDQT2sNQI9b1utXFdYisi+wzZ/ri/1m7QfDgEuvgUUEIJPq3DhX/5DWNqIXDOweC2wvIR90Oq3lDpdMIgD2r0dXvGdsEW5H6x6HLRJYU7C69VefO1x8Gde1ZFSJLfWS1jbCnhtOPxmpfv2LXOA2Xk2tvnwKKPFuZ/oRmwBwqRQDcKNeVQkYcOjtWVBuM/JuYw5b6isojIkYxyYAFn5K7ZBF10fea52y8QltAg6jnMqNHFBmGkQ1j+U43HMi2xMar1Nv0zGsf1s8nUsmUtPOOrbFIR8bHFDMB5zL13Gmr/kGlCkUzedTzzmzsaJXhYawnA3UmARpiYj5ooJZiUoxFRtK3X6pgNPv+IZVPcnwbOl6f+aBaO1CNvPW9n9LmCp01nuSaTRF2YxHqZ8DYQT6WsXT+RD6eUztwYLZ8rM+rcPxamv1VQzFUkzFXvkiVrySGQgJNvXHJAxiU3/NwiC03rSf05VBaPtu/Z7/B8Yn/w7eguloAAAAAElFTkSuQmCC');
-  }
-
-  div.callout-note.callout-style-default .callout-title {
-    background-color: #dae6fb
-  }
-
-  div.callout-important {
-    border-left-color: #d9534f !important;
-  }
-
-  div.callout-important .callout-icon::before {
-    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAEKklEQVRYCcVXTWhcVRS+575MJym48A+hSRFr00ySRQhURRfd2HYjk2SSTokuBCkU2o0LoSKKraKIBTcuFCoidGFD08nkBzdREbpQ1EDNIv8qSGMFUboImMSZd4/f9zJv8ibJMC8xJQfO3HPPPef7zrvvvnvviIkpC9nsw0UttFunbUhpFzFtarSd6WJkStVMw5xyVqYTvkwfzuf/5FgtkVoB0729j1rjXwThS7Vio+Mo6DNnvLfahoZ+i/o32lULuJ3NNiz7q6+pyAUkJaFF6JwaM2lUJlV0MlnQn5aTRbEu0SEqHUa0A4AdiGuB1kFXRfVyg5d87+Dg4DL6m2TLAub60ilj7A1Ec4odSAc8X95sHh7+ZRPCFo6Fnp7HfU/fBng/hi10CjCnWnJjsxvDNxWw0NfV6Rv5GgP3I3jGWXumdTD/3cbEOP2ZbOZp69yniG3FQ9z1jD7bnBu9Fc2tKGC2q+uAJOQHBDRiZX1x36o7fWBs7J9ownbtO+n0/qWkvW7UPIfc37WgT6ZGR++EOJyeQDSb9UB+DZ1G6DdLDzyS+b/kBCYGsYgJbSQHuThGKRcw5xdeQf8YdNHsc6ePXrlSYMBuSIAFTGAtQo+VuALo4BX83N190NWZWbynBjhOHsmNfFWLeL6v+ynsA58zDvvAC8j5PkbOcXCMg2PZFk3q8MjI7WAG/Dp9AwP7jdGBOOQkAvlFUB+irtm16I1Zw9YBcpGTGXYmk3kQIC/Cds55l+iMI3jqhjAuaoe+am2Jw5GT3Nbz3CkE12NavmzN5+erJW7046n/CH1RO/RVa8lBLozXk9uqykkGAyRXLWlLv5jyp4RFsG5vGVzpDLnIjTWgnRy2Rr+tDKvRc7Y8AyZq10jj8DqXdnIRNtFZb+t/ZRtXcDiVnzpqx8mPcDWxgARUqx0W1QB9MeUZiNrV4qP+Ehc+BpNgATsTX8ozYKL2NtFYAHc84fG7ndxUPr+AR/iQSns7uSUufAymwDOb2+NjK27lEFocm/EE2WpyIy/Hi66MWuMKJn8RvxIcj87IM5Vh9663ziW36kR0HNenXuxmfaD8JC7tfKbrhFr7LiZCrMjrzTeGx+PmkosrkNzW94ObzwocJ7A1HokLolY+AvkTiD/q1H0cN48c5EL8Crkttsa/AXQVDmutfyku0E7jShx49XqV3MFK8IryDhYVbj7Sj2P2eBxwcXoe8T8idsKKPRcnZw1b+slFTubwUwhktrfnAt7J++jwQtLZcm3sr9LQrjRzz6cfMv9aLvgmnAGvpoaGLxM4mAEaLV7iAzQ3oU0IvD5x9ix3yF2RAAuYAOO2f7PEFWCXZ4C9Pb2UsgDeVnFSpbFK7/IWu7TPTvBqzbGdCHOJQSxiEjt6IyZmxQyEJHv6xyQsYk//moVFsN2zP6fRImjfq7/n/wFDguUQFNEwugAAAABJRU5ErkJggg==');
-  }
-
-  div.callout-important.callout-style-default .callout-title {
-    background-color: #f7dddc
-  }
-
-  div.callout-warning {
-    border-left-color: #f0ad4e !important;
-  }
-
-  div.callout-warning .callout-icon::before {
-    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAETklEQVRYCeVWW2gcVRg+58yaTUnizqbipZeX4uWhBEniBaoUX1Ioze52t7sRq6APio9V9MEaoWlVsFasRq0gltaAPuxms8lu0gcviE/FFOstVbSIxgcv6SU7EZqmdc7v9+9mJtNks51NTUH84ed889/PP+cmxP+d5FIbMJmNbpREu4WUkiTtCicKny0l1pIKmBzovF2S+hIJHX8iEu3hZJ5lNZGqyRrGSIQpq15AzF28jgpeY6yk6GVdrfFqdrD6Iw+QlB8g0YS2g7dyQmXM/IDhBhT0UCiRf59lfqmmDvzRt6kByV/m4JjtzuaujMUM2c5Z2d6JdKrRb3K2q6mA+oYVz8JnDdKPmmNthzkAk/lN63sYPgevrguc72aZX/L9C6x09GYyxBgCX4NlvyGUHOKELlm5rXeR1kchuChJt4SSwyddZRXgvwMGvYo4QSlk3/zkHD8UHxwVJA6zjZZqP8v8kK8OWLnIZtLyCAJagYC4rTGW/9Pqj92N/c+LUaAj27movwbi19tk/whRCIE7Q9vyI6yvRpftAKVTdUjOW40X3h5OXsKCdmFcx0xlLJoSuQngnrJe7Kcjm4OMq9FlC7CMmScQANuNvjfP3PjGXDBaUQmbp296S5L4DrpbrHN1T87ZVEZVCzg1FF0Ft+dKrlLukI+/c9ENo+TvlTDbYFvuKPtQ9+l052rXrgKoWkDAFnvh0wTOmYn8R5f4k/jN/fZiCM1tQx9jQQ4ANhqG4hiL0qIFTGViG9DKB7GYzgubnpofgYRwO+DFjh0Zin2m4b/97EDkXkc+f6xYAPX0KK2I/7fUQuwzuwo/L3AkcjugPNixC8cHf0FyPjWlItmLxWw4Ou9YsQCr5fijMGoD/zpdRy95HRysyXA74MWOnscpO4j2y3HAVisw85hX5+AFBRSHt4ShfLFkIMXTqyKFc46xdzQM6XbAi702a7sy04J0+feReMFKp5q9esYLCqAZYw/k14E/xcLLsFElaornTuJB0svMuJINy8xkIYuL+xPAlWRceH6+HX7THJ0djLUom46zREu7tTkxwmf/FdOZ/sh6Q8qvEAiHpm4PJ4a/doJe0gH1t+aHRgCzOvBvJedEK5OFE5jpm4AGP2a8Dxe3gGJ/pAutug9Gp6he92CsSsWBaEcxGx0FHytmIpuqGkOpldqNYQK8cSoXvd+xLxXADw0kf6UkJNFtdo5MOgaLjiQOQHcn+A6h5NuL2s0qsC2LOM75PcF3yr5STuBSAcGG+meA14K/CI21HcS4LBT6tv0QAh8Dr5l93AhZzG5ZJ4VxAqdZUEl9z7WJ4aN+svMvwHHL21UKTd1mqvChH7/Za5xzXBBKrUcB0TQ+Ulgkfbi/H/YT5EptrGzsEK7tR1B7ln9BBwckYfMiuSqklSznIuoIIOM42MQO+QnduCoFCI0bpkzjCjddHPN/F+2Yu+sd9bKNpVwHhbS3LluK/0zgfwD0xYI5dXuzlQAAAABJRU5ErkJggg==');
-  }
-
-  div.callout-warning.callout-style-default .callout-title {
-    background-color: #fcefdc
-  }
-
-  div.callout-tip {
-    border-left-color: #02b875 !important;
-  }
-
-  div.callout-tip .callout-icon::before {
-    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAADr0lEQVRYCe1XTWgTQRj9ZjZV8a9SPIkKgj8I1bMHsUWrqYLVg4Ue6v9BwZOxSYsIerFao7UiUryIqJcqgtpimhbBXoSCVxUFe9CTiogUrUp2Pt+3aUI2u5vdNh4dmMzOzHvvezuz8xNFM0mjnbXaNu1MvFWRXkXEyE6aYOYJpdW4IXuA4r0fo8qqSMDBU0v1HJUgVieAXxzCsdE/YJTdFcVIZQNMyhruOMJKXYFoLfIfIvVIMWdsrd+Rpd86ZmyzzjJmLStqRn0v8lzkb4rVIXvnpScOJuAn2ACC65FkPzEdEy4TPWRLJ2h7z4cArXzzaOdKlbOvKKX25Wl00jSnrwVxAg3o4dRxhO13RBSdNvH0xSARv3adTXbBdTf64IWO2vH0LT+cv4GR1DJt+DUItaQogeBX/chhbTBxEiZ6gftlDNXTrvT7co4ub5A6gp9HIcHvzTa46OS5fBeP87Qm0fQkr4FsYgVQ7Qg+ZayaDg9jhg1GkWj8RG6lkeSacrrHgDaxdoBiZPg+NXV/KifMuB6//JmYH4CntVEHy/keA6x4h4CU5oFy8GzrBS18cLJMXcljAKB6INjWsRcuZBWVaS3GDrqB7rdapVIeA+isQ57Eev9eCqzqOa81CY05VLd6SamW2wA2H3SiTbnbSxmzfp7WtKZkqy4mdyAlGx7ennghYf8voqp9cLSgKdqNfa6RdRsAAkPwRuJZNbpByn+RrJi1RXTwdi8RQF6ymDwGMAtZ6TVE+4uoKh+MYkcLsT0Hk8eAienbiGdjJHZTpmNjlbFJNKDVAp2fJlYju6IreQxQ08UJDNYdoLSl6AadO+fFuCQqVMB1NJwPm69T04Wv5WhfcWyfXQB+wXRs1pt+nCknRa0LVzSA/2B+a9+zQJadb7IyyV24YAxKp2Jqs3emZTuNnKxsah+uabKbMk7CbTgJx/zIgQYErIeTKRQ9yD9wxVof5YolPHqaWo7TD6tJlh7jQnK5z2n3+fGdggIOx2kaa2YI9QWarc5Ce1ipNWMKeSG4DysFF52KBmTNMmn5HqCFkwy34rDg05gDwgH3bBi+sgFhN/e8QvRn8kbamCOhgrZ9GJhFDgfcMHzFb6BAtjKpFhzTjwv1KCVuxHvCbsSiEz4CANnj84cwHdFXAbAOJ4LTSAawGWFn5tDhLMYz6nWeU2wJfIhmIJBefcd/A5FWQWGgrWzyORZ3Q6HuV+Jf0Bj+BTX69fm1zWgK7By1YTXchFDORywnfQ7GpzOo6S+qECrsx2ifVQAAAABJRU5ErkJggg==');
-  }
-
-  div.callout-tip.callout-style-default .callout-title {
-    background-color: #ccf1e3
-  }
-
-  div.callout-caution {
-    border-left-color: #fd7e14 !important;
-  }
-
-  div.callout-caution .callout-icon::before {
-    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAACV0lEQVRYCdVWzWoUQRCuqp2ICBLJXgITZL1EfQDBW/bkzUMUD7klD+ATSHBEfAIfQO+iXsWDxJsHL96EHAwhgzlkg8nBg25XWb0zIb0zs9muYYWkoKeru+vn664fBqElyZNuyh167NXJ8Ut8McjbmEraKHkd7uAnAFku+VWdb3reSmRV8PKSLfZ0Gjn3a6Xlcq9YGb6tADjn+lUfTXtVmaZ1KwBIvFI11rRXlWlatwIAAv2asaa9mlB9wwygiDX26qaw1yYPzFXg2N1GgG0FMF8Oj+VIx7E/03lHx8UhvYyNZLN7BwSPgekXXLribw7w5/c8EF+DBK5idvDVYtEEwMeYefjjLAdEyQ3M9nfOkgnPTEkYU+sxMq0BxNR6jExrAI31H1rzvLEfRIdgcv1XEdj6QTQAS2wtstEALLG1yEZ3QhH6oDX7ExBSFEkFINXH98NTrme5IOaaA7kIfiu2L8A3qhH9zRbukdCqdsA98TdElyeMe5BI8Rs2xHRIsoTSSVFfCFCWGPn9XHb4cdobRIWABNf0add9jakDjQJpJ1bTXOJXnnRXHRf+dNL1ZV1MBRCXhMbaHqGI1JkKIL7+i8uffuP6wVQAzO7+qVEbF6NbS0LJureYcWXUUhH66nLR5rYmva+2tjRFtojkM2aD76HEGAD3tPtKM309FJg5j/K682ywcWJ3PASCcycH/22u+Bh7Aa0ehM2Fu4z0SAE81HF9RkB21c5bEn4Dzw+/qNOyXr3DCTQDMBOdhi4nAgiFDGCinIa2owCEChUwD8qzd03PG+qdW/4fDzjUMcE1ZpIAAAAASUVORK5CYII=');
-  }
-
-  div.callout-caution.callout-style-default .callout-title {
-    background-color: #ffe5d0
-  }
-
-  </style>
+  <link href="site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
   <style type="text/css">
     .reveal div.sourceCode {
       margin: 0;
@@ -404,7 +207,6 @@
       margin-right: 0; 
     }
   </style>
-  
   <style type="text/css">
   ul li ul li {
     font-size: 0.78em;
@@ -418,7 +220,7 @@
   <div class="reveal">
     <div class="slides">
 
-<section id="title-slide" data-background-image="jsm_logo.png" data-background-position="2% 2%" data-background-size="20%" class="quarto-title-block center">
+<section id="title-slide" class="quarto-title-block center">
   <h1 class="title">Statistical Methods for Composite Endpoints: Win Ratio and Beyond</h1>
   <p class="subtitle">Chapter 4 - Semiparametric Regression</p>
 
@@ -437,7 +239,7 @@ Lu Mao
             University of Wisconsin-Madison
           </p>
         <p class="quarto-title-affiliation">
-            Aug 3, 2024
+            April 25, 2025
           </p>
     </div>
 </div>
@@ -455,18 +257,35 @@ Lu Mao
 <li>Estimation and residual analysis</li>
 <li>HF-ACTION example (<a href="https://cran.r-project.org/package=WR" target="_blank"><code>WR</code></a> package)</li>
 </ul></li>
-<li><p>Generalized proportional odds model</p>
+<li><p>High-dimensional data</p>
 <ul>
-<li>Model specification and interpretation</li>
-<li>Challenges in estimation</li>
+<li>Regularization by elastic net</li>
+<li>HF-ACTION example (<a href="https://lmaowisc.github.io/wrnet/" target="_blank"><code>WRNet</code></a> package)</li>
+</ul></li>
 </ul>
-<p><span class="math display">\[\newcommand{\d}{{\rm d}}\]</span> <span class="math display">\[\newcommand{\T}{{\rm T}}\]</span> <span class="math display">\[\newcommand{\dd}{{\rm d}}\]</span> <span class="math display">\[\newcommand{\cc}{{\rm c}}\]</span> <span class="math display">\[\newcommand{\pr}{{\rm pr}}\]</span> <span class="math display">\[\newcommand{\var}{{\rm var}}\]</span> <span class="math display">\[\newcommand{\se}{{\rm se}}\]</span> <span class="math display">\[\newcommand{\indep}{\perp \!\!\! \perp}\]</span> <span class="math display">\[\newcommand{\Pn}{n^{-1}\sum_{i=1}^n}\]</span> <span class="math display">\[
-    \newcommand\mymathop[1]{\mathop{\operatorname{#1}}}
-    \]</span> <span class="math display">\[
-    \newcommand{\Ut}{{n \choose 2}^{-1}\sum_{i&lt;j}\sum}
-    \]</span> <span class="math display">\[ \def\a{{(a)}} \def\b{{(1-a)}} \def\t{{(1)}} \def\c{{(0)}} \def\d{{\rm d}} \def\T{{\rm T}} \def\bs{\boldsymbol}
-    \]</span></p></li>
-</ul>
+<p><span class="math display">\[\newcommand{\d}{{\rm d}}
+\newcommand{\T}{{\rm T}}
+\newcommand{\dd}{{\rm d}}
+\newcommand{\cc}{{\rm c}}
+\newcommand{\pr}{{\rm pr}}
+\newcommand{\var}{{\rm var}}
+\newcommand{\se}{{\rm se}}
+\newcommand{\indep}{\perp \!\!\! \perp}
+\newcommand{\Pn}{n^{-1}\sum_{i=1}^n}
+\newcommand\mymathop[1]{\mathop{\operatorname{#1}}}
+\newcommand{\Ut}{{n \choose 2}^{-1}\sum_{i&lt;j}\sum}
+\def\a{{(a)}}
+\def\b{{(1-a)}}
+\def\t{{(1)}}
+\def\c{{(0)}}
+\def\d{{\rm d}}
+\def\T{{\rm T}}
+\def\bs{\boldsymbol}
+\def\C{{\mathcal C}}
+\def\S{{\mathcal S}}
+\def\Sk{{\mathcal S}^{(k)}}
+\newcommand{\wh}{\widehat}
+\]</span></p>
 </section>
 <section id="regression-framework" class="slide level2">
 <h2>Regression Framework</h2>
@@ -482,7 +301,7 @@ Lu Mao
 </ul></li>
 </ul></li>
 </ul>
-<table>
+<table class="caption-top">
 <thead>
 <tr class="header">
 <th></th>
@@ -625,7 +444,7 @@ M_{ij}(t\mid Z_i, Z_j;\beta)=\underbrace{\delta_{ij}(t)}_{\rm observed\,\,win} -
 </ul>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="images/res_p.png" style="width:90.0%"></p>
+<p><img data-src="images/res_p.png" class="quarto-figure quarto-figure-center" style="width:90.0%"></p>
 </figure>
 </div>
 </section>
@@ -660,9 +479,9 @@ M_{ij}(t\mid Z_i, Z_j;\beta)=\underbrace{\delta_{ij}(t)}_{\rm observed\,\,win} -
 </ul>
 <div class="big-code">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">library</span>(WR)</span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="co"># fit PW model (death &gt; nonfatal event)</span></span>
-<span id="cb1-3"><a href="#cb1-3"></a>obj <span class="ot">&lt;-</span> <span class="fu">pwreg</span>(ID, time, status, Z, <span class="at">strata =</span> <span class="cn">NULL</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a><span class="fu">library</span>(WR)</span>
+<span id="cb1-2"><a></a><span class="co"># fit PW model (death &gt; nonfatal event)</span></span>
+<span id="cb1-3"><a></a>obj <span class="ot">&lt;-</span> <span class="fu">pwreg</span>(ID, time, status, Z, <span class="at">strata =</span> <span class="cn">NULL</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 <ul>
@@ -684,8 +503,8 @@ M_{ij}(t\mid Z_i, Z_j;\beta)=\underbrace{\delta_{ij}(t)}_{\rm observed\,\,win} -
 </ul>
 <div class="big-code">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># compute covariate-specific cumulative residuals</span></span>
-<span id="cb2-2"><a href="#cb2-2"></a>score.obj <span class="ot">&lt;-</span> <span class="fu">score.proc</span>(obj)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a><span class="co"># compute covariate-specific cumulative residuals</span></span>
+<span id="cb2-2"><a></a>score.obj <span class="ot">&lt;-</span> <span class="fu">score.proc</span>(obj)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 <ul>
@@ -708,20 +527,20 @@ M_{ij}(t\mid Z_i, Z_j;\beta)=\underbrace{\delta_{ij}(t)}_{\rm observed\,\,win} -
 </ul></li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="fu">library</span>(WR)</span>
-<span id="cb3-2"><a href="#cb3-2"></a><span class="fu">head</span>(non_ischemic)</span>
-<span id="cb3-3"><a href="#cb3-3"></a><span class="co">#&gt;   ID time status trt_ab age sex Black.vs.White Other.vs.White   bmi</span></span>
-<span id="cb3-4"><a href="#cb3-4"></a><span class="co">#&gt; 1  1  221      2      0  62   1              0              0 25.18</span></span>
-<span id="cb3-5"><a href="#cb3-5"></a><span class="co">#&gt; 2  1  383      0      0  62   1              0              0 25.18</span></span>
-<span id="cb3-6"><a href="#cb3-6"></a><span class="co">#&gt; 3  2   23      2      0  75   1              1              0 22.96</span></span>
-<span id="cb3-7"><a href="#cb3-7"></a><span class="co">#&gt; 4  2 1400      0      0  75   1              1              0 22.96</span></span>
-<span id="cb3-8"><a href="#cb3-8"></a><span class="co">#&gt; ...</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a><span class="fu">library</span>(WR)</span>
+<span id="cb3-2"><a></a><span class="fu">head</span>(non_ischemic)</span>
+<span id="cb3-3"><a></a><span class="co">#&gt;   ID time status trt_ab age sex Black.vs.White Other.vs.White   bmi</span></span>
+<span id="cb3-4"><a></a><span class="co">#&gt; 1  1  221      2      0  62   1              0              0 25.18</span></span>
+<span id="cb3-5"><a></a><span class="co">#&gt; 2  1  383      0      0  62   1              0              0 25.18</span></span>
+<span id="cb3-6"><a></a><span class="co">#&gt; 3  2   23      2      0  75   1              1              0 22.96</span></span>
+<span id="cb3-7"><a></a><span class="co">#&gt; 4  2 1400      0      0  75   1              1              0 22.96</span></span>
+<span id="cb3-8"><a></a><span class="co">#&gt; ...</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="hf-action-table-one" class="slide level2">
 <h2>HF-ACTION: Table One</h2>
 <div class="custom-small">
-<table style="width:90%;">
+<table class="caption-top" style="width:90%;">
 <caption>Table 1. Patient characteristics in non-ischemic cohort of HF-ACTION</caption>
 <colgroup>
 <col style="width: 30%">
@@ -814,18 +633,18 @@ M_{ij}(t\mid Z_i, Z_j;\beta)=\underbrace{\delta_{ij}(t)}_{\rm observed\,\,win} -
 </ul></li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="co"># number of covariates (-c(ID, time, status))</span></span>
-<span id="cb4-2"><a href="#cb4-2"></a>p <span class="ot">&lt;-</span> <span class="fu">ncol</span>(non_ischemic) <span class="sc">-</span> <span class="dv">3</span></span>
-<span id="cb4-3"><a href="#cb4-3"></a></span>
-<span id="cb4-4"><a href="#cb4-4"></a><span class="co"># extract ID, time, status and covariates matrix Z from the data.</span></span>
-<span id="cb4-5"><a href="#cb4-5"></a><span class="co"># note that: ID, time and status should be column vector</span></span>
-<span id="cb4-6"><a href="#cb4-6"></a>ID <span class="ot">&lt;-</span> non_ischemic[,<span class="st">"ID"</span>]</span>
-<span id="cb4-7"><a href="#cb4-7"></a>time <span class="ot">&lt;-</span> non_ischemic[,<span class="st">"time"</span>] <span class="sc">/</span> <span class="fl">30.5</span> <span class="co"># days to months</span></span>
-<span id="cb4-8"><a href="#cb4-8"></a>status <span class="ot">&lt;-</span> non_ischemic[,<span class="st">"status"</span>]</span>
-<span id="cb4-9"><a href="#cb4-9"></a>Z <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(non_ischemic[, <span class="dv">4</span><span class="sc">:</span>(<span class="dv">3</span><span class="sc">+</span>p)])</span>
-<span id="cb4-10"><a href="#cb4-10"></a></span>
-<span id="cb4-11"><a href="#cb4-11"></a><span class="co"># pass the parameters into the function</span></span>
-<span id="cb4-12"><a href="#cb4-12"></a>obj <span class="ot">&lt;-</span> <span class="fu">pwreg</span>(ID, time, status, Z)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a><span class="co"># number of covariates (-c(ID, time, status))</span></span>
+<span id="cb4-2"><a></a>p <span class="ot">&lt;-</span> <span class="fu">ncol</span>(non_ischemic) <span class="sc">-</span> <span class="dv">3</span></span>
+<span id="cb4-3"><a></a></span>
+<span id="cb4-4"><a></a><span class="co"># extract ID, time, status and covariates matrix Z from the data.</span></span>
+<span id="cb4-5"><a></a><span class="co"># note that: ID, time and status should be column vector</span></span>
+<span id="cb4-6"><a></a>ID <span class="ot">&lt;-</span> non_ischemic[,<span class="st">"ID"</span>]</span>
+<span id="cb4-7"><a></a>time <span class="ot">&lt;-</span> non_ischemic[,<span class="st">"time"</span>] <span class="sc">/</span> <span class="fl">30.5</span> <span class="co"># days to months</span></span>
+<span id="cb4-8"><a></a>status <span class="ot">&lt;-</span> non_ischemic[,<span class="st">"status"</span>]</span>
+<span id="cb4-9"><a></a>Z <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(non_ischemic[, <span class="dv">4</span><span class="sc">:</span>(<span class="dv">3</span><span class="sc">+</span>p)])</span>
+<span id="cb4-10"><a></a></span>
+<span id="cb4-11"><a></a><span class="co"># pass the parameters into the function</span></span>
+<span id="cb4-12"><a></a>obj <span class="ot">&lt;-</span> <span class="fu">pwreg</span>(ID, time, status, Z)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="hf-action-results-i" class="slide level2">
@@ -834,19 +653,19 @@ M_{ij}(t\mid Z_i, Z_j;\beta)=\underbrace{\delta_{ij}(t)}_{\rm observed\,\,win} -
 <li><strong>Model summary</strong></li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>obj</span>
-<span id="cb5-2"><a href="#cb5-2"></a><span class="co">#&gt; Call:</span></span>
-<span id="cb5-3"><a href="#cb5-3"></a><span class="co">#&gt; pwreg(ID = ID, time = time, status = status, Z = Z)</span></span>
-<span id="cb5-4"><a href="#cb5-4"></a></span>
-<span id="cb5-5"><a href="#cb5-5"></a><span class="co">#&gt; Total number of pairs: 101475 </span></span>
-<span id="cb5-6"><a href="#cb5-6"></a><span class="co">#&gt; Wins-losses on death:  7644 (7.5%) </span></span>
-<span id="cb5-7"><a href="#cb5-7"></a><span class="co">#&gt; Wins-losses on non-fatal event:  78387 (77.2%) </span></span>
-<span id="cb5-8"><a href="#cb5-8"></a><span class="co">#&gt; Indeterminate pairs 15444 (15.2%) </span></span>
-<span id="cb5-9"><a href="#cb5-9"></a><span class="co">#&gt; </span></span>
-<span id="cb5-10"><a href="#cb5-10"></a><span class="co">#&gt; Newton-Raphson algorithm converged in 5 iterations.</span></span>
-<span id="cb5-11"><a href="#cb5-11"></a><span class="co">#&gt; </span></span>
-<span id="cb5-12"><a href="#cb5-12"></a><span class="co">#&gt; Overall test: chisq test with 13 degrees of freedom; </span></span>
-<span id="cb5-13"><a href="#cb5-13"></a><span class="co">#&gt;  Wald statistic 24.9 with p-value 0.02392931 </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a>obj</span>
+<span id="cb5-2"><a></a><span class="co">#&gt; Call:</span></span>
+<span id="cb5-3"><a></a><span class="co">#&gt; pwreg(ID = ID, time = time, status = status, Z = Z)</span></span>
+<span id="cb5-4"><a></a></span>
+<span id="cb5-5"><a></a><span class="co">#&gt; Total number of pairs: 101475 </span></span>
+<span id="cb5-6"><a></a><span class="co">#&gt; Wins-losses on death:  7644 (7.5%) </span></span>
+<span id="cb5-7"><a></a><span class="co">#&gt; Wins-losses on non-fatal event:  78387 (77.2%) </span></span>
+<span id="cb5-8"><a></a><span class="co">#&gt; Indeterminate pairs 15444 (15.2%) </span></span>
+<span id="cb5-9"><a></a><span class="co">#&gt; </span></span>
+<span id="cb5-10"><a></a><span class="co">#&gt; Newton-Raphson algorithm converged in 5 iterations.</span></span>
+<span id="cb5-11"><a></a><span class="co">#&gt; </span></span>
+<span id="cb5-12"><a></a><span class="co">#&gt; Overall test: chisq test with 13 degrees of freedom; </span></span>
+<span id="cb5-13"><a></a><span class="co">#&gt;  Wald statistic 24.9 with p-value 0.02392931 </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="hf-action-results-ii" class="slide level2">
@@ -858,21 +677,21 @@ M_{ij}(t\mid Z_i, Z_j;\beta)=\underbrace{\delta_{ij}(t)}_{\rm observed\,\,win} -
 </ul></li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>obj</span>
-<span id="cb6-2"><a href="#cb6-2"></a><span class="co">#&gt;                     Estimate         se z.value p.value  </span></span>
-<span id="cb6-3"><a href="#cb6-3"></a><span class="co">#&gt; Training vs Usual  0.1906687  0.1264658  1.5077 0.13164  </span></span>
-<span id="cb6-4"><a href="#cb6-4"></a><span class="co">#&gt; Age (year)        -0.0128306  0.0057285 -2.2398 0.02510 *</span></span>
-<span id="cb6-5"><a href="#cb6-5"></a><span class="co">#&gt; Male vs Female    -0.1552923  0.1294198 -1.1999 0.23017  </span></span>
-<span id="cb6-6"><a href="#cb6-6"></a><span class="co">#&gt; Black vs White    -0.3026335  0.1461330 -2.0709 0.03836 *</span></span>
-<span id="cb6-7"><a href="#cb6-7"></a><span class="co">#&gt; Other vs White    -0.3565390  0.3424360 -1.0412 0.29779  </span></span>
-<span id="cb6-8"><a href="#cb6-8"></a><span class="co">#&gt; BMI               -0.0181310  0.0097582 -1.8580 0.06316 .</span></span>
-<span id="cb6-9"><a href="#cb6-9"></a><span class="co">#&gt; LVEF               0.0214905  0.0086449  2.4859 0.01292 *</span></span>
-<span id="cb6-10"><a href="#cb6-10"></a><span class="co">#&gt; Hypertension      -0.0318291  0.1456217 -0.2186 0.82698  </span></span>
-<span id="cb6-11"><a href="#cb6-11"></a><span class="co">#&gt; COPD              -0.4023069  0.2066821 -1.9465 0.05159 .</span></span>
-<span id="cb6-12"><a href="#cb6-12"></a><span class="co">#&gt; Diabetes           0.0703990  0.1419998  0.4958 0.62006  </span></span>
-<span id="cb6-13"><a href="#cb6-13"></a><span class="co">#&gt; ACE Inhibitor     -0.1068201  0.1571317 -0.6798 0.49662  </span></span>
-<span id="cb6-14"><a href="#cb6-14"></a><span class="co">#&gt; Beta Blocker      -0.5344979  0.3289319 -1.6250 0.10417  </span></span>
-<span id="cb6-15"><a href="#cb6-15"></a><span class="co">#&gt; Smoker            -0.0602350  0.1682826 -0.3579 0.72039  </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a>obj</span>
+<span id="cb6-2"><a></a><span class="co">#&gt;                     Estimate         se z.value p.value  </span></span>
+<span id="cb6-3"><a></a><span class="co">#&gt; Training vs Usual  0.1906687  0.1264658  1.5077 0.13164  </span></span>
+<span id="cb6-4"><a></a><span class="co">#&gt; Age (year)        -0.0128306  0.0057285 -2.2398 0.02510 *</span></span>
+<span id="cb6-5"><a></a><span class="co">#&gt; Male vs Female    -0.1552923  0.1294198 -1.1999 0.23017  </span></span>
+<span id="cb6-6"><a></a><span class="co">#&gt; Black vs White    -0.3026335  0.1461330 -2.0709 0.03836 *</span></span>
+<span id="cb6-7"><a></a><span class="co">#&gt; Other vs White    -0.3565390  0.3424360 -1.0412 0.29779  </span></span>
+<span id="cb6-8"><a></a><span class="co">#&gt; BMI               -0.0181310  0.0097582 -1.8580 0.06316 .</span></span>
+<span id="cb6-9"><a></a><span class="co">#&gt; LVEF               0.0214905  0.0086449  2.4859 0.01292 *</span></span>
+<span id="cb6-10"><a></a><span class="co">#&gt; Hypertension      -0.0318291  0.1456217 -0.2186 0.82698  </span></span>
+<span id="cb6-11"><a></a><span class="co">#&gt; COPD              -0.4023069  0.2066821 -1.9465 0.05159 .</span></span>
+<span id="cb6-12"><a></a><span class="co">#&gt; Diabetes           0.0703990  0.1419998  0.4958 0.62006  </span></span>
+<span id="cb6-13"><a></a><span class="co">#&gt; ACE Inhibitor     -0.1068201  0.1571317 -0.6798 0.49662  </span></span>
+<span id="cb6-14"><a></a><span class="co">#&gt; Beta Blocker      -0.5344979  0.3289319 -1.6250 0.10417  </span></span>
+<span id="cb6-15"><a></a><span class="co">#&gt; Smoker            -0.0602350  0.1682826 -0.3579 0.72039  </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="hf-action-race-effect" class="slide level2">
@@ -884,18 +703,18 @@ M_{ij}(t\mid Z_i, Z_j;\beta)=\underbrace{\delta_{ij}(t)}_{\rm observed\,\,win} -
 </ul></li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="co"># extract estimates of (beta_4, beta_5)</span></span>
-<span id="cb7-2"><a href="#cb7-2"></a>beta <span class="ot">&lt;-</span> <span class="fu">matrix</span>(obj<span class="sc">$</span>beta[<span class="dv">4</span><span class="sc">:</span><span class="dv">5</span>])</span>
-<span id="cb7-3"><a href="#cb7-3"></a><span class="co"># extract estimated covariance matrix for (beta_4, beta_5)</span></span>
-<span id="cb7-4"><a href="#cb7-4"></a>Sigma <span class="ot">&lt;-</span> obj<span class="sc">$</span>Var[<span class="dv">4</span><span class="sc">:</span><span class="dv">5</span>, <span class="dv">4</span><span class="sc">:</span><span class="dv">5</span>]</span>
-<span id="cb7-5"><a href="#cb7-5"></a><span class="co"># compute chisq statistic in quadratic form</span></span>
-<span id="cb7-6"><a href="#cb7-6"></a>chistats <span class="ot">&lt;-</span> <span class="fu">t</span>(beta) <span class="sc">%*%</span> <span class="fu">solve</span>(Sigma) <span class="sc">%*%</span> beta  </span>
-<span id="cb7-7"><a href="#cb7-7"></a></span>
-<span id="cb7-8"><a href="#cb7-8"></a><span class="co"># compare the Wald statistic with the reference</span></span>
-<span id="cb7-9"><a href="#cb7-9"></a><span class="co"># distribution of chisq(2) to obtain the p-value</span></span>
-<span id="cb7-10"><a href="#cb7-10"></a><span class="dv">1</span> <span class="sc">-</span> <span class="fu">pchisq</span>(chistats, <span class="at">df =</span> <span class="dv">2</span>)</span>
-<span id="cb7-11"><a href="#cb7-11"></a><span class="co">#&gt;           [,1]</span></span>
-<span id="cb7-12"><a href="#cb7-12"></a><span class="co">#&gt; [1,] 0.1016988</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a><span class="co"># extract estimates of (beta_4, beta_5)</span></span>
+<span id="cb7-2"><a></a>beta <span class="ot">&lt;-</span> <span class="fu">matrix</span>(obj<span class="sc">$</span>beta[<span class="dv">4</span><span class="sc">:</span><span class="dv">5</span>])</span>
+<span id="cb7-3"><a></a><span class="co"># extract estimated covariance matrix for (beta_4, beta_5)</span></span>
+<span id="cb7-4"><a></a>Sigma <span class="ot">&lt;-</span> obj<span class="sc">$</span>Var[<span class="dv">4</span><span class="sc">:</span><span class="dv">5</span>, <span class="dv">4</span><span class="sc">:</span><span class="dv">5</span>]</span>
+<span id="cb7-5"><a></a><span class="co"># compute chisq statistic in quadratic form</span></span>
+<span id="cb7-6"><a></a>chistats <span class="ot">&lt;-</span> <span class="fu">t</span>(beta) <span class="sc">%*%</span> <span class="fu">solve</span>(Sigma) <span class="sc">%*%</span> beta  </span>
+<span id="cb7-7"><a></a></span>
+<span id="cb7-8"><a></a><span class="co"># compare the Wald statistic with the reference</span></span>
+<span id="cb7-9"><a></a><span class="co"># distribution of chisq(2) to obtain the p-value</span></span>
+<span id="cb7-10"><a></a><span class="dv">1</span> <span class="sc">-</span> <span class="fu">pchisq</span>(chistats, <span class="at">df =</span> <span class="dv">2</span>)</span>
+<span id="cb7-11"><a></a><span class="co">#&gt;           [,1]</span></span>
+<span id="cb7-12"><a></a><span class="co">#&gt; [1,] 0.1016988</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="hf-action-win-ratio-table" class="slide level2">
@@ -907,21 +726,21 @@ M_{ij}(t\mid Z_i, Z_j;\beta)=\underbrace{\delta_{ij}(t)}_{\rm observed\,\,win} -
 </ul></li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="co">#&gt; Point and interval estimates for the win ratios:</span></span>
-<span id="cb8-2"><a href="#cb8-2"></a><span class="co">#&gt;                   Win Ratio 95% lower CL 95% higher CL</span></span>
-<span id="cb8-3"><a href="#cb8-3"></a><span class="co">#&gt; Training vs Usual 1.2100585    0.9444056     1.5504374</span></span>
-<span id="cb8-4"><a href="#cb8-4"></a><span class="co">#&gt; Age (year)        0.9872513    0.9762288     0.9983983</span></span>
-<span id="cb8-5"><a href="#cb8-5"></a><span class="co">#&gt; Male vs Female    0.8561648    0.6643471     1.1033663</span></span>
-<span id="cb8-6"><a href="#cb8-6"></a><span class="co">#&gt; Black vs White    0.7388699    0.5548548     0.9839127</span></span>
-<span id="cb8-7"><a href="#cb8-7"></a><span class="co">#&gt; Other vs White    0.7000951    0.3578286     1.3697431</span></span>
-<span id="cb8-8"><a href="#cb8-8"></a><span class="co">#&gt; BMI               0.9820323    0.9634287     1.0009952</span></span>
-<span id="cb8-9"><a href="#cb8-9"></a><span class="co">#&gt; LVEF              1.0217231    1.0045572     1.0391823</span></span>
-<span id="cb8-10"><a href="#cb8-10"></a><span class="co">#&gt; Hypertension      0.9686721    0.7281543     1.2886357</span></span>
-<span id="cb8-11"><a href="#cb8-11"></a><span class="co">#&gt; COPD              0.6687755    0.4460178     1.0027865</span></span>
-<span id="cb8-12"><a href="#cb8-12"></a><span class="co">#&gt; Diabetes          1.0729362    0.8122757     1.4172433</span></span>
-<span id="cb8-13"><a href="#cb8-13"></a><span class="co">#&gt; ACE Inhibitor     0.8986873    0.6604773     1.2228110</span></span>
-<span id="cb8-14"><a href="#cb8-14"></a><span class="co">#&gt; Beta Blocker      0.5859634    0.3075270     1.1164977</span></span>
-<span id="cb8-15"><a href="#cb8-15"></a><span class="co">#&gt; Smoker            0.9415433    0.6770144     1.3094312</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a><span class="co">#&gt; Point and interval estimates for the win ratios:</span></span>
+<span id="cb8-2"><a></a><span class="co">#&gt;                   Win Ratio 95% lower CL 95% higher CL</span></span>
+<span id="cb8-3"><a></a><span class="co">#&gt; Training vs Usual 1.2100585    0.9444056     1.5504374</span></span>
+<span id="cb8-4"><a></a><span class="co">#&gt; Age (year)        0.9872513    0.9762288     0.9983983</span></span>
+<span id="cb8-5"><a></a><span class="co">#&gt; Male vs Female    0.8561648    0.6643471     1.1033663</span></span>
+<span id="cb8-6"><a></a><span class="co">#&gt; Black vs White    0.7388699    0.5548548     0.9839127</span></span>
+<span id="cb8-7"><a></a><span class="co">#&gt; Other vs White    0.7000951    0.3578286     1.3697431</span></span>
+<span id="cb8-8"><a></a><span class="co">#&gt; BMI               0.9820323    0.9634287     1.0009952</span></span>
+<span id="cb8-9"><a></a><span class="co">#&gt; LVEF              1.0217231    1.0045572     1.0391823</span></span>
+<span id="cb8-10"><a></a><span class="co">#&gt; Hypertension      0.9686721    0.7281543     1.2886357</span></span>
+<span id="cb8-11"><a></a><span class="co">#&gt; COPD              0.6687755    0.4460178     1.0027865</span></span>
+<span id="cb8-12"><a></a><span class="co">#&gt; Diabetes          1.0729362    0.8122757     1.4172433</span></span>
+<span id="cb8-13"><a></a><span class="co">#&gt; ACE Inhibitor     0.8986873    0.6604773     1.2228110</span></span>
+<span id="cb8-14"><a></a><span class="co">#&gt; Beta Blocker      0.5859634    0.3075270     1.1164977</span></span>
+<span id="cb8-15"><a></a><span class="co">#&gt; Smoker            0.9415433    0.6770144     1.3094312</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="hf-action-residual-analysis" class="slide level2">
@@ -930,111 +749,334 @@ M_{ij}(t\mid Z_i, Z_j;\beta)=\underbrace{\delta_{ij}(t)}_{\rm observed\,\,win} -
 <li><strong>Check proportionality assumption on covariates</strong></li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="co"># compute score processes</span></span>
-<span id="cb9-2"><a href="#cb9-2"></a>score_obj <span class="ot">&lt;-</span> <span class="fu">score.proc</span>(obj)</span>
-<span id="cb9-3"><a href="#cb9-3"></a><span class="co"># plot scores for first 8 covariates</span></span>
-<span id="cb9-4"><a href="#cb9-4"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">4</span>))</span>
-<span id="cb9-5"><a href="#cb9-5"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="fu">c</span>(<span class="dv">1</span> <span class="sc">:</span> <span class="dv">8</span>)){</span>
-<span id="cb9-6"><a href="#cb9-6"></a>  <span class="fu">plot</span>(score_obj, <span class="at">k =</span> i, <span class="at">xlab =</span> <span class="st">"Time (months)"</span>)</span>
-<span id="cb9-7"><a href="#cb9-7"></a>  <span class="co"># add reference lines</span></span>
-<span id="cb9-8"><a href="#cb9-8"></a>  <span class="fu">abline</span>(<span class="at">a =</span> <span class="dv">2</span>, <span class="at">b =</span> <span class="dv">0</span>, <span class="at">lty =</span> <span class="dv">3</span>)</span>
-<span id="cb9-9"><a href="#cb9-9"></a>  <span class="fu">abline</span>(<span class="at">a =</span> <span class="dv">0</span>, <span class="at">b =</span> <span class="dv">0</span>, <span class="at">lty =</span> <span class="dv">3</span>)</span>
-<span id="cb9-10"><a href="#cb9-10"></a>  <span class="fu">abline</span>(<span class="at">a =</span> <span class="sc">-</span> <span class="dv">2</span>, <span class="at">b =</span> <span class="dv">0</span>, <span class="at">lty =</span> <span class="dv">3</span>)</span>
-<span id="cb9-11"><a href="#cb9-11"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a><span class="co"># compute score processes</span></span>
+<span id="cb9-2"><a></a>score_obj <span class="ot">&lt;-</span> <span class="fu">score.proc</span>(obj)</span>
+<span id="cb9-3"><a></a><span class="co"># plot scores for first 8 covariates</span></span>
+<span id="cb9-4"><a></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">4</span>))</span>
+<span id="cb9-5"><a></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="fu">c</span>(<span class="dv">1</span> <span class="sc">:</span> <span class="dv">8</span>)){</span>
+<span id="cb9-6"><a></a>  <span class="fu">plot</span>(score_obj, <span class="at">k =</span> i, <span class="at">xlab =</span> <span class="st">"Time (months)"</span>)</span>
+<span id="cb9-7"><a></a>  <span class="co"># add reference lines</span></span>
+<span id="cb9-8"><a></a>  <span class="fu">abline</span>(<span class="at">a =</span> <span class="dv">2</span>, <span class="at">b =</span> <span class="dv">0</span>, <span class="at">lty =</span> <span class="dv">3</span>)</span>
+<span id="cb9-9"><a></a>  <span class="fu">abline</span>(<span class="at">a =</span> <span class="dv">0</span>, <span class="at">b =</span> <span class="dv">0</span>, <span class="at">lty =</span> <span class="dv">3</span>)</span>
+<span id="cb9-10"><a></a>  <span class="fu">abline</span>(<span class="at">a =</span> <span class="sc">-</span> <span class="dv">2</span>, <span class="at">b =</span> <span class="dv">0</span>, <span class="at">lty =</span> <span class="dv">3</span>)</span>
+<span id="cb9-11"><a></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="hf-action-residual-plot" class="slide level2">
 <h2>HF-ACTION: Residual Plot</h2>
 <ul>
-<li>Mostly well-behaved <img data-src="images/reg_score.png" style="width:90.0%" data-fig-align="center">
+<li>Mostly well-behaved <img data-src="images/reg_score.png" class="quarto-figure quarto-figure-center" style="width:90.0%">
 <ul>
 <li><strong>Exercise</strong>: Fit stratified PW model by sex</li>
 </ul></li>
 </ul>
+<!-- # Generalized PO Model -->
+<!-- ## Alternative Modeling -->
+<!-- -   **Extension of proportional odds (PO)?** -->
+<!--     -   **Univariate PO model** [@Bennett1983] $$ -->
+<!--         \log\left\{\frac{\pr(D\leq t)}{\pr(D > t)}\right\}=h(t) + \beta^\T Z -->
+<!--         $$ -->
+<!--         -   $\exp(\beta)$: Odds ratios (OR) of having early death (regardless of time cut-off) -->
+<!-- +-------------------------------+-----------------+-------------------------------------------------------------------------------------------+ -->
+<!-- |                               | Univariate      | Hierarchical composite                                                                    | -->
+<!-- +===============================+:===============:+:=========================================================================================:+ -->
+<!-- | **Hypothesis testing**        | Gehan, log-rank | Win ratio/odds, net benefit ([Ch 2](chap2.html#/alternative-hypothesis){target="_blank"}) | -->
+<!-- +-------------------------------+-----------------+-------------------------------------------------------------------------------------------+ -->
+<!-- | **Nonparametric estimation**  | RMST            | RMT-IF ([Ch 3](chap3.html#/alternative-hypothesis){target="_blank"})                      | -->
+<!-- +-------------------------------+-----------------+-------------------------------------------------------------------------------------------+ -->
+<!-- | **Semiparametric regression** | Cox PH model    | PW model (Ch 4)                                                                           | -->
+<!-- |                               |                 |                                                                                           | -->
+<!-- |                               | PO model        | ?                                                                                         | -->
+<!-- +-------------------------------+-----------------+-------------------------------------------------------------------------------------------+ -->
+<!-- ## Model Specification -->
+<!-- -   **Outcome formulation** -->
+<!--     -   **Multistate process** $Y(0)=0, 1,\ldots, K, \infty$ (hierarchically ordered) -->
+<!-- -   **Generalized PO model** $$ -->
+<!--     \log\left[\frac{\pr\{Y(t)>k\}}{\pr\{Y(t)\leq k\}}\right]=h_k(t) + \beta^\T Z -->
+<!--     $$ -->
+<!--     -   $\exp(\beta)$: ORs of having early and less favorable outcomes (regardless of time and favorability cut-off) -->
+<!--         -   Two-way (time & order) proportionality -->
+<!--         -   $K=0$ $\to$ Univariate PO -->
+<!-- ## Estimation Problem -->
+<!-- -   **Main challenge** -->
+<!--     -   Nonparametric baseline log-odds $h_k(t)$ -->
+<!--     -   Model does not determine likelihood $\to$ ~~MLE~~ -->
+<!--         -   Unlike univariate PO [@murphy1997] -->
+<!-- -   **Possible solutions** -->
+<!--     -   Posit a *nuisance* (Markov) model for $Y(t)$ $\to$ MLE -->
+<!--     -   Find estimating functions under marginal model alone -->
 </section></section>
 <section>
-<section id="generalized-po-model" class="title-slide slide level1 center">
-<h1>Generalized PO Model</h1>
+<section id="regularized-regression" class="title-slide slide level1 center">
+<h1>Regularized Regression</h1>
 
 </section>
-<section id="alternative-modeling" class="slide level2">
-<h2>Alternative Modeling</h2>
+<section id="standard-model-fitting" class="slide level2">
+<h2>Standard Model-Fitting</h2>
 <ul>
-<li><strong>Extension of proportional odds (PO)?</strong>
+<li><strong>Estimating equation</strong> <span class="math display">\[\begin{equation}
+U_n(\beta) = |\mathcal R|^{-1} \sum_{(i, j)\in \mathcal R}
+z_{ij} \left\{ \delta_{ij} - \frac{\exp(\beta^\top z_{ij})}{1 + \exp(\beta^\top z_{ij})} \right\}
+\end{equation}\]</span>
 <ul>
-<li><strong>Univariate PO model</strong> <span class="citation" data-cites="Bennett1983">(<a href="#/references" role="doc-biblioref" onclick="">Bennett, 1983</a>)</span> <span class="math display">\[
-\log\left\{\frac{\pr(D\leq t)}{\pr(D &gt; t)}\right\}=h(t) + \beta^\T Z
-\]</span>
-<ul>
-<li><span class="math inline">\(\exp(\beta)\)</span>: Odds ratios (OR) of having early death (regardless of time cut-off)</li>
+<li><span class="math inline">\(z_{ij} = z_i - z_j\)</span>: covariate difference<br>
+</li>
+<li><span class="math inline">\(\delta_{ij} = \mathcal{W}(\bs Y_i, \bs Y_j)(X_i \wedge X_j)\)</span>: observed win indicator</li>
+<li><span class="math inline">\(\mathcal{R}=\{(i, j): \delta_{ij} + \delta_{ji} &gt; 0\}\)</span>: set of <em>comparable</em> pairs</li>
 </ul></li>
+<li><strong>High-dimensional</strong> <span class="math inline">\(z\)</span>?
+<ul>
+<li>Variable selection</li>
+<li>Improve generalizability</li>
 </ul></li>
 </ul>
-<table>
-<thead>
-<tr class="header">
-<th></th>
-<th style="text-align: center;">Univariate</th>
-<th style="text-align: center;">Hierarchical composite</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><strong>Hypothesis testing</strong></td>
-<td style="text-align: center;">Gehan, log-rank</td>
-<td style="text-align: center;">Win ratio/odds, net benefit (<a href="chap2.html#/alternative-hypothesis" target="_blank">Ch 2</a>)</td>
-</tr>
-<tr class="even">
-<td><strong>Nonparametric estimation</strong></td>
-<td style="text-align: center;">RMST</td>
-<td style="text-align: center;">RMT-IF (<a href="chap3.html#/alternative-hypothesis" target="_blank">Ch 3</a>)</td>
-</tr>
-<tr class="odd">
-<td><strong>Semiparametric regression</strong></td>
-<td style="text-align: center;"><p>Cox PH model</p>
-<p>PO model</p></td>
-<td style="text-align: center;"><p>PW model (Ch 4)</p>
-<p>?</p></td>
-</tr>
-</tbody>
-</table>
 </section>
-<section id="model-specification-1" class="slide level2">
-<h2>Model Specification</h2>
+<section id="regularized-pw-model" class="slide level2">
+<h2>Regularized PW model</h2>
 <ul>
-<li><strong>Outcome formulation</strong>
+<li><strong>Objective function</strong> <span class="citation" data-cites="mao2025 zou:2005">(<a href="#/references" role="doc-biblioref" onclick="">Mao, 2025</a>; <a href="#/references" role="doc-biblioref" onclick="">Zou &amp; Hastie, 2005</a>)</span>: <span class="math display">\[\begin{align}\label{eq:obj_fun}
+l_n(\beta;\lambda) &amp;= - |\mathcal R|^{-1}\sum_{(i, j)\in\mathcal R}\left[\delta_{ij}\beta^\T z_{ij} - \log\{1+\exp(\beta^\T z_{ij})\}\right]\notag\\
+&amp;\hspace{3em}+\lambda\left\{(1-\alpha)||\beta||_2^2/2+\alpha||\beta||_1\right\}
+\end{align}\]</span>
 <ul>
-<li><strong>Multistate process</strong> <span class="math inline">\(Y(0)=0, 1,\ldots, K, \infty\)</span> (hierarchically ordered)</li>
+<li><strong>Pathwise solution</strong> <span class="math inline">\(\hat\beta(\lambda) = \arg\min_\beta l_n(\beta;\lambda)\)</span>
+<ul>
+<li>Numerically equivalent to regularized logistic regression</li>
 </ul></li>
-<li><strong>Generalized PO model</strong> <span class="math display">\[
-\log\left[\frac{\pr\{Y(t)&gt;k\}}{\pr\{Y(t)\leq k\}}\right]=h_k(t) + \beta^\T Z
-\]</span>
+<li>Tuning parameter <span class="math inline">\(\lambda\geq 0\)</span>—determined by cross-validation (CV)
 <ul>
-<li><span class="math inline">\(\exp(\beta)\)</span>: ORs of having early and less favorable outcomes (regardless of time and favorability cut-off)
+<li><span class="math inline">\(\partial l_n(\beta; 0)/\partial\beta = U_n(\beta)\)</span></li>
+</ul></li>
+<li>Mixing parameter <span class="math inline">\(\alpha \in (0, 1)\)</span>
 <ul>
-<li>Two-way (time &amp; order) proportionality</li>
-<li><span class="math inline">\(K=0\)</span> <span class="math inline">\(\to\)</span> Univariate PO</li>
+<li><span class="math inline">\(\alpha &gt; 0\)</span> <span class="math inline">\(\longrightarrow\)</span> some components of <span class="math inline">\(\hat\beta(\lambda)=0\)</span> (performs variable selection)</li>
 </ul></li>
 </ul></li>
 </ul>
 </section>
-<section id="estimation-problem" class="slide level2">
-<h2>Estimation Problem</h2>
+<section id="pathwise-solution" class="slide level2">
+<h2>Pathwise Solution</h2>
 <ul>
-<li><strong>Main challenge</strong>
+<li><p><strong>Pathwise algorithm</strong> <span class="citation" data-cites="friedman:2010">(<a href="#/references" role="doc-biblioref" onclick="">Friedman et al., 2010</a>)</span></p>
 <ul>
-<li>Nonparametric baseline log-odds <span class="math inline">\(h_k(t)\)</span></li>
-<li>Model does not determine likelihood <span class="math inline">\(\to\)</span> <del>MLE</del>
+<li>Efficient computation of <span class="math inline">\(\hat\beta(\lambda)\)</span> for all <span class="math inline">\(\lambda\)</span></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a></a>glmnet<span class="sc">::</span><span class="fu">glmnet</span>(x, y, <span class="at">family =</span> <span class="st">"binomial"</span>, <span class="at">intercept =</span> <span class="cn">FALSE</span>, lambda)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <ul>
-<li>Unlike univariate PO <span class="citation" data-cites="murphy1997">(<a href="#/references" role="doc-biblioref" onclick="">Murphy et al., 1997</a>)</span></li>
-</ul></li>
-</ul></li>
-<li><strong>Possible solutions</strong>
-<ul>
-<li>Posit a <em>nuisance</em> (Markov) model for <span class="math inline">\(Y(t)\)</span> <span class="math inline">\(\to\)</span> MLE</li>
-<li>Find estimating functions under marginal model alone</li>
+<li><code>x</code>: covariate matrix containing <span class="math inline">\(z_{ij}\)</span> ,</li>
+<li><code>y</code>: response vector <span class="math inline">\(\delta_{ij}\)</span></li>
+<li><code>intercept = FALSE</code> removes intercept</li>
+<li><code>lambda</code>: user-specified <span class="math inline">\(\lambda\)</span> vector</li>
 </ul></li>
 </ul>
+</section>
+<section id="cross-validation" class="slide level2">
+<h2>Cross Validation</h2>
+<ul>
+<li><strong>CV routine for logistic regression</strong> <code>cv.glmnet()</code>
+<ul>
+<li>Partition <em>pairs</em> into <span class="math inline">\(k\)</span> folds—train and validate</li>
+<li>Built-in <code>cv.glmnet()</code></li>
+<li>Not appropriate
+<ul>
+<li>Overlap between analysis and validation sets</li>
+<li>Inflation of sample size</li>
+</ul></li>
+</ul></li>
+<li><strong>Subject-based CV</strong>
+<ul>
+<li>Partition subjects into <span class="math inline">\(k\)</span> folds <span class="math inline">\(\mathcal{S}^{(k)}\)</span></li>
+<li>Train on <span class="math inline">\(\mathcal{S}^{(-k)}\)</span>: <span class="math inline">\(\hat\beta^{(-k)}(\lambda)\)</span> <span class="math inline">\(\longrightarrow\)</span> validate on <span class="math inline">\(\mathcal{S}^{(k)}\)</span></li>
+<li>Identify optimal <span class="math inline">\(\lambda\)</span> maximizing average concordance index</li>
+</ul></li>
+</ul>
+</section>
+<section id="winrisk-score" class="slide level2">
+<h2>Win/Risk Score</h2>
+<ul>
+<li><strong>Motivation</strong>
+<ul>
+<li>Model-predicted win probability given comparability <span class="math display">\[\mu(z_i, z_j;\beta)=\frac{\exp\{\beta^\T(z_i-z_j)\}}{1 + \exp\{\beta^\T(z_i-z_j)\}}\]</span></li>
+<li><span class="math inline">\(\beta^\T z\)</span> measures tendency to win <span class="math display">\[\begin{align*}
+\mu(z_i, z_j;\beta) &gt; 0.5 &amp;\Leftrightarrow \beta^\T z_i &gt; \beta^\T z_j;\\
+\mu(z_i, z_j;\beta) = 0.5 &amp;\Leftrightarrow \beta^\T z_i = \beta^\T z_j;\\
+\mu(z_i, z_j;\beta) &lt; 0.5 &amp;\Leftrightarrow \beta^\T z_i &lt; \beta^\T z_j.
+\end{align*}\]</span></li>
+<li><span class="math inline">\(-\beta^\T z\)</span>: risk score</li>
+</ul></li>
+</ul>
+</section>
+<section id="generalized-concordance-index" class="slide level2">
+<h2>Generalized Concordance Index</h2>
+<ul>
+<li><strong>Validation/test set</strong> <span class="math inline">\(\mathcal S^*\)</span>
+<ul>
+<li>Pairwise indices <span class="math display">\[
+\mathcal R^* = \{(i,j): \delta_{ij}+\delta_{ji}\neq 0; i&lt;j; i,j\in\S^*\}
+\]</span></li>
+</ul></li>
+<li><strong>Concordance</strong> <span class="citation" data-cites="harrell:1982 uno:2011 cheung:2019">(<a href="#/references" role="doc-biblioref" onclick="">Cheung et al., 2019</a>; <a href="#/references" role="doc-biblioref" onclick="">Harrell et al., 1982</a>; <a href="#/references" role="doc-biblioref" onclick="">Uno et al., 2011</a>)</span>
+<ul>
+<li>Proportion of correct ranking of pairs <span class="math display">\[\begin{equation}\label{eq:c_index}
+\mathcal C(\S^*;\beta) = |\mathcal R^*|^{-1}\sum_{(i, j)\in\mathcal R^*}
+\bigl[\underbrace{I\{(2\delta_{ij} -1)(\beta^\T z_i - \beta^\T z_j)&gt;0\}}_{\text{Concordant pair}}+2^{-1}
+\underbrace{I(\beta^\T z_i = \beta^\T z_j)}_{\text{Tied score}}\bigr]
+\end{equation}\]</span></li>
+</ul></li>
+</ul>
+</section>
+<section id="validation-and-testing" class="slide level2">
+<h2>Validation and Testing</h2>
+<ul>
+<li><strong>Model tuning</strong>
+<ul>
+<li><span class="math inline">\(k\)</span>th-fold CV concordance: <span class="math inline">\(C^{(k)}(\lambda) = \mathcal C\left(\Sk;\wh\beta^{(-k)}(\lambda)\right)\)</span></li>
+<li><strong>Optimal</strong> <span class="math inline">\(\lambda_{\rm opt} = \arg\max_\lambda K^{-1}\sum_{k=1}^K\C^{(k)}(\lambda)\)</span></li>
+<li><strong>Final model</strong>: <span class="math inline">\(\wh\beta(\lambda_{\rm opt})\)</span></li>
+</ul></li>
+<li><strong>Variable importance</strong>
+<ul>
+<li>Component-wise <span class="math inline">\(|\beta|/\text{sd}(z)\)</span></li>
+</ul></li>
+<li><strong>Test C-index</strong>
+<ul>
+<li><span class="math inline">\(\mathcal C(\S^*;\wh\beta(\lambda_{\rm opt}))\)</span> for test set <span class="math inline">\(\S^*\)</span></li>
+</ul></li>
+</ul>
+</section>
+<section id="workflow---input-data" class="slide level2">
+<h2>Workflow - Input Data</h2>
+<ul>
+<li><p><strong>Data format</strong></p>
+<ul>
+<li>Long format with columns: <code>id</code>, <code>time</code>, <code>status</code>, and covariates</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a><span class="co"># Load package containing data</span></span>
+<span id="cb11-2"><a></a><span class="fu">library</span>(WR)</span>
+<span id="cb11-3"><a></a>df <span class="ot">&lt;-</span> gbc <span class="co"># n = 686 subjects, p = 9 covariates</span></span>
+<span id="cb11-4"><a></a>df <span class="co"># status = 0 (censored), 1 (death), 2 (recurrence)</span></span>
+<span id="cb11-5"><a></a><span class="co">#&gt;   id      time status hormone age menopause size grade ...</span></span>
+<span id="cb11-6"><a></a><span class="co">#&gt;1   1 43.836066      2       1  38         1   18     3  </span></span>
+<span id="cb11-7"><a></a><span class="co">#&gt;2   1 74.819672      0       1  38         1   18     3  </span></span>
+<span id="cb11-8"><a></a><span class="co">#&gt;3   2 46.557377      2       1  52         1   20     1   </span></span>
+<span id="cb11-9"><a></a><span class="co">#&gt;4   2 65.770492      0       1  52         1   20     1  </span></span>
+<span id="cb11-10"><a></a><span class="co">#&gt;5   3 41.934426      2       1  47         1   30     2   </span></span>
+<span id="cb11-11"><a></a><span class="co">#&gt;...</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></li>
+</ul>
+</section>
+<section id="workflow---data-partitioning" class="slide level2">
+<h2>Workflow - Data Partitioning</h2>
+<ul>
+<li><strong>Splitting data</strong>
+<ul>
+<li><code>wr_split()</code> function</li>
+</ul></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a></a><span class="co"># Data partitioning ------------------------------------</span></span>
+<span id="cb12-2"><a></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb12-3"><a></a>obj_split <span class="ot">&lt;-</span> df <span class="sc">|&gt;</span> <span class="fu">wr_split</span>(<span class="at">prop =</span> <span class="fl">0.8</span>) <span class="co"># 80% training, 20% test</span></span>
+<span id="cb12-4"><a></a><span class="co"># Take training and test set</span></span>
+<span id="cb12-5"><a></a>df_train <span class="ot">&lt;-</span> obj_split<span class="sc">$</span>df_train</span>
+<span id="cb12-6"><a></a>df_test <span class="ot">&lt;-</span> obj_split<span class="sc">$</span>df_test</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="workflow---cross-validation-i" class="slide level2">
+<h2>Workflow - Cross-Validation (I)</h2>
+<ul>
+<li><span class="math inline">\(k\)</span>-fold CV
+<ul>
+<li><code>cv_wrnet(id, time, status, Z, k = 10, ...)</code></li>
+</ul></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a></a><span class="co"># 10-fold CV -------------------------------------------</span></span>
+<span id="cb13-2"><a></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
+<span id="cb13-3"><a></a>obj_cv <span class="ot">&lt;-</span> <span class="fu">cv_wrnet</span>(df_train<span class="sc">$</span>id, df_train<span class="sc">$</span>time, df_train<span class="sc">$</span>status, </span>
+<span id="cb13-4"><a></a>                    df_train <span class="sc">|&gt;</span> <span class="fu">select</span>(<span class="sc">-</span><span class="fu">c</span>(id, time, status)))</span>
+<span id="cb13-5"><a></a><span class="co"># Plot CV results (C-index vs log-lambda)</span></span>
+<span id="cb13-6"><a></a>obj_cv <span class="sc">|&gt;</span> </span>
+<span id="cb13-7"><a></a>   <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span>  <span class="fu">log</span>(lambda), <span class="at">y =</span> concordance)) <span class="sc">+</span></span>
+<span id="cb13-8"><a></a>   <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">geom_line</span>() <span class="sc">+</span> <span class="fu">theme_minimal</span>()</span>
+<span id="cb13-9"><a></a><span class="co"># Optimal lambda</span></span>
+<span id="cb13-10"><a></a>lambda_opt <span class="ot">&lt;-</span> obj_cv<span class="sc">$</span>lambda[<span class="fu">which.max</span>(obj_cv<span class="sc">$</span>concordance)]</span>
+<span id="cb13-11"><a></a>lambda_opt</span>
+<span id="cb13-12"><a></a><span class="co">#&gt; [1] 0.0171976</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="workflow---cross-validation-ii" class="slide level2">
+<h2>Workflow - Cross-Validation (II)</h2>
+<ul>
+<li><strong>Validation C-index</strong></li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/gbc_cv.png" class="quarto-figure quarto-figure-center" style="width:55.0%"></p>
+</figure>
+</div>
+</section>
+<section id="workflow---final-model" class="slide level2">
+<h2>Workflow - Final Model</h2>
+<ul>
+<li><p><strong>Fit final model</strong></p>
+<ul>
+<li><code>wrnet(id, time, status, Z, lambda = lambda_opt, ...)</code></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a></a><span class="co"># Final model ------------------------------------------</span></span>
+<span id="cb14-2"><a></a>final_fit <span class="ot">&lt;-</span> <span class="fu">wrnet</span>(df_train<span class="sc">$</span>id, df_train<span class="sc">$</span>time, df_train<span class="sc">$</span>status, </span>
+<span id="cb14-3"><a></a>          df_train <span class="sc">|&gt;</span> <span class="fu">select</span>(<span class="sc">-</span><span class="fu">c</span>(id, time, status)), <span class="at">lambda =</span> lambda_opt)</span>
+<span id="cb14-4"><a></a>final_fit<span class="sc">$</span>beta <span class="co"># Estimated coefficients</span></span>
+<span id="cb14-5"><a></a><span class="co">#&gt;                      s0</span></span>
+<span id="cb14-6"><a></a><span class="co">#&gt; hormone     0.306026364</span></span>
+<span id="cb14-7"><a></a><span class="co">#&gt; age         0.003111462</span></span>
+<span id="cb14-8"><a></a><span class="co">#&gt; menopause   .          </span></span>
+<span id="cb14-9"><a></a><span class="co">#&gt; size       -0.007720497</span></span>
+<span id="cb14-10"><a></a><span class="co">#&gt; grade      -0.285511701</span></span>
+<span id="cb14-11"><a></a><span class="co">#&gt; nodes      -0.082227827</span></span>
+<span id="cb14-12"><a></a><span class="co">#&gt; prog_recp   0.001861367</span></span>
+<span id="cb14-13"><a></a><span class="co">#&gt; estrg_recp  .     </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></li>
+</ul>
+</section>
+<section id="workflow---variable-importance" class="slide level2">
+<h2>Workflow - Variable Importance</h2>
+<ul>
+<li><strong>Variable importance</strong></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a></a>final_fit <span class="sc">|&gt;</span> <span class="fu">vi_wrnet</span>() <span class="sc">|&gt;</span> <span class="fu">vip</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/gbc_vip.png" class="quarto-figure quarto-figure-center" style="width:52.0%"></p>
+</figure>
+</div>
+</section>
+<section id="workflow---test-performance" class="slide level2">
+<h2>Workflow - Test Performance</h2>
+<ul>
+<li><strong>Overall and component-wise C-index</strong>
+<ul>
+<li><code>test_wrnet(final_fit, df_test)</code></li>
+</ul></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a></a><span class="co"># Test model performance -------------------------------</span></span>
+<span id="cb16-2"><a></a>test_result <span class="ot">&lt;-</span> final_fit <span class="sc">|&gt;</span> <span class="fu">test_wrnet</span>(df_test)</span>
+<span id="cb16-3"><a></a><span class="co"># Overall and event-specific C-indices</span></span>
+<span id="cb16-4"><a></a>test_result<span class="sc">$</span>concordance</span>
+<span id="cb16-5"><a></a><span class="co">#&gt; # A tibble: 3 × 2</span></span>
+<span id="cb16-6"><a></a><span class="co">#&gt;   component concordance</span></span>
+<span id="cb16-7"><a></a><span class="co">#&gt;   &lt;chr&gt;           &lt;dbl&gt;</span></span>
+<span id="cb16-8"><a></a><span class="co">#&gt; 1 death           0.724</span></span>
+<span id="cb16-9"><a></a><span class="co">#&gt; 2 nonfatal        0.607</span></span>
+<span id="cb16-10"><a></a><span class="co">#&gt; 3 overall         0.664</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </section></section>
 <section>
 <section id="conclusion" class="title-slide slide level1 center">
@@ -1078,26 +1120,21 @@ WR(t\mid Z_i, Z_j;\mathcal W)=\exp\left\{\beta^{\rm T}\left(Z_i- Z_j\right)\righ
 <li><code>WR::pwreg(ID, time, status, Z, strata)</code></li>
 </ul></li>
 </ul></li>
-<li><strong>Generalize PO model</strong>
+<li><strong>Regularized PW</strong>
 <ul>
-<li>Multistate process <span class="math inline">\(Y(t)=0, 1, \ldots, K, \infty\)</span> <span class="math display">\[
-\log\left[\frac{\pr\{Y(t)&gt;k\}}{\pr\{Y(t)\leq k\}}\right]=h_k(t) + \beta^\T Z
-\]</span>
-<ul>
-<li><span class="math inline">\(\exp(\beta)\)</span>: ORs with unit increases in covariates<br>
-<!-- -   Estimation: an open problem --></li>
-</ul></li>
+<li><code>wrnet</code>: <a href="https://lmaowisc.github.io/wrnet/">https://lmaowisc.github.io/wrnet/</a></li>
+<li>Efficient implementation with <code>glmnet()</code> backend</li>
+<li>Supports CV, test evaluation, and variable importance</li>
 </ul></li>
 </ul>
 </section>
 <section id="references" class="slide level2 smaller scrollable">
 <h2>References</h2>
-<div class="footer footer-default">
 
-</div>
-<div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="list">
-<div id="ref-Bennett1983" class="csl-entry" role="listitem">
-Bennett, S. (1983). Analysis of survival data by the proportional odds model. <em>Statistics in Medicine</em>, <em>2</em>(2), 273–277. <a href="https://doi.org/10.1002/sim.4780020223">https://doi.org/10.1002/sim.4780020223</a>
+
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list">
+<div id="ref-cheung:2019" class="csl-entry" role="listitem">
+Cheung, L. C., Pan, Q., Hyun, N., &amp; Katki, H. A. (2019). Prioritized concordance index for hierarchical survival outcomes. <em>Statistics in Medicine</em>, <em>38</em>(15), 2868–2882.
 </div>
 <div id="ref-dong2023" class="csl-entry" role="listitem">
 Dong, G., Hoaglin, D. C., Huang, B., Cui, Y., Wang, D., Cheng, Y., &amp; Gamalo-Siebers, M. (2023). The stratified win statistics (win ratio, win odds, and net benefit). <em>Pharmaceutical Statistics</em>, <em>22</em>(4), 748–756. <a href="https://doi.org/10.1002/pst.2293">https://doi.org/10.1002/pst.2293</a>
@@ -1108,40 +1145,56 @@ Dong, G., Qiu, J., Wang, D., &amp; Vandemeulebroecke, M. (2017). The stratified 
 <div id="ref-follmann2019" class="csl-entry" role="listitem">
 Follmann, D., Fay, M. P., Hamasaki, T., &amp; Evans, S. (2019). Analysis of ordered composite endpoints. <em>Statistics in Medicine</em>, <em>39</em>(5), 602–616. <a href="https://doi.org/10.1002/sim.8431">https://doi.org/10.1002/sim.8431</a>
 </div>
+<div id="ref-friedman:2010" class="csl-entry" role="listitem">
+Friedman, J., Hastie, T., &amp; Tibshirani, R. (2010). Regularization paths for generalized linear models via coordinate descent. <em>Journal of Statistical Software</em>, <em>33</em>(1), 1.
+</div>
+<div id="ref-harrell:1982" class="csl-entry" role="listitem">
+Harrell, F. E., Califf, R. M., Pryor, D. B., Lee, K. L., &amp; Rosati, R. A. (1982). Evaluating the yield of medical tests. <em>JAMA</em>, <em>247</em>(18), 2543–2546.
+</div>
 <div id="ref-lin1993" class="csl-entry" role="listitem">
 Lin, D. Y., Wei, L. J., &amp; Ying, Z. (1993). Checking the Cox model with cumulative sums of martingale-based residuals. <em>Biometrika</em>, <em>80</em>(3), 557–572. <a href="https://doi.org/10.1093/biomet/80.3.557">https://doi.org/10.1093/biomet/80.3.557</a>
+</div>
+<div id="ref-mao2025" class="csl-entry" role="listitem">
+Mao, L. (2025). Regularized win ratio regression for variable selection and risk prediction, with an application to a cardiovascular trial. <em>BMC Medical Research Methodology</em>, <em>25</em>(1). <a href="https://doi.org/10.1186/s12874-025-02554-w">https://doi.org/10.1186/s12874-025-02554-w</a>
 </div>
 <div id="ref-Mao2021" class="csl-entry" role="listitem">
 Mao, L., &amp; Wang, T. (2021). A class of proportional win<span>-</span>fractions regression models for composite outcomes. <em>Biometrics</em>, <em>77</em>(4), 1265–1275. <a href="https://doi.org/10.1111/biom.13382">https://doi.org/10.1111/biom.13382</a>
 </div>
-<div id="ref-murphy1997" class="csl-entry" role="listitem">
-Murphy, S. A., Rossini, A. J., &amp; Vaart, A. W. van der. (1997). Maximum Likelihood Estimation in the Proportional Odds Model. <em>Journal of the American Statistical Association</em>, <em>92</em>(439), 968–976. <a href="https://doi.org/10.1080/01621459.1997.10474051">https://doi.org/10.1080/01621459.1997.10474051</a>
-</div>
 <div id="ref-song2022" class="csl-entry" role="listitem">
 Song, J., Verbeeck, J., Huang, B., Hoaglin, D. C., Gamalo-Siebers, M., Seifu, Y., Wang, D., Cooner, F., &amp; Dong, G. (2022). The win odds: statistical inference and regression. <em>Journal of Biopharmaceutical Statistics</em>, <em>33</em>(2), 140–150. <a href="https://doi.org/10.1080/10543406.2022.2089156">https://doi.org/10.1080/10543406.2022.2089156</a>
+</div>
+<div id="ref-uno:2011" class="csl-entry" role="listitem">
+Uno, H., Cai, T., Pencina, M. J., D’Agostino, R. B., &amp; Wei, L.-J. (2011). On the c-statistics for evaluating overall adequacy of risk prediction procedures with censored survival data. <em>Statistics in Medicine</em>, <em>30</em>(10), 1105–1117.
 </div>
 <div id="ref-Wang2022" class="csl-entry" role="listitem">
 Wang, T., &amp; Mao, L. (2022). Stratified proportional win<span>-</span>fractions regression analysis. <em>Statistics in Medicine</em>, <em>41</em>(26), 5305–5318. <a href="https://doi.org/10.1002/sim.9570">https://doi.org/10.1002/sim.9570</a>
 </div>
+<div id="ref-zou:2005" class="csl-entry" role="listitem">
+Zou, H., &amp; Hastie, T. (2005). Regularization and variable selection via the elastic net. <em>Journal of the Royal Statistical Society Series B: Statistical Methodology</em>, <em>67</em>(2), 301–320.
+</div>
 </div>
 </section></section>
     </div>
-  </div>
+  <div class="quarto-auto-generated-content" style="display: none;">
+<div class="footer footer-default">
+
+</div>
+</div></div>
 
   <script>window.backupDefine = window.define; window.define = undefined;</script>
-  <script src="chap4_files/libs/revealjs/dist/reveal.js"></script>
+  <script src="site_libs/revealjs/dist/reveal.js"></script>
   <!-- reveal.js plugins -->
-  <script src="chap4_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
-  <script src="chap4_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
-  <script src="chap4_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
-  <script src="chap4_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
-  <script src="chap4_files/libs/revealjs/plugin/quarto-support/support.js"></script>
+  <script src="site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="site_libs/revealjs/plugin/quarto-support/support.js"></script>
   
 
-  <script src="chap4_files/libs/revealjs/plugin/notes/notes.js"></script>
-  <script src="chap4_files/libs/revealjs/plugin/search/search.js"></script>
-  <script src="chap4_files/libs/revealjs/plugin/zoom/zoom.js"></script>
-  <script src="chap4_files/libs/revealjs/plugin/math/math.js"></script>
+  <script src="site_libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="site_libs/revealjs/plugin/search/search.js"></script>
+  <script src="site_libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="site_libs/revealjs/plugin/math/math.js"></script>
   <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
 
   <script>
@@ -1151,12 +1204,12 @@ Wang, T., &amp; Mao, L. (2022). Stratified proportional win<span>-</span>fractio
       Reveal.initialize({
 'controlsAuto': true,
 'previewLinksAuto': false,
-'smaller': false,
 'pdfSeparateFragments': false,
 'autoAnimateEasing': "ease",
 'autoAnimateDuration': 1,
 'autoAnimateUnmatched': true,
-'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'jumpToSlide': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
 'smaller': false,
  
         // Display controls in the bottom right corner
@@ -1310,7 +1363,7 @@ Wang, T., &amp; Mao, L. (2022). Stratified proportional win<span>-</span>fractio
         margin: 0.1,
 
         math: {
-          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
+          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js',
           config: 'TeX-AMS_HTML-full',
           tex2jax: {
             inlineMath: [['\\(','\\)']],
@@ -1337,42 +1390,80 @@ Wang, T., &amp; Mao, L. (2022). Stratified proportional win<span>-</span>fractio
       });
     </script>
     
+
     <script>
+
       // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+
       // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+
       // slide changes (different for each slide format).
+
       (function () {
+
         // dispatch for htmlwidgets
+
         function fireSlideEnter() {
+
           const event = window.document.createEvent("Event");
+
           event.initEvent("slideenter", true, true);
+
           window.document.dispatchEvent(event);
+
         }
+
+    
 
         function fireSlideChanged(previousSlide, currentSlide) {
+
           fireSlideEnter();
 
+    
+
           // dispatch for shiny
+
           if (window.jQuery) {
+
             if (previousSlide) {
+
               window.jQuery(previousSlide).trigger("hidden");
+
             }
+
             if (currentSlide) {
+
               window.jQuery(currentSlide).trigger("shown");
+
             }
+
           }
+
         }
+
+    
 
         // hookup for slidy
+
         if (window.w3c_slidy) {
+
           window.w3c_slidy.add_observer(function (slide_num) {
+
             // slide_num starts at position 1
+
             fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+
           });
+
         }
 
+    
+
       })();
+
     </script>
+
+    
 
     <script id="quarto-html-after-body" type="application/javascript">
     window.document.addEventListener("DOMContentLoaded", function (event) {
@@ -1406,18 +1497,7 @@ Wang, T., &amp; Mao, L. (2022). Stratified proportional win<span>-</span>fractio
         }
         return false;
       }
-      const clipboard = new window.ClipboardJS('.code-copy-button', {
-        text: function(trigger) {
-          const codeEl = trigger.previousElementSibling.cloneNode(true);
-          for (const childEl of codeEl.children) {
-            if (isCodeAnnotation(childEl)) {
-              childEl.remove();
-            }
-          }
-          return codeEl.innerText;
-        }
-      });
-      clipboard.on('success', function(e) {
+      const onCopySuccess = function(e) {
         // button target
         const button = e.trigger;
         // don't keep focus
@@ -1449,11 +1529,48 @@ Wang, T., &amp; Mao, L. (2022). Stratified proportional win<span>-</span>fractio
         }, 1000);
         // clear code selection
         e.clearSelection();
+      }
+      const getTextToCopy = function(trigger) {
+          const codeEl = trigger.previousElementSibling.cloneNode(true);
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+      }
+      const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+        text: getTextToCopy
       });
-      function tippyHover(el, contentFn) {
+      clipboard.on('success', onCopySuccess);
+      if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+        const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+          text: getTextToCopy,
+          container: window.document.getElementById('quarto-embedded-source-code-modal')
+        });
+        clipboardModal.on('success', onCopySuccess);
+      }
+        var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+        var mailtoRegex = new RegExp(/^mailto:/);
+          var filterRegex = new RegExp('/' + window.location.host + '/');
+        var isInternal = (href) => {
+            return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+        }
+        // Inspect non-navigation links and adorn them if external
+     	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+        for (var i=0; i<links.length; i++) {
+          const link = links[i];
+          if (!isInternal(link.href)) {
+            // undo the damage that might have been done by quarto-nav.js in the case of
+            // links that we want to consider external
+            if (link.dataset.originalHref !== undefined) {
+              link.href = link.dataset.originalHref;
+            }
+          }
+        }
+      function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
         const config = {
           allowHTML: true,
-          content: contentFn,
           maxWidth: 500,
           delay: 100,
           arrow: false,
@@ -1463,8 +1580,17 @@ Wang, T., &amp; Mao, L. (2022). Stratified proportional win<span>-</span>fractio
           interactive: true,
           interactiveBorder: 10,
           theme: 'light-border',
-          placement: 'bottom-start'
+          placement: 'bottom-start',
         };
+        if (contentFn) {
+          config.content = contentFn;
+        }
+        if (onTriggerFn) {
+          config.onTrigger = onTriggerFn;
+        }
+        if (onUntriggerFn) {
+          config.onUntrigger = onUntriggerFn;
+        }
           config['offset'] = [0,0];
           config['maxWidth'] = 700;
         window.tippy(el, config); 
@@ -1478,7 +1604,11 @@ Wang, T., &amp; Mao, L. (2022). Stratified proportional win<span>-</span>fractio
           try { href = new URL(href).hash; } catch {}
           const id = href.replace(/^#\/?/, "");
           const note = window.document.getElementById(id);
-          return note.innerHTML;
+          if (note) {
+            return note.innerHTML;
+          } else {
+            return "";
+          }
         });
       }
       const findCites = (el) => {

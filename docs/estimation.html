@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>3&nbsp; Nonparametric Estimation – Statistical Methods for Composite Endpoints</title>
+<title>estimation</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -58,14 +58,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
 <script src="site_libs/clipboard/clipboard.min.js"></script>
 <script src="site_libs/quarto-search/autocomplete.umd.js"></script>
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./regression.html" rel="next">
-<link href="./testing.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -74,7 +71,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-e26003cea8cd680ca0c55a263523d882.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-3fa07f995375b3a6eabf8b337cbf22a5.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-863186b8177791087a47ebf1f3fc2e2d.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -134,130 +131,26 @@ window.Quarto = {
 </script>
 
 <link rel="stylesheet" href="styles.css">
-<meta name="twitter:title" content="3&nbsp; Nonparametric Estimation – Statistical Methods for Composite Endpoints">
-<meta name="twitter:description" content="">
-<meta name="twitter:card" content="summary">
 </head>
 
-<body class="nav-sidebar floating">
+<body>
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
-  <nav class="quarto-secondary-nav">
-    <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-        <i class="bi bi-layout-text-sidebar-reverse"></i>
-      </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./estimation.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Nonparametric Estimation</span></a></li></ol></nav>
-        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-        </a>
-      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
-        <i class="bi bi-search"></i>
-      </button>
-    </div>
-  </nav>
-</header>
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header">
-    <div class="sidebar-title mb-0 py-0">
-      <a href="./">Statistical Methods for Composite Endpoints</a> 
-    </div>
-      </div>
-        <div class="mt-2 flex-shrink-0 align-items-center">
-        <div class="sidebar-search">
-        <div id="quarto-search" class="" title="Search"></div>
-        </div>
-        </div>
-    <div class="sidebar-menu-container"> 
-    <ul class="list-unstyled mt-1">
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Course Info</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./intro.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./testing.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Hypothesis Testing</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./estimation.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Nonparametric Estimation</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./regression.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Semiparametric Regression</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./discussions.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Discussions</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./references.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">References</span></a>
-  </div>
-</li>
-    </ul>
-    </div>
-</nav>
-<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Table of contents</h2>
-   
-  <ul>
-  <li><a href="#slides" id="toc-slides" class="nav-link active" data-scroll-target="#slides">Slides</a></li>
-  <li><a href="#r-code" id="toc-r-code" class="nav-link" data-scroll-target="#r-code">R-code</a></li>
-  <li><a href="#restricted-win-ratio" id="toc-restricted-win-ratio" class="nav-link" data-scroll-target="#restricted-win-ratio"><span class="header-section-number">3.1</span> Restricted Win Ratio</a></li>
-  <li><a href="#restricted-mean-time-in-favor-rmt-if" id="toc-restricted-mean-time-in-favor-rmt-if" class="nav-link" data-scroll-target="#restricted-mean-time-in-favor-rmt-if"><span class="header-section-number">3.2</span> Restricted Mean Time in Favor (RMT-IF)</a></li>
-  <li><a href="#while-alive-weighted-loss" id="toc-while-alive-weighted-loss" class="nav-link" data-scroll-target="#while-alive-weighted-loss"><span class="header-section-number">3.3</span> While-Alive Weighted Loss</a></li>
-  <li><a href="#hf-action-illustrations" id="toc-hf-action-illustrations" class="nav-link" data-scroll-target="#hf-action-illustrations"><span class="header-section-number">3.4</span> HF-ACTION Illustrations</a></li>
-  <li><a href="#example-r-code" id="toc-example-r-code" class="nav-link" data-scroll-target="#example-r-code"><span class="header-section-number">3.5</span> Example R code</a></li>
-  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion"><span class="header-section-number">3.6</span> Conclusion</a></li>
-  </ul>
-</nav>
-    </div>
+        
+    <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="estimation.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Nonparametric Estimation</span></h1>
-</div>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
 
 
 
-<div class="quarto-title-meta">
 
-    
-  
-    
-  </div>
-  
-
-
-</header>
-
-
+<section id="nonparametric-estimation" class="level1">
+<h1>Nonparametric Estimation</h1>
 <section id="slides" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="slides">Slides</h2>
 <p>Chapter slides <a href="chap3.html" target="_blank">here</a>. (To convert html to pdf, press E <span class="math inline">\(\to\)</span> Print <span class="math inline">\(\to\)</span> Destination: Save to pdf)</p>
@@ -585,16 +478,16 @@ window.Quarto = {
 \def\bs{\boldsymbol}
 \]</span></p>
 </section>
-<section id="restricted-win-ratio" class="level2" data-number="3.1">
-<h2 data-number="3.1" class="anchored" data-anchor-id="restricted-win-ratio"><span class="header-section-number">3.1</span> Restricted Win Ratio</h2>
+<section id="restricted-win-ratio" class="level2">
+<h2 class="anchored" data-anchor-id="restricted-win-ratio">Restricted Win Ratio</h2>
 <p>The win ratio estimand depends on the censoring distribution, as each pairwise comparison is limited to the observed follow-up <span class="math inline">\([0, C_i^\t \wedge C_j^\c]\)</span>. This leads to a censoring-weighted average of time-specific win probabilities, which is trial-dependent and lacks generalizability. One solution is to pre-specify a restriction time <span class="math inline">\(\tau\)</span> so all comparisons are evaluated over the same window.</p>
 <p>For a two-tiered composite of death and a nonfatal event, the restricted win/loss probability is defined by <span class="math display">\[\begin{align}
 w_{a, 1-a}(\tau) &amp;= \pr\{D^\b &lt; \min(D^\a, \tau)\} \\
 &amp;\quad + \pr\{\min(D^\t, D^\c) &gt; \tau, T^\b &lt; \min(T^\a, \tau)\},
 \end{align}\]</span> with the restricted win ratio defined as <span class="math inline">\(\text{WR}(\tau) = w_{1,0}(\tau) / w_{0,1}(\tau)\)</span>. Estimation methods include inverse probability of censoring weighting (IPCW) and multiple imputation (MI), as implemented in the <code>WINS</code> package.</p>
 </section>
-<section id="restricted-mean-time-in-favor-rmt-if" class="level2" data-number="3.2">
-<h2 data-number="3.2" class="anchored" data-anchor-id="restricted-mean-time-in-favor-rmt-if"><span class="header-section-number">3.2</span> Restricted Mean Time in Favor (RMT-IF)</h2>
+<section id="restricted-mean-time-in-favor-rmt-if" class="level2">
+<h2 class="anchored" data-anchor-id="restricted-mean-time-in-favor-rmt-if">Restricted Mean Time in Favor (RMT-IF)</h2>
 <p>The restricted mean time in favor (RMT-IF) redefines the win-loss comparison in terms of time spent in more favorable states. For a multistate outcome <span class="math inline">\(Y(t)\)</span>, RMT-IF measures the net average time one subject remains in a better state than another: <span class="math display">\[
 \mu(\tau) = E\left[ \int_0^\tau I\{Y^{(1)}(t) &lt; Y^{(0)}(t)\} \, \dd t \right]
 - E\left[ \int_0^\tau I\{Y^{(0)}(t) &lt; Y^{(1)}(t)\} \, \dd t \right].
@@ -603,8 +496,8 @@ w_{a, 1-a}(\tau) &amp;= \pr\{D^\b &lt; \min(D^\a, \tau)\} \\
 \mu(\tau) = \sum_{k=1}^K \mu_k(\tau) + \mu_\infty(\tau),
 \]</span> where each <span class="math inline">\(\mu_k(\tau)\)</span> captures net time gained in a specific nonfatal state and <span class="math inline">\(\mu_\infty(\tau)\)</span> captures the difference in restricted mean survival time. Estimation proceeds by plugging in Kaplan–Meier estimators for transition times. The <code>rmt::rmtfit()</code> function provides estimation, inference, and graphics.</p>
 </section>
-<section id="while-alive-weighted-loss" class="level2" data-number="3.3">
-<h2 data-number="3.3" class="anchored" data-anchor-id="while-alive-weighted-loss"><span class="header-section-number">3.3</span> While-Alive Weighted Loss</h2>
+<section id="while-alive-weighted-loss" class="level2">
+<h2 class="anchored" data-anchor-id="while-alive-weighted-loss">While-Alive Weighted Loss</h2>
 <p>Standard analyses of weighted total events may misrepresent treatment effects if survival time differs between groups. The while-alive loss framework defines a normalized event rate over time alive: <span class="math display">\[
 \ell^{(a)}(\tau) = \frac{E\left\{N_{\rm R}^{*(a)}(\tau)\right\}}{E\left(D^{(a)} \wedge \tau\right)}.
 \]</span></p>
@@ -612,8 +505,8 @@ w_{a, 1-a}(\tau) &amp;= \pr\{D^\b &lt; \min(D^\a, \tau)\} \\
 \ell^{(a)}(\tau) = \frac{E\left\{\mathcal L\left(\mathcal H^{*(a)}\right)(\tau)\right\}}{E\left(D^{(a)} \wedge \tau\right)},
 \]</span> which includes total events, mortality, and flexible weighted combinations. Estimation uses survival-weighted Aalen-type integrals and is implemented in the <code>WA::LRfit()</code> function.</p>
 </section>
-<section id="hf-action-illustrations" class="level2" data-number="3.4">
-<h2 data-number="3.4" class="anchored" data-anchor-id="hf-action-illustrations"><span class="header-section-number">3.4</span> HF-ACTION Illustrations</h2>
+<section id="hf-action-illustrations" class="level2">
+<h2 class="anchored" data-anchor-id="hf-action-illustrations">HF-ACTION Illustrations</h2>
 <p>All three approaches were applied to the HF-ACTION dataset:</p>
 <ul>
 <li><strong>Restricted WR</strong> showed better interpretability than the original WR by standardizing follow-up to 4 years.</li>
@@ -627,8 +520,8 @@ w_{a, 1-a}(\tau) &amp;= \pr\{D^\b &lt; \min(D^\a, \tau)\} \\
 <li>Restricted WR retains the pairwise framework but standardizes follow-up.</li>
 </ul>
 </section>
-<section id="example-r-code" class="level2" data-number="3.5">
-<h2 data-number="3.5" class="anchored" data-anchor-id="example-r-code"><span class="header-section-number">3.5</span> Example R code</h2>
+<section id="example-r-code" class="level2">
+<h2 class="anchored" data-anchor-id="example-r-code">Example R code</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># RMT-IF</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rmt)</span>
@@ -641,11 +534,12 @@ w_{a, 1-a}(\tau) &amp;= \pr\{D^\b &lt; \min(D^\a, \tau)\} \\
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(obj, <span class="at">tau =</span> <span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="conclusion" class="level2" data-number="3.6">
-<h2 data-number="3.6" class="anchored" data-anchor-id="conclusion"><span class="header-section-number">3.6</span> Conclusion</h2>
+<section id="conclusion" class="level2">
+<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
 <p>Restricting follow-up time resolves many of the interpretability issues in standard composite endpoint analysis. The restricted win ratio, restricted mean time in favor, and while-alive loss rate each target clinically interpretable, time-standardized estimands. These tools are particularly helpful when survival times vary across groups, and should be considered complementary strategies in the analysis of composite outcomes.</p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -739,7 +633,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("https:\/\/lmaowisc\.github\.io\/ce\/");
+      var filterRegex = new RegExp('/' + window.location.host + '/');
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
@@ -1066,18 +960,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script>
-<nav class="page-navigation">
-  <div class="nav-page nav-page-previous">
-      <a href="./testing.html" class="pagination-link" aria-label="Hypothesis Testing">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Hypothesis Testing</span></span>
-      </a>          
-  </div>
-  <div class="nav-page nav-page-next">
-      <a href="./regression.html" class="pagination-link" aria-label="Semiparametric Regression">
-        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Semiparametric Regression</span></span> <i class="bi bi-arrow-right-short"></i>
-      </a>
-  </div>
-</nav>
 </div> <!-- /content -->
 
 
