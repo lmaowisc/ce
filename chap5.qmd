@@ -1,0 +1,142 @@
+---
+title: "Statistical Methods for Composite Endpoints: Win Ratio and Beyond"
+subtitle: "Chapter 5 - Discussions"
+css: style.css
+csl: apa.csl
+author:
+  name: Lu Mao
+  affiliations: 
+    - name: Department of Biostatistics & Medical Informatics
+    - University of Wisconsin-Madison
+    - April 25, 2024
+  email: lmao@biostat.wisc.edu
+format: 
+  revealjs:
+    theme: simple
+    auto-stretch: false
+    # incremental: true   
+editor: visual
+execute: 
+  eval: false
+  echo: true
+include-in-header:
+  - text: |
+      <style type="text/css">
+      ul li ul li {
+        font-size: 0.78em;
+      }
+      .custom-small table {
+        font-size: .55em
+      }
+      </style>
+bibliography: references.bib
+# title-slide-attributes: 
+#   data-background-image: jsm_logo.png
+#   data-background-size: 20%
+#   data-background-position: 2% 2%
+---
+
+# Open Problems
+
+## Covariate Adjustment
+
+-   **Different from regression**
+    -   **Marginal estimands** for $\mathcal H^{*(1)}$ vs $\mathcal H^{*(0)}$, not conditioning on $Z$
+    -   **Gain efficiency** when outcome-covariate model is true, otherwise still valid (robustness)
+    -   **Standard endpoints**
+        -   Continuous, binary, univariate survival, etc. [@tsiatis2008; @wang2021; @ye2022]
+        -   FDA recommendation [@fda:2023]
+-   **Challenges with WR**
+    -   $U$-statistic structure
+    -   Lack of likelihood structure
+
+## Interim Analysis
+
+-   **Purpose**
+    -   Analyze interim data for evidence of efficacy/futility $\to$ stop trial early
+    -   Univariate survival: information accrued $\propto$ number of events
+-   **Challenges with WR**
+    -   Information time not event-driven
+        -   Case study: RMST [@luo2019; @lu2021]
+    -   Correlations between component events
+        -   *Dependent* increments
+
+## Meta Analysis
+
+-   **Challenges**
+    -   Primary studies *not* reporting win-loss measures
+    -   Primary studies over *different* time spans
+    -   Primary studies with *different* definitions of win/loss
+
+-   [`WinKM`](https://lmaowisc.github.io/winkm/){target="_blank"}: A toolkit to start
+    -   Calculate win-loss statistics based on 
+        -   KM estimates for OS and EFS
+        -   At-risk table at selected time points 
+        -   Total event counts (reported in the CONSORT diagram or results section)
+
+
+# Conclusion
+
+## Summary (I)
+
+-   **Composite endpoints**
+    -   Death + hospitalization/progression/relapse
+    -   Regulatory recommendation
+-   **Traditional**
+    -   **Time to first**: death = nonfatal (`survival::coxph()`)
+    -   **Weighted total**: death = $w_D\times$ nonfatal (`Wcompo::compoML()`)
+-   **Hierarchical**
+    -   Win ratio, net benifit, win odds: death \> nonfatal
+    -   Estimand issue - ICH E9 (R1)
+
+## Summary (II)
+
+-   **Win ratio test**
+    -   **Standard**: death \> one nonfatal event
+    -   **Recurrent events**: death \> frequency \> time to last/first event
+        -   `WR::WRrec(ID, time, status, trt, strata)`
+    -   **Sample size calculations**
+        -   **Gumbel-Hougaard copula** for death & nonfatal event
+        -   Baseline parameters + component-wise HR
+        -   `WR::WRSS(xi, ...)`
+-   **RMT-IF**
+    -   Net average win time on hierarchical states by $\tau$
+        -   `rmt::rmtfit(id, time, status, trt)`
+
+## Summary (III)
+
+-   **While-alive weighted events**
+    -   Compensate for differential survival by $\tau$
+        -   `WA::LRfit(id, time, status, trt, Dweight)`
+-   **WR regression**
+    -   PW model $$
+        WR(t\mid Z_i, Z_j;\mathcal W)=\exp\left\{\beta^{\rm T}\left(Z_i- Z_j\right)\right\}
+        $$
+        -   $\exp(\beta)$: WRs with unit increases in covariates
+        -   `WR::pwreg(ID, time, status, Z, strata)`
+-   **Regularization**
+    -   Elastic net-type penalty (`WRNet`)
+
+## Learning Objectives
+
+-   **Objectives**
+    
+    -   Identify statistical and regulatory challenges with composite endpoints
+    -   Apply key methods such as hypothesis testing, power analysis, and regression
+    -   Gain hands-on experience with real data using R packages
+
+
+Visit back at <https://lmaowisc.github.io/ce/>
+
+## Acknowledgments
+
+-   **Funding**
+
+    -   [R01HL149875](https://reporter.nih.gov/search/9aSu5u3xlE26GrjbF_4cBg/project-details/10734551){target="_blank"} (11/2019 -- 7/2028)
+    -   [DMS2015526](https://www.nsf.gov/awardsearch/showAward?AWD_ID=2015526){target="_blank"} (7/2020 -- 6/2024) ![](images/funds.png){fig-align="center" width="70%"}
+
+-   **Collaborators**
+
+    -   [KyungMann Kim](https://biostat.wiscweb.wisc.edu/staff/kim-kyungmann/){target="_blank"}, [Tuo Wang](https://tuowang.rbind.io/){target="_blank"}, Po-Kuei Chen, Gaohong Dong, Bo Huang, Yi Li, [Xinran Miao](https://xinranmiao.github.io/){target="_blank"}, [Danyu Lin](https://dlin.web.unc.edu/){target="_blank"}, etc.
+
+## References
