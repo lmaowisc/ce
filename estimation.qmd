@@ -11,200 +11,244 @@ Chapter slides [here](chap3.html){target="_blank"}. (To convert html to pdf, pre
 #| code-summary: "Show the code"
 #| eval: false
 
-
 ##################################################################
-# This code generates the numerical results in  chapter 3       ##
+# This code generates the numerical results in chapter 3         #
 ##################################################################
 
-
-
-# install.packages("rmt")
+# install.packages("rmt") # if not already installed
 library(rmt)
 library(tidyverse)
 
-##### Read in HF-ACTION DATA########
+##### Read in HF-ACTION DATA ########
 data(hfaction)
 head(hfaction)
+#> Displays the first few rows of the HF-ACTION dataset (patid, time, status, trt_ab)
 
 # TFE: take the first event per patient id
-hfaction_TFE <- hfaction |> 
-  arrange(patid, time) |> 
-  group_by(patid) |> 
-  slice_head() |> 
+# TFE = Time to First Event (death or hospitalization)
+hfaction_TFE <- hfaction |>
+  arrange(patid, time) |>
+  group_by(patid) |>
+  slice_head() |>
   ungroup()
 
 ###### Standard RMST analysis #################
 library(survRM2)
 
-# Mortality analysis ------------------------------------------------------
+# -------------------------------------------------------------------------
+# Mortality analysis
+# -------------------------------------------------------------------------
 
 ## get mortality data
-hfaction_D <- hfaction |> 
-  filter(status != 1) # remove hospitalization records
+hfaction_D <- hfaction |>
+  filter(status != 1) # remove hospitalization records (status=1)
 
-## RMST analysis for overall survival 
-rmst_obj <- rmst2(hfaction_D$time, hfaction_D$status>0, hfaction_D$trt_ab, tau=3.97)
+## RMST (Restricted Mean Survival Time) analysis for overall survival
+# Here we compare arm=1 (training) vs arm=0 (usual care)
+rmst_obj <- rmst2(
+  time    = hfaction_D$time,
+  status  = hfaction_D$status > 0,
+  arm     = hfaction_D$trt_ab,
+  tau     = 3.97
+)
 rmst_obj
+#> Prints estimates of restricted mean survival (in years), differences, ratios, and p-values
 # Between-group contrast 
 #                       Est. lower .95 upper .95     p
 # RMST (arm=1)-(arm=0) 0.238     0.013     0.464 0.039
 # RMST (arm=1)/(arm=0) 1.074     1.003     1.150 0.040
 # RMTL (arm=1)/(arm=0) 0.680     0.468     0.988 0.043
-rmst <- rmst_obj$unadjusted.result[1, 1] * 12 # convert to month
+
+# Extract the difference in RMST (in years) and convert to months
+rmst <- rmst_obj$unadjusted.result[1, 1] * 12 
 rmst_p <- rmst_obj$unadjusted.result[1, 4]
 
+# -------------------------------------------------------------------------
+# TFE analysis
+# -------------------------------------------------------------------------
 
-# TFE analysis --------------------------------------------------------
-
-## how many of first events are death (1) or hosp (2)
-hfaction_TFE |> 
+## Check how many of the first events are death (status=1) or hospitalization (status=2)
+hfaction_TFE |>
   count(status)
 
-##RMST analysis for hospitalization-free survival 
-rmest_obj <- rmst2(hfaction_TFE$time, hfaction_TFE$status>0, hfaction_TFE$trt_ab, tau=3.97)
+## RMST analysis for hospitalization-free survival
+rmest_obj <- rmst2(
+  time    = hfaction_TFE$time,
+  status  = hfaction_TFE$status > 0,
+  arm     = hfaction_TFE$trt_ab,
+  tau     = 3.97
+)
 rmest_obj
+#> Similar output for restricted mean event-free survival
 # Between-group contrast 
 #                       Est. lower .95 upper .95     p
 # RMST (arm=1)-(arm=0) 0.198    -0.064     0.459 0.139
 # RMST (arm=1)/(arm=0) 1.145     0.957     1.370 0.139
 # RMTL (arm=1)/(arm=0) 0.924     0.832     1.027 0.141
-# extract p-value
-rmest <- rmest_obj$unadjusted.result[1, 1] * 12 # convert to month
+
+# Extract the difference in event-free survival (years) and convert to months
+rmest <- rmest_obj$unadjusted.result[1, 1] * 12
 rmest_p <- rmest_obj$unadjusted.result[1, 4]
 
-
-
-
-
-# Mortality vs TFE --------------------------------------------------------
+# -------------------------------------------------------------------------
+# Mortality vs TFE (Kaplan-Meier plots with annotations)
+# -------------------------------------------------------------------------
 
 library(ggsurvfit)
 library(patchwork)
 
+# Plot for overall survival
 pD <- survfit2(Surv(time, status > 0) ~ trt_ab, data = hfaction_D) |>
   ggsurvfit(linewidth = 1) +
   scale_ggsurvfit() +
-  annotate("text", x = 4, y = 1, hjust = 1, vjust = 1, 
-           label = str_c("4y-RMST = ", round(rmst, 2), " months",
-                            " (P = ", round(rmst_p, 3), ")")) +
+  annotate(
+    "text", x = 4, y = 1, hjust = 1, vjust = 1,
+    label = str_c("4y-RMST = ", round(rmst, 2), " months",
+                  " (P = ", round(rmst_p, 3), ")")
+  ) +
   scale_color_discrete(labels = c("Usual care", "Training")) +
   scale_x_continuous("Time (years)", limits = c(0, 4)) +
   labs(y = "Overall survival")
 
+# Plot for hospitalization-free survival
 pTFE <- survfit2(Surv(time, status > 0) ~ trt_ab, data = hfaction_TFE) |>
   ggsurvfit(linewidth = 1) +
-  annotate("text", x = 4, y = 1, hjust = 1, vjust = 1, 
-           label = str_c("4y-RMEST = ", round(rmest, 2), " months",
-                         " (P = ", round(rmest_p, 3), ")")) +
+  annotate(
+    "text", x = 4, y = 1, hjust = 1, vjust = 1,
+    label = str_c("4y-RMEST = ", round(rmest, 2), " months",
+                  " (P = ", round(rmest_p, 3), ")")
+  ) +
   scale_ggsurvfit() +
   scale_color_discrete(labels = c("Usual care", "Training")) +
   scale_x_continuous("Time (years)", limits = c(0, 4)) +
-  labs(y = "Hospitalization-free survival",
-       caption = "RMEST: restricted mean event-free survival time")
+  labs(
+    y = "Hospitalization-free survival",
+    caption = "RMEST: restricted mean event-free survival time"
+  )
 
-
-pD + pTFE + plot_layout(guides = "collect") & 
+# Combine side-by-side
+pD + pTFE + plot_layout(guides = "collect") &
   theme(
-    legend.position = "top", 
+    legend.position = "top",
     legend.text = element_text(size = 12)
   ) 
 
-# ggsave("images/est_hfaction_unis.png", width = 8, height = 4.6)
+# # ggsave("images/est_hfaction_unis.png", width = 8, height = 4.6)
+#> Uncomment above to save the combined figure
 
-
-########################
+# -------------------------------------------------------------------------
 # RMT-IF analysis
-########################
+# -------------------------------------------------------------------------
 
-
-# analyze the data using rmtfit()
+# rmtfit() from the rmt package fits the restricted mean time lost / 
+# time free approach for recurrent events & death
 obj <- rmtfit(rec(patid, time, status) ~ trt_ab, data = hfaction)
 
-
 summary(obj, Kmax = 1, tau = 3.97)
+#> Summarizes the model up to a maximum follow-up of 3.97 years, 
+#> focusing on the first event (Kmax=1) or aggregated events
 
 #############################################################
 # Graphical analysis of the HF-ACTION trial to
 # evaluate the effect of exercise training.
 ###########################################################
 
-par(mfrow=c(1,2))
-# Kmax=4: to aggregate k=4,..., K
-bouquet(obj,Kmax=4,cex.group = 1.0,
-        xlab="Restricted mean win/loss time (years)",
-        ylab="Follow-up time (years)",group.label=F,ylim=c(0,4.2))
-text(-0.8,4.15,paste("Usual care"))
-text(0.8,4.15,paste("Exercise training"))
+par(mfrow = c(1, 2))
 
-plot(obj,conf=T,lwd=2, xlab="Follow-up time (years)",
-     ylab="RMT-IF of training (years)",main="")
-par(mfrow=c(1,1))
+# bouquet() displays the "bouquet plot" for each k up to Kmax=4
+bouquet(
+  obj, Kmax = 4, cex.group = 1.0,
+  xlab = "Restricted mean win/loss time (years)",
+  ylab = "Follow-up time (years)",
+  group.label = FALSE, ylim = c(0, 4.2)
+)
+text(-0.8, 4.15, paste("Usual care"))
+text(0.8, 4.15, paste("Exercise training"))
+
+# plot() visualizes the RMT-IF difference as a function of time
+plot(
+  obj, conf = TRUE, lwd = 2,
+  xlab = "Follow-up time (years)",
+  ylab = "RMT-IF of training (years)", 
+  main = ""
+)
+
+par(mfrow = c(1, 1))
+#> Reset the graphic device to a single panel
 
 ### LaTeX table ###
 
-### format to LATEX table
-pval_fmt3=function(x){
-  if(x<0.001){
+pval_fmt3 = function(x) {
+  if (x < 0.001) {
     return("$<$0.001")
-  }else{
-    return(round(x,3))
+  } else {
+    return(round(x, 3))
   }
 }
 
+ltable = NULL
+# aggregate the results for k=1,...,K
+hosp_sum = summary(obj, Kmax = 1, tau = 3.97)$tab
+# aggregate the results for k=4,...,K
+all_sum = summary(obj, Kmax = 4, tau = 3.97)$tab
 
-ltable=NULL
-# aggregate the results for k=1,..., K
-hosp_sum=summary(obj,Kmax=1,tau=3.97)$tab
-# aggregate the results for k=4,..., K
-all_sum=summary(obj,Kmax=4,tau=3.97)$tab
+ltable = c(
+  "&", "&", "&",
+  round(12 * hosp_sum[1, 1], 2), "&", round(12 * hosp_sum[1, 2], 2),
+  "&", pval_fmt3(hosp_sum[1, 4]), "\\"
+)
 
-ltable=c("&","&","&",round(12*hosp_sum[1,1],2),"&",round(12*hosp_sum[1,2],2),"&",pval_fmt3(hosp_sum[1,4]),"\\")
-
-for (i in 1:6){
-  tmp=c("&",i,"&&",round(12*all_sum[i,1],2),"&",round(12*all_sum[i,2],2),"&",pval_fmt3(all_sum[i,4]),"\\")
-  ltable=rbind(ltable,tmp)
+for (i in 1:6) {
+  tmp = c(
+    "&", i, "&&",
+    round(12 * all_sum[i, 1], 2), "&", round(12 * all_sum[i, 2], 2),
+    "&", pval_fmt3(all_sum[i, 4]), "\\"
+  )
+  ltable = rbind(ltable, tmp)
 }
 
-ltable[5,2]="4+"
-ltable[6:7,2]=""
+ltable[5, 2] = "4+"
+ltable[6:7, 2] = ""
 
-rownames(ltable)=c("Hopitalization","","" ,"","","Death","Overall")
+rownames(ltable) = c("Hopitalization", "", "", "", "", "Death", "Overall")
 
 noquote(ltable)
-
-
+#> Produces a LaTeX-formatted table summarizing the RMT-IF results
 
 #######################################################################
 #               WA analysis                                           #
 #######################################################################
 
-
-# install.packages("WA")
+# install.packages("WA") # if needed
 library(WA)
 
-# load the hf-action study data
+# load the hf-action study data (already loaded, but repeated here)
 head(hfaction)
 
 # descriptive analysis
 
-## death & hosp rates
-
-hfaction |> 
-  group_by(trt_ab,patid) |> 
+## death & hosp rates by treatment arm
+hfaction |>
+  group_by(trt_ab, patid) |>
   summarize(
     ND = sum(status == 2),
     NH = sum(status == 1)
-  ) |> 
+  ) |>
   summarize(
     death_rate = mean(ND),
     avgNH = mean(NH),
     sdNH = sd(NH)
   )
 
-
-# weighted while-alive event rate (death vs hosp = 2:1).
-obj <- LRfit(hfaction$patid, hfaction$time, hfaction$status, hfaction$trt_ab, 
-             Dweight = 2)
+# weighted while-alive event rate analysis 
+# with death weighted as 2 vs 1 for hospitalization
+obj <- LRfit(
+  id = hfaction$patid,
+  time = hfaction$time,
+  status = hfaction$status,
+  trt = hfaction$trt_ab,
+  Dweight = 2
+)
 ## print some descriptive information 
 obj
 
@@ -212,31 +256,148 @@ obj
 summary(obj, tau = 3.97, joint.test = TRUE)
 
 plot(obj)
+#> Plots the Weighted-Alive event rates over time for each arm
 
-# unadjusted cumulative mean (Ch 1) ----------------------------------------
+# -------------------------------------------------------------------------
+# unadjusted cumulative mean (Ch 1)
+# -------------------------------------------------------------------------
+
 ## fit proportional means model with death = 2 x hosp
 library(Wcompo)
+
 ## change status coding
 status <- hfaction$status
 status[status != 0] <- 3 - status[status != 0]
+#> This transforms status=1->2, status=2->1, effectively swapping them
 
-
-obj_ML <- CompoML(hfaction$patid, hfaction$time, status, 
-                  hfaction$trt_ab, w = c(2, 1))
+obj_ML <- CompoML(
+  hfaction$patid,
+  hfaction$time,
+  status,
+  hfaction$trt_ab,
+  w = c(2, 1)
+)
 ## summary results
-t <- obj_ML$t ## time
-mu0 <- obj_ML$y ## baseline mean of t
+t <- obj_ML$t     # time points
+mu0 <- obj_ML$y   # baseline cumulative mean events
 mu1 <- mu0 * exp(as.numeric(obj_ML$beta))
+#> The exponentiated beta shifts the baseline function for the second arm
 
 ## plot survival-adjusted cumulative event 
 ## vs unadjusted under PM model
-plot(obj, ylab = "Cumulative loss", xlab = "Time (years)")
-lines(t[t<=3.97], mu0[t<=3.97], lty = 3, col = "red", lwd = 2)
-lines(t[t<=3.97], mu1[t<=3.97], lty = 3, col = "blue", lwd = 2)
-legend("bottomright", col = c("red", "red", "blue", "blue"), 
-       c("Usual care (WA)", "Usual care (unadj)", 
-         "Training (WA)", "Training (unadj)"), 
-       lty = c(1, 3, 1, 3), lwd = 2)
+plot(
+  obj,
+  ylab = "Cumulative loss",
+  xlab = "Time (years)"
+)
+lines(
+  t[t <= 3.97], mu0[t <= 3.97],
+  lty = 3, col = "red", lwd = 2
+)
+lines(
+  t[t <= 3.97], mu1[t <= 3.97],
+  lty = 3, col = "blue", lwd = 2
+)
+legend(
+  "bottomright",
+  col = c("red", "red", "blue", "blue"),
+  c("Usual care (WA)", "Usual care (unadj)",
+    "Training (WA)", "Training (unadj)"),
+  lty = c(1, 3, 1, 3),
+  lwd = 2
+)
+#> Compares Weighted-Alive-based event accumulation with the "unadjusted" PM model
+
 
 ```
 
+$$\newcommand{\d}{{\rm d}}
+\newcommand{\T}{{\rm T}}
+\newcommand{\dd}{{\rm d}}
+\newcommand{\cc}{{\rm c}}
+\newcommand{\pr}{{\rm pr}}
+\newcommand{\var}{{\rm var}}
+\newcommand{\se}{{\rm se}}
+\newcommand{\indep}{\perp \!\!\! \perp}
+\newcommand{\Pn}{n^{-1}\sum_{i=1}^n}
+\newcommand\mymathop[1]{\mathop{\operatorname{#1}}}
+\newcommand{\Ut}{{n \choose 2}^{-1}\sum_{i<j}\sum}
+\def\a{{(a)}} 
+\def\b{{(1-a)}} 
+\def\t{{(1)}} 
+\def\c{{(0)}} 
+\def\d{{\rm d}} 
+\def\T{{\rm T}} 
+\def\bs{\boldsymbol}
+$$
+
+## Restricted Win Ratio
+
+The win ratio estimand depends on the censoring distribution, as each pairwise comparison is limited to the observed follow-up $[0, C_i^\t \wedge C_j^\c]$. This leads to a censoring-weighted average of time-specific win probabilities, which is trial-dependent and lacks generalizability. One solution is to pre-specify a restriction time $\tau$ so all comparisons are evaluated over the same window.
+
+For a two-tiered composite of death and a nonfatal event, the restricted win/loss probability is defined by
+\begin{align}
+w_{a, 1-a}(\tau) &= \pr\{D^\b < \min(D^\a, \tau)\} \\
+&\quad + \pr\{\min(D^\t, D^\c) > \tau, T^\b < \min(T^\a, \tau)\},
+\end{align}
+with the restricted win ratio defined as $\text{WR}(\tau) = w_{1,0}(\tau) / w_{0,1}(\tau)$. Estimation methods include inverse probability of censoring weighting (IPCW) and multiple imputation (MI), as implemented in the `WINS` package.
+
+## Restricted Mean Time in Favor (RMT-IF)
+
+The restricted mean time in favor (RMT-IF) redefines the win-loss comparison in terms of time spent in more favorable states. For a multistate outcome $Y(t)$, RMT-IF measures the net average time one subject remains in a better state than another:
+$$
+\mu(\tau) = E\left[ \int_0^\tau I\{Y^{(1)}(t) < Y^{(0)}(t)\} \, \dd t \right] 
+- E\left[ \int_0^\tau I\{Y^{(0)}(t) < Y^{(1)}(t)\} \, \dd t \right].
+$$
+
+The process $Y(t)$ is assumed progressive and represents a hierarchy of worsening states, terminating in death. The estimand $\mu(\tau)$ admits a decomposition into component-specific effects:
+$$
+\mu(\tau) = \sum_{k=1}^K \mu_k(\tau) + \mu_\infty(\tau),
+$$
+where each $\mu_k(\tau)$ captures net time gained in a specific nonfatal state and $\mu_\infty(\tau)$ captures the difference in restricted mean survival time. Estimation proceeds by plugging in Kaplan–Meier estimators for transition times. The `rmt::rmtfit()` function provides estimation, inference, and graphics.
+
+## While-Alive Weighted Loss
+
+Standard analyses of weighted total events may misrepresent treatment effects if survival time differs between groups. The while-alive loss framework defines a normalized event rate over time alive:
+$$
+\ell^{(a)}(\tau) = \frac{E\left\{N_{\rm R}^{*(a)}(\tau)\right\}}{E\left(D^{(a)} \wedge \tau\right)}.
+$$
+
+More generally, the loss can be specified by a function $\mathcal{L}(\mathcal{H}^*(t))$ that accumulates only during time alive. This leads to a class of estimands:
+$$
+\ell^{(a)}(\tau) = \frac{E\left\{\mathcal L\left(\mathcal H^{*(a)}\right)(\tau)\right\}}{E\left(D^{(a)} \wedge \tau\right)},
+$$
+which includes total events, mortality, and flexible weighted combinations. Estimation uses survival-weighted Aalen-type integrals and is implemented in the `WA::LRfit()` function.
+
+## HF-ACTION Illustrations
+
+All three approaches were applied to the HF-ACTION dataset:
+
+- **Restricted WR** showed better interpretability than the original WR by standardizing follow-up to 4 years.
+- **RMT-IF** detected a significant average gain of 5.1 months in the training group, driven by both survival and reduced hospitalizations.
+- **While-alive loss** adjusted for differential follow-up and showed a 20% reduction in the average event rate, though the effect was attenuated compared to RMT-IF.
+
+Each method offers a distinct perspective:
+
+- RMT-IF summarizes net benefit in time.
+- WA analyses account for differential exposure.
+- Restricted WR retains the pairwise framework but standardizes follow-up.
+
+## Example R code
+
+```{r}
+#| eval: false
+# RMT-IF
+library(rmt)
+obj <- rmtfit(id, time, status, trt, type = "recurrent")
+summary(obj, tau = 4)
+
+# While-alive loss (death = 2 × nonfatal)
+library(WA)
+obj <- LRfit(id, time, status, trt, Dweight = 2)
+summary(obj, tau = 4)
+```
+
+## Conclusion
+
+Restricting follow-up time resolves many of the interpretability issues in standard composite endpoint analysis. The restricted win ratio, restricted mean time in favor, and while-alive loss rate each target clinically interpretable, time-standardized estimands. These tools are particularly helpful when survival times vary across groups, and should be considered complementary strategies in the analysis of composite outcomes.
