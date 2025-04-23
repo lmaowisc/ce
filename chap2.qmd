@@ -49,7 +49,7 @@ bibliography: references.bib
 # Win Ratio Basics & Properties
 
 ## Standard Two-Sample
-
+:::{.fragment}
 -   **Two-sample comparison** [@pocock2012]
     -   **Data**: $D_i^{(a)}, T_i^{(a)}, C_i^{(a)}$: survival, hospitalization, censoring times on $i$th subject in group $a$ $(i=1,\ldots, N_a; a= 1, 0)$
     -   **Pairwise comparisons**: $i$th in group $a$ vs $j$th in group $1-a$
@@ -57,15 +57,17 @@ bibliography: references.bib
             \hat w^{(a, 1-a)}_{ij}&= \underbrace{I(D_j^{(1-a)}< D_i^{(a)}\wedge C_i^{(a)}\wedge C_j^{(1-a)})}_{\mbox{win on survival}}\\
             & + \underbrace{I(\min(D_i^{(a)}, D_j^{(1-a)}) > C_i^{(a)}\wedge C_j^{(1-a)}, T_j^{(1-a)}< T_i^{(a)}\wedge C_i^{(1)}\wedge C_j^{(0)})}_{\mbox{tie on survival, win on hospitalization}}
             \end{align}
+:::
 
 ## Pocock's Rule
-
+:::{.fragment}
 -   **Win, lose, or tie?**
 
 ![](images/test_wrp.png){fig-align="center" width="80%"}
+:::
 
 ## Calculation of Win Ratio
-
+:::{.fragment}
 -   **Two-sample statistics**
     -   **Win (loss) fraction** for group $a$ ($1-a$) $$
         \hat w^{(a, 1-a)}=(N_0N_1)^{-1}\sum_{i=1}^{N_a}\sum_{j=1}^{N_{1-a}}\hat w^{(a, 1-a)}_{ij}$$
@@ -75,9 +77,10 @@ bibliography: references.bib
     -   **Other measures**
         -   **Net benefit (proportion in favor)**: $\hat w^{(1, 0)} - \hat w^{(0, 1)}$ [@buyse2010]
         -   **Win odds**: $(\hat w^{(1, 0)} - \hat w^{(0, 1)} + 1)/ (\hat w^{(0, 1)} - \hat w^{(1, 0)} + 1)$ [@dong2019]
+:::
 
 ## The Binary Case
-
+:::{.fragment}
 -   **Consider binary** $Y^{(a)}= 1, 0$
     -   $\hat w^{(a, 1-a)}_{ij} = I(Y_i^{(a)}> Y_j^{(1-a)})=Y_i^{(a)}(1-Y_j^{(1-a)})$
     -   **Win (loss) fraction** $$
@@ -88,30 +91,31 @@ bibliography: references.bib
         {\rm Win\,\, ratio}&= \frac{\hat w^{(1, 0)}}{\hat w^{(0, 1)}} = \frac{\hat p^{(1)}(1-\hat p^{(0)})}{\hat p^{(0)}(1-\hat p^{(1)})} = {\rm Odds \,\, ratio}\\
         {\rm Net \,\, benefit}&=\hat w^{(1, 0)} - \hat w^{(0, 1)} = \hat p^{(1)}- \hat p^{(0)}= {\rm Risk \,\, difference}
         \end{align}
+:::
 
 ## Hypothesis Testing
-
+:::{.fragment}
 -   **Test statistic**
     -   **Log-transformed and normalized** $$
         S_n = \frac{n^{1/2}\log(\hat w_{1,0}/\hat w_{0,1})}{\hat{\rm SE}} \stackrel{H_0}{\sim} N (0, 1)
         $$
-        -   $n = N_1 + N_0$
-        -   $\hat{\rm SE}$: standard error of numerator by $U$-statistic method [@Luo2015; @Bebu2016; @dong2016]
+        -   $\hat{\rm SE}$: standard error of numerator by $U$-statistic method [@Luo2015; @Bebu2016; @dong2016]; $n = N_1 + N_0$
     -   **Null hypothesis** $$
         H_0: H^\t(s, t) = H^\c(s, t)\mbox{ for all } t\leq s
         $$
         -   $H^\a(s, t)=\pr(D^\a > s, T^\a > t)$
+:::
 
 ## Alternative Hypothesis
-
+:::{.fragment}
 -   **What is estimand of WR?**
     -   Censoring-weighted average of time-dependent WRs [@oakes2016] $$
         \frac{\hat w_{1,0}}{\hat w_{0,1}}\to 
         \frac{\int_0^\infty\pr(\mbox{Treatment wins by } t)\dd G(t)}
-        {\int_0^\infty\pr(\mbox{Control wins by } t)\dd G(t)}
+        {\int_0^\infty\pr(\mbox{Control wins by } t)\dd G(t)} =\text{Non-centrality parameter}
         $$
         -   $G(t)$: Distribution function of $C^\t\wedge C^\c$
--   **Alternative hypothesis**
+<!-- -   **Alternative hypothesis** -->
     -   **Treatment wins *consistently*** against control over time [@Mao2019] $$
         H_A: \pr(\mbox{Treatment wins by } t)\geq \pr(\mbox{Control wins by } t)
         \mbox{ for all } t
@@ -119,32 +123,38 @@ bibliography: references.bib
     -   **Sufficient condition**: joint stochastic order of death and nonfatal event $$
         H_A: H^\t(s, t) \geq  H^\c(s, t)\mbox{ for all } t\leq s
         $$
+:::
 
 ## Variations
-
+:::{.fragment}
 -   **Weighting**
 
     -   Unweighted pairwise comparisons $\to$ @gehan1965 test
     -   Weight win/loss by time of follow-up $\to$ log-rank (more efficient) [@Luo2017]
-
+:::
+:::{.fragment}
 -   **Stratification**
 
     -   **Stratified WR**: within-stratum comparisons [@dong2017; @gasparyan2020; @dong2023]
         -   Sum of stratum-specific wins / sum of stratum-specific losses
     -   Adjust for confounding; increase efficiency
+:::
 
 # Handling Recurrent Events
 
 ## General Data
-
+:::{.fragment}
 -   **Full outcomes**
     -   A subject in group $a$ $(a=1, 0)$ $$\mathcal H^{*{(a)}}(t)=\left\{N^{*{(a)}}_D(u), N^{*{(a)}}_1(u), \ldots, N^{*{(a)}}_K(u):0\leq u\leq t\right\}$$
     -   $N^{*{(a)}}_D(u), N^{*{(a)}}_1(u), \ldots, N^{*{(a)}}_K(u)$: counting processes for death and $K$ different types of nonfatal events
+:::
+:::{.fragment}
 -   **Observed data**
     -   $\mathcal H^{*{(a)}}(X^{(a)})$: life history up to $X^{(a)}= D^{(a)}\wedge C^{(a)}$
+:::
 
 ## General Rule of Comparison
-
+:::{.fragment}
 -   **Win function**
     -   **Time frame of comparison**: $[0, t]$ $$\mathcal W(\mathcal H^{*{(a)}}, \mathcal H^{*{(1-a)}})(t) =I\left\{\mathcal H^{*{(a)}}(t) \mbox{ is more favorable than } \mathcal H^{*{(1-a)}}(t)\right\}$$
 
@@ -159,9 +169,10 @@ bibliography: references.bib
         -   (W1) Consistency of time frame
         -   (W2) Either win, loss, or tie
         -   (W3) No change of win-loss status after death (satisfied if death is prioritized)
+:::
 
 ## Generalized Win Ratio
-
+:::{.fragment}
 -   **Under general win function** $\mathcal W(\cdot,\cdot)$
     -   **Win ratio statistic** \begin{equation}\label{eq:wr:gen_WR}
         \hat{\mathcal E}_n(\mathcal W)=\frac{(N_1N_0)^{-1}\sum_{i=1}^{N_1}\sum_{j=1}^{N_0}\mathcal W(\mathcal H^{*{(1)}}_{i}, \mathcal H^{*{(0)}}_{j})(X^{{(1)}}_{i}\wedge X^{{(0)}}_{j})}
@@ -169,49 +180,55 @@ bibliography: references.bib
         \end{equation}
     -   Still each pair is compared over $\left[0, X^{{(1)}}_{i}\wedge X^{{(0)}}_{j}\right]$, but by a general rule $\mathcal W$
     -   **Stratified win ratio**: ratio between weighted sum of *within-stratum* win/loss fractions
+:::
 
 ## Examples
-
+:::{.fragment}
 -   **Pocock's WR**
     -   $T^{(a)}_1$: time of first event in $N^{*{(a)}}(t)=\sum_{k=1}^K N^{*{(a)}}_k(t)$ \begin{align}\label{eq:wr:PWR}
         \mathcal W_{\rm P}(\mathcal H^{*{(a)}}, \mathcal H^{*{(1-a)}})(t)&=I\{D^{(1-a)}<D^{(a)}\wedge t\}\notag\\
         &\hspace{2mm}+I\{D^{(a)}\wedge D^{(1-a)}>t, T_{1}^{(1-a)}<T_{1}^{(a)}\wedge t\}
         \end{align}
     -   $\hat{\mathcal E}_n(\mathcal W_{\rm P})$
+:::
+:::{.fragment}
 -   **TFE WR**
     -   $\tilde T^{(a)}=\min(D^{(a)}, T_1^{(a)})$ $$
         \mathcal W_{\rm TFE}(\mathcal H^{*{(a)}},\mathcal H^{*{(1-a)}})(t)=I(\tilde T^{(1-a)}<\tilde T^{(a)}\wedge t)
         $$
     -   $\hat{\mathcal E}_n(\mathcal W_{\rm TFE})$: allowable but not desirable
+:::
 
 ## Options for Recurrent Events
-
+:::{.fragment}
 -   **Three variations** [@mao2022a]
     -   **Naive**: Death \> number of events [@finkelstein1999]
     -   **First-event**: Death \> number of events \> time to *first* event
     -   **Last-event**: Death \> number of events \> time to *last* event
+:::
+:::{.fragment}
 -   **Properties**
     -   First/Last-event *fewer ties* than standard WR
 
     -   First/Last-event $\to$ Pocock's WR with *nonrecurrent* event
-
-    -   Last-event: longer-term endpoint (*recommended*)
 
         ::: callout-note
         ## Exercise
 
         Write out the win function $\mathcal W$ for the three versions of recurrent-event WR.
         :::
+:::
 
 ## Comparison with Pocock's
-
+:::{.fragment}
 -   **Last-event WR (LWR)**
     -   vs Pocock's WR (PWR)
 
 ![](images/test_comp_rwr.png){fig-align="center" width="80%"}
+:::
 
 ## Alternative Hypothesis for LWR
-
+:::{.fragment}
 -   **LWR**
     -   Tests joint stochastic order of all events $$
           H_A: H^\t(s, t_1, t_2, \ldots) \geq  H^\c(s, t_1, t_2, \ldots)\mbox{ for all } 
@@ -222,9 +239,10 @@ bibliography: references.bib
     -   Treatment stochastically delays all events
     -   All variations of WR implemented in [`WR`](https://cran.r-project.org/package=WR){target="_blank"} package
         -   Simulations show LWR more powerful than rest [@mao2022a]
+:::
 
 ## Software: `WR::WRrec()`
-
+:::{.fragment}
 -   **Basic syntax**
     -   **Long format** `ID`: unique patient identifier; `time`: event times; `status`: event types (`1`: death; `2`: recurrent events; `0`: censoring); `trt`: binary treatment; `strata`: strata variable
     -   `naive = TRUE`: calculates naive/FWR as well as LWR
@@ -232,40 +250,41 @@ bibliography: references.bib
 ::: big-code
 ```{r}
 library(WR)
-obj <- WRrec(ID, time, status, trt, strata = NULL, 
-              naive = FALSE)
+obj <- WRrec(ID, time, status, trt, strata = NULL, naive = FALSE)
 ```
 :::
 
 -   **Output**: a list of class `WRrec`
     -   `obj$log.WR`: log-LWR; `obj$se`: $\hat\se(\mbox{log-LWR})$
     -   `print(obj)` to print summary results
+:::
 
 ## HF-ACTION: Data
-
+:::{.fragment}
 -   **High-risk subset** $(n=426)$
 
     -   `age60`: indicator of age $\geq$ 60 yrs
 
-    ```{r}
-    library(WR)
-    ##### Read in HF-ACTION DATA########
-    # same as rmt::hfaction used in chap 1 
-    #  (except for status coding)
-    data(hfaction_cpx9)
-    hfaction <- hfaction_cpx9
-    head(hfaction)
-    #        patid       time status trt_ab age60
-    #> 1 HFACT00001  7.2459016      2      0     1
-    #> 2 HFACT00001 12.5573770      0      0     1
-    #> 3 HFACT00002  0.7540984      2      0     1
-    #> 4 HFACT00002  4.2950820      2      0     1
-    #> 5 HFACT00002  4.7540984      2      0     1
-    #> 6 HFACT00002 45.9016393      0      0     1
-    ```
+```{r}
+library(WR)
+##### Read in HF-ACTION DATA########
+# same as rmt::hfaction used in chap 1 
+#  (except for status coding)
+data(hfaction_cpx9)
+hfaction <- hfaction_cpx9
+head(hfaction)
+#>        patid       time status trt_ab age60
+#> 1 HFACT00001  7.2459016      2      0     1
+#> 2 HFACT00001 12.5573770      0      0     1
+#> 3 HFACT00002  0.7540984      2      0     1
+#> 4 HFACT00002  4.2950820      2      0     1
+#> 5 HFACT00002  4.7540984      2      0     1
+#> 6 HFACT00002 45.9016393      0      0     1
+```
+:::
 
 ## HF-ACTION: Summary
-
+:::{.fragment}
 -   **Descriptive**
 
 ```{r}
@@ -290,9 +309,10 @@ hf_desc <- tibble(
 kable(hf_desc, align = c("lccc"))
 
 ```
+:::
 
 ## HF-ACTION: WR Analyses
-
+:::{.fragment}
 -   **Naive (NWR), first-event (FWR), LWR**
 
     -   Stratified by age $<$ or $\geq 60$
@@ -318,32 +338,36 @@ kable(hf_desc, align = c("lccc"))
     #> *Note: The scale of WR depends on censoring distribution.
 
     ```
+:::
 
 ## HF-ACTION: Overall
-
+:::{.fragment}
 -   **Recurrent-event WRs more powerful than PWR**
     -   NWR/FWR/LWR similar as $N$ hosp is highly variable (0 - 26)
 
 ![](images/test_hfaction_wr.png){fig-align="center" width="70%"}
+:::
 
 # Sample Size Calculations
 
 ## Special Case: PWR
-
+:::{.fragment}
 -   **Simplified outcome model**
     -   **Gumbel-Hougaard copula** [@oakes1989] $$
         \pr(D^\a>s, T_1^\a>t) = \exp\left(-\left[\{\exp(a\xi_D)\lambda_Ds\}^\kappa + \{\exp(a\xi_H)\lambda_Ht\}^\kappa \right]^{1/\kappa}\right)
         $$
-    -   **Parameters**
         -   $\lambda_D, \lambda_H$: baseline hazard rates for death/nonfatal event
         -   $\exp(\xi_D), \exp(\xi_H)$: treatment HR on death/nonfatal event (*effect sizes*)
         -   $\kappa\geq 1$: association parameter (Kendall's rank correlation $1-\kappa^{-1}$)
+:::
+:::{.fragment}
 -   **Study design**
     -   Uniform patient accrual over $[0, \tau_b]$; follow all until $\tau>\tau_b$
     -   Random loss-to-follow-up (LTFU) rate $\lambda_L$
+:::
 
 ## Sample Size Formula
-
+:::{.fragment}
 -   **Total sample size needed** $$
     n = \frac{\zeta_0^2(\lambda_D,\lambda_H,\kappa,\tau_c,\tau,\lambda_L)(z_{1-\alpha/2} + z_\gamma)^2}
     {q(1-q)\delta(\lambda_D,\lambda_H,\kappa,\tau_c,\tau,\lambda_L)^\T\xi}
@@ -355,9 +379,10 @@ kable(hf_desc, align = c("lccc"))
         -   $\zeta_0(\lambda_D,\lambda_H,\kappa,\tau_c,\tau,\lambda_L)$: individual-level noise parameter (cf. SD) in WR
         -   $\delta(\lambda_D,\lambda_H,\kappa,\tau_c,\tau,\lambda_L)$: differential vector for log-WR $\to$ log-HRs
         -   Calculable by `WR::base(lambda_D,lambda_H,kappa,tau_c,tau,lambda_L)`
+:::
 
 ## Parameter Specification
-
+:::{.fragment}
 -   **Baseline outcome parameters** $(\lambda_D,\lambda_H,\kappa)$
 
     -   Estimable from *pilot/historical data*
@@ -379,9 +404,10 @@ kable(hf_desc, align = c("lccc"))
 -   **Design parameters** $(\tau_c,\tau,\lambda_L)$
 
     -   Self-specify
+:::
 
 ## Software: `WR::WRSS()`
-
+:::{.fragment}
 -   **Basic steps**
 
     -   `xi`: log-HRs $\xi=(\xi_D, \xi_H)^T$ (e.g., $\log (0.8, 0.9)^\T$)
@@ -406,19 +432,23 @@ kable(hf_desc, align = c("lccc"))
     obj <- WRSS(xi, bparam, q = 0.5, alpha = 0.05, side = 2, power = 0.8)
     obj$n
     ```
+:::
 
 ## A New Training Trial
-
+:::{.fragment}
 -   **Background**
     -   WR demonstrated beneficial effect of training on (death \> hosp) in HF patients with CPX $\leq 9$ min
+:::
+:::{.fragment}
 -   **Design of new trial**
     -   **Purpose**: test a new training program with existing one as standard care
     -   **Design**: $\tau_b = 3$ yrs patient accrual, follow until $\tau = 4$ yrs
         -   Assume minimal LTFU $\lambda_L = 0.01$ per person-year
     -   **Baseline event rates/correlation**: estimable from $n=205$ patients in HF-ACTION training arm
+:::
 
 ## HF-ACTION: Historical Data
-
+:::{.fragment}
 -   **Extract data from `hfaction`**
 
 ```{r}
@@ -439,9 +469,10 @@ pilot |> distinct(patid) |>
 #>   n
 #> 205
 ```
+:::
 
 ## HF-ACTION: Baseline Outcome
-
+:::{.fragment}
 -   **Parameter estimates**
     -   $\lambda_D=0.07$ year$^{-1}$, $\lambda_H=0.56$ year$^{-1}$, Kendall's corr $=36.1\%$
 
@@ -451,7 +482,6 @@ outcome_base <- gumbel.est(pilot$patid, pilot$time / 12, pilot$status)
 lambda_D <- outcome_base$lambda_D
 lambda_H <- outcome_base$lambda_H
 kappa <- outcome_base$kappa
-
 lambda_D
 #> [1] 0.07307293
 lambda_H
@@ -461,11 +491,11 @@ kappa
 ## Kendall's rank correlation
 1 - 1/kappa
 #> [1] 0.360812
-
 ```
+:::
 
 ## Sample Size: Example
-
+:::{.fragment}
 -   **One scenario**
     -   HRs on death & hospitalization: 0.9, 0.8
     -   Sample size needed for power 80%: $n=1241$
@@ -484,12 +514,14 @@ obj <- WRSS(xi = log(c(0.9, 0.8)), bparam = bparam, q =  0.5, alpha = 0.05,
 obj$n
 #> [1] 1240.958
 ```
+:::
 
 ## A Range of Effect Sizes
-
+:::{.fragment}
 -   Different HRs: $\exp(\xi)\in [0.6, 0.95]^{\otimes 2}$
 
 ![](images/test_hfaction_ss.png){fig-align="center" width="90%"}
+:::
 
 # Conclusion
 
@@ -498,7 +530,8 @@ obj$n
 -   **Event-specific win ratio**
     -   Win/loss on which component [@yang2020; @yang2022]
 -   **More on sample size**
-    -   Simplified/approximate approaches in various scenarios [@yu2022; @wang2023a; @gasparyan2021; @zhou2022; @seifu2022, etc.]
+    -   Calculatation based on win/loss proproportions [@yu2022]
+    -   Simplified/approximate approaches in various scenarios [@wang2023a; @gasparyan2021; @zhou2022; @seifu2022, etc.]
 
 ## Summary
 

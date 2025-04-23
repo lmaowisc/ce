@@ -268,6 +268,7 @@ Lu Mao
 </section>
 <section id="standard-two-sample" class="slide level2">
 <h2>Standard Two-Sample</h2>
+<div class="fragment">
 <ul>
 <li><strong>Two-sample comparison</strong> <span class="citation" data-cites="pocock2012">(<a href="#/references" role="doc-biblioref" onclick="">Pocock et al., 2012</a>)</span>
 <ul>
@@ -281,9 +282,11 @@ Lu Mao
 </ul></li>
 </ul></li>
 </ul>
+</div>
 </section>
 <section id="pococks-rule" class="slide level2">
 <h2>Pocock’s Rule</h2>
+<div class="fragment">
 <ul>
 <li><strong>Win, lose, or tie?</strong></li>
 </ul>
@@ -292,9 +295,11 @@ Lu Mao
 <p><img data-src="images/test_wrp.png" class="quarto-figure quarto-figure-center" style="width:80.0%"></p>
 </figure>
 </div>
+</div>
 </section>
 <section id="calculation-of-win-ratio" class="slide level2">
 <h2>Calculation of Win Ratio</h2>
+<div class="fragment">
 <ul>
 <li><strong>Two-sample statistics</strong>
 <ul>
@@ -310,9 +315,11 @@ WR = \hat w^{(1, 0)} / \hat w^{(0, 1)}
 </ul></li>
 </ul></li>
 </ul>
+</div>
 </section>
 <section id="the-binary-case" class="slide level2">
 <h2>The Binary Case</h2>
+<div class="fragment">
 <ul>
 <li><strong>Consider binary</strong> <span class="math inline">\(Y^{(a)}= 1, 0\)</span>
 <ul>
@@ -329,9 +336,11 @@ WR = \hat w^{(1, 0)} / \hat w^{(0, 1)}
 \end{align}\]</span></li>
 </ul></li>
 </ul>
+</div>
 </section>
 <section id="hypothesis-testing" class="slide level2">
 <h2>Hypothesis Testing</h2>
+<div class="fragment">
 <ul>
 <li><strong>Test statistic</strong>
 <ul>
@@ -339,8 +348,7 @@ WR = \hat w^{(1, 0)} / \hat w^{(0, 1)}
 S_n = \frac{n^{1/2}\log(\hat w_{1,0}/\hat w_{0,1})}{\hat{\rm SE}} \stackrel{H_0}{\sim} N (0, 1)
 \]</span>
 <ul>
-<li><span class="math inline">\(n = N_1 + N_0\)</span></li>
-<li><span class="math inline">\(\hat{\rm SE}\)</span>: standard error of numerator by <span class="math inline">\(U\)</span>-statistic method <span class="citation" data-cites="Luo2015 Bebu2016 dong2016">(<a href="#/references" role="doc-biblioref" onclick="">Bebu &amp; Lachin, 2016</a>; <a href="#/references" role="doc-biblioref" onclick="">Dong et al., 2016</a>; <a href="#/references" role="doc-biblioref" onclick="">Luo et al., 2015</a>)</span></li>
+<li><span class="math inline">\(\hat{\rm SE}\)</span>: standard error of numerator by <span class="math inline">\(U\)</span>-statistic method <span class="citation" data-cites="Luo2015 Bebu2016 dong2016">(<a href="#/references" role="doc-biblioref" onclick="">Bebu &amp; Lachin, 2016</a>; <a href="#/references" role="doc-biblioref" onclick="">Dong et al., 2016</a>; <a href="#/references" role="doc-biblioref" onclick="">Luo et al., 2015</a>)</span>; <span class="math inline">\(n = N_1 + N_0\)</span></li>
 </ul></li>
 <li><strong>Null hypothesis</strong> <span class="math display">\[
 H_0: H^\t(s, t) = H^\c(s, t)\mbox{ for all } t\leq s
@@ -350,23 +358,22 @@ H_0: H^\t(s, t) = H^\c(s, t)\mbox{ for all } t\leq s
 </ul></li>
 </ul></li>
 </ul>
+</div>
 </section>
 <section id="alternative-hypothesis" class="slide level2">
 <h2>Alternative Hypothesis</h2>
+<div class="fragment">
 <ul>
 <li><strong>What is estimand of WR?</strong>
 <ul>
 <li>Censoring-weighted average of time-dependent WRs <span class="citation" data-cites="oakes2016">(<a href="#/references" role="doc-biblioref" onclick="">Oakes, 2016</a>)</span> <span class="math display">\[
 \frac{\hat w_{1,0}}{\hat w_{0,1}}\to
 \frac{\int_0^\infty\pr(\mbox{Treatment wins by } t)\dd G(t)}
-{\int_0^\infty\pr(\mbox{Control wins by } t)\dd G(t)}
+{\int_0^\infty\pr(\mbox{Control wins by } t)\dd G(t)} =\text{Non-centrality parameter}
 \]</span>
 <ul>
-<li><span class="math inline">\(G(t)\)</span>: Distribution function of <span class="math inline">\(C^\t\wedge C^\c\)</span></li>
+<li><span class="math inline">\(G(t)\)</span>: Distribution function of <span class="math inline">\(C^\t\wedge C^\c\)</span> <!-- -   **Alternative hypothesis** --></li>
 </ul></li>
-</ul></li>
-<li><strong>Alternative hypothesis</strong>
-<ul>
 <li><strong>Treatment wins <em>consistently</em></strong> against control over time <span class="citation" data-cites="Mao2019">(<a href="#/references" role="doc-biblioref" onclick="">Mao, 2019</a>)</span> <span class="math display">\[
 H_A: \pr(\mbox{Treatment wins by } t)\geq \pr(\mbox{Control wins by } t)
 \mbox{ for all } t
@@ -376,15 +383,21 @@ H_A: H^\t(s, t) \geq  H^\c(s, t)\mbox{ for all } t\leq s
 \]</span></li>
 </ul></li>
 </ul>
+</div>
 </section>
 <section id="variations" class="slide level2">
 <h2>Variations</h2>
+<div class="fragment">
 <ul>
 <li><p><strong>Weighting</strong></p>
 <ul>
 <li>Unweighted pairwise comparisons <span class="math inline">\(\to\)</span> <span class="citation" data-cites="gehan1965">Gehan (<a href="#/references" role="doc-biblioref" onclick="">1965</a>)</span> test</li>
 <li>Weight win/loss by time of follow-up <span class="math inline">\(\to\)</span> log-rank (more efficient) <span class="citation" data-cites="Luo2017">(<a href="#/references" role="doc-biblioref" onclick="">Luo et al., 2017</a>)</span></li>
 </ul></li>
+</ul>
+</div>
+<div class="fragment">
+<ul>
 <li><p><strong>Stratification</strong></p>
 <ul>
 <li><strong>Stratified WR</strong>: within-stratum comparisons <span class="citation" data-cites="dong2017 gasparyan2020 dong2023">(<a href="#/references" role="doc-biblioref" onclick="">Dong et al., 2017</a>, <a href="#/references" role="doc-biblioref" onclick="">2023</a>; <a href="#/references" role="doc-biblioref" onclick="">Gasparyan et al., 2020</a>)</span>
@@ -394,6 +407,7 @@ H_A: H^\t(s, t) \geq  H^\c(s, t)\mbox{ for all } t\leq s
 <li>Adjust for confounding; increase efficiency</li>
 </ul></li>
 </ul>
+</div>
 </section></section>
 <section>
 <section id="handling-recurrent-events" class="title-slide slide level1 center">
@@ -402,20 +416,27 @@ H_A: H^\t(s, t) \geq  H^\c(s, t)\mbox{ for all } t\leq s
 </section>
 <section id="general-data" class="slide level2">
 <h2>General Data</h2>
+<div class="fragment">
 <ul>
 <li><strong>Full outcomes</strong>
 <ul>
 <li>A subject in group <span class="math inline">\(a\)</span> <span class="math inline">\((a=1, 0)\)</span> <span class="math display">\[\mathcal H^{*{(a)}}(t)=\left\{N^{*{(a)}}_D(u), N^{*{(a)}}_1(u), \ldots, N^{*{(a)}}_K(u):0\leq u\leq t\right\}\]</span></li>
 <li><span class="math inline">\(N^{*{(a)}}_D(u), N^{*{(a)}}_1(u), \ldots, N^{*{(a)}}_K(u)\)</span>: counting processes for death and <span class="math inline">\(K\)</span> different types of nonfatal events</li>
 </ul></li>
+</ul>
+</div>
+<div class="fragment">
+<ul>
 <li><strong>Observed data</strong>
 <ul>
 <li><span class="math inline">\(\mathcal H^{*{(a)}}(X^{(a)})\)</span>: life history up to <span class="math inline">\(X^{(a)}= D^{(a)}\wedge C^{(a)}\)</span></li>
 </ul></li>
 </ul>
+</div>
 </section>
 <section id="general-rule-of-comparison" class="slide level2">
 <h2>General Rule of Comparison</h2>
+<div class="fragment">
 <ul>
 <li><strong>Win function</strong>
 <ul>
@@ -434,9 +455,11 @@ H_A: H^\t(s, t) \geq  H^\c(s, t)\mbox{ for all } t\leq s
 </ul></li>
 </ul></li>
 </ul>
+</div>
 </section>
 <section id="generalized-win-ratio" class="slide level2">
 <h2>Generalized Win Ratio</h2>
+<div class="fragment">
 <ul>
 <li><strong>Under general win function</strong> <span class="math inline">\(\mathcal W(\cdot,\cdot)\)</span>
 <ul>
@@ -448,9 +471,11 @@ H_A: H^\t(s, t) \geq  H^\c(s, t)\mbox{ for all } t\leq s
 <li><strong>Stratified win ratio</strong>: ratio between weighted sum of <em>within-stratum</em> win/loss fractions</li>
 </ul></li>
 </ul>
+</div>
 </section>
 <section id="examples" class="slide level2">
 <h2>Examples</h2>
+<div class="fragment">
 <ul>
 <li><strong>Pocock’s WR</strong>
 <ul>
@@ -460,6 +485,10 @@ H_A: H^\t(s, t) \geq  H^\c(s, t)\mbox{ for all } t\leq s
 \end{align}\]</span></li>
 <li><span class="math inline">\(\hat{\mathcal E}_n(\mathcal W_{\rm P})\)</span></li>
 </ul></li>
+</ul>
+</div>
+<div class="fragment">
+<ul>
 <li><strong>TFE WR</strong>
 <ul>
 <li><span class="math inline">\(\tilde T^{(a)}=\min(D^{(a)}, T_1^{(a)})\)</span> <span class="math display">\[
@@ -468,9 +497,11 @@ H_A: H^\t(s, t) \geq  H^\c(s, t)\mbox{ for all } t\leq s
 <li><span class="math inline">\(\hat{\mathcal E}_n(\mathcal W_{\rm TFE})\)</span>: allowable but not desirable</li>
 </ul></li>
 </ul>
+</div>
 </section>
 <section id="options-for-recurrent-events" class="slide level2">
 <h2>Options for Recurrent Events</h2>
+<div class="fragment">
 <ul>
 <li><strong>Three variations</strong> <span class="citation" data-cites="mao2022a">(<a href="#/references" role="doc-biblioref" onclick="">Mao et al., 2022</a>)</span>
 <ul>
@@ -478,11 +509,14 @@ H_A: H^\t(s, t) \geq  H^\c(s, t)\mbox{ for all } t\leq s
 <li><strong>First-event</strong>: Death &gt; number of events &gt; time to <em>first</em> event</li>
 <li><strong>Last-event</strong>: Death &gt; number of events &gt; time to <em>last</em> event</li>
 </ul></li>
+</ul>
+</div>
+<div class="fragment">
+<ul>
 <li><strong>Properties</strong>
 <ul>
 <li><p>First/Last-event <em>fewer ties</em> than standard WR</p></li>
-<li><p>First/Last-event <span class="math inline">\(\to\)</span> Pocock’s WR with <em>nonrecurrent</em> event</p></li>
-<li><p>Last-event: longer-term endpoint (<em>recommended</em>)</p>
+<li><p>First/Last-event <span class="math inline">\(\to\)</span> Pocock’s WR with <em>nonrecurrent</em> event</p>
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -498,9 +532,11 @@ H_A: H^\t(s, t) \geq  H^\c(s, t)\mbox{ for all } t\leq s
 </div></li>
 </ul></li>
 </ul>
+</div>
 </section>
 <section id="comparison-with-pococks" class="slide level2">
 <h2>Comparison with Pocock’s</h2>
+<div class="fragment">
 <ul>
 <li><strong>Last-event WR (LWR)</strong>
 <ul>
@@ -512,9 +548,11 @@ H_A: H^\t(s, t) \geq  H^\c(s, t)\mbox{ for all } t\leq s
 <p><img data-src="images/test_comp_rwr.png" class="quarto-figure quarto-figure-center" style="width:80.0%"></p>
 </figure>
 </div>
+</div>
 </section>
 <section id="alternative-hypothesis-for-lwr" class="slide level2">
 <h2>Alternative Hypothesis for LWR</h2>
+<div class="fragment">
 <ul>
 <li><strong>LWR</strong>
 <ul>
@@ -533,9 +571,11 @@ H_A: H^\t(s, t) \geq  H^\c(s, t)\mbox{ for all } t\leq s
 </ul></li>
 </ul></li>
 </ul>
+</div>
 </section>
 <section id="software-wrwrrec" class="slide level2">
 <h2>Software: <code>WR::WRrec()</code></h2>
+<div class="fragment">
 <ul>
 <li><strong>Basic syntax</strong>
 <ul>
@@ -546,8 +586,7 @@ H_A: H^\t(s, t) \geq  H^\c(s, t)\mbox{ for all } t\leq s
 <div class="big-code">
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a><span class="fu">library</span>(WR)</span>
-<span id="cb1-2"><a></a>obj <span class="ot">&lt;-</span> <span class="fu">WRrec</span>(ID, time, status, trt, <span class="at">strata =</span> <span class="cn">NULL</span>, </span>
-<span id="cb1-3"><a></a>              <span class="at">naive =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-2"><a></a>obj <span class="ot">&lt;-</span> <span class="fu">WRrec</span>(ID, time, status, trt, <span class="at">strata =</span> <span class="cn">NULL</span>, <span class="at">naive =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 <ul>
@@ -557,13 +596,16 @@ H_A: H^\t(s, t) \geq  H^\c(s, t)\mbox{ for all } t\leq s
 <li><code>print(obj)</code> to print summary results</li>
 </ul></li>
 </ul>
+</div>
 </section>
 <section id="hf-action-data" class="slide level2">
 <h2>HF-ACTION: Data</h2>
+<div class="fragment">
 <ul>
 <li><p><strong>High-risk subset</strong> <span class="math inline">\((n=426)\)</span></p>
 <ul>
 <li><code>age60</code>: indicator of age <span class="math inline">\(\geq\)</span> 60 yrs</li>
+</ul></li>
 </ul>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a><span class="fu">library</span>(WR)</span>
@@ -573,18 +615,19 @@ H_A: H^\t(s, t) \geq  H^\c(s, t)\mbox{ for all } t\leq s
 <span id="cb2-5"><a></a><span class="fu">data</span>(hfaction_cpx9)</span>
 <span id="cb2-6"><a></a>hfaction <span class="ot">&lt;-</span> hfaction_cpx9</span>
 <span id="cb2-7"><a></a><span class="fu">head</span>(hfaction)</span>
-<span id="cb2-8"><a></a><span class="co">#        patid       time status trt_ab age60</span></span>
+<span id="cb2-8"><a></a><span class="co">#&gt;        patid       time status trt_ab age60</span></span>
 <span id="cb2-9"><a></a><span class="co">#&gt; 1 HFACT00001  7.2459016      2      0     1</span></span>
 <span id="cb2-10"><a></a><span class="co">#&gt; 2 HFACT00001 12.5573770      0      0     1</span></span>
 <span id="cb2-11"><a></a><span class="co">#&gt; 3 HFACT00002  0.7540984      2      0     1</span></span>
 <span id="cb2-12"><a></a><span class="co">#&gt; 4 HFACT00002  4.2950820      2      0     1</span></span>
 <span id="cb2-13"><a></a><span class="co">#&gt; 5 HFACT00002  4.7540984      2      0     1</span></span>
 <span id="cb2-14"><a></a><span class="co">#&gt; 6 HFACT00002 45.9016393      0      0     1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div></li>
-</ul>
+</div>
+</div>
 </section>
 <section id="hf-action-summary" class="slide level2">
 <h2>HF-ACTION: Summary</h2>
+<div class="fragment">
 <ul>
 <li><strong>Descriptive</strong></li>
 </ul>
@@ -667,9 +710,11 @@ Table&nbsp;1: Summary statistics for a high-risk subgroup (n=426) in HF-ACTION t
 </figure>
 </div>
 </div>
+</div>
 </section>
 <section id="hf-action-wr-analyses" class="slide level2">
 <h2>HF-ACTION: WR Analyses</h2>
+<div class="fragment">
 <ul>
 <li><p><strong>Naive (NWR), first-event (FWR), LWR</strong></p>
 <ul>
@@ -695,9 +740,11 @@ Table&nbsp;1: Summary statistics for a high-risk subgroup (n=426) in HF-ACTION t
 <span id="cb4-12"><a></a><span class="co">#&gt; *Note: The scale of WR depends on censoring distribution.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></li>
 </ul>
+</div>
 </section>
 <section id="hf-action-overall" class="slide level2">
 <h2>HF-ACTION: Overall</h2>
+<div class="fragment">
 <ul>
 <li><strong>Recurrent-event WRs more powerful than PWR</strong>
 <ul>
@@ -709,6 +756,7 @@ Table&nbsp;1: Summary statistics for a high-risk subgroup (n=426) in HF-ACTION t
 <p><img data-src="images/test_hfaction_wr.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></p>
 </figure>
 </div>
+</div>
 </section></section>
 <section>
 <section id="sample-size-calculations" class="title-slide slide level1 center">
@@ -717,28 +765,34 @@ Table&nbsp;1: Summary statistics for a high-risk subgroup (n=426) in HF-ACTION t
 </section>
 <section id="special-case-pwr" class="slide level2">
 <h2>Special Case: PWR</h2>
+<div class="fragment">
 <ul>
 <li><strong>Simplified outcome model</strong>
 <ul>
 <li><strong>Gumbel-Hougaard copula</strong> <span class="citation" data-cites="oakes1989">(<a href="#/references" role="doc-biblioref" onclick="">Oakes, 1989</a>)</span> <span class="math display">\[
 \pr(D^\a&gt;s, T_1^\a&gt;t) = \exp\left(-\left[\{\exp(a\xi_D)\lambda_Ds\}^\kappa + \{\exp(a\xi_H)\lambda_Ht\}^\kappa \right]^{1/\kappa}\right)
-\]</span></li>
-<li><strong>Parameters</strong>
+\]</span>
 <ul>
 <li><span class="math inline">\(\lambda_D, \lambda_H\)</span>: baseline hazard rates for death/nonfatal event</li>
 <li><span class="math inline">\(\exp(\xi_D), \exp(\xi_H)\)</span>: treatment HR on death/nonfatal event (<em>effect sizes</em>)</li>
 <li><span class="math inline">\(\kappa\geq 1\)</span>: association parameter (Kendall’s rank correlation <span class="math inline">\(1-\kappa^{-1}\)</span>)</li>
 </ul></li>
 </ul></li>
+</ul>
+</div>
+<div class="fragment">
+<ul>
 <li><strong>Study design</strong>
 <ul>
 <li>Uniform patient accrual over <span class="math inline">\([0, \tau_b]\)</span>; follow all until <span class="math inline">\(\tau&gt;\tau_b\)</span></li>
 <li>Random loss-to-follow-up (LTFU) rate <span class="math inline">\(\lambda_L\)</span></li>
 </ul></li>
 </ul>
+</div>
 </section>
 <section id="sample-size-formula" class="slide level2">
 <h2>Sample Size Formula</h2>
+<div class="fragment">
 <ul>
 <li><strong>Total sample size needed</strong> <span class="math display">\[
 n = \frac{\zeta_0^2(\lambda_D,\lambda_H,\kappa,\tau_c,\tau,\lambda_L)(z_{1-\alpha/2} + z_\gamma)^2}
@@ -756,9 +810,11 @@ n = \frac{\zeta_0^2(\lambda_D,\lambda_H,\kappa,\tau_c,\tau,\lambda_L)(z_{1-\alph
 </ul></li>
 </ul></li>
 </ul>
+</div>
 </section>
 <section id="parameter-specification" class="slide level2">
 <h2>Parameter Specification</h2>
+<div class="fragment">
 <ul>
 <li><p><strong>Baseline outcome parameters</strong> <span class="math inline">\((\lambda_D,\lambda_H,\kappa)\)</span></p>
 <ul>
@@ -791,9 +847,11 @@ n = \frac{\zeta_0^2(\lambda_D,\lambda_H,\kappa,\tau_c,\tau,\lambda_L)(z_{1-\alph
 <li>Self-specify</li>
 </ul></li>
 </ul>
+</div>
 </section>
 <section id="software-wrwrss" class="slide level2">
 <h2>Software: <code>WR::WRSS()</code></h2>
+<div class="fragment">
 <ul>
 <li><p><strong>Basic steps</strong></p>
 <ul>
@@ -818,14 +876,20 @@ n = \frac{\zeta_0^2(\lambda_D,\lambda_H,\kappa,\tau_c,\tau,\lambda_L)(z_{1-\alph
 <span id="cb7-3"><a></a>obj<span class="sc">$</span>n</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></li>
 </ul>
+</div>
 </section>
 <section id="a-new-training-trial" class="slide level2">
 <h2>A New Training Trial</h2>
+<div class="fragment">
 <ul>
 <li><strong>Background</strong>
 <ul>
 <li>WR demonstrated beneficial effect of training on (death &gt; hosp) in HF patients with CPX <span class="math inline">\(\leq 9\)</span> min</li>
 </ul></li>
+</ul>
+</div>
+<div class="fragment">
+<ul>
 <li><strong>Design of new trial</strong>
 <ul>
 <li><strong>Purpose</strong>: test a new training program with existing one as standard care</li>
@@ -836,9 +900,11 @@ n = \frac{\zeta_0^2(\lambda_D,\lambda_H,\kappa,\tau_c,\tau,\lambda_L)(z_{1-\alph
 <li><strong>Baseline event rates/correlation</strong>: estimable from <span class="math inline">\(n=205\)</span> patients in HF-ACTION training arm</li>
 </ul></li>
 </ul>
+</div>
 </section>
 <section id="hf-action-historical-data" class="slide level2">
 <h2>HF-ACTION: Historical Data</h2>
+<div class="fragment">
 <ul>
 <li><strong>Extract data from <code>hfaction</code></strong></li>
 </ul>
@@ -860,9 +926,11 @@ n = \frac{\zeta_0^2(\lambda_D,\lambda_H,\kappa,\tau_c,\tau,\lambda_L)(z_{1-\alph
 <span id="cb8-15"><a></a><span class="co">#&gt;   n</span></span>
 <span id="cb8-16"><a></a><span class="co">#&gt; 205</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+</div>
 </section>
 <section id="hf-action-baseline-outcome" class="slide level2">
 <h2>HF-ACTION: Baseline Outcome</h2>
+<div class="fragment">
 <ul>
 <li><strong>Parameter estimates</strong>
 <ul>
@@ -875,20 +943,21 @@ n = \frac{\zeta_0^2(\lambda_D,\lambda_H,\kappa,\tau_c,\tau,\lambda_L)(z_{1-\alph
 <span id="cb9-3"><a></a>lambda_D <span class="ot">&lt;-</span> outcome_base<span class="sc">$</span>lambda_D</span>
 <span id="cb9-4"><a></a>lambda_H <span class="ot">&lt;-</span> outcome_base<span class="sc">$</span>lambda_H</span>
 <span id="cb9-5"><a></a>kappa <span class="ot">&lt;-</span> outcome_base<span class="sc">$</span>kappa</span>
-<span id="cb9-6"><a></a></span>
-<span id="cb9-7"><a></a>lambda_D</span>
-<span id="cb9-8"><a></a><span class="co">#&gt; [1] 0.07307293</span></span>
-<span id="cb9-9"><a></a>lambda_H</span>
-<span id="cb9-10"><a></a><span class="co">#&gt; 1] 0.5596186</span></span>
-<span id="cb9-11"><a></a>kappa</span>
-<span id="cb9-12"><a></a><span class="co">#&gt; [1] 1.564485</span></span>
-<span id="cb9-13"><a></a><span class="do">## Kendall's rank correlation</span></span>
-<span id="cb9-14"><a></a><span class="dv">1</span> <span class="sc">-</span> <span class="dv">1</span><span class="sc">/</span>kappa</span>
-<span id="cb9-15"><a></a><span class="co">#&gt; [1] 0.360812</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb9-6"><a></a>lambda_D</span>
+<span id="cb9-7"><a></a><span class="co">#&gt; [1] 0.07307293</span></span>
+<span id="cb9-8"><a></a>lambda_H</span>
+<span id="cb9-9"><a></a><span class="co">#&gt; 1] 0.5596186</span></span>
+<span id="cb9-10"><a></a>kappa</span>
+<span id="cb9-11"><a></a><span class="co">#&gt; [1] 1.564485</span></span>
+<span id="cb9-12"><a></a><span class="do">## Kendall's rank correlation</span></span>
+<span id="cb9-13"><a></a><span class="dv">1</span> <span class="sc">-</span> <span class="dv">1</span><span class="sc">/</span>kappa</span>
+<span id="cb9-14"><a></a><span class="co">#&gt; [1] 0.360812</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </div>
 </section>
 <section id="sample-size-example" class="slide level2">
 <h2>Sample Size: Example</h2>
+<div class="fragment">
 <ul>
 <li><strong>One scenario</strong>
 <ul>
@@ -910,9 +979,11 @@ n = \frac{\zeta_0^2(\lambda_D,\lambda_H,\kappa,\tau_c,\tau,\lambda_L)(z_{1-\alph
 <span id="cb10-11"><a></a>obj<span class="sc">$</span>n</span>
 <span id="cb10-12"><a></a><span class="co">#&gt; [1] 1240.958</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+</div>
 </section>
 <section id="a-range-of-effect-sizes" class="slide level2">
 <h2>A Range of Effect Sizes</h2>
+<div class="fragment">
 <ul>
 <li>Different HRs: <span class="math inline">\(\exp(\xi)\in [0.6, 0.95]^{\otimes 2}\)</span></li>
 </ul>
@@ -920,6 +991,7 @@ n = \frac{\zeta_0^2(\lambda_D,\lambda_H,\kappa,\tau_c,\tau,\lambda_L)(z_{1-\alph
 <figure>
 <p><img data-src="images/test_hfaction_ss.png" class="quarto-figure quarto-figure-center" style="width:90.0%"></p>
 </figure>
+</div>
 </div>
 </section></section>
 <section>
@@ -936,7 +1008,8 @@ n = \frac{\zeta_0^2(\lambda_D,\lambda_H,\kappa,\tau_c,\tau,\lambda_L)(z_{1-\alph
 </ul></li>
 <li><strong>More on sample size</strong>
 <ul>
-<li>Simplified/approximate approaches in various scenarios <span class="citation" data-cites="yu2022 wang2023a gasparyan2021 zhou2022 seifu2022">(<a href="#/references" role="doc-biblioref" onclick="">Gasparyan et al., 2021</a>; <a href="#/references" role="doc-biblioref" onclick="">Seifu et al., 2022</a>, etc.; <a href="#/references" role="doc-biblioref" onclick="">Wang et al., 2023</a>; <a href="#/references" role="doc-biblioref" onclick="">Yu &amp; Ganju, 2022</a>; <a href="#/references" role="doc-biblioref" onclick="">Zhou et al., 2022</a>)</span></li>
+<li>Calculatation based on win/loss proproportions <span class="citation" data-cites="yu2022">(<a href="#/references" role="doc-biblioref" onclick="">Yu &amp; Ganju, 2022</a>)</span></li>
+<li>Simplified/approximate approaches in various scenarios <span class="citation" data-cites="wang2023a gasparyan2021 zhou2022 seifu2022">(<a href="#/references" role="doc-biblioref" onclick="">Gasparyan et al., 2021</a>; <a href="#/references" role="doc-biblioref" onclick="">Seifu et al., 2022</a>, etc.; <a href="#/references" role="doc-biblioref" onclick="">Wang et al., 2023</a>; <a href="#/references" role="doc-biblioref" onclick="">Zhou et al., 2022</a>)</span></li>
 </ul></li>
 </ul>
 </section>
