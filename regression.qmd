@@ -9,261 +9,393 @@ Chapter slides [here](chap4.html){target="_blank"}. (To convert html to pdf, pre
 ```{r}
 #| code-fold: true
 #| code-summary: "Show the code"
-#| eval: true
-#| warning: false
-#| label: tbl-hfaction-reg-tabone
-#| tbl-cap: Patient characteristics in non-ischemic cohort of HF-ACTION 
+#| eval: false
 
 ##################################################################
-# This code generates the numerical results in  chapter 4       ##
+# This code generates the numerical results in chapter 4         #
 ##################################################################
-
 
 # install.packages("WR")
 library(WR)
 library(tidyverse)
 library(knitr) # for formatted table output
 
-
 # load the data
 data(non_ischemic)
 # head(non_ischemic)
+#> non_ischemic dataset containing columns for ID, time, status, trt_ab, and covariates
 
+# -------------------------------------------------------------------------
+# Descriptive Analysis
+# -------------------------------------------------------------------------
 
-
-# Descriptive analysis ----------------------------------------------------
-
-# function to convert 1-0 to Yes-No
-one_zero_to_yn <- function(x){
+# function to convert 1-0 to Yes-No strings
+one_zero_to_yn <- function(x) {
   if_else(x == 1, "Yes", "No")
 }
 
-
 # clean up data
-df <- non_ischemic |> 
-  filter(status != 2) |>  # de-duplicate
-  mutate( # clean up the levels of categorical variables
-    trt_ab = fct(if_else(trt_ab == 0, "Usual care", "Training")),
+df <- non_ischemic |>
+  filter(status != 2) |>  # remove rows where status=2 (duplicates or not needed)
+  mutate(
+    trt_ab = fct(if_else(trt_ab == 0, "Usual care", "Training")), 
+    # Convert trt_ab=0 -> "Usual care", 1 -> "Training"
+    
     sex = if_else(sex == 1, "Female", "Male"),
+    # Convert numeric sex variable to "Female"/"Male"
+    
     race = case_when(
       Black.vs.White == 1 ~ "Black",
       Other.vs.White == 1 ~ "Other",
       Black.vs.White == 0 & Other.vs.White == 0 ~ "White"
     ),
-    race = fct(race),
+    # Recode race based on binary indicators
+    
+    race = fct(race), # Convert to factor
+    
     across(hyperten:smokecurr, one_zero_to_yn)
-  ) 
+    # Convert all these binary variables to "Yes"/"No" strings
+  )
 
-
-## a function to compute median (IQR) for x
-## rounded to the rth decimal place
-med_iqr <- function(x, r = 1){
-  qt <- quantile(x, na.rm = TRUE)
-  
-  str_c(round(qt[3], r), " (", 
-        round(qt[2], r), ", ",
-        round(qt[4], r), ")")
+## A function to compute median (IQR) for a numeric vector 'x', 
+## rounded to the r-th decimal place
+med_iqr <- function(x, r = 1) {
+  qt <- quantile(x, na.rm = TRUE)  # Calculate quartiles
+  str_c(
+    round(qt[3], r), " (",  # Median
+    round(qt[2], r), ", ",  # Q1
+    round(qt[4], r), ")"    # Q3
+  )
 }
 
 # create summary table for quantitative variables
-# age, size, nodes, prog, estrg
-tab_quant <- df |> 
-  group_by(trt_ab) |> 
+# We summarize across arms: 'age', 'bmi', and 'bipllvef' (Left Ventricular Ejection Fraction)
+tab_quant <- df |>
+  group_by(trt_ab) |>
   summarize(
     across(c(age, bmi, bipllvef), med_iqr)
-  ) |> 
-  pivot_longer( # long format: value = median (IQR); name = variable names
+  ) |>
+  pivot_longer(
     !trt_ab,
     values_to = "value",
     names_to = "name"
-  ) |> 
-  pivot_wider( # wide format: name = variable names; trt_ab as columns
+  ) |>
+  pivot_wider(
     values_from = value,
     names_from = trt_ab
-  ) |> 
+  ) |>
   mutate(
-    name = case_when( # format the variable names
+    name = case_when(
       name == "age" ~ "Age (years)",
       name == "bmi" ~ "BMI",
       name == "bipllvef" ~ "LVEF (%)"
     )
   )
 
-
-## a function that computes N (%) for each level of var
-## by group in data frame df (percent rounded to rth point)
-freq_pct<- function(df, group, var, r = 1){
-  # compute the N for each level of var by group
-  var_counts <- df |> 
-    group_by({{ group }}, {{ var }}) |> 
+## A function that computes N (%) for each level of `var`,
+## grouped by 'group' in df (percent rounded to r-th decimal).
+freq_pct <- function(df, group, var, r = 1) {
+  # Tally up the count n for each level of 'var' by 'group'
+  var_counts <- df |>
+    group_by({{ group }}, {{ var }}) |>
     summarize(
       n = n(),
       .groups = "drop"
-    ) 
-  # compute N (%)
-  var_counts |> 
-    left_join( # compute the total number (demoninator) in each group
-      # and joint it back to the numerator
-      var_counts |> group_by({{ group }}) |> summarize(N = sum(n)),
+    )
+  
+  # Join with the total count N in each group, then compute "n (xx%)"
+  var_counts |>
+    left_join(
+      var_counts |>
+        group_by({{ group }}) |>
+        summarize(N = sum(n)),
       by = join_by({{ group }})
-    ) |> 
-    mutate( # N (%)
+    ) |>
+    mutate(
       value = str_c(n, " (", round(100 * n / N, r), "%)")
-    ) |> 
-    select(- c(n, N)) |> 
-    pivot_wider( # put group levels on columns
+    ) |>
+    select(-c(n, N)) |>
+    pivot_wider(
       names_from = {{ group }},
       values_from = value
-    ) |> 
+    ) |>
     rename(
-      name = {{ var }} # name = variable names 
+      name = {{ var }}
     )
 }
 
-# Apply this function to sex, race, hyperten:smokecurr 
-  
+# Apply freq_pct() to sex, race, hyperten:smokecurr
+
 # sex
 sex <- df |>
-  freq_pct(trt_ab, sex) |> 
+  freq_pct(trt_ab, sex) |>
   mutate(
-    name = str_c("Sex - ", name)
+    name = str_c("Sex - ", name) 
+    # e.g., "Sex - Female", "Sex - Male"
   )
 
 # race
 race <- df |>
-  freq_pct(trt_ab, race) |> 
+  freq_pct(trt_ab, race) |>
   mutate(
     name = str_c("Race - ", name)
+    # e.g., "Race - Black", "Race - White", etc.
   )
 
 hyperten <- df |>
-  freq_pct(trt_ab, hyperten) |> 
-  filter(name == "Yes") |> 
+  freq_pct(trt_ab, hyperten) |>
+  filter(name == "Yes") |>
   mutate(
     name = "Hypertension"
   )
 
+# The following block is repeated as in the original code:
 hyperten <- df |>
-  freq_pct(trt_ab, hyperten) |> 
-  filter(name == "Yes") |> 
+  freq_pct(trt_ab, hyperten) |>
+  filter(name == "Yes") |>
   mutate(
     name = "Hypertension"
   )
-
 
 COPD <- df |>
-  freq_pct(trt_ab, COPD) |> 
-  filter(name == "Yes") |> 
+  freq_pct(trt_ab, COPD) |>
+  filter(name == "Yes") |>
   mutate(
     name = "COPD"
-)  
+  )
 
 diabetes <- df |>
-  freq_pct(trt_ab, diabetes) |> 
-  filter(name == "Yes") |> 
+  freq_pct(trt_ab, diabetes) |>
+  filter(name == "Yes") |>
   mutate(
     name = "Diabetes"
-  )  
+  )
 
 acei <- df |>
-   freq_pct(trt_ab, acei) |> 
-   filter(name == "Yes") |> 
-   mutate(
-     name = "ACE Inhibitor"
-   ) 
-   
+  freq_pct(trt_ab, acei) |>
+  filter(name == "Yes") |>
+  mutate(
+    name = "ACE Inhibitor"
+  )
+
 betab <- df |>
-  freq_pct(trt_ab, betab) |> 
-  filter(name == "Yes") |> 
+  freq_pct(trt_ab, betab) |>
+  filter(name == "Yes") |>
   mutate(
     name = "Beta Blocker"
-  )     
-
+  )
 
 smokecurr <- df |>
-  freq_pct(trt_ab, betab) |> 
-  filter(name == "smokecurr") |> 
+  freq_pct(trt_ab, betab) |>  # This line references betab for grouping
+  filter(name == "smokecurr") |>
   mutate(
     name = "Smoker"
-  )     
+  )
 
-
+# Combine all the partial tables (quantitative + categorical summaries)
 tabone <- bind_rows(
   tab_quant[1, ],
-  sex, race,
+  sex,
+  race,
   tab_quant[2:3, ],
-  hyperten, COPD, diabetes, acei, betab, smokecurr    
+  hyperten,
+  COPD,
+  diabetes,
+  acei,
+  betab,
+  smokecurr
 )
 
+## Add the group sample size (N=...) to column names
+colnames(tabone) <- c(
+  " ",
+  str_c(
+    colnames(tabone)[2:3],
+    " (N=", table(df$trt_ab), ")"
+  )
+)
 
-## add N to group names  
-colnames(tabone) <- c(" ", str_c(colnames(tabone)[2:3], " (N=", table(df$trt_ab),")"))
-## print out the table
+## Print out the final table in a formatted manner
 kable(tabone, align = c("lcc"))
-```
 
-
-
-```{r}
-#| code-fold: true
-#| code-summary: "Show the code"
-#| eval: false
 
 # PW regression analysis --------------------------------------------------
+# The following code chunk is not executed by default (eval=FALSE) but 
+# shows how to fit piecewise regression using 'pwreg()'.
 
 # re-label the covariates with informative names.
-
-colnames(non_ischemic)[4:16]=c(
-  "Training vs Usual","Age (year)","Male vs Female","Black vs White", 
-  "Other vs White", "BMI","LVEF","Hypertension","COPD","Diabetes",
-  "ACE Inhibitor","Beta Blocker", "Smoker"
+colnames(non_ischemic)[4:16] = c(
+  "Training vs Usual", "Age (year)", "Male vs Female", "Black vs White", 
+  "Other vs White", "BMI", "LVEF", "Hypertension", "COPD", "Diabetes",
+  "ACE Inhibitor", "Beta Blocker", "Smoker"
 )
 
+p <- ncol(non_ischemic) - 3
 
-p <- ncol(non_ischemic)-3
+# extract ID, time, status, and covariates matrix Z
+# note that ID, time, and status should be column vectors
+ID <- non_ischemic[, "ID"]
+time <- non_ischemic[, "time"] / 30.5 # convert days to months
+status <- non_ischemic[, "status"]
+Z <- as.matrix(non_ischemic[, 4:(3 + p)])
 
-# extract ID, time, status and covariates matrix Z from the data.
-# note that: ID, time and status should be column vector
-ID <- non_ischemic[,"ID"]
-time <- non_ischemic[,"time"] / 30.5 # days to months
-status <- non_ischemic[,"status"]
-Z <- as.matrix(non_ischemic[,4:(3+p)])
-
-# pass the parameters into the function
+# pass parameters into the function
 obj <- pwreg(ID, time, status, Z)
 obj
+#> Displays the main results from piecewise regression
 
 # extract estimates of (beta_4, beta_5)
 beta <- matrix(obj$beta[4:5])
 # extract estimated covariance matrix for (beta_4, beta_5)
 Sigma <- obj$Var[4:5, 4:5]
-# compute chisq statistic in quadratic form
-chistats <- t(beta) %*% solve(Sigma) %*% beta  
 
-# compare the Wald statistic with the reference
-# distribution of chisq(2) to obtain the p-value
+# compute chisq statistic in quadratic form to jointly test beta_4, beta_5
+chistats <- t(beta) %*% solve(Sigma) %*% beta
+
+# compare the Wald statistic with a chisq(2) reference distribution
 1 - pchisq(chistats, df = 2)
-#>           [,1]
-#> [1,] 0.1016988
-
+#> example p-value for the joint test
 
 # compute score processes
 score_obj <- score.proc(obj)
-# plot scores for all 13 covariates
+
+# plot scores for all 13 covariates to check time-varying effects
 par(mfrow = c(4, 4))
-for(i in c(1:13)){
+for (i in 1:13) {
   plot(score_obj, k = i, xlab = "Time (months)")
-  # add reference lines
+  # add reference lines for approx. +/-2 standard errors
   abline(a = 2, b = 0, lty = 3)
   abline(a = 0, b = 0, lty = 3)
-  abline(a = - 2, b = 0, lty = 3)
+  abline(a = -2, b = 0, lty = 3)
 }
 
-
 ### Exercise: Stratify by sex ###
+# Drop the sex variable from Z (assuming it's at column 3)
 sex <- Z[, 3]
 Zs <- Z[, -3]
-obj_str<-pwreg(ID, time, status, Zs, strata = sex)
+obj_str <- pwreg(ID, time, status, Zs, strata = sex)
 obj_str
+#> Fits a PW regression model stratified by sex
+```
+
+$$
+\def\T{{\rm T}} 
+$$
+
+## Regression Framework 
+
+The proportional win-fractions (PW) model provides a semiparametric regression framework for composite outcomes defined by prioritized win/loss rules. Like the Cox model for univariate time-to-event data, the PW model enables covariate adjustment and improves efficiency. It also generalizes the two-sample win ratio by allowing treatment comparisons to be conditional on baseline characteristics.
+
+Given two subjects with covariates $Z_i$ and $Z_j$, the conditional win ratio is defined as
+$$
+WR(t; Z_i, Z_j;\mathcal W) = \frac{E\left\{\mathcal{W}(\mathcal H_i^*, \mathcal H_j^*)(t) \mid Z_i, Z_j \right\}}{E\left\{\mathcal{W}(\mathcal H_j^*, \mathcal H_i^*)(t) \mid Z_i, Z_j \right\}},
+$$
+where $\mathcal{W}$ is a prespecified win function and the ratio represents the odds that subject $i$ wins against $j$.
+
+## Proportional Win-Fractions Model
+### Model Specification
+Under the proportional win-fractions assumption, the conditional win ratio is modeled as
+$$
+WR(t \mid Z_i, Z_j; \mathcal W) = \exp\left\{\beta^\T (Z_i - Z_j)\right\},
+$$
+where $\beta$ is a vector of regression coefficients interpreted on the log win-ratio scale. The PW model is semiparametric: it imposes parametric structure on covariate effects while leaving the distribution of outcomes unspecified.
+
+The model includes standard Cox regression and two-sample WR as special cases. For instance, when $\mathcal W$ corresponds to time-to-first-event comparisons, PW reduces to the Cox model. When $Z$ is a binary treatment indicator, $\exp(\beta)$ equals the marginal win ratio between groups.
+
+### Estimation and Residuals
+
+Model parameters are estimated by solving a $U$-statistic estimating equation involving pairwise win residuals:
+$$
+M_{ij}(t \mid Z_i, Z_j; \beta) = \delta_{ij}(t) - R_{ij}(t) \cdot \frac{\exp\left\{\beta^\T(Z_i - Z_j)\right\}}{1 + \exp\left\{\beta^\T(Z_i - Z_j)\right\}}.
+$$
+The estimating function averages weighted residuals across all subject pairs. Variance is obtained via $U$-statistic theory. Proportionality assumptions can be assessed using cumulative residual plots analogous to score processes in the Cox model.
+
+### Stratification
+
+To address potential non-proportionality across levels of categorical covariates, the PW model can be extended to allow stratum-specific baselines. In the stratified PW model, win/loss probabilities are modeled only within each stratum. This permits heterogeneity in win functions across subgroups while maintaining proportionality within each.
+
+### HF-ACTION Application
+
+The PW model was applied to 451 non-ischemic patients in HF-ACTION using a win function prioritizing death over first hospitalization. Covariates included demographics, comorbidities, and medication use. The overall Wald test for all covariates was statistically significant (*p* = 0.024). Significant predictors included age, LVEF, and race, with Black patients having lower win probabilities relative to White patients. Residual plots supported the proportionality assumption across most covariates.
+
+## Regularized PW Regression
+
+### Elastic Net Penalty
+In high-dimensional settings, regularization improves model stability and supports variable selection. The `wrnet` function estimates the PW model under elastic net penalty. The objective function combines logistic loss over all comparable pairs with an $\ell_1$–$\ell_2$ penalty:
+$$
+l_n(\beta; \lambda) = -\frac{1}{|\mathcal R|} \sum_{(i,j)\in\mathcal R} \left[\delta_{ij} \beta^\T z_{ij} - \log\left\{1 + \exp(\beta^\T z_{ij})\right\} \right] + \lambda \left\{ (1-\alpha)\|\beta\|_2^2/2 + \alpha \|\beta\|_1 \right\}.
+$$
+Cross-validation is performed by partitioning subjects (not pairs), and selecting the penalty $\lambda$ that maximizes average concordance.
+
+### Win Scores and Concordance
+
+The fitted model yields a win score $\beta^\T Z$ for each subject, which ranks patients by their likelihood of winning under the win rule. The generalized concordance index measures how well these scores align with observed pairwise wins in a validation set:
+$$
+\mathcal{C} = \frac{1}{|\mathcal{R}^*|} \sum_{(i,j) \in \mathcal{R}^*} \left[ I\{(2\delta_{ij} - 1)(\beta^\T z_i - \beta^\T z_j) > 0\} + \frac{1}{2} I(\beta^\T z_i = \beta^\T z_j) \right].
+$$
+
+### GBC Case Study
+
+The `wrnet` model was applied to the GBC dataset with 686 patients and 9 covariates. The model was trained via 10-fold subject-based cross-validation. The final model selected a sparse set of predictors and achieved an overall test concordance of 0.66. Death-specific concordance was 0.72. Variable importance rankings confirmed the relevance of tumor grade, nodal status, and hormone therapy.
+
+
+## Example R code
+
+The following example assumes a data frame `df` in long format with columns:
+
+- `id`: subject identifier  
+- `time`: event or censoring time  
+- `status`: event type (0 = censoring, 1 = death, 2 = nonfatal)  
+- `Z`: covariate matrix for regression  
+- `strata`: optional stratification variable
+
+```{r}
+#| eval: false
+########################################
+# 1. Proportional win-fractions model
+########################################
+library(WR)
+
+# Fit the PW model using death > nonfatal event win function
+obj <- pwreg(ID = df$id, time = df$time, status = df$status, Z = df$Z)
+
+# Summarize results
+obj$beta        # Estimated coefficients
+obj$Var         # Variance-covariance matrix
+print(obj)
+
+# Score residual plots
+score_obj <- score.proc(obj)
+plot(score_obj, k = 1)  # Residuals for 1st covariate
+
+########################################
+# 2. Regularized PW regression (WRNet)
+########################################
+# Go to https://lmaowisc.github.io/wrnet/ for the R script
+
+# Split data into training and test sets
+set.seed(123)
+obj_split <- df |> wr_split(prop = 0.8)
+df_train <- obj_split$df_train
+df_test  <- obj_split$df_test
+
+# Cross-validation to select optimal lambda
+obj_cv <- cv_wrnet(df_train$id, df_train$time, df_train$status,
+                   df_train |> dplyr::select(-id, -time, -status))
+lambda_opt <- obj_cv$lambda[which.max(obj_cv$concordance)]
+
+# Fit final model
+final_fit <- wrnet(df_train$id, df_train$time, df_train$status,
+                   df_train |> dplyr::select(-id, -time, -status),
+                   lambda = lambda_opt)
+
+# Variable importance
+final_fit |> vi_wrnet() |> vip()
+
+# Test set performance
+test_wrnet(final_fit, df_test)
 
 ```
+## Conclusion
+
+The PW model generalizes the win ratio to adjust for covariates and test prognostic factors. It provides interpretable effect estimates on the win ratio scale, supports model diagnostics via residuals, and enables stratification when needed. The regularized PW model (`wrnet`) extends these capabilities to high-dimensional settings and supports model tuning and evaluation via cross-validation and concordance analysis.
