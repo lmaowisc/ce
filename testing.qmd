@@ -10,14 +10,9 @@ Chapter slides [here](chap2.html){target="_blank"}. (To convert html to pdf, pre
 #| code-fold: true
 #| code-summary: "Show the code"
 #| eval: false
-
-
-
-
 ##################################################################
-# This code generates the numerical results in  chapter 2       ##
+# This code generates the numerical results in chapter 2         #
 ##################################################################
-
 
 # load the survival package
 library(survival)
@@ -28,182 +23,218 @@ library(survival)
 # 3. functions base() and WRSS() for sample size calculation
 # install.packages("WR")
 library(WR)
-library(tidyverse) # for data wrangling
+library(tidyverse) # for data wrangling (dplyr, ggplot2, etc.)
 
-
-##### Read in HF-ACTION DATA########
+##### Read in HF-ACTION DATA ########
 # same as rmt::hfaction used in chap 1 
 #  (except for status coding)
 data(hfaction_cpx9)
 hfaction <- hfaction_cpx9
 head(hfaction)
-
+#> Shows the first few rows of hfaction_cpx9 dataset
 
 # count unique patients in each arm
 hfaction |> 
   group_by(trt_ab) |> 
   distinct(patid) |> 
   count(trt_ab)
-  
+#> This gives the number of unique patients (patid) by treatment arm (trt_ab)
+
 #### demo ############
-obj <- WRrec(ID = hfaction$patid, time = hfaction$time, 
-             status = hfaction$status, trt = hfaction$trt_ab,
-             strata = hfaction$age60, naive = TRUE)
+# WRrec() fits the recurrent event plus death model (Win Ratio approach)
+obj <- WRrec(
+  ID = hfaction$patid,
+  time = hfaction$time,
+  status = hfaction$status,
+  trt = hfaction$trt_ab,
+  strata = hfaction$age60,
+  naive = TRUE
+)
 # summary results
 obj
+#> Displays the main results, including win ratio estimates for each method.
 
 # LWR
-beta <- obj$log.WR
-se <- obj$se
+beta <- obj$log.WR  # log-win ratio for LWR
+se <- obj$se        # standard error for log-win ratio (LWR)
 # test
-pval <- 2*(1-pnorm(abs(beta/se)))
+pval <- 2 * (1 - pnorm(abs(beta / se)))
 pval
+#> Two-sided p-value for LWR
 
 # NWR
-beta.naive<-obj$log.WR.naive
-se.naive<-obj$se.naive
+beta.naive <- obj$log.WR.naive  # log-win ratio for naive WR (NWR)
+se.naive <- obj$se.naive        # its standard error
 # test
-pval.naive<-2*(1-pnorm(abs(beta.naive/se.naive)))
+pval.naive <- 2 * (1 - pnorm(abs(beta.naive / se.naive)))
 pval.naive
-
+#> Two-sided p-value for NWR
 
 # FWR
-beta.FI<-obj$log.WR.FI
-se.FI<-obj$se.FI
+beta.FI <- obj$log.WR.FI  # log-win ratio for Fisher’s information-based WR (FWR)
+se.FI <- obj$se.FI        # standard error for log(FWR)
 # test
-pval.FI<-2*(1-pnorm(abs(beta.FI/se.FI)))
+pval.FI <- 2 * (1 - pnorm(abs(beta.FI / se.FI)))
 pval.FI
-
+#> Two-sided p-value for FWR
 
 #################################
 # Win ratio analyses: tabulate  #
 #################################
 
 data <- hfaction 
-### create a dataset with only the first hospitalization data.H1
+### create a dataset with only the first hospitalization -> data.H1
 
 # hospitalization data
-tmpH <- data[data$status==2,]
+tmpH <- data[data$status == 2, ]
 # get the first record of each id
-o <- order(tmpH$patid,tmpH$time)
-tmpH <- tmpH[o,]
-tmpFH <- tmpH[!duplicated(tmpH$patid),]
+o <- order(tmpH$patid, tmpH$time)
+tmpH <- tmpH[o, ]
+tmpFH <- tmpH[!duplicated(tmpH$patid), ]
 
 # combine it with mortality data
-data.H1 <- rbind(tmpFH,data[data$status!=2,])
-o <- order(data.H1$patid,data.H1$time)
-data.H1 <- data.H1[o,]
+data.H1 <- rbind(tmpFH, data[data$status != 2, ])
+o <- order(data.H1$patid, data.H1$time)
+data.H1 <- data.H1[o, ]
 
-
-# Function to create table for estimates of 
-# PWR, NWR, FWR, and LWR, 95% CI nad p-values
-# ind: index for data
-# ind1: index for data.H1
-# r: number of decimal point
-gwr.fun=function(ind,ind1,r=2){
-
-# fit NWR, FWR, and LWR
-obj <- WRrec(ID=data$patid[ind],time=data$time[ind],status=data$status[ind],
-          trt=data$trt_ab[ind],strata=data$age60[ind],naive=T)
-# fit sWR
-obj1 <- WRrec(ID=data.H1$patid[ind1],time=data.H1$time[ind1],status=data.H1$status[ind1],
-          trt=data.H1$trt_ab[ind1],strata=data.H1$age60[ind1],naive=F)
-
-# critical value of p=0.05
-za <- qnorm(0.975)
-
-## LWR
-beta <- obj$log.WR
-se <- obj$se
-theta <- obj$theta
-
-r4 <- c(paste0(round(100*theta[1],1),"%"),
-     paste0(round(100*theta[2],1),"%"),
-     paste0(round(exp(beta),r)," (",round(exp(beta-za*se),r),", ",round(exp(beta+za*se),r),")"),
-     round(1-pchisq((beta/se)^2,1),3)
-)
-
-
-## PWR
-beta1=obj1$log.WR
-se1=obj1$se
-theta1=obj1$theta
-
-r1=c(paste0(round(100*theta1[1],1),"%"),
-     paste0(round(100*theta1[2],1),"%"),
-     paste0(round(exp(beta1),r)," (",round(exp(beta1-za*se1),r),", ",round(exp(beta1+za*se1),r),")"),
-     round(1-pchisq((beta1/se1)^2,1),3)
-)
-
-## NWR
-beta.naive=obj$log.WR.naive
-se.naive=obj$se.naive
-theta.naive=obj$theta.naive
-
-
-r2=c(paste0(round(100*theta.naive[1],1),"%"),
-     paste0(round(100*theta.naive[2],1),"%"),
-     paste0(round(exp(beta.naive),r)," (",round(exp(beta.naive-za*se.naive),r),", ",
-            round(exp(beta.naive+za*se.naive),r),")"),
-     round(1-pchisq((beta.naive/se.naive)^2,1),3)
-)
-
-
-
-
-## FWR
-beta.FI=obj$log.WR.FI
-se.FI=obj$se.FI
-theta.FI=obj$theta.FI
-
-
-r3=c(paste0(round(100*theta.FI[1],1),"%"),
-     paste0(round(100*theta.FI[2],1),"%"),
-     paste0(round(exp(beta.FI),r)," (",round(exp(beta.FI-za*se.FI),r),", ",
-            round(exp(beta.FI+za*se.FI),r),")"),
-     round(1-pchisq((beta.FI/se.FI)^2,1),3)
-)
-
-result=rbind(r1,r2,r3,r4)
-rownames(result)=c("PWR","NWR","FWR","LWR")
-
-return(result)
+# Function to create a summary table for
+# PWR, NWR, FWR, and LWR with their 95% CI and p-values
+# ind:  index (logical) for rows in the main 'data'
+# ind1: index (logical) for rows in 'data.H1'
+# r:    number of decimals for rounding in the output
+gwr.fun = function(ind, ind1, r = 2) {
+  
+  # fit NWR, FWR, and LWR to original data (multiple events)
+  obj <- WRrec(
+    ID = data$patid[ind],
+    time = data$time[ind],
+    status = data$status[ind],
+    trt = data$trt_ab[ind],
+    strata = data$age60[ind],
+    naive = TRUE
+  )
+  
+  # fit sWR (PWR) to dataset with first hospitalization only
+  # This typically addresses "semi-competing" event structure
+  obj1 <- WRrec(
+    ID = data.H1$patid[ind1],
+    time = data.H1$time[ind1],
+    status = data.H1$status[ind1],
+    trt = data.H1$trt_ab[ind1],
+    strata = data.H1$age60[ind1],
+    naive = FALSE
+  )
+  
+  # critical value for a 95% confidence interval
+  za <- qnorm(0.975)
+  
+  ## LWR results
+  beta <- obj$log.WR
+  se <- obj$se
+  theta <- obj$theta  # proportion of pairwise comparisons that are wins/losses
+  
+  # Format: percentage of wins, percentage of losses, 
+  #         win ratio & 95% CI, p-value
+  r4 <- c(
+    paste0(round(100 * theta[1], 1), "%"),  # Win
+    paste0(round(100 * theta[2], 1), "%"),  # Loss
+    paste0(
+      round(exp(beta), r), " (",
+      round(exp(beta - za * se), r), ", ",
+      round(exp(beta + za * se), r), ")"
+    ),
+    round(1 - pchisq((beta / se)^2, 1), 3)
+  )
+  
+  ## PWR results
+  beta1 <- obj1$log.WR
+  se1 <- obj1$se
+  theta1 <- obj1$theta
+  
+  r1 <- c(
+    paste0(round(100 * theta1[1], 1), "%"),
+    paste0(round(100 * theta1[2], 1), "%"),
+    paste0(
+      round(exp(beta1), r), " (",
+      round(exp(beta1 - za * se1), r), ", ",
+      round(exp(beta1 + za * se1), r), ")"
+    ),
+    round(1 - pchisq((beta1 / se1)^2, 1), 3)
+  )
+  
+  ## NWR results
+  beta.naive <- obj$log.WR.naive
+  se.naive <- obj$se.naive
+  theta.naive <- obj$theta.naive
+  
+  r2 <- c(
+    paste0(round(100 * theta.naive[1], 1), "%"),
+    paste0(round(100 * theta.naive[2], 1), "%"),
+    paste0(
+      round(exp(beta.naive), r), " (",
+      round(exp(beta.naive - za * se.naive), r), ", ",
+      round(exp(beta.naive + za * se.naive), r), ")"
+    ),
+    round(1 - pchisq((beta.naive / se.naive)^2, 1), 3)
+  )
+  
+  ## FWR results
+  beta.FI <- obj$log.WR.FI
+  se.FI <- obj$se.FI
+  theta.FI <- obj$theta.FI
+  
+  r3 <- c(
+    paste0(round(100 * theta.FI[1], 1), "%"),
+    paste0(round(100 * theta.FI[2], 1), "%"),
+    paste0(
+      round(exp(beta.FI), r), " (",
+      round(exp(beta.FI - za * se.FI), r), ", ",
+      round(exp(beta.FI + za * se.FI), r), ")"
+    ),
+    round(1 - pchisq((beta.FI / se.FI)^2, 1), 3)
+  )
+  
+  # Combine rows into a single table
+  result <- rbind(r1, r2, r3, r4)
+  rownames(result) <- c("PWR", "NWR", "FWR", "LWR")
+  
+  return(result)
 }
-
 
 # Create table
 ## Age <= 60 years
-ind=(data$age60==0)
-ind1=(data.H1$age60==0)
-result.lt60=gwr.fun(ind,ind1,r=2)
+ind <- (data$age60 == 0)
+ind1 <- (data.H1$age60 == 0)
+result.lt60 <- gwr.fun(ind, ind1, r = 2)
 
 ## Age > 60 years
-ind=(data$age60==1)
-ind1=(data.H1$age60==1)
-result.ge60=gwr.fun(ind,ind1,r=2)
+ind <- (data$age60 == 1)
+ind1 <- (data.H1$age60 == 1)
+result.ge60 <- gwr.fun(ind, ind1, r = 2)
 
 ## overall
-ind=rep(T,nrow(data))
-ind1=rep(T,nrow(data.H1))
-result.all=gwr.fun(ind,ind1,r=2)
+ind <- rep(TRUE, nrow(data))
+ind1 <- rep(TRUE, nrow(data.H1))
+result.all <- gwr.fun(ind, ind1, r = 2)
 
 # combine results 
-results=rbind(result.lt60,result.ge60,result.all)
-colnames(results)=c("Win", "Loss", "Win ratio (95% CI)", "p-value")
+results <- rbind(result.lt60, result.ge60, result.all)
+colnames(results) <- c("Win", "Loss", "Win ratio (95% CI)", "p-value")
 noquote(results)
-
-
+#> Final table of all 4 measures (PWR, NWR, FWR, LWR) across strata.
 
 ############################################################################
 #               Sample size calculation                                    #     
 ############################################################################
 
 # get training arm data
-pilot <- hfaction |> 
+pilot <- hfaction |>
   filter(trt_ab == 1)
 # number of subjects
-pilot |> distinct(patid) |> 
+pilot |>
+  distinct(patid) |>
   count()
+#> This indicates how many unique subjects were in the training arm
 
 ############## estimate parameters ##############
 # Get the variables from pilot dataset
@@ -219,30 +250,40 @@ kappa <- outcome_base$kappa
 lambda_D
 lambda_H
 kappa
+#> Baseline hazards for death/hospitalization and the gumbel 'kappa' parameter
 
 ## Kendall's rank correlation
 1 - 1/kappa
 #> [1] 0.360812
+#> This measures correlation between timing of repeated events
 
 ### demo ###################
 # set design parameters
-tau_b <- 3
-tau <- 4
-lambda_L <- 0.01
+tau_b <- 3   # time from baseline to start of follow-up for base() computation
+tau <- 4     # total follow-up (in years)
+lambda_L <- 0.01  # Additional parameter used in the base() function
+
 # use base() function to compute zeta2 and delta
 ## may take up to 30s
 bparam <- base(lambda_D, lambda_H, kappa, tau_b, tau, lambda_L)
+#> bparam includes the baseline rates and distribution shape 
+#> used for sample size calculations
+
 # compute sample size under HRs 0.8 and 0.9
 # for death and nonfatal event, respectively
-obj <- WRSS(xi = log(c(0.9,0.8)), bparam = bparam, q =  0.5, alpha = 0.05,
-          power = 0.8)
-
+obj <- WRSS(
+  xi = log(c(0.9, 0.8)),
+  bparam = bparam,
+  q = 0.5,
+  alpha = 0.05,
+  power = 0.8
+)
 obj$n
-
+#> The required sample size for the given HRs at 80% power
 
 ## effect size specification
-thetaD <- seq(0.6, 0.95,by = 0.05) ## hazard ratio for death
-thetaH <- seq(0.6, 0.95,by = 0.05) ## hazard ratio for hospitalization
+thetaD <- seq(0.6, 0.95, by = 0.05) # hazard ratio for death
+thetaH <- seq(0.6, 0.95, by = 0.05) # hazard ratio for hospitalization
 
 ## create a matrix "SS08" for sample size powered at 80% 
 ## under each combination of thetaD and thetaH
@@ -251,68 +292,237 @@ mH <- length(thetaH)
 SS08 <- matrix(NA, mD, mH)
 rownames(SS08) <- thetaD
 colnames(SS08) <- thetaH
+
 ## fill in the computed sample size values
-for (i in 1:mD){
-  for (j in 1:mH){
-    ## sample size under hazard ratios thetaD[i] for death and thetaH[j] for hospitalization
-    SS08[i,j]<-WRSS(xi=log(c(thetaD[i],thetaH[j])),bparam=bparam,q=0.5,alpha=0.05,
-                    power=0.8)$n
+for (i in 1:mD) {
+  for (j in 1:mH) {
+    ## sample size under hazard ratios thetaD[i] for death 
+    ## and thetaH[j] for hospitalization
+    SS08[i, j] <- WRSS(
+      xi = log(c(thetaD[i], thetaH[j])),
+      bparam = bparam,
+      q = 0.5,
+      alpha = 0.05,
+      power = 0.8
+    )$n
   }
 }
 ## print the calculated sample sizes
 print(SS08)
-# 0.6     0.65      0.7     0.75       0.8     0.85      0.9      0.95
-# 0.6  198.1636 261.3528 351.2579 484.2468  691.0512 1034.785 1661.812  2976.570
-# 0.65 209.5088 278.6457 378.4143 528.6465  767.7521 1177.940 1961.252  3727.580
-# 0.7  220.9045 296.2334 406.4659 575.4320  850.7474 1338.718 2316.976  4708.455
-# 0.75 232.3703 314.1480 435.4823 624.8038  940.7326 1519.930 2742.885  6016.294
-# 0.8  243.9237 332.4188 465.5327 676.9740 1038.4859 1724.935 3257.279  7803.776
-# 0.85 255.5795 351.0732 496.6864 732.1690 1144.8828 1957.769 3884.618 10321.618
-# 0.9  267.3513 370.1374 529.0141 790.6317 1260.9129 2223.322 4658.150 14003.925
-# 0.95 279.2513 389.6366 562.5886 852.6243 1387.6996 2527.561 5623.948 19653.870
+#> Shows how sample size changes under different hazard ratios for death/hosp
 
 ## repeating the same calculation for power = 90%
 SS09 <- matrix(NA, mD, mH)
 rownames(SS09) <- thetaD
-colnames(SS09) < -thetaH
+colnames(SS09) < -thetaH  # As in original code; sets the colnames to the sequence of thetaH
+
 ## fill in the computed sample size values
-for (i in 1:mD){
-  for (j in 1:mH){
-    ## sample size under hazard ratios thetaD[i] for death and thetaH[j] for hospitalization
-    SS09[i,j]<-WRSS(xi=log(c(thetaD[i],thetaH[j])),bparam=bparam,q=0.5,alpha=0.05,
-                    power=0.9)$n
+for (i in 1:mD) {
+  for (j in 1:mH) {
+    ## sample size under hazard ratios thetaD[i] for death 
+    ## and thetaH[j] for hospitalization
+    SS09[i, j] <- WRSS(
+      xi = log(c(thetaD[i], thetaH[j])),
+      bparam = bparam,
+      q = 0.5,
+      alpha = 0.05,
+      power = 0.9
+    )$n
   }
 }
 ## print the calculated sample sizes
 print(SS09)
-# [,1]     [,2]     [,3]      [,4]      [,5]     [,6]     [,7]      [,8]
-# 0.6  265.2849 349.8773 470.2346  648.2691  925.1215 1385.283 2224.695  3984.783
-# 0.65 280.4729 373.0275 506.5893  707.7076 1027.8022 1576.928 2625.560  4990.172
-# 0.7  295.7284 396.5725 544.1425  770.3402 1138.9094 1792.164 3101.773  6303.285
-# 0.75 311.0780 420.5551 582.9873  836.4350 1259.3740 2034.755 3671.945  8054.111
-# 0.8  326.5446 445.0145 623.2161  906.2762 1390.2379 2309.198 4360.573 10447.042
-# 0.85 342.1484 469.9874 664.9221  980.1666 1532.6732 2620.897 5200.401 13817.718
-# 0.9  357.9075 495.5089 708.1999 1058.4316 1688.0046 2976.398 6235.942 18747.282
-# 0.95 373.8383 521.6128 753.1465 1141.4221 1857.7360 3383.687 7528.871 26310.956
+#> Sample sizes under 90% power requirements
 
 oldpar <- par(mfrow = par("mfrow"))
-par(mfrow=c(1,2))
-persp(thetaD, thetaH, SS08/1000, theta = 50, phi = 15, expand = 0.8, col = "gray",
-      ltheta = 180, lphi=180, shade = 0.75,
-      ticktype = "detailed",
-      xlab = "\n HR on Death", ylab = "\n HR on Hospitalization",
-      zlab=paste0("\n Sample Size (10e3)"),
-      main="Power = 80%",
-      zlim=c(0, 26)
-)
-persp(thetaD, thetaH, SS09/1000, theta = 50, phi = 15, expand = 0.8, col = "gray",
-      ltheta = 180, lphi=180, shade = 0.75,
-      ticktype = "detailed",
-      xlab = "\nHR on Death", ylab = "\nHR on Hospitalization",
-      zlab=paste0("\n Sample Size (10e3)"),
-      main="Power = 90%",
-      zlim=c(0, 26)
-)
+par(mfrow = c(1, 2))
 
+persp(
+  thetaD, thetaH, SS08 / 1000,
+  theta = 50, phi = 15, expand = 0.8, col = "gray",
+  ltheta = 180, lphi = 180, shade = 0.75,
+  ticktype = "detailed",
+  xlab = "\n HR on Death", ylab = "\n HR on Hospitalization",
+  zlab = paste0("\n Sample Size (10e3)"),
+  main = "Power = 80%",
+  zlim = c(0, 26)
+)
+#> 3D perspective plot of sample size (in thousands) for power=80% 
+#> over various hazard ratios for death/hosp
+
+persp(
+  thetaD, thetaH, SS09 / 1000,
+  theta = 50, phi = 15, expand = 0.8, col = "gray",
+  ltheta = 180, lphi = 180, shade = 0.75,
+  ticktype = "detailed",
+  xlab = "\nHR on Death", ylab = "\nHR on Hospitalization",
+  zlab = paste0("\n Sample Size (10e3)"),
+  main = "Power = 90%",
+  zlim = c(0, 26)
+)
+#> Similar 3D perspective for power=90%
 
 ```
+
+$$\newcommand{\d}{{\rm d}}
+\newcommand{\T}{{\rm T}}
+\newcommand{\dd}{{\rm d}}
+\newcommand{\cc}{{\rm c}}
+\newcommand{\pr}{{\rm pr}}
+\newcommand{\var}{{\rm var}}
+\newcommand{\se}{{\rm se}}
+\newcommand{\indep}{\perp \!\!\! \perp}
+\newcommand{\Pn}{n^{-1}\sum_{i=1}^n}
+\newcommand\mymathop[1]{\mathop{\operatorname{#1}}}
+\newcommand{\Ut}{{n \choose 2}^{-1}\sum_{i<j}\sum}
+\def\a{{(a)}} 
+\def\b{{(1-a)}} 
+\def\t{{(1)}} 
+\def\c{{(0)}} 
+\def\d{{\rm d}} 
+\def\T{{\rm T}} 
+\def\bs{\boldsymbol}
+$$
+
+## Win Ratio: Definitions and Properties
+
+The win ratio (WR) is a pairwise, nonparametric method for comparing composite outcomes in a prioritized manner. Each subject in the treatment arm is compared to each subject in the control arm over a shared follow-up window. A win is declared if the treated subject experiences a better outcome—typically defined as longer survival or, if tied on survival, fewer or later nonfatal events.
+
+Formally, let $D_i^{(a)}, T_i^{(a)}, C_i^{(a)}$ denote survival, hospitalization, censoring times on $i$th subject in group $a$ $(i=1,\ldots, N_a; a= 1, 0)$.
+Then the win fraction for group $a$ versus $1-a$ is
+$$
+\hat w^{(a, 1-a)} = \frac{1}{N_1N_0} \sum_{i=1}^{N_a} \sum_{j=1}^{N_{1-a}} \hat w^{(a, 1-a)}_{ij},
+$$
+where 
+\begin{align}
+            \hat w^{(a, 1-a)}_{ij}&= \underbrace{I(D_j^{(1-a)}< D_i^{(a)}\wedge C_i^{(a)}\wedge C_j^{(1-a)})}_{\mbox{win on survival}}\\
+            & + \underbrace{I(\min(D_i^{(a)}, D_j^{(1-a)}) > C_i^{(a)}\wedge C_j^{(1-a)}, T_j^{(1-a)}< T_i^{(a)}\wedge C_i^{(1)}\wedge C_j^{(0)})}_{\mbox{tie on survival, win on hospitalization}}
+    \end{align}
+
+
+The win ratio statistic is defined as
+$$
+\text{WR} = \frac{\hat w^{(1, 0)}}{\hat w^{(0, 1)}}.
+$$
+
+Alternative summaries include the **net benefit** (proportion in favor) and the **win odds**, which account for ties and interpret the WR on a log-odds scale. In the special case of binary outcomes, the WR reduces to the odds ratio, and the net benefit corresponds to the risk difference.
+
+## Hypothesis Testing and Interpretation
+
+Statistical inference for the WR is based on the asymptotic normality of the log win ratio:
+$$
+S_n = \frac{\sqrt{n} \log(\hat w_{1,0} / \hat w_{0,1})}{\hat{\rm SE}} \sim N(0, 1),
+$$
+under the null hypothesis that treatment and control are equally effective. The standard error $\hat{\rm SE}$ is calculated via $U$-statistics, and the null corresponds to equal bivariate survival functions $H^{(1)}(s, t) = H^{(0)}(s, t)$ for all $t \le s$.
+
+The alternative hypothesis assumes that the probability of a treatment win exceeds that of a control win at all times. A sufficient condition is that the joint distribution of death and nonfatal events under treatment is stochastically larger than under control.
+
+## Extensions and Variants
+
+Several extensions of the WR improve its flexibility and robustness. Weighted comparisons allow later follow-up times to contribute more to the test statistic, leading to log-rank-type weights. Stratified WR methods compare subjects within strata to adjust for confounding and increase efficiency.
+
+## Generalization to Recurrent Events
+
+When subjects experience multiple nonfatal events, a generalized WR can be defined using a win function $\mathcal{W}(\cdot, \cdot)(t)$ that compares event histories up to time $t$. The generalized win ratio statistic becomes
+$$
+\hat{\mathcal E}_n(\mathcal W) = \frac{\sum \mathcal W(\mathcal H^{*(1)}_i, \mathcal H^{*(0)}_j)}
+     {\sum \mathcal W(\mathcal H^{*(0)}_j, \mathcal H^{*(1)}_i)},
+$$
+where comparisons are made up to the minimum of each pair’s observed follow-up time.
+
+Three versions of recurrent-event win functions are commonly used:
+
+- **Naive WR**: prioritize death, then total number of events
+- **First-event WR**: further prioritize time to first event
+- **Last-event WR**: further prioritize time to last event
+
+All versions enforce a win/loss/tie rule based on observable history, and guarantee that win status is unchanged after death. Among them, the last-event WR (LWR) has shown superior power in simulation studies due to fewer ties and better separation between subjects.
+
+## HF-ACTION Example
+
+In the HF-ACTION trial, recurrent-event WR methods were applied to a high-risk subgroup of 426 patients. Compared to usual care, exercise training reduced both mortality and hospitalizations. The last-event WR was estimated as 1.32 (95% CI: 1.05–1.66, *p* = 0.019), with similar results from first-event and naive WRs.
+
+![](images/test_hfaction_wr.png){fig-align="center" width="70%"}
+
+These results illustrate that recurrent-event WRs detect benefits more effectively than traditional time-to-first-event WRs, especially when the number and timing of nonfatal events vary widely across subjects.
+
+## Sample Size Calculation
+
+Sample size calculation for WR is based on a joint model for death and nonfatal events. Under a Gumbel–Hougaard copula model, the joint survival function is
+$$
+        \pr(D^\a>s, T_1^\a>t) = \exp\left(-\left[\{\exp(a\xi_D)\lambda_Ds\}^\kappa + \{\exp(a\xi_H)\lambda_Ht\}^\kappa \right]^{1/\kappa}\right)
+$$
+where $\lambda_D^a$ and $\lambda_H^a$ are arm-specific baseline hazard rates and $\kappa$ controls the dependence between outcomes.
+
+The required sample size is
+$$
+n = \frac{\zeta_0^2(z_{1-\alpha/2} + z_\gamma)^2}{q(1-q)\delta^\top \xi},
+$$
+where:
+
+- $\zeta_0^2$ is the variance of the test statistic under the null,
+- $\delta$ is the sensitivity of the log-WR to changes in log-HRs $\xi$,
+- $q$ is the treatment allocation proportion.
+
+Design parameters include the accrual duration $\tau_b$, total follow-up time $\tau$, and a random loss-to-follow-up rate $\lambda_L$.
+
+## HF-ACTION: Planning a New Trial
+
+Using HF-ACTION training arm data as historical reference, the estimated baseline rates were:
+
+- $\lambda_D = 0.073$ deaths/year
+- $\lambda_H = 0.56$ hospitalizations/year
+- Kendall’s correlation = 36.1%
+
+Assuming HRs of 0.9 (death) and 0.8 (hospitalization), and minimal loss to follow-up, the sample size required for 80% power is approximately $n = 1241$.
+
+![](images/test_hfaction_ss.png){fig-align="center" width="90%"}
+
+## Example R code
+
+The following example uses a data frame `df` in long format with columns:
+
+-   `id`: subject identifier\
+-   `time`: event or censoring time\
+-   `status`: event type (0 = censoring, 1 = death, 2 = nonfatal)\
+-   `trt`: treatment group (0 = control, 1 = treatment)\
+-   `strata`: optional stratification variable
+
+```{r}
+#| eval: false
+########################################
+# 1. WR test for recurrent events
+########################################
+library(WR)
+
+obj <- WRrec(ID = df$id, time = df$time, status = df$status, 
+             trt = df$trt, strata = df$strata, naive = TRUE)
+
+# Extract log win ratio and standard error
+obj$log.WR
+obj$se
+print(obj)
+
+
+########################################
+# 2. Sample size calculation
+########################################
+# Step 1: Estimate baseline outcome parameters
+base_est <- gumbel.est(id = df$id, time = df$time, status = df$status)
+
+# Step 2: Design-specific noise and signal
+bparam <- base(lambda_D = base_est$lambda_D,
+               lambda_H = base_est$lambda_H,
+               kappa = base_est$kappa,
+               tau_c = 3, tau = 4, lambda_L = 0.001)
+
+# Step 3: Required sample size for given effect sizes
+WRSS(xi = log(c(0.9, 0.8)), bparam = bparam, q = 0.5, power = 0.8)$n
+
+```
+
+## Conclusion
+
+The win ratio test provides a clinically meaningful and statistically valid method for analyzing prioritized composite outcomes. By extending to recurrent events and general win functions, the WR accommodates complex patient trajectories while preserving interpretability. Among several extensions, the last-event WR offers strong separation and improved power in trials with repeated nonfatal events.
+
+Sample size formulas grounded in copula models enable principled trial design. The WR package supports both estimation and power analysis, facilitating the broader adoption of win-based strategies in modern clinical research.
