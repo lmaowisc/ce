@@ -335,53 +335,45 @@ $$
 
 The win ratio estimand depends on the censoring distribution, as each pairwise comparison is limited to the observed follow-up $[0, C_i^\t \wedge C_j^\c]$. This leads to a censoring-weighted average of time-specific win probabilities, which is trial-dependent and lacks generalizability. One solution is to pre-specify a restriction time $\tau$ so all comparisons are evaluated over the same window.
 
-For a two-tiered composite of death and a nonfatal event, the restricted win/loss probability is defined by
-\begin{align}
+For a two-tiered composite of death and a nonfatal event, the restricted win/loss probability is defined by \begin{align}
 w_{a, 1-a}(\tau) &= \pr\{D^\b < \min(D^\a, \tau)\} \\
 &\quad + \pr\{\min(D^\t, D^\c) > \tau, T^\b < \min(T^\a, \tau)\},
-\end{align}
-with the restricted win ratio defined as $\text{WR}(\tau) = w_{1,0}(\tau) / w_{0,1}(\tau)$. Estimation methods include inverse probability of censoring weighting (IPCW) and multiple imputation (MI), as implemented in the `WINS` package.
+\end{align} with the restricted win ratio defined as $\text{WR}(\tau) = w_{1,0}(\tau) / w_{0,1}(\tau)$. Estimation methods include inverse probability of censoring weighting (IPCW) and multiple imputation (MI), as implemented in the `WINS` package.
 
 ## Restricted Mean Time in Favor (RMT-IF)
 
-The restricted mean time in favor (RMT-IF) redefines the win-loss comparison in terms of time spent in more favorable states. For a multistate outcome $Y(t)$, RMT-IF measures the net average time one subject remains in a better state than another:
-$$
+The restricted mean time in favor (RMT-IF) redefines the win-loss comparison in terms of time spent in more favorable states. For a multistate outcome $Y(t)$, RMT-IF measures the net average time one subject remains in a better state than another: $$
 \mu(\tau) = E\left[ \int_0^\tau I\{Y^{(1)}(t) < Y^{(0)}(t)\} \, \dd t \right] 
 - E\left[ \int_0^\tau I\{Y^{(0)}(t) < Y^{(1)}(t)\} \, \dd t \right].
 $$
 
-The process $Y(t)$ is assumed progressive and represents a hierarchy of worsening states, terminating in death. The estimand $\mu(\tau)$ admits a decomposition into component-specific effects:
-$$
+The process $Y(t)$ is assumed progressive and represents a hierarchy of worsening states, terminating in death. The estimand $\mu(\tau)$ admits a decomposition into component-specific effects: $$
 \mu(\tau) = \sum_{k=1}^K \mu_k(\tau) + \mu_\infty(\tau),
-$$
-where each $\mu_k(\tau)$ captures net time gained in a specific nonfatal state and $\mu_\infty(\tau)$ captures the difference in restricted mean survival time. Estimation proceeds by plugging in Kaplan–Meier estimators for transition times. The `rmt::rmtfit()` function provides estimation, inference, and graphics.
+$$ where each $\mu_k(\tau)$ captures net time gained in a specific nonfatal state and $\mu_\infty(\tau)$ captures the difference in restricted mean survival time. Estimation proceeds by plugging in Kaplan–Meier estimators for transition times. The `rmt::rmtfit()` function provides estimation, inference, and graphics.
 
 ## While-Alive Weighted Loss
 
-Standard analyses of weighted total events may misrepresent treatment effects if survival time differs between groups. The while-alive loss framework defines a normalized event rate over time alive:
-$$
+Standard analyses of weighted total events may misrepresent treatment effects if survival time differs between groups. The while-alive loss framework defines a normalized event rate over time alive: $$
 \ell^{(a)}(\tau) = \frac{E\left\{N_{\rm R}^{*(a)}(\tau)\right\}}{E\left(D^{(a)} \wedge \tau\right)}.
 $$
 
-More generally, the loss can be specified by a function $\mathcal{L}(\mathcal{H}^*(t))$ that accumulates only during time alive. This leads to a class of estimands:
-$$
+More generally, the loss can be specified by a function $\mathcal{L}(\mathcal{H}^*(t))$ that accumulates only during time alive. This leads to a class of estimands: $$
 \ell^{(a)}(\tau) = \frac{E\left\{\mathcal L\left(\mathcal H^{*(a)}\right)(\tau)\right\}}{E\left(D^{(a)} \wedge \tau\right)},
-$$
-which includes total events, mortality, and flexible weighted combinations. Estimation uses survival-weighted Aalen-type integrals and is implemented in the `WA::LRfit()` function.
+$$ which includes total events, mortality, and flexible weighted combinations. Estimation uses survival-weighted Aalen-type integrals and is implemented in the `WA::LRfit()` function.
 
 ## HF-ACTION Illustrations
 
 All three approaches were applied to the HF-ACTION dataset:
 
-- **Restricted WR** showed better interpretability than the original WR by standardizing follow-up to 4 years.
-- **RMT-IF** detected a significant average gain of 5.1 months in the training group, driven by both survival and reduced hospitalizations.
-- **While-alive loss** adjusted for differential follow-up and showed a 20% reduction in the average event rate, though the effect was attenuated compared to RMT-IF.
+-   **Restricted WR** showed better interpretability than the original WR by standardizing follow-up to 4 years.
+-   **RMT-IF** detected a significant average gain of 5.1 months in the training group, driven by both survival and reduced hospitalizations.
+-   **While-alive loss** adjusted for differential follow-up and showed a 20% reduction in the average event rate, though the effect was attenuated compared to RMT-IF.
 
 Each method offers a distinct perspective:
 
-- RMT-IF summarizes net benefit in time.
-- WA analyses account for differential exposure.
-- Restricted WR retains the pairwise framework but standardizes follow-up.
+-   RMT-IF summarizes net benefit in time.
+-   WA analyses account for differential exposure.
+-   Restricted WR retains the pairwise framework but standardizes follow-up.
 
 ## Example R code
 
