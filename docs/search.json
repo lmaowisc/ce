@@ -1569,5 +1569,55 @@
     "title": "Statistical Methods for Composite Endpoints: Win Ratio and Beyond",
     "section": "Learning Objectives",
     "text": "Learning Objectives\n\nObjectives\n\nIdentify statistical and regulatory challenges with composite endpoints\nApply key methods such as hypothesis testing, power analysis, and regression\nGain hands-on experience with real data using R packages\n\n\nVisit back at https://lmaowisc.github.io/ce/"
+  },
+  {
+    "objectID": "discussions.html",
+    "href": "discussions.html",
+    "title": "5  Discussions",
+    "section": "",
+    "text": "Slides\nChapter slides here. (To convert html to pdf, press E \\(\\to\\) Print \\(\\to\\) Destination: Save to pdf)",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Discussions</span>"
+    ]
+  },
+  {
+    "objectID": "discussions.html#open-problems",
+    "href": "discussions.html#open-problems",
+    "title": "5  Discussions",
+    "section": "5.1 Open Problems",
+    "text": "5.1 Open Problems\nSeveral practical and methodological challenges remain for win-based composite endpoint analysis. These include covariate adjustment, interim monitoring, and evidence synthesis across trials.\n\n5.1.1 Covariate Adjustment\nCovariate adjustment improves efficiency for marginal estimands comparing \\(\\mathcal H^{*(1)}\\) and \\(\\mathcal H^{*(0)}\\) without conditioning on \\(Z\\). This approach is well developed for continuous, binary, and univariate time-to-event outcomes, and is recommended by regulatory agencies including the FDA. However, win ratio–based methods lack a likelihood structure and rely on \\(U\\)-statistics, complicating covariate-adjusted inference. Developing robust and interpretable adjustment strategies for win-type statistics remains an active area of research.\n\n\n5.1.2 Interim Analysis\nInterim analyses are used in trials to assess early signs of efficacy or futility and potentially stop the study early. For standard survival endpoints, information time is approximately proportional to the number of events. With win ratio statistics, however, the information time is not event-driven, particularly when outcomes involve multiple components. Correlations between events further complicate interim monitoring, making it difficult to quantify information accrual or control type I error. Similar challenges have been noted in RMST-based designs.\n\n\n5.1.3 Meta Analysis\nMeta-analyses of win ratio results are hindered by inconsistent reporting across studies. Primary studies often do not report win-loss frequencies, and may differ in follow-up times or definitions of win/loss. Moreover, many published studies only present hazard ratios or summary KM curves.\nThe WinKM toolkit offers a workaround by reconstructing win/loss probabilities using reported KM survival estimates, at-risk tables, and total event counts. This enables harmonized analysis of survival and event-free endpoints across trials.",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Discussions</span>"
+    ]
+  },
+  {
+    "objectID": "discussions.html#summary",
+    "href": "discussions.html#summary",
+    "title": "5  Discussions",
+    "section": "5.2 Summary",
+    "text": "5.2 Summary\n\n5.2.1 Composite Endpoints and Semiparametric Tools\n\nComposite outcomes capture death and clinically meaningful nonfatal events.\nTraditional analyses include time to first event and weighted total counts.\nHierarchical approaches—win ratio, net benefit, win odds—respect clinical priorities but introduce estimand issues.\n\n\n\n5.2.2 Win Ratio and RMT-IF\n\nWin ratio test generalizes to recurrent events using death-first comparison rules.\nSample size calculation uses Gumbel–Hougaard copula to model dependence between components.\nRestricted mean time in favor (RMT-IF) quantifies net time gained in favorable states, using multistate modeling.\n\n\n\n5.2.3 Survival-Adjusted Total Events and Regression\n\nWhile-alive loss rate adjusts total event burden by survival time.\nProportional win-fractions (PW) model allows semiparametric regression of win ratios on baseline covariates.\nHigh-dimensional extension uses regularized logistic loss with elastic net penalty.",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Discussions</span>"
+    ]
+  },
+  {
+    "objectID": "discussions.html#learning-objectives",
+    "href": "discussions.html#learning-objectives",
+    "title": "5  Discussions",
+    "section": "5.3 Learning Objectives",
+    "text": "5.3 Learning Objectives\nThis course aims to equip participants to:\n\nUnderstand statistical and regulatory challenges with composite endpoints.\nApply win ratio–based methods including hypothesis testing and regression.\nDesign and analyze clinical trial data using R packages:\n\nWcompo, WR, WINS, rmt, WA, WRNet",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Discussions</span>"
+    ]
+  },
+  {
+    "objectID": "discussions.html#acknowledgments",
+    "href": "discussions.html#acknowledgments",
+    "title": "5  Discussions",
+    "section": "5.2 Acknowledgments",
+    "text": "5.2 Acknowledgments\nThis work was supported by NIH/NHLBI (R01HL149875) and the NSF (DMS2015526). Contributions from many collaborators are gratefully acknowledged.\nFor more tools and examples, visit https://lmaowisc.github.io/ce/",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Discussions</span>"
+    ]
   }
 ]

@@ -3,3 +3,29 @@
 ## Slides {.unnumbered}
 
 Chapter slides [here](chap5.html){target="_blank"}. (To convert html to pdf, press E $\to$ Print $\to$ Destination: Save to pdf)
+
+## Open Problems
+
+Several practical and methodological challenges remain for win-based composite endpoint analysis. These include covariate adjustment, interim monitoring, and evidence synthesis across trials.
+
+### Covariate Adjustment
+
+Covariate adjustment improves efficiency for marginal estimands comparing $\mathcal H^{*(1)}$ and $\mathcal H^{*(0)}$ without conditioning on $Z$. This approach is well developed for continuous, binary, and univariate time-to-event outcomes, and is recommended by regulatory agencies including the FDA. However, win ratio–based methods lack a likelihood structure and rely on $U$-statistics, complicating covariate-adjusted inference. Developing robust and interpretable adjustment strategies for win-type statistics remains an active area of research.
+
+### Interim Analysis
+
+Interim analyses are used in trials to assess early signs of efficacy or futility and potentially stop the study early. For standard survival endpoints, information time is approximately proportional to the number of events. With win ratio statistics, however, the information time is not event-driven, particularly when outcomes involve multiple components. Correlations between events further complicate interim monitoring, making it difficult to quantify information accrual or control type I error. Similar challenges have been noted in RMST-based designs.
+
+### Meta Analysis
+
+Meta-analyses of win ratio results are hindered by inconsistent reporting across studies. Primary studies often do not report win-loss frequencies, and may differ in follow-up times or definitions of win/loss. Moreover, many published studies only present hazard ratios or summary KM curves.
+
+The [`WinKM`](https://lmaowisc.github.io/winkm/) toolkit offers a workaround by reconstructing win/loss probabilities using reported KM survival estimates, at-risk tables, and total event counts. This enables harmonized analysis of survival and event-free endpoints across trials.
+
+
+## Acknowledgments
+
+This work was supported by NIH/NHLBI (R01HL149875) and the NSF (DMS2015526). Contributions from many collaborators are gratefully acknowledged.
+
+
+For more tools and examples, visit [https://lmaowisc.github.io/ce/](https://lmaowisc.github.io/ce/)
