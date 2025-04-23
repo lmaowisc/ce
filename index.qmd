@@ -21,7 +21,7 @@ Chapter of the ASA.
 -   Collaborative research
     -   Cardiovascular disease, cancer, radiology, behavioral health interventions
 -   Teaching
-    -   [Survival Analysis: Theory and Methods](https://lmaowisc.github.io/BMI741){target="_blank"} (UW; 2020 - 2024)
+    -   [Survival Analysis: Theory and Methods](https://lmaowisc.github.io/BMI741){target="_blank"} (UW; 2020 - 2025)
 -   Editorial service
     -   [Statistical Editor](https://www.jacc.org/journal/heart-failure/editorial-board){target="_blank"}, *JACC Journals*
     -   [Associate Editor](https://www.tandfonline.com/action/journalInformation?show=editorialBoard&journalCode=usbr20){target="_blank"}, *Statistics for Biopharmaceutical Research*
