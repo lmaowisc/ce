@@ -84,7 +84,7 @@ $$
 
 -   More trials are using it...
 
-![](images/Ntrial_title.png){fig-align="center" width="100%"}
+![](images/intro_Ntrial_title.png){fig-align="center" width="100%"}
 
 # Estimand vs Censoring
 
