@@ -1,14 +1,17 @@
 # Course Info {.unnumbered}
 
 This is a companion site for the same-titled **workshop** for the 
-44th annual Applied Statistics Workshop hosted by the Southern California
-Chapter of the ASA. 
+<!-- 44th annual Applied Statistics Workshop hosted by the Southern California -->
+<!-- Chapter of the ASA.  -->
+38th New England Statistics Symposium held in New Haven, CT.
+
 
 ## Time and Place
 
--   Friday, April 25 · 9am - 4pm PDT
--   Platt Conference Center, Cooper Auditorium  
-    City of Hope, 1500 East Duarte Road, Duarte, CA 91010
+<!-- -   Friday, April 25 · 9am - 4pm PDT -->
+<!-- -   Platt Conference Center, Cooper Auditorium   -->
+<!--     City of Hope, 1500 East Duarte Road, Duarte, CA 91010 -->
+-   May 31, 2025 (online)
 
 ## Instructor Profile
 
