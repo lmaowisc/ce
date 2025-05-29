@@ -8,7 +8,7 @@ author:
   affiliations: 
     - name: Department of Biostatistics & Medical Informatics
     - University of Wisconsin-Madison
-    - April 25, 2024
+    - May 31, 2025
   email: lmao@biostat.wisc.edu
 format: 
   revealjs:
@@ -67,13 +67,11 @@ bibliography: references.bib
     -   Primary studies *not* reporting win-loss measures
     -   Primary studies over *different* time spans
     -   Primary studies with *different* definitions of win/loss
-
 -   [`WinKM`](https://lmaowisc.github.io/winkm/){target="_blank"}: A toolkit to start
-    -   Calculate win-loss statistics based on 
+    -   Calculate win-loss statistics based on
         -   KM estimates for OS and EFS
-        -   At-risk table at selected time points 
+        -   At-risk table at selected time points
         -   Total event counts (reported in the CONSORT diagram or results section)
-
 
 # Conclusion
 
@@ -120,11 +118,10 @@ bibliography: references.bib
 ## Learning Objectives
 
 -   **Objectives**
-    
+
     -   Identify statistical and regulatory challenges with composite endpoints
     -   Apply key methods such as hypothesis testing, power analysis, and regression
     -   Gain hands-on experience with real data using R packages
-
 
 Visit back at <https://lmaowisc.github.io/ce/>
 

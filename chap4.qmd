@@ -8,7 +8,7 @@ author:
   affiliations: 
     - name: Department of Biostatistics & Medical Informatics
     - University of Wisconsin-Madison
-    - April 25, 2025
+    - May 31, 2025
   email: lmao@biostat.wisc.edu
 format: 
   revealjs:
@@ -83,11 +83,11 @@ $$
     -   Screening of prognostic factors
         -   Treatment, demographics (e.g., age, race, sex), medical history (e.g., diabetes, prior CVD), current medication (e.g., $\beta$-blocker, ACE inhibitor)
 
-|   | Univariate | Hierarchical composite |
-|---------------|:-------------:|:----------------------------------------:|
-| **Hypothesis testing** | Gehan, log-rank | Win ratio/odds, net benefit ([Ch 2](chap2.html#/alternative-hypothesis){target="_blank"}) |
-| **Nonparametric estimation** | RMST | RMT-IF ([Ch 3](chap3.html#/alternative-hypothesis){target="_blank"}) |
-| **Semiparametric regression** | Cox PH model | ? |
+|                               |   Univariate    |                                  Hierarchical composite                                   |
+|-----------------|:---------------:|:-------------------------------------:|
+| **Hypothesis testing**        | Gehan, log-rank | Win ratio/odds, net benefit ([Ch 2](chap2.html#/alternative-hypothesis){target="_blank"}) |
+| **Nonparametric estimation**  |      RMST       |           RMT-IF ([Ch 3](chap3.html#/alternative-hypothesis){target="_blank"})            |
+| **Semiparametric regression** |  Cox PH model   |                                             ?                                             |
 
 # PW Model
 
@@ -685,7 +685,6 @@ test_result$concordance
 
     -   Variations: regression of win ratio/odds [@follmann2019; @song2022]
 
-
 ## Summary
 
 -   **PW: WR regression**
@@ -695,7 +694,7 @@ test_result$concordance
         -   $\exp(\beta)$: WRs with unit increases in covariates
         -   `WR::pwreg(ID, time, status, Z, strata)`
 -   **Regularized PW**
-    -   `wrnet`: [https://lmaowisc.github.io/wrnet/](https://lmaowisc.github.io/wrnet/)
+    -   `wrnet`: <https://lmaowisc.github.io/wrnet/>
     -   Efficient implementation with `glmnet()` backend
     -   Supports CV, test evaluation, and variable importance
 

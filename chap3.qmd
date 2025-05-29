@@ -8,7 +8,7 @@ author:
   affiliations: 
     - name: Department of Biostatistics & Medical Informatics
     - University of Wisconsin-Madison
-    - April 25, 2025
+    - May 31, 2025
   email: lmao@biostat.wisc.edu
 format: 
   revealjs:
@@ -343,10 +343,10 @@ kable(hf_infer, align = c("llrrr"))
 -   **HF-ACTION**
     -   Trained survive longer $\to$ more hospitalizations
 
-|   | Usual care (N = 221) | Exercise training (N = 205) |
+|                             | Usual care (N = 221) | Exercise training (N = 205) |
 |--------------------------|:------------------:|:------------------------:|
-| Death | 57 (25.8%) | 36 (17.6%) |
-| Avg \# hospitalization (SD) | 2.6 (3.1) | 2.2 (3.1) |
+| Death                       |      57 (25.8%)      |         36 (17.6%)          |
+| Avg \# hospitalization (SD) |      2.6 (3.1)       |          2.2 (3.1)          |
 
 -   **Impact of differential survival time**
     -   **Hierarchical**: WR, RMT-IF (death \> nonfatal)
