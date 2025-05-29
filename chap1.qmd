@@ -8,7 +8,7 @@ author:
   affiliations: 
     - name: Department of Biostatistics & Medical Informatics
     - University of Wisconsin-Madison
-    - Aug 3, 2024
+    - May 31, 2025
   email: lmao@biostat.wisc.edu
 format: 
   revealjs:
@@ -53,7 +53,8 @@ $$
 # Example and Guidelines
 
 ## Motivating Example: Colon Cancer
-:::{.fragment}
+
+::: fragment
 -   **Landmark colon cancer trial**
     -   **Population**: 619 patients with stage C disease [@Moertel1990]
     -   **Arms**: Levamisole + fluorouracil ($n=304$) vs control ($n=315$)
@@ -65,7 +66,8 @@ $$
 :::
 
 ## Motivating Example: HF-ACTION
-:::{.fragment}
+
+::: fragment
 -   **A cardiovascular trial (HF-ACTION)**
     -   **Subpopulation**: 426 heart failure patients [@OConnor2009]
     -   **Arms**: Exercise training + usual care ($n=205$) vs usual care ($n=221$)
@@ -77,7 +79,8 @@ $$
 :::
 
 ## Composite Endpoints
-:::{.fragment}
+
+::: fragment
 -   **Traditional composite endpoint (TCE)**
     -   **Time to first event**
         -   Relapse/Progression-free survival
@@ -86,13 +89,15 @@ $$
         -   Lack of clinical priority
         -   Statistical inefficiency (waste of data)
 :::
-:::{.fragment}
+
+::: fragment
 -   **Hierarchical composite endpoint (HCE)**
     -   **Example**: Death \> nonfatal MACE \> six-minute walk test (6MWT)/NYHA class
 :::
 
 ## Why Composite
-:::{.fragment}
+
+::: fragment
 -   **Advantages**
 
     -   More events $\to$ higher power $\to$ smaller sample size/lower costs
@@ -111,7 +116,8 @@ $$
 :::
 
 ## Regulatory Guidelines: FDA
-:::{.fragment}
+
+::: fragment
 -   **Main points**
 
     -   Typically first event but can do total events
@@ -125,8 +131,10 @@ $$
     -   “…analyses of the components of the composite endpoint are important and can influence interpretation of the overall study results”
     :::
 :::
+
 ## Regulatory Guidelines: Europe
-:::{.fragment}
+
+::: fragment
 -   **Main points**
 
     -   Combine events of similar importance
@@ -142,7 +150,8 @@ $$
 :::
 
 ## A Tricky Example
-:::{.fragment}
+
+::: fragment
 -   **The EMPA-REG Trial** (NCT01131676)
     -   **Population**: 7,020 patients with type 2 diabetes [@Zinman2015]
     -   **Treatment arms**: Empagliflozin vs control
@@ -154,13 +163,15 @@ $$
 # Traditional Composites
 
 ## Data and Notation
-:::{.fragment}
+
+::: fragment
 -   **Full data** $\mathcal H^*(\infty)$
     -   $D$: survival time; $N^*_D(t)=I(D\leq t)$
     -   $N^*_1(t), \ldots, N^*_K(t)$: counting processes for $K$ nonfatal event types
     -   Cumulative data: $\mathcal H^*(t)=\{N^*_D(u), N^*_1(u), \ldots, N^*_K(u):0\leq u\leq t\}$
 :::
-:::{.fragment}
+
+::: fragment
 -   **Observed (censored) data** $\{\mathcal H^*(X), X\}$
     -   $\mathcal H^*(X)$: outcomes up to time $X$
     -   $X=D\wedge C$: length of follow-up ($a\wedge b = \min(a, b)$)
@@ -169,7 +180,8 @@ $$
 :::
 
 ## First Event
-:::{.fragment}
+
+::: fragment
 -   **Univariate endpoint**
     -   $N^*_{\rm TFE}(t) = I\{N^*_D(t)+\sum_{k=1}^KN^*_k(t)\geq 1\}$
 
@@ -179,15 +191,16 @@ $$
 
         -   Kaplan--Meier curve, log-rank test, Cox model
 :::
-:::{.fragment}
+
+::: fragment
 -   **Component-wise weighting**
     -   Upweight death over nonfatal events
-        -   E.g., Death = 2 $\times$ hospitalization
-![](images/intro_tfe.png){fig-align="center" width="50%"}
+        -   E.g., Death = 2 $\times$ hospitalization ![](images/intro_tfe.png){fig-align="center" width="50%"}
 :::
 
 ## Total Events
-:::{.fragment}
+
+::: fragment
 -   **Weighted composite event process**
     -   $N^*_{\rm R}(t)=w_DN^*_D(t)+\sum_{k=1}^Kw_kN^*_k(t)$
         -   $w_D, w_1, \ldots, w_K$: weights to death and nonfatal events ![](images/intro_wcompo.png){fig-align="right" width="75%"}
@@ -199,7 +212,8 @@ $$
 :::
 
 ## Software: `Wcompo::CompoML()`
-:::{.fragment}
+
+::: fragment
 -   **Basic syntax**
     -   `id`: unique patient identifier; `time`: event times; `status`: event types (`1`: death; `2,...,K` nonfatal event types; `Z`: covariate matrix)
     -   `w`: $K$-vector of weights to event types `1,...K`; default is unweighted
@@ -211,18 +225,21 @@ obj <- CompoML(id, time, status, Z, w = c(2, 1))
 ```
 :::
 :::
-:::{.fragment}
+
+::: fragment
 -   **Output**: a list of class `CompoML`
     -   `obj$beta`: $\hat\beta$; `obj$var`: $\hat\var(\hat\beta)$
     -   `plot(obj, z)`: plot mean function $\exp(\hat\beta^{\rm T} z)\hat\mu_0(t)$
 :::
 
 ## HF-ACTION: An Example
-:::{.fragment}
+
+::: fragment
 -   **High-risk subgroup (n=426)**
     -   Baseline cardiopulmonary exercise (CPX) test $\leq$ 9 min
 :::
-:::{.fragment}
+
+::: fragment
 ```{r}
 #| eval: true
 #| echo: false
@@ -248,7 +265,8 @@ kable(hf_desc, align = c("lccc"))
 :::
 
 ## HF-ACTION: Preparation
-:::{.fragment}
+
+::: fragment
 -   **Load packages and data**
 
 ```{r}
@@ -272,7 +290,8 @@ head(hfaction) # trt_ab=1: training; 0: usual care
 :::
 
 ## HF-ACTION: Data
-:::{.fragment}
+
+::: fragment
 -   **Data processing**
 
 ```{r}
@@ -297,7 +316,8 @@ hfaction_TFE <- hfaction |>
 :::
 
 ## HF-ACTION: Mortality
-:::{.fragment}
+
+::: fragment
 -   **Cox model for death**
     -   **HR**: $\exp(-0.3973) = 67.2\%$ ($32.8\%$ reduction in risk)
     -   $P$-value: 0.0621 (borderline significant)
@@ -318,7 +338,8 @@ summary(obj_D)
 :::
 
 ## HF-ACTION: TFE
-:::{.fragment}
+
+::: fragment
 -   **Cox model for hospitalization-free survival**
     -   **HR**: $\exp(-0.1770) = 83.8\%$ ($16.2\%$ reduction in risk)
     -   $P$-value: 0.111 (less significant than death)
@@ -334,13 +355,15 @@ summary(obj_TFE)
 :::
 
 ## HF-ACTION: Death vs TFE
-:::{.fragment}
+
+::: fragment
 -   Hospitalizations dilute effect on death ...
     -   An *EMPA-REG*-like situation ![](images/intro_hfaction_unis.png){fig-align="center" width="80%"}
 :::
 
 ## HF-ACTION: Weighted Total
-:::{.fragment}
+
+::: fragment
 -   **Proportional means model** (death = $2\times$ hosp)
 
     -   **MR**: $\exp(-0.15398) = 85.7\%$ ($14.3\%$ reduction in total number of composite events)
@@ -360,7 +383,8 @@ summary(obj_TFE)
 :::
 
 ## HF-ACTION: Cumulative Means
-:::{.fragment}
+
+::: fragment
 -   **Model-based mean functions**
 
 ```{r}
@@ -373,12 +397,14 @@ legend(0, 5, col=c("red","blue"), c("Usual care", "Training"), lwd = 2)
 :::
 
 ## Lessons Learned
-:::{.fragment}
+
+::: fragment
 -   **Adding nonfatal events** $\neq$ higher power
     -   Component may be less discriminating [@freemantle2003a]
     -   Length of exposure (death as competing risk) [@schmidli2023]
 :::
-:::{.fragment}
+
+::: fragment
 -   **Solutions**
     -   Hierarchically prioritize death
         -   Evaluate nonfatal components only on survivors
@@ -389,7 +415,8 @@ legend(0, 5, col=c("red","blue"), c("Usual care", "Training"), lwd = 2)
 # Hierarchical Composites
 
 ## Win Ratio: Basics
-:::{.fragment}
+
+::: fragment
 -   **A common approach to HCE**
     -   **Proposed and popularized** by @pocock2012
     -   **Treatment vs control**: generalized pairwise comparisons
@@ -397,27 +424,32 @@ legend(0, 5, col=c("red","blue"), c("Usual care", "Training"), lwd = 2)
         -   Longer survival \> fewer/later nonfatal MACE \> better 6MWT/NYHA score
     -   **Effect size**: WR $=$ wins / losses
 :::
-:::{.fragment}
+
+::: fragment
 -   **Alternative metrics**
     -   **Proportion in favor** (net benefit): PIF $=$ wins $-$ losses [@buyse2010]
     -   **Win odds**: WO $=$ (wins $+$ $2^{-1}$ties) / (losses $+$ $2^{-1}$ties) [@dong2019; @brunner2021]
 :::
 
 ## Win Ratio: Gaining Popularity
-:::{.fragment}
+
+::: fragment
 -   More trials are using it...
 :::
-:::{.fragment}
+
+::: fragment
 ![](images/intro_Ntrial_title.png){fig-align="center" width="100%"}
 :::
 
 ## An Important Caveat
-:::{.fragment}
+
+::: fragment
 -   **WR's estimand depends on censoring ...**
 
     -   @Luo2015, @Bebu2016, @oakes2016, @Mao2019, @Dong2020a, @li2024, etc.
 :::
-:::{.fragment}
+
+::: fragment
 -   **What is an estimand?**
 
     -   Population-level quantity to be estimated
@@ -427,7 +459,8 @@ legend(0, 5, col=c("red","blue"), c("Usual care", "Training"), lwd = 2)
 :::
 
 ## Win-Loss Changes with Time
-:::{.fragment}
+
+::: fragment
 -   **Illustration**
     -   Win-loss status, and deciding component, changes with time ![](images/exmp.png){fig-align="center" width="85%"}
     -   Longer follow-up ...
@@ -436,13 +469,15 @@ legend(0, 5, col=c("red","blue"), c("Usual care", "Training"), lwd = 2)
 :::
 
 ## Trial-Dependent Estimand
-:::{.fragment}
+
+::: fragment
 -   **Actual estimand**
     -   Average WR mixing shorter-term with longer-term comparisons
     -   Weight set (haphazardly) by censoring distribution
         -   Staggered entry, random withdrawal $\to$ non-scientific
 :::
-:::{.fragment}
+
+::: fragment
 -   **Testing vs estimation**
     -   **Testing (qualitative)**: okay
         -   Valid under $H_0$, powerful if treatment *consistently* outperforms control over time
