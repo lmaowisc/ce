@@ -1698,7 +1698,7 @@
     "href": "win_ratio_estimand.html#time-restriction---wr",
     "title": "Defining estimand for win ratio",
     "section": "Time Restriction - WR",
-    "text": "Time Restriction - WR\n\nTwo-tiered composite\n\n\\(D^\\a\\): survival time; \\(T^\\a\\): time to (first) nonfatal MACE\n\nRestricted win/loss probability\n\nImage all patients followed up to \\(\\tau\\) \\[\\begin{align}\\label{eq:wl_2comp}\nw_{a, 1-a}(\\tau) &=  \\underbrace{P\\{D^\\b &lt; \\min(D^\\a, \\tau)\\}}_{\\mbox{win on survival}}\\\\\n& +\n\\underbrace{P\\{\\min(D^\\t, D^\\c) &gt; \\tau, T^\\b &lt; \\min(T^\\a, \\tau)\\}}_{\\mbox{tie on survival, win on nonfatal event}}\n\\end{align}\\]\nRestricted WR: \\({\\rm WR}(\\tau)=w_{1, 0}(\\tau)/w_{0, 1}(\\tau)\\)"
+    "text": "Time Restriction - WR\n\nTwo-tiered composite\n\n\\(D^\\a\\): survival time; \\(T^\\a\\): time to (first) nonfatal MACE\n\nRestricted win/loss probability\n\nImagine all patients followed up to \\(\\tau\\) \\[\\begin{align}\\label{eq:wl_2comp}\nw_{a, 1-a}(\\tau) &=  \\underbrace{P\\{D^\\b &lt; \\min(D^\\a, \\tau)\\}}_{\\mbox{win on survival}}\\\\\n& +\n\\underbrace{P\\{\\min(D^\\t, D^\\c) &gt; \\tau, T^\\b &lt; \\min(T^\\a, \\tau)\\}}_{\\mbox{tie on survival, win on nonfatal event}}\n\\end{align}\\]\nRestricted WR: \\({\\rm WR}(\\tau)=w_{1, 0}(\\tau)/w_{0, 1}(\\tau)\\)"
   },
   {
     "objectID": "win_ratio_estimand.html#time-restriction---estimation",
@@ -1769,5 +1769,96 @@
     "title": "Defining estimand for win ratio",
     "section": "References",
     "text": "References\n\n\n\n\nBebu, I., & Lachin, J. M. (2016). Large sample inference for a win ratio analysis of a composite outcome based on prioritized components. Biostatistics, 17(1), 178–187. https://doi.org/10.1093/biostatistics/kxv032\n\n\nCui, Y., & Huang, B. (2023). WINS: The r WINS package. https://CRAN.R-project.org/package=WINS\n\n\nDong, G., Huang, B., Chang, Y.-W., Seifu, Y., Song, J., & Hoaglin, D. C. (2020a). The win ratio: Impact of censoring and follow-up time and use with nonproportional hazards. Pharmaceutical Statistics, 19(3), 168–177. https://doi.org/10.1002/pst.1977\n\n\nDong, G., Huang, B., Wang, D., Verbeeck, J., Wang, J., & Hoaglin, D. C. (2021). Adjusting win statistics for dependent censoring. Pharmaceutical Statistics, 20(3), 440–450. https://doi.org/10.1002/pst.2086\n\n\nDong, G., Mao, L., Huang, B., Gamalo-Siebers, M., Wang, J., Yu, G., & Hoaglin, D. C. (2020b). The inverse-probability-of-censoring weighting (IPCW) adjusted win ratio statistic: an unbiased estimator in the presence of independent censoring. Journal of Biopharmaceutical Statistics, 30(5), 882–899. https://doi.org/10.1080/10543406.2020.1757692\n\n\nGasparyan, S. B., Kowalewski, E. K., Folkvaljon, F., Bengtsson, O., Buenconsejo, J., Adler, J., & Koch, G. G. (2021). Power and sample size calculation for the win odds test: application to an ordinal endpoint in COVID-19 trials. Journal of Biopharmaceutical Statistics, 31(6), 765–787. https://doi.org/10.1080/10543406.2021.1968893\n\n\nICH. (2020). ICH E9 (R1) addendum on estimands and sensitivity analysis in clinical trials to the guideline on statistical principles for clinical trials, step 5. London: European Medicines Evaluation Agency.\n\n\nLi, H., Chen, W.-C., Lu, N., Tang, R., & Zhao, Y. (2024). The elusiveness of the win ratio parameter in the presence of missing data. Therapeutic Innovation & Regulatory Science, 1–2.\n\n\nLuo, X., Tian, H., Mohanty, S., & Tsai, W. Y. (2015). An Alternative Approach to Confidence Interval Estimation for the Win Ratio Statistic. Biometrics, 71(1), 139–145. https://doi.org/10.1111/biom.12225\n\n\nMao, L. (2019). On the Alternative Hypotheses for the Win Ratio. Biometrics, 75(1), 347–351. https://doi.org/10.1111/biom.12954\n\n\nMao, L. (2023). On restricted mean time in favor of treatment. Biometrics, 79(1), 61–72. https://doi.org/10.1111/biom.13570\n\n\nMao, L., Kim, K., & Miao, X. (2022). Sample size formula for general win ratio analysis. Biometrics, 78(3), 1257–1268. https://doi.org/10.1111/biom.13501\n\n\nMao, L., & Wang, T. (2021). A class of proportional win-fractions regression models for composite outcomes. Biometrics, 77(4), 1265–1275. https://doi.org/10.1111/biom.13382\n\n\nOakes, D. (2016). On the win-ratio statistic in clinical trials with multiple types of event. Biometrika, 103(3), 742–745. https://doi.org/10.1093/biomet/asw026\n\n\nPocock, S. J., Ariti, C. A., Collier, T. J., & Wang, D. (2012). The win ratio: a new approach to the analysis of composite endpoints in clinical trials based on clinical priorities. European Heart Journal, 33(2), 176–182. https://doi.org/10.1093/eurheartj/ehr352\n\n\nWang, B., Zhou, D., Zhang, J., Kim, Y., Chen, L.-W., Dunnmon, P., Bai, S., Liu, Q., & Ishida, E. (2023). Statistical power considerations in the use of win ratio in cardiovascular outcome trials. Contemporary Clinical Trials, 124, 107040. https://doi.org/10.1016/j.cct.2022.107040\n\n\nWang, T., Li, Y., & Qu, Y. (2024). Restricted time win ratio: from estimands to estimation. Statistics in Biopharmaceutical Research, 1–18. https://doi.org/10.1080/19466315.2024.2332675\n\n\nWang, T., & Mao, L. (2022). Stratified proportional win-fractions regression analysis. Statistics in Medicine, 41(26), 5305–5318. https://doi.org/10.1002/sim.9570\n\n\nWang, T., Zilinskas, R., Li, Y., & Qu, Y. (2023). Missing Data Imputation for a Multivariate Outcome of Mixed Variable Types. Statistics in Biopharmaceutical Research, 15(4), 826–837. https://doi.org/10.1080/19466315.2023.2169753\n\n\nYu, R. X., & Ganju, J. (2022). Sample size formula for a win ratio endpoint. Statistics in Medicine, 41(6), 950–963. https://doi.org/10.1002/sim.9297"
+  },
+  {
+    "objectID": "win_ratio_and_beyond.html#outline",
+    "href": "win_ratio_and_beyond.html#outline",
+    "title": "The Win Ratio and Beyond",
+    "section": "Outline",
+    "text": "Outline\n\nBackground\nCensoring’s impact on estimand\n\nTime frame of comparison\n\nTwo approaches to clarity\n\nNonparametric: fix the time frame\nSemiparametric: posit a time-constant feature\n\nSummary and discussion\n\n\\[\n\\def\\a{{(a)}}\n\\def\\b{{(1-a)}}\n\\def\\t{{(1)}}\n\\def\\c{{(0)}}\n\\def\\d{{\\rm d}}\n\\def\\T{{\\rm T}}\n\\]"
+  },
+  {
+    "objectID": "win_ratio_and_beyond.html#composite-endpoint",
+    "href": "win_ratio_and_beyond.html#composite-endpoint",
+    "title": "The Win Ratio and Beyond",
+    "section": "Composite Endpoint",
+    "text": "Composite Endpoint\n\nTraditional composite endpoint\n\nTime to first event\n\nMajor adverse cardiac event (MACE): death, heart failure, myocardio-infarction, stroke, etc.\n\nLimitations:\n\nLack of clinical priority\nStatistical inefficiency (waste of data)\n\n\nHierarchical composite endpoint (HCE)\n\nExample: Death &gt; nonfatal MACE &gt; six-minute walk test (6MWT)/NYHA class"
+  },
+  {
+    "objectID": "win_ratio_and_beyond.html#win-ratio-basics",
+    "href": "win_ratio_and_beyond.html#win-ratio-basics",
+    "title": "The Win Ratio and Beyond",
+    "section": "Win Ratio: Basics",
+    "text": "Win Ratio: Basics\n\nA common approach to HCE\n\nProposed and popularized by Pocock et al. (2012)\nTreatment vs control: generalized pairwise comparisons (Buyse, 2010)\nWin-loss: sequential comparison on components\n\nLonger survival &gt; fewer/later nonfatal MACE &gt; better 6MWT/NYHA score\n\nEffect size: WR \\(=\\) wins / losses\n\nAlternative metrics\n\nProportion in favor (net benefit): PIF \\(=\\) wins \\(-\\) losses\nWin odds: WO \\(=\\) (wins \\(+\\) \\(2^{-1}\\)ties) / (losses \\(+\\) \\(2^{-1}\\)ties)"
+  },
+  {
+    "objectID": "win_ratio_and_beyond.html#acknowledgments",
+    "href": "win_ratio_and_beyond.html#acknowledgments",
+    "title": "The Win Ratio and Beyond",
+    "section": "Acknowledgments",
+    "text": "Acknowledgments\n\nFunding\n\nR01HL149875 (11/2019 – 7/2028)\nDMS2015526 (7/2020 – 6/2024) \n\nCollaborators\n\nKyungMann Kim, Tuo Wang, Gaohong Dong, Bo Huang, etc."
+  },
+  {
+    "objectID": "win_ratio_and_beyond.html#references",
+    "href": "win_ratio_and_beyond.html#references",
+    "title": "The Win Ratio and Beyond",
+    "section": "References",
+    "text": "References\n\n\n\n\nBuyse, M. (2010). Generalized pairwise comparisons of prioritized outcomes in the two-sample problem. Statistics in Medicine, 29(30), 3245–3257. https://doi.org/10.1002/sim.3923\n\n\nPocock, S. J., Ariti, C. A., Collier, T. J., & Wang, D. (2012). The win ratio: a new approach to the analysis of composite endpoints in clinical trials based on clinical priorities. European Heart Journal, 33(2), 176–182. https://doi.org/10.1093/eurheartj/ehr352"
+  },
+  {
+    "objectID": "win_ratio_and_beyond.html#prioritized-comparison",
+    "href": "win_ratio_and_beyond.html#prioritized-comparison",
+    "title": "The Win Ratio and Beyond",
+    "section": "Prioritized Comparison",
+    "text": "Prioritized Comparison\n\nCut off at earlier end of follow-up"
+  },
+  {
+    "objectID": "win_ratio_and_beyond.html#pairwise-comparison",
+    "href": "win_ratio_and_beyond.html#pairwise-comparison",
+    "title": "The Win Ratio and Beyond",
+    "section": "Pairwise Comparison",
+    "text": "Pairwise Comparison\n\n\n\n\nGPC Results\n\nWins: 8 / 16 = 50%\n\nLosses: 3 / 16 = 18.8%\nTies: 5 / 16 = 31.2%\n\nEffect Sizes\n\nWR = 50% / 18.8% = 2.67\n\nPIF = 50% - 18.8% = 31.2%\nWO = (50% + 15.6%) / (18.8% + 15.6%) = 1.72"
+  },
+  {
+    "objectID": "win_ratio_and_beyond.html#stratification",
+    "href": "win_ratio_and_beyond.html#stratification",
+    "title": "The Win Ratio and Beyond",
+    "section": "Stratification",
+    "text": "Stratification"
+  },
+  {
+    "objectID": "win_ratio_and_beyond.html#sample-size-calculation",
+    "href": "win_ratio_and_beyond.html#sample-size-calculation",
+    "title": "The Win Ratio and Beyond",
+    "section": "Sample Size Calculation",
+    "text": "Sample Size Calculation"
+  },
+  {
+    "objectID": "win_ratio_and_beyond.html#regression-analysis",
+    "href": "win_ratio_and_beyond.html#regression-analysis",
+    "title": "The Win Ratio and Beyond",
+    "section": "Regression Analysis",
+    "text": "Regression Analysis"
+  },
+  {
+    "objectID": "win_ratio_and_beyond.html#win-loss-times",
+    "href": "win_ratio_and_beyond.html#win-loss-times",
+    "title": "The Win Ratio and Beyond",
+    "section": "Win-Loss Times",
+    "text": "Win-Loss Times"
+  },
+  {
+    "objectID": "win_ratio_and_beyond.html#door",
+    "href": "win_ratio_and_beyond.html#door",
+    "title": "The Win Ratio and Beyond",
+    "section": "DOOR",
+    "text": "DOOR"
+  },
+  {
+    "objectID": "win_ratio_and_beyond.html#criticisms",
+    "href": "win_ratio_and_beyond.html#criticisms",
+    "title": "The Win Ratio and Beyond",
+    "section": "Criticisms",
+    "text": "Criticisms"
   }
 ]

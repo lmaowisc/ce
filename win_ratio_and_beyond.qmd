@@ -1,0 +1,144 @@
+---
+title: "The Win Ratio and Beyond"
+subtitle: "Evolution, Applications, and Open Questions in Composite Endpoint Analysis"
+css: wr_sj_style.css
+csl: apa.csl
+author:
+  name: Lu Mao
+  affiliations: 
+    - name: Department of Biostatistics & Medical Informatics
+    - University of Wisconsin-Madison
+  email: lmao@biostat.wisc.edu
+format: 
+  revealjs:
+    theme: simple
+    # incremental: true   
+editor: visual
+include-in-header:
+  - text: |
+      <style type="text/css">
+      ul li ul li {
+        font-size: 0.80em;
+      }
+      </style>
+bibliography: references.bib
+title-slide-attributes:
+  data-background-image: sj_images/banner.webp
+  data-background-size: 35%
+  data-background-position: 0% 2%
+---
+
+## Outline
+
+-   **Background**
+
+-   **Censoring's impact on estimand**
+
+    -   Time frame of comparison
+
+-   **Two approaches to clarity**
+
+    -   **Nonparametric**: fix the time frame
+    -   **Semiparametric**: posit a time-constant feature
+
+-   **Summary and discussion**
+
+$$
+\def\a{{(a)}}
+\def\b{{(1-a)}}
+\def\t{{(1)}}
+\def\c{{(0)}}
+\def\d{{\rm d}}
+\def\T{{\rm T}}
+$$
+
+# Introduction
+
+## Composite Endpoint
+
+-   **Traditional composite endpoint**
+    -   **Time to first event**
+        -   Major adverse cardiac event (MACE): death, heart failure, myocardio-infarction, stroke, etc.
+    -   **Limitations**:
+        -   Lack of clinical priority
+        -   Statistical inefficiency (waste of data)
+-   **Hierarchical composite endpoint (HCE)**
+    -   **Example**: Death \> nonfatal MACE \> six-minute walk test (6MWT)/NYHA class
+
+## Win Ratio: Basics
+
+-   **A common approach to HCE**
+    -   **Proposed and popularized** by @pocock2012
+    -   **Treatment vs control**: generalized pairwise comparisons [@buyse2010]
+    -   **Win-loss**: sequential comparison on components
+        -   Longer survival \> fewer/later nonfatal MACE \> better 6MWT/NYHA score
+    -   **Effect size**: WR $=$ wins / losses
+-   **Alternative metrics**
+    -   **Proportion in favor** (net benefit): PIF $=$ wins $-$ losses
+    -   **Win odds**: WO $=$ (wins $+$ $2^{-1}$ties) / (losses $+$ $2^{-1}$ties)
+
+
+## Prioritized Comparison
+<div style="font-size: 0.75em; line-height: 1.2em;">
+Cut off at earlier end of follow-up
+</div>
+![](sj_images/comp_wr_pc.png){width="50%" fig-align="center"}
+
+## Pairwise Comparison
+
+:::: {.columns}
+::: {.column width="30%"}
+<div style="font-size: 0.75em; line-height: 1.2em;">
+- **GPC Results** 
+    - Wins: 8 / 16 = 50%  
+    - Losses: 3 / 16 = 18.8%
+    - Ties: 5 / 16 = 31.2%
+- **Effect Sizes**
+    - WR = 50% / 18.8% = 2.67  
+    - PIF = 50% - 18.8% = 31.2%
+    - WO = (50% + 15.6%) / (18.8% + 15.6%) = 1.72
+</div>
+:::
+
+::: {.column width="70%"}
+<br>
+
+![](sj_images/gpc_pairwise.png){width="100%" fig-align="center"}
+:::
+::::
+
+
+## Stratification
+
+
+# Properties and Use Cases
+
+
+# Extensions and Variations
+
+## Sample Size Calculation
+
+
+## Regression Analysis
+
+## Win-Loss Times
+
+## DOOR
+
+
+# Challenges and Open Questions
+
+## Criticisms
+
+## Acknowledgments
+
+-   **Funding**
+
+    -   [R01HL149875](https://reporter.nih.gov/search/9aSu5u3xlE26GrjbF_4cBg/project-details/10734551) (11/2019 -- 7/2028)
+    -   [DMS2015526](https://www.nsf.gov/awardsearch/showAward?AWD_ID=2015526) (7/2020 -- 6/2024) ![](images/funds.png){fig-align="center" width="70%"}
+
+-   **Collaborators**
+
+    -   [KyungMann Kim](https://biostat.wiscweb.wisc.edu/staff/kim-kyungmann/), [Tuo Wang](https://tuowang.rbind.io/), Gaohong Dong, Bo Huang, etc.
+
+## References

@@ -164,7 +164,7 @@ $$
 -   **Two-tiered composite**
     -   $D^\a$: survival time; $T^\a$: time to (first) nonfatal MACE
 -   **Restricted win/loss probability**
-    -   Image all patients followed up to $\tau$ \begin{align}\label{eq:wl_2comp}
+    -   Imagine all patients followed up to $\tau$ \begin{align}\label{eq:wl_2comp}
         w_{a, 1-a}(\tau) &=  \underbrace{P\{D^\b < \min(D^\a, \tau)\}}_{\mbox{win on survival}}\\
         & +
          \underbrace{P\{\min(D^\t, D^\c) > \tau, T^\b < \min(T^\a, \tau)\}}_{\mbox{tie on survival, win on nonfatal event}}
