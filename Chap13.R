@@ -441,7 +441,7 @@ theme_clean <- theme_minimal(base_size = 14) +
     legend.position = "bottom", 
     legend.key.width = unit(1.5, "cm"),
     legend.text = element_text(size = 14),
-    legend.title = element_blank(),
+    # legend.title = element_blank(),
     plot.background = element_rect(fill = "white", color = NA)
   )
 
@@ -464,6 +464,7 @@ p <- ggplot() +
   annotate("text", x = 1, y = 4.5, label = "Control",   fontface = "bold", size = 5, hjust = 0.5) +
   scale_color_manual(values = cols, breaks = c("Win","Loss","Tie")) +
   coord_cartesian(xlim = c(-0.15, 1.15), ylim = c(0.7, 4.7), expand = FALSE) +
+  labs(color = "Treatment vs Control:") +
   theme_clean
 
 print(p)
@@ -535,7 +536,7 @@ make_panel <- function(outcomes,
       plot.title = element_text(face = "bold", hjust = 0.5),
       plot.subtitle = element_text(hjust = 0.5),
       legend.position = "bottom",
-      legend.title = element_blank(),
+      # legend.title = element_blank(),
       legend.key.width = grid::unit(1.4, "cm"),
       legend.text = element_text(size = 14),
       plot.background = element_rect(fill = "white", color = NA)
@@ -561,7 +562,8 @@ make_panel <- function(outcomes,
     coord_cartesian(xlim = c(-0.18, 1.18),
                     ylim = c(0.5, max(n_t, n_c) + 0.8),
                     expand = FALSE) +
-    labs(title = title, subtitle = subtitle) +
+    labs(title = title, subtitle = subtitle,
+         color = "Treatment vs Control:") +
     theme_clean
 }
 
@@ -576,7 +578,7 @@ outcomes_ef_le40 <- matrix(
   nrow = 4, ncol = 4, byrow = TRUE,
   dimnames = list(paste0("T", 1:4), paste0("C", 1:4))
 )
-p1 <- make_panel(outcomes_ef_le40, title = "EF ≤ 40%")
+p1 <- make_panel(outcomes_ef_le40, title = "EF ≤ 40% (N = 8)")
 
 # ---- Panel (2): EF > 40% — 3×3, 3 Wins, 2 Losses, 4 Ties ----
 outcomes_ef_gt40 <- matrix(
@@ -589,7 +591,7 @@ outcomes_ef_gt40 <- matrix(
   dimnames = list(paste0("T", 1:3), paste0("C", 1:3))
 )
 
-p2 <- make_panel(outcomes_ef_gt40, title = "EF > 40%")
+p2 <- make_panel(outcomes_ef_gt40, title = "EF > 40% (N = 6)")
 
 # ---- Side-by-side (patchwork) ----
 p_final <- p1 + p2 + plot_layout(guides = "collect") &

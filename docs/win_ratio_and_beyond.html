@@ -282,7 +282,7 @@ Lu Mao
 <h2>Stratification</h2>
 <div style="font-size: 0.75em;">
 <ul>
-<li><strong>GPC within stratum and aggregate</strong> <span class="citation" data-cites="dong2017 dong2023">(<a href="#/references" role="doc-biblioref" onclick="">Dong et al., 2018</a>, <a href="#/references" role="doc-biblioref" onclick="">2023</a>)</span> <img data-src="sj_images/str_winloss.png" class="quarto-figure quarto-figure-center" style="width:100.0%"> <span class="math display">\[\begin{align}
+<li><strong>GPC within stratum <span class="math inline">\(\to\)</span> combine</strong> <span class="citation" data-cites="dong2017 gasparyan2020 dong2023">(<a href="#/references" role="doc-biblioref" onclick="">Dong et al., 2018</a>, <a href="#/references" role="doc-biblioref" onclick="">2023</a>; <a href="#/references" role="doc-biblioref" onclick="">Gasparyan et al., 2020</a>)</span> <img data-src="sj_images/str_winloss.png" class="quarto-figure quarto-figure-center" style="width:100.0%"> <span class="math display">\[\begin{align}
 \text{Wins: } &amp; 50\% \times 8/(8+6) + 33\% \times 6/(8+6) = 42.7\% \\
 \text{Losses: } &amp; 38\% \times 8/(8+6) + 22\% \times 6/(8+6) = 31.1\%
 \end{align}\]</span></li>
@@ -323,10 +323,10 @@ W_{ij} = \begin{cases}
 <ul>
 <li><span class="math inline">\(Y^\a_i = 1\)</span> (response) vs 0 (no-response) for subject <span class="math inline">\(i\)</span> in group <span class="math inline">\(a\)</span> (<span class="math inline">\(a = 0, 1\)</span>)</li>
 <li>Win-loss (1-0) fractions <span class="math display">\[
-\hat w^{(a, 1-a)} = (n_an_{1-a})^{-1} \sum_{i=1}^{n_a}\sum_{j=1}^{n_{1-a}} Y^\a_i (1 - Y^\b_j) = \hat p_a (1 - \hat p_{1-a})
+\hat w_{a, 1-a} = (n_an_{1-a})^{-1} \sum_{i=1}^{n_a}\sum_{j=1}^{n_{1-a}} Y^\a_i (1 - Y^\b_j) = \hat p_a (1 - \hat p_{1-a})
 \]</span>
 <ul>
-<li><span class="math inline">\(\hat p_a = n_a^{-1} \sum_{i=1}^{n_a} Y^\a_i\)</span> = response rate in group <span class="math inline">\(a\)</span></li>
+<li><span class="math inline">\(\hat p_a = n_a^{-1} \sum_{i=1}^{n_a} Y^\a_i =\)</span> response rate in group <span class="math inline">\(a\)</span></li>
 </ul></li>
 </ul></li>
 <li><strong>GPC stats</strong>
@@ -360,7 +360,7 @@ W_{ij} = \begin{cases}
 </ul></li>
 <li><strong>Alternative hypothesis</strong>
 <ul>
-<li>Death and hospitalization times: <em>stochastically larger</em> in treatment than in control <span class="citation" data-cites="Luo2015 Mao2019">(<a href="#/references" role="doc-biblioref" onclick="">Luo et al., 2015</a>; <a href="#/references" role="doc-biblioref" onclick="">Mao, 2019</a>)</span>
+<li>Death and hospitalizations <em>stochastically later</em> in treatment than in control <span class="citation" data-cites="Luo2015 Mao2019">(<a href="#/references" role="doc-biblioref" onclick="">Luo et al., 2015</a>; <a href="#/references" role="doc-biblioref" onclick="">Mao, 2019</a>)</span>
 <ul>
 <li>Stratified test: Stochastical order in each stratum</li>
 </ul></li>
@@ -399,7 +399,7 @@ W_{ij} = \begin{cases}
 </li>
 <li><strong>Intervention:</strong> Acoramidis 800 mg BID vs placebo for 30 months<br>
 </li>
-<li><strong>Primary HCE:</strong> Death → CV hospitalization → NT-proBNP → 6-min walk distance
+<li><strong>Primary HCE:</strong> Death <span class="math inline">\(\stackrel{71 \%}{\to}\)</span> CV hospitalization <span class="math inline">\(\stackrel{42 \%}{\to}\)</span> NT-proBNP <span class="math inline">\(\stackrel{12 \%}{\to}\)</span> 6MWT <span class="math inline">\(\stackrel{0.3 \%}{\to}\)</span> ties
 <ul>
 <li>Stratified by TTR genotype, NT-proBNP level, eGFR, etc.</li>
 </ul></li>
@@ -418,10 +418,9 @@ W_{ij} = \begin{cases}
 </li>
 <li><strong>Population:</strong> Critically ill adults with an organ dysfunction (respiratory/ cardiovascular/renal)<br>
 </li>
-<li><strong>Intervention:</strong> Dapagliflozin 10 mg daily vs standard care alone (up to 14 days)<br>
+<li><strong>Intervention:</strong> Dapagliflozin 10 mg daily vs standard care alone (up to 14d)<br>
 </li>
-<li><strong>Primary HCE:</strong> Hospital mortality → initiation of KRT → ICU length of stay (28 days)<br>
-</li>
+<li><strong>Primary HCE:</strong> Hospital mortality <span class="math inline">\(\stackrel{42\%}{\to}\)</span> KRT initiation <span class="math inline">\(\stackrel{35\%}{\to}\)</span> ICU length of stay <span class="math inline">\(\stackrel{4\%}{\to}\)</span> ties</li>
 </ul></li>
 </ul>
 </div>
@@ -553,11 +552,11 @@ n\approx\frac{4(1+p_{\text{tie}})(z_{1-\alpha/2}+z_{1-\beta})^2}{3q(1-q)(1-p_{\t
 <ul>
 <li><span class="math inline">\(\alpha = 0.05\)</span>: type I error; <span class="math inline">\(\,\, 1 - \beta = 80\%, 90\%\)</span>: desired power</li>
 <li><span class="math inline">\(q = n_1/n\)</span>; <span class="math inline">\(\,\, p_{\text{tie}}\)</span>: proportion of ties</li>
-<li>Elicit effect size <span class="math inline">\(\log(\text{WR})\)</span> and <span class="math inline">\(p_{\text{tie}}\)</span> from component-wise win-loss measures <span class="citation" data-cites="barnhart:2025:sim barnhart:2025:sbr">(<a href="#/references" role="doc-biblioref" onclick="">Barnhart et al., 2025a</a>, <a href="#/references" role="doc-biblioref" onclick="">2025b</a>)</span></li>
+<li><span class="math inline">\(\log(\text{WR})\)</span> and <span class="math inline">\(p_{\text{tie}}\)</span> elicitable from component-wise win-loss measures <span class="citation" data-cites="barnhart:2025:sim barnhart:2025:sbr">(<a href="#/references" role="doc-biblioref" onclick="">Barnhart et al., 2025a</a>, <a href="#/references" role="doc-biblioref" onclick="">2025b</a>)</span></li>
 </ul></li>
 <li><strong>Parametric approach</strong> <span class="citation" data-cites="mao2022">(<a href="#/references" role="doc-biblioref" onclick="">Mao, Kim, &amp; Miao, 2022</a>)</span>
 <ul>
-<li>Gumbel–Hougaard copula <span class="math inline">\(+\)</span> Numerical integration (R package <a href="https://cran.r-project.org/web/packages/WR/" target="_blank"><code>WR</code></a>)</li>
+<li>Gumbel–Hougaard copula <span class="math inline">\(+\)</span> numerical integration (R package <a href="https://cran.r-project.org/web/packages/WR/" target="_blank"><code>WR</code></a>)</li>
 </ul></li>
 </ul>
 </section>
@@ -581,7 +580,7 @@ n\approx\frac{4(1+p_{\text{tie}})(z_{1-\alpha/2}+z_{1-\beta})^2}{3q(1-q)(1-p_{\t
 <ul>
 <li><strong>Specify time horizon</strong> <span class="math inline">\(\tau\)</span>
 <ul>
-<li>Imagine all subjects followed up to <span class="math inline">\(\tau\)</span> (1 yr, 3 yrs, etc.)</li>
+<li>Imagine all subjects followed up to <span class="math inline">\(\tau\)</span> (1 yr, 3 yr, etc.)</li>
 </ul></li>
 <li><strong>GPC under consistent time frame</strong>
 <ul>
@@ -621,8 +620,11 @@ n\approx\frac{4(1+p_{\text{tie}})(z_{1-\alpha/2}+z_{1-\beta})^2}{3q(1-q)(1-p_{\t
 \mu(\tau) = w_{1, 0}(\tau) - w_{0, 1}(\tau)
 \]</span>
 <ul>
-<li><span class="math inline">\(w_{a, 1-a}(\tau)\)</span>: average <em>time</em> subject in group <span class="math inline">\(a\)</span> wins over subject in group <span class="math inline">\(1-a\)</span> up to time <span class="math inline">\(\tau\)</span></li>
-<li>Interpretation: net favorable time gained/lost by treatment <span class="citation" data-cites="Mao2023">(<a href="#/references" role="doc-biblioref" onclick="">Mao, 2023</a>, R package <a href="https://cran.r-project.org/web/packages/rmt/" target="_blank"><code>rmt</code></a>)</span></li>
+<li><span class="math inline">\(w_{a, 1-a}(\tau)\)</span>: average <em>time</em> group <span class="math inline">\(a\)</span> wins over group <span class="math inline">\(1-a\)</span> up to time <span class="math inline">\(\tau\)</span></li>
+<li><strong>Interpretation</strong>: net favorable time gained/lost by treatment <span class="citation" data-cites="Mao2023">(<a href="#/references" role="doc-biblioref" onclick="">Mao, 2023</a>, R package <a href="https://cran.r-project.org/web/packages/rmt/" target="_blank"><code>rmt</code></a>)</span>
+<ul>
+<li>Decomposable by component</li>
+</ul></li>
 </ul></li>
 <li><strong>Other win time measures</strong>
 <ul>
@@ -660,16 +662,16 @@ n\approx\frac{4(1+p_{\text{tie}})(z_{1-\alpha/2}+z_{1-\beta})^2}{3q(1-q)(1-p_{\t
 <section id="critiques" class="slide level2">
 <h2>Critiques</h2>
 <ul>
-<li><strong>Some caveats</strong> <span class="citation" data-cites="butler:2024">(<a href="#/references" role="doc-biblioref" onclick="">Butler et al., 2024</a>)</span>
+<li><strong>Pitfalls and caveats</strong> <span class="citation" data-cites="butler:2024">(<a href="#/references" role="doc-biblioref" onclick="">Butler et al., 2024</a>)</span>
 <ul>
 <li>WR ignores ties
 <ul>
 <li>Win relative to <em>loss</em> rather than <em>“not win”</em></li>
-<li>Some consider this to overstate effect size</li>
+<li>Some consider this to <em>overstate</em> effect size</li>
 </ul></li>
-<li>Inclusion of low-priority biomarker
+<li>Inclusion of low-priority biomarkers
 <ul>
-<li>Surrogate measures drives treatment effect</li>
+<li>Surrogate measures drive treatment effect</li>
 </ul></li>
 <li>Subjectivity in defining HCE
 <ul>
@@ -839,6 +841,9 @@ Evans, S. R., Rubin, D., Follmann, D., Pennello, G., Huskins, W. C., Powers, J. 
 </div>
 <div id="ref-fda:2023" class="csl-entry" role="listitem">
 FDA. (2023). <em>Guidance document: Adjusting for covariates in randomized clinical trials for drugs and biological products</em>. US Food and Drug Adminstration. <a href="https://www.fda.gov/regulatory-information/search-fda-guidance-documents/adjusting-covariates-randomized-clinical-trials-drugs-and-biological-products">https://www.fda.gov/regulatory-information/search-fda-guidance-documents/adjusting-covariates-randomized-clinical-trials-drugs-and-biological-products</a>
+</div>
+<div id="ref-gasparyan2020" class="csl-entry" role="listitem">
+Gasparyan, S. B., Folkvaljon, F., Bengtsson, O., Buenconsejo, J., &amp; Koch, G. G. (2020). Adjusted win ratio with stratification: Calculation methods and interpretation. <em>Statistical Methods in Medical Research</em>, <em>30</em>(2), 580–611. <a href="https://doi.org/10.1177/0962280220942558">https://doi.org/10.1177/0962280220942558</a>
 </div>
 <div id="ref-gillmore:2024" class="csl-entry" role="listitem">
 Gillmore, J. D., Judge, D. P., Cappelli, F., Fontana, M., Garcia-Pavia, P., Gibbs, S., Grogan, M., Hanna, M., Hoffman, J., Masri, A., Maurer, M. S., Nativi-Nicolau, J., Obici, L., Poulsen, S. H., Rockhold, F., Shah, K. B., Soman, P., Garg, J., Chiswell, K., … Fox, J. C. (2024). Efficacy and safety of acoramidis in transthyretin amyloid cardiomyopathy. <em>New England Journal of Medicine</em>, <em>390</em>(2), 132–142. <a href="https://doi.org/10.1056/NEJMoa2305434">https://doi.org/10.1056/NEJMoa2305434</a>

@@ -100,7 +100,7 @@ Cut off at earlier end of follow-up
 
 ## Stratification
 <div style="font-size: 0.75em;">
-- **GPC within stratum and aggregate** [@dong2017; @dong2023]
+- **GPC within stratum $\to$ combine** [@dong2017; @gasparyan2020; @dong2023]
 ![](sj_images/str_winloss.png){width="100%" fig-align="center"}
 \begin{align}
 \text{Wins: } & 50\% \times 8/(8+6) + 33\% \times 6/(8+6) = 42.7\% \\
@@ -136,9 +136,9 @@ $$
     ($a = 0, 1$)
     -   Win-loss (1-0) fractions
 $$
-\hat w^{(a, 1-a)} = (n_an_{1-a})^{-1} \sum_{i=1}^{n_a}\sum_{j=1}^{n_{1-a}} Y^\a_i (1 - Y^\b_j) = \hat p_a (1 - \hat p_{1-a})
+\hat w_{a, 1-a} = (n_an_{1-a})^{-1} \sum_{i=1}^{n_a}\sum_{j=1}^{n_{1-a}} Y^\a_i (1 - Y^\b_j) = \hat p_a (1 - \hat p_{1-a})
 $$
-        - $\hat p_a = n_a^{-1} \sum_{i=1}^{n_a} Y^\a_i$ = response rate in group $a$
+        - $\hat p_a = n_a^{-1} \sum_{i=1}^{n_a} Y^\a_i =$ response rate in group $a$
 -   **GPC stats**
     -   WR $= [\hat p_1 (1 - \hat p_0)] / [\hat p_0 (1 - \hat p_1)] =$ response odds ratio
     -   NB $= \hat p_1 - \hat p_0=$ response rate difference
@@ -158,7 +158,7 @@ $$
     -   WR $= 1$, NB $= 0$, WO $= 1$ regardless of follow-up time
 
 -   **Alternative hypothesis**
-    - Death and hospitalization times: *stochastically larger* in treatment than in control [@Luo2015; @Mao2019]
+    - Death and hospitalizations *stochastically later* in treatment than in control [@Luo2015; @Mao2019]
         - Stratified test: Stochastical order in each stratum
     - So WR $> 1$, NB $> 0$, WO $> 1$ regardless of follow-up time
     - Power $\to 1$ as $n=n_1+n_0\to\infty$
@@ -187,7 +187,7 @@ $$
     - **Design:** Phase 3, double-blind RCT (n = 632; 2:1 randomization)  
     - **Population:** Transthyretin amyloid cardiomyopathy (90 % wild-type, mean age 77 yr)  
     - **Intervention:** Acoramidis 800 mg BID vs placebo for 30 months  
-    - **Primary HCE:** Death → CV hospitalization → NT-proBNP → 6-min walk distance  
+    - **Primary HCE:** Death $\stackrel{71 \%}{\to}$ CV hospitalization $\stackrel{42 \%}{\to}$ NT-proBNP $\stackrel{12 \%}{\to}$ 6MWT $\stackrel{0.3 \%}{\to}$ ties  
         - Stratified by TTR genotype, NT-proBNP level, eGFR, etc.
 </div>
 
@@ -200,8 +200,8 @@ $$
 - **Trial data** [@tavares:2024]
     - **Design:** Multicenter, open-label RCT (n = 507; 22 ICUs in Brazil)  
     - **Population:** Critically ill adults with an organ dysfunction (respiratory/ cardiovascular/renal)  
-    - **Intervention:** Dapagliflozin 10 mg daily vs standard care alone (up to 14 days)  
-    - **Primary HCE:** Hospital mortality → initiation of KRT → ICU length of stay (28 days)  
+    - **Intervention:** Dapagliflozin 10 mg daily vs standard care alone (up to 14d)  
+    - **Primary HCE:**  Hospital mortality $\stackrel{42\%}{\to}$ KRT initiation $\stackrel{35\%}{\to}$ ICU length of stay $\stackrel{4\%}{\to}$ ties
 </div>
 
 ```{r}
@@ -295,11 +295,11 @@ n\approx\frac{4(1+p_{\text{tie}})(z_{1-\alpha/2}+z_{1-\beta})^2}{3q(1-q)(1-p_{\t
 $$
     - $\alpha = 0.05$: type I error; $\,\, 1 - \beta = 80\%, 90\%$: desired power
     - $q = n_1/n$; $\,\, p_{\text{tie}}$: proportion of ties
-    - Elicit effect size $\log(\text{WR})$ and $p_{\text{tie}}$ from component-wise
+    - $\log(\text{WR})$ and $p_{\text{tie}}$ elicitable from component-wise
     win-loss measures [@barnhart:2025:sim; @barnhart:2025:sbr]
 
 - **Parametric approach** [@mao2022]
-    - Gumbel--Hougaard copula $+$ Numerical integration (R package [`WR`](https://cran.r-project.org/web/packages/WR/){target="_blank"}) 
+    - Gumbel--Hougaard copula $+$ numerical integration (R package [`WR`](https://cran.r-project.org/web/packages/WR/){target="_blank"}) 
 
 
 ## Estimand Issue
@@ -316,7 +316,7 @@ $$
 ## Time Restriction
 
 - **Specify time horizon** $\tau$
-    - Imagine all subjects followed up to $\tau$ (1 yr, 3 yrs, etc.)
+    - Imagine all subjects followed up to $\tau$ (1 yr, 3 yr, etc.)
 
 - **GPC under consistent time frame**
     - **Estimand**: WR$(\tau)$, NB$(\tau)$, WO$(\tau)$
@@ -348,8 +348,9 @@ $$
     $$
     \mu(\tau) = w_{1, 0}(\tau) - w_{0, 1}(\tau)
     $$
-    -   $w_{a, 1-a}(\tau)$: average *time* subject in group $a$ wins over subject in group $1-a$ up to time $\tau$
-    -   Interpretation: net favorable time gained/lost by treatment [@Mao2023, R package [`rmt`](https://cran.r-project.org/web/packages/rmt/){target="_blank"}]
+    -   $w_{a, 1-a}(\tau)$: average *time* group $a$ wins over group $1-a$ up to time $\tau$
+    -   **Interpretation**: net favorable time gained/lost by treatment [@Mao2023, R package [`rmt`](https://cran.r-project.org/web/packages/rmt/){target="_blank"}]
+        - Decomposable by component
 
 - **Other win time measures**
     -   Expected win time ($\tau\to$ maximum length of follow-up), etc. [@troendle2024]
@@ -376,12 +377,12 @@ $$
 
 ## Critiques
 
-- **Some caveats** [@butler:2024]
+- **Pitfalls and caveats** [@butler:2024]
     -  WR ignores ties
         -  Win relative to *loss* rather than *"not win"*
-        -  Some consider this to overstate effect size 
-    -  Inclusion of low-priority biomarker
-        -   Surrogate measures drives treatment effect
+        -  Some consider this to *overstate* effect size 
+    -  Inclusion of low-priority biomarkers
+        -   Surrogate measures drive treatment effect
     - Subjectivity in defining HCE
         -  Clinical input needed
         -  Post hoc construction inflates type I error
