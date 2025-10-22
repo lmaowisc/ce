@@ -12,6 +12,9 @@ author:
 format: 
   revealjs:
     theme: simple
+    toc: true
+    toc-title: "Outline"
+    toc-depth: 1
     # incremental: true   
 editor: visual
 include-in-header:
@@ -28,20 +31,9 @@ title-slide-attributes:
   data-background-position: 0% 2%
 ---
 
-## Outline
 
--   **Background**
 
--   **Censoring's impact on estimand**
-
-    -   Time frame of comparison
-
--   **Two approaches to clarity**
-
-    -   **Nonparametric**: fix the time frame
-    -   **Semiparametric**: posit a time-constant feature
-
--   **Summary and discussion**
+# Introduction
 
 $$
 \def\a{{(a)}}
@@ -51,8 +43,6 @@ $$
 \def\d{{\rm d}}
 \def\T{{\rm T}}
 $$
-
-# Introduction
 
 ## Composite Endpoint
 
@@ -67,15 +57,15 @@ $$
 
 ## Win Ratio: Basics
 
--   **A common approach to HCE**
+-   **A common HCE**
     -   **Proposed and popularized** by @pocock2012
-    -   **Treatment vs control**: generalized pairwise comparisons [@buyse2010]
-    -   **Win-loss**: sequential comparison on components
-        -   Longer survival \> fewer/later nonfatal MACE \> better 6MWT/NYHA score
+    -   **Treatment vs control**: generalized pairwise comparisons (GPC) [@buyse:2025]
+        -   **Win-loss**: Longer survival $\to$ fewer/later nonfatal MACE $\to$ better 6MWT/NYHA 
     -   **Effect size**: WR $=$ wins / losses
+        - Fold increase in probability of winning over lossing
 -   **Alternative metrics**
-    -   **Proportion in favor** (net benefit): PIF $=$ wins $-$ losses
-    -   **Win odds**: WO $=$ (wins $+$ $2^{-1}$ties) / (losses $+$ $2^{-1}$ties)
+    -   **Net benefit** (Proportion in favor): NB $=$ wins $-$ losses [@buyse2010]
+    -   **Win odds**: WO $=$ (wins $+$ $2^{-1}$ties) / (losses $+$ $2^{-1}$ties) [@brunner2021]
 
 
 ## Prioritized Comparison
@@ -95,7 +85,7 @@ Cut off at earlier end of follow-up
     - Ties: 5 / 16 = 31.2%
 - **Effect Sizes**
     - WR = 50% / 18.8% = 2.67  
-    - PIF = 50% - 18.8% = 31.2%
+    - NB = 50% - 18.8% = 31.2%
     - WO = (50% + 15.6%) / (18.8% + 15.6%) = 1.72
 </div>
 :::
@@ -109,26 +99,356 @@ Cut off at earlier end of follow-up
 
 
 ## Stratification
-
+<div style="font-size: 0.75em;">
+- **GPC within stratum and aggregate** [@dong2017; @dong2023]
+![](sj_images/str_winloss.png){width="100%" fig-align="center"}
+\begin{align}
+\text{Wins: } & 50\% \times 8/(8+6) + 33\% \times 6/(8+6) = 42.7\% \\
+\text{Losses: } & 38\% \times 8/(8+6) + 22\% \times 6/(8+6) = 31.1\%
+\end{align}
+- **Overall WR:** 42.7% / 31.1% = 1.37
+</div>
 
 # Properties and Use Cases
+
+## General Setting
+
+-   **Notation**
+    -   $n_1$, $n_0$: sample sizes in treatment and control
+    -   $W_{ij}$: win-loss indicator of subject $i$ in treatment vs $j$ in control
+$$
+W_{ij} = \begin{cases}
+1, & \text{if subject } i \text{ in treatment wins} \\
+-1, & \text{if subject } j \text{ in control wins} \\
+0, & \text{if tie}
+\end{cases}
+$$
+        - $\text{Wins}: \hat w_{1, 0} = (n_1n_0)^{-1}\sum_{i=1}^{n_1} \sum_{j=1}^{n_0} I(W_{ij} = 1)$
+        - $\text{Losses}: \hat w_{0, 1} = (n_1n_0)^{-1}\sum_{i=1}^{n_1} \sum_{j=1}^{n_0} I(W_{ij} = -1)$
+    -   WR $=\hat w_{1, 0} / \hat w_{0, 1}$; $\,\,$ NB $=\hat w_{1, 0} - \hat w_{0, 1}$;
+    $\,\,$ WO $=(1 + \text{NB}) / (1 - \text{NB})$  
+
+
+## Binary Case Equivalencies
+
+-   **Binary outcome, no censoring**
+    -   $Y^\a_i = 1$ (response) vs 0 (no-response) for subject $i$ in group $a$ 
+    ($a = 0, 1$)
+    -   Win-loss (1-0) fractions
+$$
+\hat w^{(a, 1-a)} = (n_an_{1-a})^{-1} \sum_{i=1}^{n_a}\sum_{j=1}^{n_{1-a}} Y^\a_i (1 - Y^\b_j) = \hat p_a (1 - \hat p_{1-a})
+$$
+        - $\hat p_a = n_a^{-1} \sum_{i=1}^{n_a} Y^\a_i$ = response rate in group $a$
+-   **GPC stats**
+    -   WR $= [\hat p_1 (1 - \hat p_0)] / [\hat p_0 (1 - \hat p_1)] =$ response odds ratio
+    -   NB $= \hat p_1 - \hat p_0=$ response rate difference
+
+## Variance Estimation
+
+-  **Bootstrap** 
+    -   Inital proposal [@pocock2012]
+-   **Analytic asymptotic variance** 
+    - Asymptotic decompostion of $U$-statistics [@Bebu2016; @Luo2015; @dong2016]
+    - Influence function-based
+    - **R packages**: [`WR`](https://cran.r-project.org/web/packages/WR/){target="_blank"}, [`WINS`](https://cran.r-project.org/web/packages/WINS/){target="_blank"}, [`BuyseTest`](https://cran.r-project.org/web/packages/BuyseTest/){target="_blank"}, [`WinRatio`](https://cran.r-project.org/web/packages/WinRatio/){target="_blank"}, etc.
+
+## Null vs Alternative Hypotheses
+
+-   **Null hypothesis**: No treatment effect on any event
+    -   WR $= 1$, NB $= 0$, WO $= 1$ regardless of follow-up time
+
+-   **Alternative hypothesis**
+    - Death and hospitalization times: *stochastically larger* in treatment than in control [@Luo2015; @Mao2019]
+        - Stratified test: Stochastical order in each stratum
+    - So WR $> 1$, NB $> 0$, WO $> 1$ regardless of follow-up time
+    - Power $\to 1$ as $n=n_1+n_0\to\infty$
+
+
+## Recurrent Events (I)
+
+-  **GPC to accommodate recurrent events** 
+    -   E.g., hospitalizations, exacerbations, infections, etc.
+
+-  **Comparison rules**
+    -   Death $\to$ Number of events $\to$ Time to first/last event [@mao2022a]
+    $\to$ ... (Biomarker/QoL changes)
+    -   $H_A$: Treatment stochastically delays all events
+
+## Recurrent Events (II)
+
+![](sj_images/comp_wr_rwr.png){width="60%" fig-align="center"}
+
+
+## ATTRibute-CM (NEJM 2024)
+
+<div style="font-size:0.8em; line-height:1em;">
+
+- **Trial data** [@gillmore:2024]
+    - **Design:** Phase 3, double-blind RCT (n = 632; 2:1 randomization)  
+    - **Population:** Transthyretin amyloid cardiomyopathy (90 % wild-type, mean age 77 yr)  
+    - **Intervention:** Acoramidis 800 mg BID vs placebo for 30 months  
+    - **Primary HCE:** Death → CV hospitalization → NT-proBNP → 6-min walk distance  
+        - Stratified by TTR genotype, NT-proBNP level, eGFR, etc.
+</div>
+
+![](sj_images/attr_cm.png){width="70%" fig-align="center"}
+
+## DEFENDER (JAMA 2024)
+
+<div style="font-size:0.8em; line-height:1em;">
+
+- **Trial data** [@tavares:2024]
+    - **Design:** Multicenter, open-label RCT (n = 507; 22 ICUs in Brazil)  
+    - **Population:** Critically ill adults with an organ dysfunction (respiratory/ cardiovascular/renal)  
+    - **Intervention:** Dapagliflozin 10 mg daily vs standard care alone (up to 14 days)  
+    - **Primary HCE:** Hospital mortality → initiation of KRT → ICU length of stay (28 days)  
+</div>
+
+```{r}
+#| fig-width: 8
+#| fig-height: 2
+
+
+
+library(ggplot2)
+library(dplyr)
+
+# Data from DEFENDER trial (JAMA 2024)
+
+
+
+df_wr <- tribble(
+~Group, ~WR, ~CI_low, ~CI_high,
+"Overall", 1.01, 0.90, 1.13,
+"Age < 65 yr", 0.85, 0.71, 1.00,
+"Age ≥ 65 yr", 1.16, 0.99, 1.37
+)
+
+# Reorder for top-down plotting
+
+
+
+df_wr <- df_wr %>%
+mutate(Group = factor(Group, levels = rev(Group)))
+
+# Forest plot
+
+
+
+ggplot(df_wr, aes(x = WR, y = Group)) +
+geom_vline(xintercept = 1, linetype = "dashed", color = "grey50") +
+geom_errorbarh(aes(xmin = CI_low, xmax = CI_high), height = 0.3, size = 0.8) +
+geom_point(size = 3) +
+scale_x_log10("Win Ratio (95% CI)", limits = c(0.7, 1.5),
+              breaks = seq(0.8, 1.4, by = 0.2)) +
+labs(y = NULL) +
+theme_minimal(base_size = 12) +
+theme(
+axis.text.y = element_text(size = 11),
+axis.text.x = element_text(size = 10),
+plot.title = element_text(face = "bold", size = 13, hjust = 0.5),
+panel.grid.major.y = element_blank(),
+# add a outer framing box containing the plot including axis labels
+plot.background = element_rect(color = "black", fill = NA, size = 0.8)
+)
+```
+
+
+## WR as Primary Endpoint (I)
+<div style="font-size: 0.75em; line-height: 1.2em;">
+@gregson:2025 summarizes recent/ongoing RCTs:
+<br>
+</div>
+
+| Trial | Condition | Interventions | HCE | 
+|:--|:--|:--|:--|
+| **ATTRibute-CM (2024)** | Transthyretin amyloid cardiomyopathy | Acoramidis vs placebo | Death → CV hosp → NT-proBNP/6MWT | 
+| **COVID-PACT (2022)** | Critically ill COVID-19 | Full-dose AC vs standard-dose AC | Venous/arterial death → PE → DVT → ... | 
+| **DAPA-MI (2024)** | Clinically stable acute MI | Dapagliflozin vs placebo | CV death → non-CV death → HF hosp → ... | 
+| **DEFENDER (2024)** | Critical illness with organ failure | Dapagliflozin + SOC vs SOC | In-hospital death → KRT initiation → ICU LOS |
+| **EMPULSE (2022)** | Acute HF (hospitalized) | Empagliflozin vs placebo | All-cause death → HF events (number/time) → KCCQ change |
+| **HEART-FID (2023)** | HFrEF with iron deficiency | Ferric carboxymaltose vs placebo | All-cause death → HF hosp → 6MWT change | 
+
+---
+
+## WR as Primary Endpoint (II)
+
+<br>
+
+| Trial | Condition | Interventions | HCE | 
+|:--|:--|:--|:--|
+| **PARTNER 3 (2023)** | Low-risk symptomatic AS | TAVR vs SAVR | Death → stroke → rehospitalization days | 
+| **REDUCE LAP-HF II (2022)** | HFpEF/HFmrEF | Atrial shunt device vs sham | CV death/stroke → HF hosp → KCCQ change | 
+| **TRILUMINATE (2023)** | Symptomatic tricuspid regurgitation | TEER vs OMT | Death/surgery → HF hosp → KCCQ change | 
+| **VIP-ACS (2022)** | Acute coronary syndrome | High-dose influenza vaccine vs standard | Death → MI → stroke → ... |
+| ... |  |  |  | 
+
 
 
 # Extensions and Variations
 
 ## Sample Size Calculation
 
+- **Rank-based approximation** [@yu2022]
+$$
+n\approx\frac{4(1+p_{\text{tie}})(z_{1-\alpha/2}+z_{1-\beta})^2}{3q(1-q)(1-p_{\text{tie}})\log^2(\text{WR})}
+$$
+    - $\alpha = 0.05$: type I error; $\,\, 1 - \beta = 80\%, 90\%$: desired power
+    - $q = n_1/n$; $\,\, p_{\text{tie}}$: proportion of ties
+    - Elicit effect size $\log(\text{WR})$ and $p_{\text{tie}}$ from component-wise
+    win-loss measures [@barnhart:2025:sim; @barnhart:2025:sbr]
+
+- **Parametric approach** [@mao2022]
+    - Gumbel--Hougaard copula $+$ Numerical integration (R package [`WR`](https://cran.r-project.org/web/packages/WR/){target="_blank"}) 
+
+
+## Estimand Issue
+
+-  **Without censoring**
+    -   WR, NB, WO = functions of joint distribution of events
+    -   Change with follow-up time [@oakes2016; @mao2024]
+![](images/exmp.png){fig-align="center" width="75%"}
+
+-  **With censoring**
+    -   Weighted average of win-loss probabilities over time
+    -   Trial-dependent estimand [@ich2020]
+
+## Time Restriction
+
+- **Specify time horizon** $\tau$
+    - Imagine all subjects followed up to $\tau$ (1 yr, 3 yrs, etc.)
+
+- **GPC under consistent time frame**
+    - **Estimand**: WR$(\tau)$, NB$(\tau)$, WO$(\tau)$
+    - **Interpretation**: win ratio/net benefit/win odds up to time $\tau$ 
+
+- **Estimation with censored data**
+    -   Inverse probability censoring weighting [@Dong2020; @Dong2021]
+        -   **R-package**: [`WINS`](https://cran.r-project.org/web/packages/WINS/){target="_blank"} 
+    -   Multiple imputations [@wang2023; @wang2024]
 
 ## Regression Analysis
 
+-   **A proportional win-fractions (PW) model** 
+$$
+\frac{{\rm pr}(W_{ij}(t) = 1\mid Z_i, Z_j)}{{\rm pr}(W_{ij}(t) = -1\mid Z_i, Z_j)}
+=\exp\left\{\beta^\T(Z_i - Z_j)\right\}
+$$
+    -   $W_{ij}(t)$: win-loss indicator by time $t$
+    -   $Z_i$, $Z_j$: covariate vectors for subjects $i$ and $j$
+    -   $\beta$: log-WRs for one-unit increases in covariates
+    -   U-statistic estimation; residual analysis to check WR constancy [@Mao2021, R package [`WR`](https://cran.r-project.org/web/packages/WR/){target="_blank"}]; stratification [@Wang2022]
+    -   Elastic net regularization for high-dimensional $Z$ [@mao2025,
+    R tool [`WRNet`](https://lmaowisc.github.io/wrnet/){target="_blank"}]
+
+  
 ## Win-Loss Times
+
+-   **Restricted mean time** in favor of treatment
+    $$
+    \mu(\tau) = w_{1, 0}(\tau) - w_{0, 1}(\tau)
+    $$
+    -   $w_{a, 1-a}(\tau)$: average *time* subject in group $a$ wins over subject in group $1-a$ up to time $\tau$
+    -   Interpretation: net favorable time gained/lost by treatment [@Mao2023, R package [`rmt`](https://cran.r-project.org/web/packages/rmt/){target="_blank"}]
+
+- **Other win time measures**
+    -   Expected win time ($\tau\to$ maximum length of follow-up), etc. [@troendle2024]
+
+
 
 ## DOOR
 
+-   **Desirability of outcome ranking** [@evans:2015:door]
+    -   Pre-defined ordinal categories of clinical outcome $Y^\a$
+        1. Dead
+        2. Alive with severe AE
+        3. Alive with mild AE
+        4. Alive without AE
+-   **Estimand**
+      - Tie-adjusted *win probability* from GPC ranked by DOOR
+      $$
+      \theta_{\text{DOOR}} = \Pr(Y^\t > Y^\c) + \tfrac{1}{2}\Pr(Y^\t = Y^\c)
+      $$
+      - R package [`door`](https://cran.r-project.org/web/packages/door/){target="_blank"} 
 
 # Challenges and Open Questions
 
-## Criticisms
+
+## Critiques
+
+- **Some caveats** [@butler:2024]
+    -  WR ignores ties
+        -  Win relative to *loss* rather than *"not win"*
+        -  Some consider this to overstate effect size 
+    -  Inclusion of low-priority biomarker
+        -   Surrogate measures drives treatment effect
+    - Subjectivity in defining HCE
+        -  Clinical input needed
+        -  Post hoc construction inflates type I error
+
+
+
+
+
+## Covariate Adjustment
+
+-   **Different from regression**
+    -   **Marginal estimands** between groups, not conditioning on $Z$
+    -   **Gain efficiency** when outcome-covariate model is true, otherwise still valid (robustness)
+    -   **Standard endpoints**
+        -   Continuous, binary, univariate survival, etc. [@tsiatis2008; @wang2021; @ye2022]
+        -   FDA recommendation [@fda:2023]
+-   **Challenges with WR**
+    -   $U$-statistic structure
+    -   Lack of likelihood structure
+
+## Interim Analysis
+
+-   **Purpose**
+    -   Analyze interim data for evidence of efficacy/futility $\to$ stop trial early
+    -   Univariate survival: information accrued $\propto$ number of events
+-   **Challenges with WR**
+    -   Information time not event-driven
+        -   Case study: RMST [@luo2019; @lu2021]
+    -   Correlations between component events
+        -   *Dependent* increments
+
+## Meta Analysis
+
+-   **Challenges**
+    -   Primary studies *not* reporting win-loss measures
+    -   Primary studies over *different* time spans
+    -   Primary studies with *different* definitions of win/loss
+-   [`WinKM`](https://lmaowisc.github.io/winkm/){target="_blank"}: A toolkit to start
+    -   Calculate win-loss statistics based on
+        -   KM estimates for OS and EFS
+        -   At-risk table at selected time points
+        -   Total event counts (reported in the CONSORT diagram or results section)
+
+
+# Conclusion
+
+## Key Takeaways (I)
+
+-   **Win ratio and its variants**
+    -   Intuitive, clinically interpretable effect sizes for HCEs
+    -   Support recurrent events, stratification, etc.
+    -   Time-resticted estimands, regression analysis, win times, DOOR, etc.
+
+-   **Good practice**
+    -   Pre-specify HCE definition and analysis plan
+    -   Caution in including surrogate measures
+        - Anticipated clinical event rates
+        - Set thresholds for meaningful differences
+    -   Sensitivity analyses
+
+## Key Takeaways (II)
+
+-  **R packages**
+    -  [`WR`](https://cran.r-project.org/web/packages/WINS/){target="_blank"}, [`WINS`](https://cran.r-project.org/web/packages/WINS/){target="_blank"}, [`BuyseTest`](https://cran.r-project.org/web/packages/BuyseTest/){target="_blank"}, [`WinRatio`](https://cran.r-project.org/web/packages/WinRatio/){target="_blank"}, [`rmt`](https://cran.r-project.org/web/packages/rmt/){target="_blank"}, [`WRNet`](https://lmaowisc.github.io/wrnet/){target="_blank"}, [`door`](https://cran.r-project.org/web/packages/door/){target="_blank"}, [`WinKM`](https://lmaowisc.github.io/winkm/){target="_blank"}, etc.
+-  **Open questions**
+    -   Covariate adjustment, interim analysis, meta analysis, etc.
+
 
 ## Acknowledgments
 

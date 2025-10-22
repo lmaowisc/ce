@@ -471,3 +471,135 @@ print(p)
 # ---- 8) Save editable files (SVG is ideal for Illustrator/InkScape/PowerPoint)
 ggsave("sj_images/gpc_pairwise.png", p, width = 8, height = 5)
 
+
+
+########## Stratification ####################
+
+
+# ---- Packages ----
+library(tidyverse)
+library(ggimage)
+library(patchwork)
+library(glue)
+
+# ---- Helper to build one panel with straight connections ----
+make_panel <- function(outcomes,
+                       title,
+                       icon_path = "sj_images/human.png",
+                       left_lab  = "Treatment",
+                       right_lab = "Control",
+                       cols = c(Win = "#2E7D32", Loss = "#F57C00", Tie = "#B3B3B3")) {
+  
+  n_t <- nrow(outcomes)
+  n_c <- ncol(outcomes)
+  
+  # Nodes (treatment on left, control on right)
+  nodes_t <- tibble(group = "Treatment",
+                    id = paste0("T", seq_len(n_t)),
+                    x = 0,
+                    y = n_t:1)
+  nodes_c <- tibble(group = "Control",
+                    id = paste0("C", seq_len(n_c)),
+                    x = 1,
+                    y = n_c:1)
+  nodes <- bind_rows(nodes_t, nodes_c) |>
+    mutate(img = normalizePath(icon_path, mustWork = FALSE))
+  
+  # Edges (all pairs; no curvature)
+  edges <- as_tibble(outcomes, rownames = "t_id") |>
+    pivot_longer(-t_id, names_to = "c_id", values_to = "type") |>
+    left_join(nodes_t |> select(id, x, y), by = c("t_id" = "id")) |>
+    rename(x_start = x, y_start = y) |>
+    left_join(nodes_c |> select(id, x, y), by = c("c_id" = "id")) |>
+    rename(x_end = x, y_end = y) |>
+    mutate(type = factor(type, levels = c("Win","Loss","Tie")))
+  
+  # Subtitle counts
+  ct <- count(edges, type) |>
+    complete(type = factor(c("Win","Loss","Tie"),
+                           levels = c("Win","Loss","Tie")),
+             fill = list(n = 0))
+  nwins = ct$n[ct$type=='Win']
+  nlosses = ct$n[ct$type=='Loss']
+  n = nrow(edges)
+  wins = paste0(round(100 * nwins / n,), "%")
+  losses = paste0(round(100 * nlosses / n), "%")
+  subtitle <- glue("Wins: {nwins} / {n} = {wins}; Losses: {nlosses} / {n} = {losses}")
+  
+  # Theme
+  theme_clean <- theme_minimal(base_size = 13) +
+    theme(
+      axis.title = element_blank(),
+      axis.text  = element_blank(),
+      panel.grid = element_blank(),
+      plot.title = element_text(face = "bold", hjust = 0.5),
+      plot.subtitle = element_text(hjust = 0.5),
+      legend.position = "bottom",
+      legend.title = element_blank(),
+      legend.key.width = grid::unit(1.4, "cm"),
+      legend.text = element_text(size = 14),
+      plot.background = element_rect(fill = "white", color = NA)
+    )
+  
+  # Plot (straight lines)
+  ggplot() +
+    geom_segment(
+      data = edges,
+      aes(x = x_start, y = y_start, xend = x_end, yend = y_end, color = type),
+      linewidth = 1.2, lineend = "round"
+    ) +
+    ggimage::geom_image(
+      data = nodes,
+      aes(x = x, y = y, image = img),
+      size = 0.14, asp = 1
+    ) +
+    annotate("text", x = 0, y = n_t + 0.6, label = left_lab,
+             fontface = "bold", size = 4.5, hjust = 0.5) +
+    annotate("text", x = 1, y = n_c + 0.6, label = right_lab,
+             fontface = "bold", size = 4.5, hjust = 0.5) +
+    scale_color_manual(values = cols, breaks = c("Win","Loss","Tie")) +
+    coord_cartesian(xlim = c(-0.18, 1.18),
+                    ylim = c(0.5, max(n_t, n_c) + 0.8),
+                    expand = FALSE) +
+    labs(title = title, subtitle = subtitle) +
+    theme_clean
+}
+
+# ---- Panel (1): EF ≤ 40% — 4×4, 8 Wins, 6 Losses, 2 Ties ----
+outcomes_ef_le40 <- matrix(
+  c(
+    "Win","Win","Loss","Tie",   # 2W,1L,1T
+    "Win","Loss","Win","Loss",  # 2W,2L
+    "Loss","Win","Tie","Win",   # 2W,1L,1T
+    "Win","Loss","Win","Loss"   # 2W,2L
+  ),
+  nrow = 4, ncol = 4, byrow = TRUE,
+  dimnames = list(paste0("T", 1:4), paste0("C", 1:4))
+)
+p1 <- make_panel(outcomes_ef_le40, title = "EF ≤ 40%")
+
+# ---- Panel (2): EF > 40% — 3×3, 3 Wins, 2 Losses, 4 Ties ----
+outcomes_ef_gt40 <- matrix(
+  c(
+    "Win","Tie","Tie",   # 1W,0L,2T
+    "Tie","Loss","Win",  # 1W,1L,1T
+    "Tie","Loss","Win"   # 1W,1L,1T
+  ),
+  nrow = 3, ncol = 3, byrow = TRUE,
+  dimnames = list(paste0("T", 1:3), paste0("C", 1:3))
+)
+
+p2 <- make_panel(outcomes_ef_gt40, title = "EF > 40%")
+
+# ---- Side-by-side (patchwork) ----
+p_final <- p1 + p2 + plot_layout(guides = "collect") &
+  theme(legend.position = "bottom")
+
+# Render
+p_final
+
+# ---- (Optional) Save high-res files ----
+# ggsave("stratified_winloss.svg", p_final, width = 14, height = 6)
+ggsave("sj_images/str_winloss.png", p_final, width = 12, height = 4)
+
+

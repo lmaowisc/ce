@@ -1775,7 +1775,7 @@
     "href": "win_ratio_and_beyond.html#outline",
     "title": "The Win Ratio and Beyond",
     "section": "Outline",
-    "text": "Outline\n\nBackground\nCensoring’s impact on estimand\n\nTime frame of comparison\n\nTwo approaches to clarity\n\nNonparametric: fix the time frame\nSemiparametric: posit a time-constant feature\n\nSummary and discussion\n\n\\[\n\\def\\a{{(a)}}\n\\def\\b{{(1-a)}}\n\\def\\t{{(1)}}\n\\def\\c{{(0)}}\n\\def\\d{{\\rm d}}\n\\def\\T{{\\rm T}}\n\\]"
+    "text": "Outline\n\n\n\n\\[\n\\def\\a{{(a)}}\n\\def\\b{{(1-a)}}\n\\def\\t{{(1)}}\n\\def\\c{{(0)}}\n\\def\\d{{\\rm d}}\n\\def\\T{{\\rm T}}\n\\]"
   },
   {
     "objectID": "win_ratio_and_beyond.html#composite-endpoint",
@@ -1789,7 +1789,7 @@
     "href": "win_ratio_and_beyond.html#win-ratio-basics",
     "title": "The Win Ratio and Beyond",
     "section": "Win Ratio: Basics",
-    "text": "Win Ratio: Basics\n\nA common approach to HCE\n\nProposed and popularized by Pocock et al. (2012)\nTreatment vs control: generalized pairwise comparisons (Buyse, 2010)\nWin-loss: sequential comparison on components\n\nLonger survival &gt; fewer/later nonfatal MACE &gt; better 6MWT/NYHA score\n\nEffect size: WR \\(=\\) wins / losses\n\nAlternative metrics\n\nProportion in favor (net benefit): PIF \\(=\\) wins \\(-\\) losses\nWin odds: WO \\(=\\) (wins \\(+\\) \\(2^{-1}\\)ties) / (losses \\(+\\) \\(2^{-1}\\)ties)"
+    "text": "Win Ratio: Basics\n\nA common HCE\n\nProposed and popularized by Pocock et al. (2012)\nTreatment vs control: generalized pairwise comparisons (GPC) (Buyse et al., 2025)\n\nWin-loss: Longer survival \\(\\to\\) fewer/later nonfatal MACE \\(\\to\\) better 6MWT/NYHA\n\nEffect size: WR \\(=\\) wins / losses\n\nFold increase in probability of winning over lossing\n\n\nAlternative metrics\n\nNet benefit (Proportion in favor): NB \\(=\\) wins \\(-\\) losses (Buyse, 2010)\nWin odds: WO \\(=\\) (wins \\(+\\) \\(2^{-1}\\)ties) / (losses \\(+\\) \\(2^{-1}\\)ties) (Brunner et al., 2021)"
   },
   {
     "objectID": "win_ratio_and_beyond.html#acknowledgments",
@@ -1803,7 +1803,7 @@
     "href": "win_ratio_and_beyond.html#references",
     "title": "The Win Ratio and Beyond",
     "section": "References",
-    "text": "References\n\n\n\n\nBuyse, M. (2010). Generalized pairwise comparisons of prioritized outcomes in the two-sample problem. Statistics in Medicine, 29(30), 3245–3257. https://doi.org/10.1002/sim.3923\n\n\nPocock, S. J., Ariti, C. A., Collier, T. J., & Wang, D. (2012). The win ratio: a new approach to the analysis of composite endpoints in clinical trials based on clinical priorities. European Heart Journal, 33(2), 176–182. https://doi.org/10.1093/eurheartj/ehr352"
+    "text": "References\n\n\n\n\nBarnhart, H., Lokhnygina, Y., Matsouaka, R. A., & Rockhold, F. W. (2025b). Trial design with win statistics for multiple time-to-event endpoints with hierarchy. Statistics in Biopharmaceutical Research, 17(2), 197–210.\n\n\nBarnhart, H., Lokhnygina, Y., Matsouaka, R., Halabi, S., Yanez, D., Mentz, R. J., & Rockhold, F. (2025a). Sample size and power calculations with win measures based on hierarchical endpoints. Statistics in Medicine, 44(10-12), e70096.\n\n\nBebu, I., & Lachin, J. M. (2016). Large sample inference for a win ratio analysis of a composite outcome based on prioritized components. Biostatistics, 17(1), 178–187. https://doi.org/10.1093/biostatistics/kxv032\n\n\nBrunner, E., Vandemeulebroecke, M., & Mütze, T. (2021). Win odds: An adaptation of the win ratio to include ties. Statistics in Medicine, 40(14), 3367–3384. https://doi.org/10.1002/sim.8967\n\n\nButler, J., Stockbridge, N., & Packer, M. (2024). Win ratio: A seductive but potentially misleading method for evaluating evidence from clinical trials. Circulation, 149(20), 1546–1548.\n\n\nBuyse, M. E. (2010). Generalized pairwise comparisons of prioritized outcomes in the two-sample problem. Statistics in Medicine, 29(30), 3245–3257. https://doi.org/10.1002/sim.3923\n\n\nBuyse, M. E., Verbeeck, J., De Backer, M., Deltuvaite-Thomas, V., Saad, E. D., & Molenberghs, G. (2025). Handbook of generalized pairwise comparisons: Methods for patient-centric analysis. CRC Press, Taylor & Francis Group.\n\n\nDong, G., Hoaglin, D. C., Huang, B., Cui, Y., Wang, D., Cheng, Y., & Gamalo-Siebers, M. (2023). The stratified win statistics (win ratio, win odds, and net benefit). Pharmaceutical Statistics, 22(4), 748–756. https://doi.org/10.1002/pst.2293\n\n\nDong, G., Huang, B., Wang, D., Verbeeck, J., Wang, J., & Hoaglin, D. C. (2021). Adjusting win statistics for dependent censoring. Pharmaceutical Statistics, 20(3), 440–450. https://doi.org/10.1002/pst.2086\n\n\nDong, G., Li, D., Ballerstedt, S., & Vandemeulebroecke, M. (2016). A generalized analytic solution to the win ratio to analyze a composite endpoint considering the clinical importance order among components. Pharmaceutical Statistics, 15(5), 430–437. https://doi.org/10.1002/pst.1763\n\n\nDong, G., Mao, L., Huang, B., Gamalo-Siebers, M., Wang, J., Yu, G., & Hoaglin, D. C. (2020b). The inverse-probability-of-censoring weighting (IPCW) adjusted win ratio statistic: an unbiased estimator in the presence of independent censoring. Journal of Biopharmaceutical Statistics, 30(5), 882–899. https://doi.org/10.1080/10543406.2020.1757692\n\n\nDong, G., Qiu, J., Wang, D., & Vandemeulebroecke, M. (2018). The stratified win ratio. Journal of Biopharmaceutical Statistics, 28(4), 778–796. https://doi.org/10.1080/10543406.2017.1397007\n\n\nEvans, S. R., Rubin, D., Follmann, D., Pennello, G., Huskins, W. C., Powers, J. H., Schoenfeld, D., Chuang-Stein, C., Cosgrove, S. E., Fowler Jr, V. G., et al. (2015). Desirability of outcome ranking (DOOR) and response adjusted for duration of antibiotic risk (RADAR). Clinical Infectious Diseases, 61(5), 800–806.\n\n\nFDA. (2023). Guidance document: Adjusting for covariates in randomized clinical trials for drugs and biological products. US Food and Drug Adminstration. https://www.fda.gov/regulatory-information/search-fda-guidance-documents/adjusting-covariates-randomized-clinical-trials-drugs-and-biological-products\n\n\nGillmore, J. D., Judge, D. P., Cappelli, F., Fontana, M., Garcia-Pavia, P., Gibbs, S., Grogan, M., Hanna, M., Hoffman, J., Masri, A., Maurer, M. S., Nativi-Nicolau, J., Obici, L., Poulsen, S. H., Rockhold, F., Shah, K. B., Soman, P., Garg, J., Chiswell, K., … Fox, J. C. (2024). Efficacy and safety of acoramidis in transthyretin amyloid cardiomyopathy. New England Journal of Medicine, 390(2), 132–142. https://doi.org/10.1056/NEJMoa2305434\n\n\nGregson, J., Taylor, D., Owen, R., Collier, T., J. Cohen, D., & Pocock, S. (2025). Hierarchical composite outcomes and win ratio methods in cardiovascular trials: A review and consequent guidance. Circulation, 151(22), 1606–1619.\n\n\nICH. (2020). ICH E9 (R1) addendum on estimands and sensitivity analysis in clinical trials to the guideline on statistical principles for clinical trials, step 5. London: European Medicines Evaluation Agency.\n\n\nLu, Y., & Tian, L. (2021). Statistical Considerations for Sequential Analysis of the Restricted Mean Survival Time for Randomized Clinical Trials. Statistics in Biopharmaceutical Research, 13(2), 210–218. https://doi.org/10.1080/19466315.2020.1816491\n\n\nLuo, X., Huang, B., & Quan, H. (2019). Design and monitoring of survival trials based on restricted mean survival times. Clinical Trials, 16(6), 616–625. https://doi.org/10.1177/1740774519871447\n\n\nLuo, X., Tian, H., Mohanty, S., & Tsai, W. Y. (2015). An Alternative Approach to Confidence Interval Estimation for the Win Ratio Statistic. Biometrics, 71(1), 139–145. https://doi.org/10.1111/biom.12225\n\n\nMao, L. (2019). On the Alternative Hypotheses for the Win Ratio. Biometrics, 75(1), 347–351. https://doi.org/10.1111/biom.12954\n\n\nMao, L. (2023). On restricted mean time in favor of treatment. Biometrics, 79(1), 61–72. https://doi.org/10.1111/biom.13570\n\n\nMao, L. (2024). Defining estimand for the win ratio: Separate the true effect from censoring. Clinical Trials, 21(5), 584–594.\n\n\nMao, L. (2025). Regularized win ratio regression for variable selection and risk prediction, with an application to a cardiovascular trial. BMC Medical Research Methodology, 25(1). https://doi.org/10.1186/s12874-025-02554-w\n\n\nMao, L., Kim, K., & Li, Y. (2022). On recurrent-event win ratio. Statistical Methods in Medical Research, 31(6), 1120–1134. https://doi.org/10.1177/09622802221084134\n\n\nMao, L., Kim, K., & Miao, X. (2022). Sample size formula for general win ratio analysis. Biometrics, 78(3), 1257–1268. https://doi.org/10.1111/biom.13501\n\n\nMao, L., & Wang, T. (2021). A class of proportional win-fractions regression models for composite outcomes. Biometrics, 77(4), 1265–1275. https://doi.org/10.1111/biom.13382\n\n\nOakes, D. (2016). On the win-ratio statistic in clinical trials with multiple types of event. Biometrika, 103(3), 742–745. https://doi.org/10.1093/biomet/asw026\n\n\nPocock, S. J., Ariti, C. A., Collier, T. J., & Wang, D. (2012). The win ratio: a new approach to the analysis of composite endpoints in clinical trials based on clinical priorities. European Heart Journal, 33(2), 176–182. https://doi.org/10.1093/eurheartj/ehr352\n\n\nTavares, C. A. M., Azevedo, L. C. P., Rea-Neto, Á., Campos, N. S., Amendola, C. P., Kozesinski-Nakatani, A. C., David-João, P. G., Lobo, S. M., Filiponi, T. C., Almeida, G. M. B., Bergo, R. R., Guimarães-Júnior, M. R. R., Figueiredo, R. C., Castro, J. R., Schuler, C. J., Westphal, G. A., Carioca, A. C. R., Monfradini, F., Nieri, J., … Zampieri, F. G. (2024). Dapagliflozin for critically ill patients with acute organ dysfunction: The DEFENDER randomized clinical trial. JAMA, 332(5), 401–411. https://doi.org/10.1001/jama.2024.10510\n\n\nTroendle, J. F., Leifer, E. S., Yang, S., Jeffries, N., Kim, D.-Y., Joo, J., & O’Connor, C. M. (2024). Use of win time for ordered composite endpoints in clinical trials. Statistics in Medicine, 43(10), 1920–1932. https://doi.org/10.1002/sim.10045\n\n\nTsiatis, A. A., Davidian, M., Zhang, M., & Lu, X. (2008). Covariate adjustment for two-sample treatment comparisons in randomized clinical trials: A principled yet flexible approach. Statistics in Medicine, 27(23), 4658–4677. https://doi.org/10.1002/sim.3113\n\n\nWang, B., Susukida, R., Mojtabai, R., Amin-Esmaeili, M., & Rosenblum, M. (2021). Model-Robust Inference for Clinical Trials that Improve Precision by Stratified Randomization and Covariate Adjustment. Journal of the American Statistical Association, 118(542), 1152–1163. https://doi.org/10.1080/01621459.2021.1981338\n\n\nWang, T., Li, Y., & Qu, Y. (2024). Restricted time win ratio: from estimands to estimation. Statistics in Biopharmaceutical Research, 1–18. https://doi.org/10.1080/19466315.2024.2332675\n\n\nWang, T., & Mao, L. (2022). Stratified proportional win-fractions regression analysis. Statistics in Medicine, 41(26), 5305–5318. https://doi.org/10.1002/sim.9570\n\n\nWang, T., Zilinskas, R., Li, Y., & Qu, Y. (2023). Missing Data Imputation for a Multivariate Outcome of Mixed Variable Types. Statistics in Biopharmaceutical Research, 15(4), 826–837. https://doi.org/10.1080/19466315.2023.2169753\n\n\nYe, T., Shao, J., Yi, Y., & Zhao, Q. (2023). Toward Better Practice of Covariate Adjustment in Analyzing Randomized Clinical Trials. Journal of the American Statistical Association, 118(544), 2370–2382. https://doi.org/10.1080/01621459.2022.2049278\n\n\nYu, R. X., & Ganju, J. (2022). Sample size formula for a win ratio endpoint. Statistics in Medicine, 41(6), 950–963. https://doi.org/10.1002/sim.9297"
   },
   {
     "objectID": "win_ratio_and_beyond.html#prioritized-comparison",
@@ -1817,42 +1817,42 @@
     "href": "win_ratio_and_beyond.html#pairwise-comparison",
     "title": "The Win Ratio and Beyond",
     "section": "Pairwise Comparison",
-    "text": "Pairwise Comparison\n\n\n\n\nGPC Results\n\nWins: 8 / 16 = 50%\n\nLosses: 3 / 16 = 18.8%\nTies: 5 / 16 = 31.2%\n\nEffect Sizes\n\nWR = 50% / 18.8% = 2.67\n\nPIF = 50% - 18.8% = 31.2%\nWO = (50% + 15.6%) / (18.8% + 15.6%) = 1.72"
+    "text": "Pairwise Comparison\n\n\n\n\nGPC Results\n\nWins: 8 / 16 = 50%\n\nLosses: 3 / 16 = 18.8%\nTies: 5 / 16 = 31.2%\n\nEffect Sizes\n\nWR = 50% / 18.8% = 2.67\n\nNB = 50% - 18.8% = 31.2%\nWO = (50% + 15.6%) / (18.8% + 15.6%) = 1.72"
   },
   {
     "objectID": "win_ratio_and_beyond.html#stratification",
     "href": "win_ratio_and_beyond.html#stratification",
     "title": "The Win Ratio and Beyond",
     "section": "Stratification",
-    "text": "Stratification"
+    "text": "Stratification\n\n\nGPC within stratum and aggregate (Dong et al., 2018, 2023)  \\[\\begin{align}\n\\text{Wins: } & 50\\% \\times 8/(8+6) + 33\\% \\times 6/(8+6) = 42.7\\% \\\\\n\\text{Losses: } & 38\\% \\times 8/(8+6) + 22\\% \\times 6/(8+6) = 31.1\\%\n\\end{align}\\]\nOverall WR: 42.7% / 31.1% = 1.37"
   },
   {
     "objectID": "win_ratio_and_beyond.html#sample-size-calculation",
     "href": "win_ratio_and_beyond.html#sample-size-calculation",
     "title": "The Win Ratio and Beyond",
     "section": "Sample Size Calculation",
-    "text": "Sample Size Calculation"
+    "text": "Sample Size Calculation\n\nRank-based approximation (Yu & Ganju, 2022) \\[\nn\\approx\\frac{4(1+p_{\\text{tie}})(z_{1-\\alpha/2}+z_{1-\\beta})^2}{3q(1-q)(1-p_{\\text{tie}})\\log^2(\\text{WR})}\n\\]\n\n\\(\\alpha = 0.05\\): type I error; \\(\\,\\, 1 - \\beta = 80\\%, 90\\%\\): desired power\n\\(q = n_1/n\\); \\(\\,\\, p_{\\text{tie}}\\): proportion of ties\nElicit effect size \\(\\log(\\text{WR})\\) and \\(p_{\\text{tie}}\\) from component-wise win-loss measures (Barnhart et al., 2025a, 2025b)\n\nParametric approach (Mao, Kim, & Miao, 2022)\n\nGumbel–Hougaard copula \\(+\\) Numerical integration (R package WR)"
   },
   {
     "objectID": "win_ratio_and_beyond.html#regression-analysis",
     "href": "win_ratio_and_beyond.html#regression-analysis",
     "title": "The Win Ratio and Beyond",
     "section": "Regression Analysis",
-    "text": "Regression Analysis"
+    "text": "Regression Analysis\n\nA proportional win-fractions (PW) model \\[\n\\frac{{\\rm pr}(W_{ij}(t) = 1\\mid Z_i, Z_j)}{{\\rm pr}(W_{ij}(t) = -1\\mid Z_i, Z_j)}\n=\\exp\\left\\{\\beta^\\T(Z_i - Z_j)\\right\\}\n\\]\n\n\\(W_{ij}(t)\\): win-loss indicator by time \\(t\\)\n\\(Z_i\\), \\(Z_j\\): covariate vectors for subjects \\(i\\) and \\(j\\)\n\\(\\beta\\): log-WRs for one-unit increases in covariates\nU-statistic estimation; residual analysis to check WR constancy (Mao & Wang, 2021, R package WR); stratification (T. Wang & Mao, 2022)\nElastic net regularization for high-dimensional \\(Z\\) (Mao, 2025, R tool WRNet)"
   },
   {
     "objectID": "win_ratio_and_beyond.html#win-loss-times",
     "href": "win_ratio_and_beyond.html#win-loss-times",
     "title": "The Win Ratio and Beyond",
     "section": "Win-Loss Times",
-    "text": "Win-Loss Times"
+    "text": "Win-Loss Times\n\nRestricted mean time in favor of treatment \\[\n\\mu(\\tau) = w_{1, 0}(\\tau) - w_{0, 1}(\\tau)\n\\]\n\n\\(w_{a, 1-a}(\\tau)\\): average time subject in group \\(a\\) wins over subject in group \\(1-a\\) up to time \\(\\tau\\)\nInterpretation: net favorable time gained/lost by treatment (Mao, 2023, R package rmt)\n\nOther win time measures\n\nExpected win time (\\(\\tau\\to\\) maximum length of follow-up), etc. (Troendle et al., 2024)"
   },
   {
     "objectID": "win_ratio_and_beyond.html#door",
     "href": "win_ratio_and_beyond.html#door",
     "title": "The Win Ratio and Beyond",
     "section": "DOOR",
-    "text": "DOOR"
+    "text": "DOOR\n\nDesirability of outcome ranking (Evans et al., 2015)\n\nPre-defined ordinal categories of clinical outcome \\(Y^\\a\\)\n\nDead\nAlive with severe AE\nAlive with mild AE\nAlive without AE\n\n\nEstimand\n\nTie-adjusted win probability from GPC ranked by DOOR \\[\n  \\theta_{\\text{DOOR}} = \\Pr(Y^\\t &gt; Y^\\c) + \\tfrac{1}{2}\\Pr(Y^\\t = Y^\\c)\n  \\]\nR package door"
   },
   {
     "objectID": "win_ratio_and_beyond.html#criticisms",
@@ -1860,5 +1860,215 @@
     "title": "The Win Ratio and Beyond",
     "section": "Criticisms",
     "text": "Criticisms"
+  },
+  {
+    "objectID": "win_ratio_and_beyond.html#varianc-estimation",
+    "href": "win_ratio_and_beyond.html#varianc-estimation",
+    "title": "The Win Ratio and Beyond",
+    "section": "Varianc Estimation",
+    "text": "Varianc Estimation\n\nNotation\n\n\\(n_1\\), \\(n_0\\): sample sizes of treatment and control groups\n\\(w_{ij}\\): win/loss/tie indicator for pair \\((i,j)\\)\n\n1 if treatment patient \\(i\\) wins over control patient \\(j\\)\n-1 if treatment patient \\(i\\) loses to control patient \\(j\\)\n0 if tie"
+  },
+  {
+    "objectID": "win_ratio_and_beyond.html#equivalence-with-binary-case",
+    "href": "win_ratio_and_beyond.html#equivalence-with-binary-case",
+    "title": "The Win Ratio and Beyond",
+    "section": "Equivalence with Binary Case",
+    "text": "Equivalence with Binary Case\n\nNotation\n\n\\(n_1\\), \\(n_0\\): sample sizes in treatment and control\n\\(W_{ij}\\): win/loss/tie indicator between subject \\(i\\) in treatment and subject \\(j\\) in control \\[\nW_{ij} = \\begin{cases}\n1, & \\text{if subject } i \\text{ in treatment wins} \\\\\n-1, & \\text{if subject } j \\text{ in control wins} \\\\\n0, & \\text{if tie}\n\\end{cases}\n\\]"
+  },
+  {
+    "objectID": "win_ratio_and_beyond.html#notation",
+    "href": "win_ratio_and_beyond.html#notation",
+    "title": "The Win Ratio and Beyond",
+    "section": "Notation",
+    "text": "Notation\n\nGeneral setting\n\n\\(n_1\\), \\(n_0\\): sample sizes in treatment and control\n\\(W_{ij}\\): win-loss indicator of subject \\(i\\) in treatment vs \\(j\\) in control \\[\nW_{ij} = \\begin{cases}\n1, & \\text{if subject } i \\text{ in treatment wins} \\\\\n-1, & \\text{if subject } j \\text{ in control wins} \\\\\n0, & \\text{if tie}\n\\end{cases}\n\\]\n\n\\(\\text{Wins}: \\hat w_{1, 0} = (n_1n_0)^{-1}\\sum_{i=1}^{n_1} \\sum_{j=1}^{n_0} I(W_{ij} = 1)\\)\n\\(\\text{Losses}: \\hat w_{0, 1} = (n_1n_0)^{-1}\\sum_{i=1}^{n_1} \\sum_{j=1}^{n_0} I(W_{ij} = -1)\\)\n\nWR \\(=\\hat w_{1, 0} / \\hat w_{0, 1}\\)\nNB: \\(=\\hat w_{1, 0} - \\hat w_{0, 1}\\)\nWO: \\(=(1 + \\text{NB}) / (1 - \\text{NB})\\)"
+  },
+  {
+    "objectID": "win_ratio_and_beyond.html#binary-case-equivalencies",
+    "href": "win_ratio_and_beyond.html#binary-case-equivalencies",
+    "title": "The Win Ratio and Beyond",
+    "section": "Binary Case Equivalencies",
+    "text": "Binary Case Equivalencies\n\nBinary outcome, no censoring\n\n\\(Y^\\a_i = 1\\) (response) vs 0 (no-response) for subject \\(i\\) in group \\(a\\) (\\(a = 0, 1\\))\nWin-loss (1-0) fractions \\[\n\\hat w^{(a, 1-a)} = (n_an_{1-a})^{-1} \\sum_{i=1}^{n_a}\\sum_{j=1}^{n_{1-a}} Y^\\a_i (1 - Y^\\b_j) = \\hat p_a (1 - \\hat p_{1-a})\n\\]\n\n\\(\\hat p_a = n_a^{-1} \\sum_{i=1}^{n_a} Y^\\a_i\\) = response rate in group \\(a\\)\n\n\nGPC stats\n\nWR \\(= [\\hat p_1 (1 - \\hat p_0)] / [\\hat p_0 (1 - \\hat p_1)] =\\) response odds ratio\nNB \\(= \\hat p_1 - \\hat p_0=\\) response rate difference"
+  },
+  {
+    "objectID": "win_ratio_and_beyond.html#general-setting",
+    "href": "win_ratio_and_beyond.html#general-setting",
+    "title": "The Win Ratio and Beyond",
+    "section": "General Setting",
+    "text": "General Setting\n\nNotation\n\n\\(n_1\\), \\(n_0\\): sample sizes in treatment and control\n\\(W_{ij}\\): win-loss indicator of subject \\(i\\) in treatment vs \\(j\\) in control \\[\nW_{ij} = \\begin{cases}\n1, & \\text{if subject } i \\text{ in treatment wins} \\\\\n-1, & \\text{if subject } j \\text{ in control wins} \\\\\n0, & \\text{if tie}\n\\end{cases}\n\\]\n\n\\(\\text{Wins}: \\hat w_{1, 0} = (n_1n_0)^{-1}\\sum_{i=1}^{n_1} \\sum_{j=1}^{n_0} I(W_{ij} = 1)\\)\n\\(\\text{Losses}: \\hat w_{0, 1} = (n_1n_0)^{-1}\\sum_{i=1}^{n_1} \\sum_{j=1}^{n_0} I(W_{ij} = -1)\\)\n\nWR \\(=\\hat w_{1, 0} / \\hat w_{0, 1}\\); \\(\\,\\,\\) NB \\(=\\hat w_{1, 0} - \\hat w_{0, 1}\\); \\(\\,\\,\\) WO \\(=(1 + \\text{NB}) / (1 - \\text{NB})\\)"
+  },
+  {
+    "objectID": "win_ratio_and_beyond.html#variance-estimation",
+    "href": "win_ratio_and_beyond.html#variance-estimation",
+    "title": "The Win Ratio and Beyond",
+    "section": "Variance Estimation",
+    "text": "Variance Estimation\n\nBootstrap\n\nInital proposal (Pocock et al., 2012)\n\nAnalytic asymptotic variance\n\nAsymptotic decompostion of \\(U\\)-statistics (Bebu & Lachin, 2016; Dong et al., 2016; Luo et al., 2015)\nInfluence function-based\nR packages: WR, WINS, BuyseTest, WinRatio, etc."
+  },
+  {
+    "objectID": "win_ratio_and_beyond.html#null",
+    "href": "win_ratio_and_beyond.html#null",
+    "title": "The Win Ratio and Beyond",
+    "section": "Null",
+    "text": "Null"
+  },
+  {
+    "objectID": "win_ratio_and_beyond.html#critiques",
+    "href": "win_ratio_and_beyond.html#critiques",
+    "title": "The Win Ratio and Beyond",
+    "section": "Critiques",
+    "text": "Critiques\n\nSome caveats (Butler et al., 2024)\n\nWR ignores ties\n\nWin relative to loss rather than “not win”\nSome consider this to overstate effect size\n\nInclusion of low-priority biomarker\n\nSurrogate measures drives treatment effect\n\nSubjectivity in defining HCE\n\nClinical input needed\nPost hoc construction inflates type I error"
+  },
+  {
+    "objectID": "win_ratio_and_beyond.html#covariate-adjustment",
+    "href": "win_ratio_and_beyond.html#covariate-adjustment",
+    "title": "The Win Ratio and Beyond",
+    "section": "Covariate Adjustment",
+    "text": "Covariate Adjustment\n\nDifferent from regression\n\nMarginal estimands between groups, not conditioning on \\(Z\\)\nGain efficiency when outcome-covariate model is true, otherwise still valid (robustness)\nStandard endpoints\n\nContinuous, binary, univariate survival, etc. (Tsiatis et al., 2008; B. Wang et al., 2021; Ye et al., 2023)\nFDA recommendation (FDA, 2023)\n\n\nChallenges with WR\n\n\\(U\\)-statistic structure\nLack of likelihood structure"
+  },
+  {
+    "objectID": "win_ratio_and_beyond.html#interim-analysis",
+    "href": "win_ratio_and_beyond.html#interim-analysis",
+    "title": "The Win Ratio and Beyond",
+    "section": "Interim Analysis",
+    "text": "Interim Analysis\n\nPurpose\n\nAnalyze interim data for evidence of efficacy/futility \\(\\to\\) stop trial early\nUnivariate survival: information accrued \\(\\propto\\) number of events\n\nChallenges with WR\n\nInformation time not event-driven\n\nCase study: RMST (Lu & Tian, 2021; Luo et al., 2019)\n\nCorrelations between component events\n\nDependent increments"
+  },
+  {
+    "objectID": "win_ratio_and_beyond.html#meta-analysis",
+    "href": "win_ratio_and_beyond.html#meta-analysis",
+    "title": "The Win Ratio and Beyond",
+    "section": "Meta Analysis",
+    "text": "Meta Analysis\n\nChallenges\n\nPrimary studies not reporting win-loss measures\nPrimary studies over different time spans\nPrimary studies with different definitions of win/loss\n\nWinKM: A toolkit to start\n\nCalculate win-loss statistics based on\n\nKM estimates for OS and EFS\nAt-risk table at selected time points\nTotal event counts (reported in the CONSORT diagram or results section)"
+  },
+  {
+    "objectID": "win_ratio_and_beyond.html#null-vs-alternative-hypotheses",
+    "href": "win_ratio_and_beyond.html#null-vs-alternative-hypotheses",
+    "title": "The Win Ratio and Beyond",
+    "section": "Null vs Alternative Hypotheses",
+    "text": "Null vs Alternative Hypotheses\n\nNull hypothesis: No treatment effect on any event\n\nWR \\(= 1\\), NB \\(= 0\\), WO \\(= 1\\) regardless of follow-up time\n\nAlternative hypothesis\n\nDeath and hospitalization times: stochastically larger in treatment than in control (Luo et al., 2015; Mao, 2019)\n\nStratified test: Stochastical order in each stratum\n\nSo WR \\(&gt; 1\\), NB \\(&gt; 0\\), WO \\(&gt; 1\\) regardless of follow-up time\nPower \\(\\to 1\\) as \\(n=n_1+n_0\\to\\infty\\)"
+  },
+  {
+    "objectID": "win_ratio_and_beyond.html#censoring-impact-on-estimand",
+    "href": "win_ratio_and_beyond.html#censoring-impact-on-estimand",
+    "title": "The Win Ratio and Beyond",
+    "section": "Censoring Impact on Estimand",
+    "text": "Censoring Impact on Estimand\n\nWithout censoring\n\nWR, NB, WO = functions of joint distribution of events\nChange with follow-up time (Mao, 2024; Oakes, 2016) \n\nWith censoring\n\nWeighted average of win-loss probabilities over time\nTrial-dependent estimand (ICH, 2020)"
+  },
+  {
+    "objectID": "win_ratio_and_beyond.html#time-restriction",
+    "href": "win_ratio_and_beyond.html#time-restriction",
+    "title": "The Win Ratio and Beyond",
+    "section": "Time Restriction",
+    "text": "Time Restriction\n\nSpecify time horizon \\(\\tau\\)\n\nImagine all subjects followed up to \\(\\tau\\) (1 yr, 3 yrs, etc.)\n\nGPC under consistent time frame\n\nEstimand: WR\\((\\tau)\\), NB\\((\\tau)\\), WO\\((\\tau)\\)\nInterpretation: win ratio/net benefit/win odds up to time \\(\\tau\\)\n\nEstimation with censored data\n\nInverse probability censoring weighting (Dong et al., 2020b, 2021)\n\nR-package: WINS\n\nMultiple imputations (T. Wang et al., 2023, 2024)"
+  },
+  {
+    "objectID": "win_ratio_and_beyond.html#wr-as-primary-endpoint",
+    "href": "win_ratio_and_beyond.html#wr-as-primary-endpoint",
+    "title": "The Win Ratio and Beyond",
+    "section": "WR as Primary Endpoint",
+    "text": "WR as Primary Endpoint\n\n\n\n\n\n\n\n\n\nTrial\nCondition\nInterventions\nHCE\n\n\n\n\nATTRibute-CM\nTransthyretin amyloid cardiomyopathy\nAcoramidis vs placebo\nDeath → CV hosp → NT-proBNP/6MWT\n\n\nCOVID-PACT\nCritically ill COVID-19\nFull-dose AC vs standard-dose AC\nVenous/arterial death → PE → DVT → …\n\n\nDAPA-MI\nClinically stable acute MI\nDapagliflozin vs placebo\nCV death → non-CV death → HF hosp → …\n\n\nDEFENDER\nCritical illness with organ failure\nDapagliflozin + SOC vs SOC\nIn-hospital death → KRT initiation → ICU LOS\n\n\nEMPULSE\nAcute HF (hospitalized)\nEmpagliflozin vs placebo\nAll-cause death → HF events → KCCQ change\n\n\nHEART-FID\nHFrEF with iron deficiency\nFerric carboxymaltose vs placebo\nAll-cause death → HF hosp → 6MWT change\n\n\nPARTNER 3\nLow-risk symptomatic AS\nTAVR vs SAVR\nDeath → stroke → rehospitalization days\n\n\nREDUCE LAP-HF II\nHFpEF/HFmrEF\nAtrial shunt device vs sham\nCV death or ischemic stroke → HF hospitalization → KCCQ-OSS change\n\n\nTRILUMINATE\nSymptomatic tricuspid regurgitation\nTEER vs OMT\nDeath or tricuspid surgery → HF hospitalization → KCCQ-OSS change\n\n\nVIP-ACS\nAcute coronary syndrome\nHigh-dose influenza vaccine vs standard\nDeath → MI → stroke → HF hosp → unstable angina hosp → urgent revascularization → respiratory infection hosp"
+  },
+  {
+    "objectID": "win_ratio_and_beyond.html#wr-as-primary-endpoint-i",
+    "href": "win_ratio_and_beyond.html#wr-as-primary-endpoint-i",
+    "title": "The Win Ratio and Beyond",
+    "section": "WR as Primary Endpoint (I)",
+    "text": "WR as Primary Endpoint (I)\n\nGregson et al. (2025) summarizes recent/ongoing RCTs: \n\n\n\n\n\n\n\n\n\n\nTrial\nCondition\nInterventions\nHCE\n\n\n\n\nATTRibute-CM (2024)\nTransthyretin amyloid cardiomyopathy\nAcoramidis vs placebo\nDeath → CV hosp → NT-proBNP/6MWT\n\n\nCOVID-PACT (2022)\nCritically ill COVID-19\nFull-dose AC vs standard-dose AC\nVenous/arterial death → PE → DVT → …\n\n\nDAPA-MI (2024)\nClinically stable acute MI\nDapagliflozin vs placebo\nCV death → non-CV death → HF hosp → …\n\n\nDEFENDER (2024)\nCritical illness with organ failure\nDapagliflozin + SOC vs SOC\nIn-hospital death → KRT initiation → ICU LOS\n\n\nEMPULSE (2022)\nAcute HF (hospitalized)\nEmpagliflozin vs placebo\nAll-cause death → HF events (number/time) → KCCQ change\n\n\nHEART-FID (2023)\nHFrEF with iron deficiency\nFerric carboxymaltose vs placebo\nAll-cause death → HF hosp → 6MWT change"
+  },
+  {
+    "objectID": "win_ratio_and_beyond.html#wr-as-primary-endpoint-i-1",
+    "href": "win_ratio_and_beyond.html#wr-as-primary-endpoint-i-1",
+    "title": "The Win Ratio and Beyond",
+    "section": "WR as Primary Endpoint (I)",
+    "text": "WR as Primary Endpoint (I)\n\n\n\n\n\n\n\n\n\n\nTrial\nCondition\nInterventions\nHCE\n\n\n\n\nPARTNER 3\nLow-risk symptomatic AS\nTAVR vs SAVR\nDeath → stroke → rehospitalization days\n\n\nREDUCE LAP-HF II\nHFpEF/HFmrEF\nAtrial shunt device vs sham\nCV death/stroke → HF hosp → KCCQ change\n\n\nTRILUMINATE\nSymptomatic tricuspid regurgitation\nTEER vs OMT\nDeath/surgery → HF hosp → KCCQ change\n\n\nVIP-ACS\nAcute coronary syndrome\nHigh-dose influenza vaccine vs standard\nDeath → MI → stroke → …\n\n\n…"
+  },
+  {
+    "objectID": "win_ratio_and_beyond.html#wr-as-primary-endpoint-ii",
+    "href": "win_ratio_and_beyond.html#wr-as-primary-endpoint-ii",
+    "title": "The Win Ratio and Beyond",
+    "section": "WR as Primary Endpoint (II)",
+    "text": "WR as Primary Endpoint (II)\n\n\n\n\n\n\n\n\n\n\nTrial\nCondition\nInterventions\nHCE\n\n\n\n\nPARTNER 3 (2023)\nLow-risk symptomatic AS\nTAVR vs SAVR\nDeath → stroke → rehospitalization days\n\n\nREDUCE LAP-HF II (2022)\nHFpEF/HFmrEF\nAtrial shunt device vs sham\nCV death/stroke → HF hosp → KCCQ change\n\n\nTRILUMINATE (2023)\nSymptomatic tricuspid regurgitation\nTEER vs OMT\nDeath/surgery → HF hosp → KCCQ change\n\n\nVIP-ACS (2022)\nAcute coronary syndrome\nHigh-dose influenza vaccine vs standard\nDeath → MI → stroke → …\n\n\n…"
+  },
+  {
+    "objectID": "win_ratio_and_beyond.html#recurrent-events",
+    "href": "win_ratio_and_beyond.html#recurrent-events",
+    "title": "The Win Ratio and Beyond",
+    "section": "Recurrent Events",
+    "text": "Recurrent Events\n\nGPC to accommodate recurrent events\n\nE.g., hospitalizations, exacerbations, infections, etc.\n\nComparison rules\n\nDeath \\(\\to\\) Number of events \\(\\to\\) Time to first/last event (Mao et al., 2022) \\(\\to\\) … (Biomarker/QoL changes)\n\\(H_A\\): Treatment stochastically delays all events"
+  },
+  {
+    "objectID": "win_ratio_and_beyond.html#recurrent-events-i",
+    "href": "win_ratio_and_beyond.html#recurrent-events-i",
+    "title": "The Win Ratio and Beyond",
+    "section": "Recurrent Events (I)",
+    "text": "Recurrent Events (I)\n\nGPC to accommodate recurrent events\n\nE.g., hospitalizations, exacerbations, infections, etc.\n\nComparison rules\n\nDeath \\(\\to\\) Number of events \\(\\to\\) Time to first/last event (Mao, Kim, & Li, 2022) \\(\\to\\) … (Biomarker/QoL changes)\n\\(H_A\\): Treatment stochastically delays all events"
+  },
+  {
+    "objectID": "win_ratio_and_beyond.html#attribute-cm-nejm-2024",
+    "href": "win_ratio_and_beyond.html#attribute-cm-nejm-2024",
+    "title": "The Win Ratio and Beyond",
+    "section": "ATTRibute-CM (NEJM 2024)",
+    "text": "ATTRibute-CM (NEJM 2024)\n\n\nTrial data (Gillmore et al., 2024)\n\nDesign: Phase 3, double-blind RCT (n = 632; 2:1 randomization)\n\nPopulation: Transthyretin amyloid cardiomyopathy (90 % wild-type, mean age 77 yr)\n\nIntervention: Acoramidis 800 mg BID vs placebo for 30 months\n\nPrimary HCE: Death → CV hospitalization → NT-proBNP → 6-min walk distance\n\nStratified by TTR genotype, NT-proBNP level, eGFR, etc."
+  },
+  {
+    "objectID": "win_ratio_and_beyond.html#defender-jama-2024",
+    "href": "win_ratio_and_beyond.html#defender-jama-2024",
+    "title": "The Win Ratio and Beyond",
+    "section": "DEFENDER (JAMA 2024)",
+    "text": "DEFENDER (JAMA 2024)\n\n\nTrial data (Tavares et al., 2024)\n\nDesign: Multicenter, open-label RCT (n = 507; 22 ICUs in Brazil)\n\nPopulation: Critically ill adults with an organ dysfunction (respiratory/ cardiovascular/renal)\n\nIntervention: Dapagliflozin 10 mg daily vs standard care alone (up to 14 days)\n\nPrimary HCE: Hospital mortality → initiation of KRT → ICU length of stay (28 days)"
+  },
+  {
+    "objectID": "win_ratio_and_beyond.html#recurrent-events-ii",
+    "href": "win_ratio_and_beyond.html#recurrent-events-ii",
+    "title": "The Win Ratio and Beyond",
+    "section": "Recurrent Events (II)",
+    "text": "Recurrent Events (II)"
+  },
+  {
+    "objectID": "win_ratio_and_beyond.html#summary",
+    "href": "win_ratio_and_beyond.html#summary",
+    "title": "The Win Ratio and Beyond",
+    "section": "Summary",
+    "text": "Summary\n\nWin ratio and its variants\n\nIntuitive, clinically interpretable effect sizes for HCEs\nSupport recurrent events, stratification, etc.\nTime-resticted estimands, regression analysis, win times, DOOR, etc.\n\nGood practice\n\nPre-specify HCE definition and analysis plan\nCaution in including surrogate measures\n\nAnticipated clinical event rates\nSet thresholds for meaningful differences\n\nSensitivity analyses\n\nR packages\n\nWR, WINS, BuyseTest, WinRatio, rmt, WRNet, door, winkm, etc.\n\nOpen questions\n\nCovariate adjustment, interim analysis, meta analysis, etc."
+  },
+  {
+    "objectID": "win_ratio_and_beyond.html#estimand-issue",
+    "href": "win_ratio_and_beyond.html#estimand-issue",
+    "title": "The Win Ratio and Beyond",
+    "section": "Estimand Issue",
+    "text": "Estimand Issue\n\nWithout censoring\n\nWR, NB, WO = functions of joint distribution of events\nChange with follow-up time (Mao, 2024; Oakes, 2016) \n\nWith censoring\n\nWeighted average of win-loss probabilities over time\nTrial-dependent estimand (ICH, 2020)"
+  },
+  {
+    "objectID": "win_ratio_and_beyond.html#critiques-and-caveats",
+    "href": "win_ratio_and_beyond.html#critiques-and-caveats",
+    "title": "The Win Ratio and Beyond",
+    "section": "Critiques and Caveats",
+    "text": "Critiques and Caveats"
+  },
+  {
+    "objectID": "win_ratio_and_beyond.html#summary-i",
+    "href": "win_ratio_and_beyond.html#summary-i",
+    "title": "The Win Ratio and Beyond",
+    "section": "Summary (I)",
+    "text": "Summary (I)\n\nWin ratio and its variants\n\nIntuitive, clinically interpretable effect sizes for HCEs\nSupport recurrent events, stratification, etc.\nTime-resticted estimands, regression analysis, win times, DOOR, etc.\n\nGood practice\n\nPre-specify HCE definition and analysis plan\nCaution in including surrogate measures\n\nAnticipated clinical event rates\nSet thresholds for meaningful differences\n\nSensitivity analyses"
+  },
+  {
+    "objectID": "win_ratio_and_beyond.html#summary-ii",
+    "href": "win_ratio_and_beyond.html#summary-ii",
+    "title": "The Win Ratio and Beyond",
+    "section": "Summary (II)",
+    "text": "Summary (II)\n\nR packages\n\nWR, WINS, BuyseTest, WinRatio, rmt, WRNet, door, winkm, etc.\n\nOpen questions\n\nCovariate adjustment, interim analysis, meta analysis, etc."
+  },
+  {
+    "objectID": "win_ratio_and_beyond.html#key-takeaways-i",
+    "href": "win_ratio_and_beyond.html#key-takeaways-i",
+    "title": "The Win Ratio and Beyond",
+    "section": "Key Takeaways (I)",
+    "text": "Key Takeaways (I)\n\nWin ratio and its variants\n\nIntuitive, clinically interpretable effect sizes for HCEs\nSupport recurrent events, stratification, etc.\nTime-resticted estimands, regression analysis, win times, DOOR, etc.\n\nGood practice\n\nPre-specify HCE definition and analysis plan\nCaution in including surrogate measures\n\nAnticipated clinical event rates\nSet thresholds for meaningful differences\n\nSensitivity analyses"
+  },
+  {
+    "objectID": "win_ratio_and_beyond.html#key-takeaways-ii",
+    "href": "win_ratio_and_beyond.html#key-takeaways-ii",
+    "title": "The Win Ratio and Beyond",
+    "section": "Key Takeaways (II)",
+    "text": "Key Takeaways (II)\n\nR packages\n\nWR, WINS, BuyseTest, WinRatio, rmt, WRNet, door, WinKM, etc.\n\nOpen questions\n\nCovariate adjustment, interim analysis, meta analysis, etc."
   }
 ]

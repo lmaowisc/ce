@@ -173,22 +173,21 @@ Lu Mao
     </div>
 </div>
 
-</section>
-<section id="outline" class="slide level2">
-<h2>Outline</h2>
+</section><section id="TOC">
+<nav role="doc-toc"> 
+<h2 id="toc-title">Outline</h2>
 <ul>
-<li><p><strong>Background</strong></p></li>
-<li><p><strong>Censoring’s impact on estimand</strong></p>
-<ul>
-<li>Time frame of comparison</li>
-</ul></li>
-<li><p><strong>Two approaches to clarity</strong></p>
-<ul>
-<li><strong>Nonparametric</strong>: fix the time frame</li>
-<li><strong>Semiparametric</strong>: posit a time-constant feature</li>
-</ul></li>
-<li><p><strong>Summary and discussion</strong></p></li>
+<li><a href="#/introduction" id="/toc-introduction">Introduction</a></li>
+<li><a href="#/properties-and-use-cases" id="/toc-properties-and-use-cases">Properties and Use Cases</a></li>
+<li><a href="#/extensions-and-variations" id="/toc-extensions-and-variations">Extensions and Variations</a></li>
+<li><a href="#/challenges-and-open-questions" id="/toc-challenges-and-open-questions">Challenges and Open Questions</a></li>
+<li><a href="#/conclusion" id="/toc-conclusion">Conclusion</a></li>
 </ul>
+</nav>
+</section>
+<section>
+<section id="introduction" class="title-slide slide level1 center">
+<h1>Introduction</h1>
 <p><span class="math display">\[
 \def\a{{(a)}}
 \def\b{{(1-a)}}
@@ -197,11 +196,6 @@ Lu Mao
 \def\d{{\rm d}}
 \def\T{{\rm T}}
 \]</span></p>
-</section>
-<section>
-<section id="introduction" class="title-slide slide level1 center">
-<h1>Introduction</h1>
-
 </section>
 <section id="composite-endpoint" class="slide level2">
 <h2>Composite Endpoint</h2>
@@ -227,20 +221,22 @@ Lu Mao
 <section id="win-ratio-basics" class="slide level2">
 <h2>Win Ratio: Basics</h2>
 <ul>
-<li><strong>A common approach to HCE</strong>
+<li><strong>A common HCE</strong>
 <ul>
 <li><strong>Proposed and popularized</strong> by <span class="citation" data-cites="pocock2012">Pocock et al. (<a href="#/references" role="doc-biblioref" onclick="">2012</a>)</span></li>
-<li><strong>Treatment vs control</strong>: generalized pairwise comparisons <span class="citation" data-cites="buyse2010">(<a href="#/references" role="doc-biblioref" onclick="">Buyse, 2010</a>)</span></li>
-<li><strong>Win-loss</strong>: sequential comparison on components
+<li><strong>Treatment vs control</strong>: generalized pairwise comparisons (GPC) <span class="citation" data-cites="buyse:2025">(<a href="#/references" role="doc-biblioref" onclick="">Buyse et al., 2025</a>)</span>
 <ul>
-<li>Longer survival &gt; fewer/later nonfatal MACE &gt; better 6MWT/NYHA score</li>
+<li><strong>Win-loss</strong>: Longer survival <span class="math inline">\(\to\)</span> fewer/later nonfatal MACE <span class="math inline">\(\to\)</span> better 6MWT/NYHA</li>
 </ul></li>
-<li><strong>Effect size</strong>: WR <span class="math inline">\(=\)</span> wins / losses</li>
+<li><strong>Effect size</strong>: WR <span class="math inline">\(=\)</span> wins / losses
+<ul>
+<li>Fold increase in probability of winning over lossing</li>
+</ul></li>
 </ul></li>
 <li><strong>Alternative metrics</strong>
 <ul>
-<li><strong>Proportion in favor</strong> (net benefit): PIF <span class="math inline">\(=\)</span> wins <span class="math inline">\(-\)</span> losses</li>
-<li><strong>Win odds</strong>: WO <span class="math inline">\(=\)</span> (wins <span class="math inline">\(+\)</span> <span class="math inline">\(2^{-1}\)</span>ties) / (losses <span class="math inline">\(+\)</span> <span class="math inline">\(2^{-1}\)</span>ties)</li>
+<li><strong>Net benefit</strong> (Proportion in favor): NB <span class="math inline">\(=\)</span> wins <span class="math inline">\(-\)</span> losses <span class="citation" data-cites="buyse2010">(<a href="#/references" role="doc-biblioref" onclick="">Buyse, 2010</a>)</span></li>
+<li><strong>Win odds</strong>: WO <span class="math inline">\(=\)</span> (wins <span class="math inline">\(+\)</span> <span class="math inline">\(2^{-1}\)</span>ties) / (losses <span class="math inline">\(+\)</span> <span class="math inline">\(2^{-1}\)</span>ties) <span class="citation" data-cites="brunner2021">(<a href="#/references" role="doc-biblioref" onclick="">Brunner et al., 2021</a>)</span></li>
 </ul></li>
 </ul>
 </section>
@@ -268,7 +264,7 @@ Lu Mao
 <ul>
 <li>WR = 50% / 18.8% = 2.67<br>
 </li>
-<li>PIF = 50% - 18.8% = 31.2%</li>
+<li>NB = 50% - 18.8% = 31.2%</li>
 <li>WO = (50% + 15.6%) / (18.8% + 15.6%) = 1.72</li>
 </ul></li>
 </ul>
@@ -284,12 +280,265 @@ Lu Mao
 </section>
 <section id="stratification" class="slide level2">
 <h2>Stratification</h2>
+<div style="font-size: 0.75em;">
+<ul>
+<li><strong>GPC within stratum and aggregate</strong> <span class="citation" data-cites="dong2017 dong2023">(<a href="#/references" role="doc-biblioref" onclick="">Dong et al., 2018</a>, <a href="#/references" role="doc-biblioref" onclick="">2023</a>)</span> <img data-src="sj_images/str_winloss.png" class="quarto-figure quarto-figure-center" style="width:100.0%"> <span class="math display">\[\begin{align}
+\text{Wins: } &amp; 50\% \times 8/(8+6) + 33\% \times 6/(8+6) = 42.7\% \\
+\text{Losses: } &amp; 38\% \times 8/(8+6) + 22\% \times 6/(8+6) = 31.1\%
+\end{align}\]</span></li>
+<li><strong>Overall WR:</strong> 42.7% / 31.1% = 1.37</li>
+</ul>
+</div>
 </section></section>
+<section>
 <section id="properties-and-use-cases" class="title-slide slide level1 center">
 <h1>Properties and Use Cases</h1>
 
 </section>
+<section id="general-setting" class="slide level2">
+<h2>General Setting</h2>
+<ul>
+<li><strong>Notation</strong>
+<ul>
+<li><span class="math inline">\(n_1\)</span>, <span class="math inline">\(n_0\)</span>: sample sizes in treatment and control</li>
+<li><span class="math inline">\(W_{ij}\)</span>: win-loss indicator of subject <span class="math inline">\(i\)</span> in treatment vs <span class="math inline">\(j\)</span> in control <span class="math display">\[
+W_{ij} = \begin{cases}
+1, &amp; \text{if subject } i \text{ in treatment wins} \\
+-1, &amp; \text{if subject } j \text{ in control wins} \\
+0, &amp; \text{if tie}
+\end{cases}
+\]</span>
+<ul>
+<li><span class="math inline">\(\text{Wins}: \hat w_{1, 0} = (n_1n_0)^{-1}\sum_{i=1}^{n_1} \sum_{j=1}^{n_0} I(W_{ij} = 1)\)</span></li>
+<li><span class="math inline">\(\text{Losses}: \hat w_{0, 1} = (n_1n_0)^{-1}\sum_{i=1}^{n_1} \sum_{j=1}^{n_0} I(W_{ij} = -1)\)</span></li>
+</ul></li>
+<li>WR <span class="math inline">\(=\hat w_{1, 0} / \hat w_{0, 1}\)</span>; <span class="math inline">\(\,\,\)</span> NB <span class="math inline">\(=\hat w_{1, 0} - \hat w_{0, 1}\)</span>; <span class="math inline">\(\,\,\)</span> WO <span class="math inline">\(=(1 + \text{NB}) / (1 - \text{NB})\)</span></li>
+</ul></li>
+</ul>
+</section>
+<section id="binary-case-equivalencies" class="slide level2">
+<h2>Binary Case Equivalencies</h2>
+<ul>
+<li><strong>Binary outcome, no censoring</strong>
+<ul>
+<li><span class="math inline">\(Y^\a_i = 1\)</span> (response) vs 0 (no-response) for subject <span class="math inline">\(i\)</span> in group <span class="math inline">\(a\)</span> (<span class="math inline">\(a = 0, 1\)</span>)</li>
+<li>Win-loss (1-0) fractions <span class="math display">\[
+\hat w^{(a, 1-a)} = (n_an_{1-a})^{-1} \sum_{i=1}^{n_a}\sum_{j=1}^{n_{1-a}} Y^\a_i (1 - Y^\b_j) = \hat p_a (1 - \hat p_{1-a})
+\]</span>
+<ul>
+<li><span class="math inline">\(\hat p_a = n_a^{-1} \sum_{i=1}^{n_a} Y^\a_i\)</span> = response rate in group <span class="math inline">\(a\)</span></li>
+</ul></li>
+</ul></li>
+<li><strong>GPC stats</strong>
+<ul>
+<li>WR <span class="math inline">\(= [\hat p_1 (1 - \hat p_0)] / [\hat p_0 (1 - \hat p_1)] =\)</span> response odds ratio</li>
+<li>NB <span class="math inline">\(= \hat p_1 - \hat p_0=\)</span> response rate difference</li>
+</ul></li>
+</ul>
+</section>
+<section id="variance-estimation" class="slide level2">
+<h2>Variance Estimation</h2>
+<ul>
+<li><strong>Bootstrap</strong>
+<ul>
+<li>Inital proposal <span class="citation" data-cites="pocock2012">(<a href="#/references" role="doc-biblioref" onclick="">Pocock et al., 2012</a>)</span></li>
+</ul></li>
+<li><strong>Analytic asymptotic variance</strong>
+<ul>
+<li>Asymptotic decompostion of <span class="math inline">\(U\)</span>-statistics <span class="citation" data-cites="Bebu2016 Luo2015 dong2016">(<a href="#/references" role="doc-biblioref" onclick="">Bebu &amp; Lachin, 2016</a>; <a href="#/references" role="doc-biblioref" onclick="">Dong et al., 2016</a>; <a href="#/references" role="doc-biblioref" onclick="">Luo et al., 2015</a>)</span></li>
+<li>Influence function-based</li>
+<li><strong>R packages</strong>: <a href="https://cran.r-project.org/web/packages/WR/" target="_blank"><code>WR</code></a>, <a href="https://cran.r-project.org/web/packages/WINS/" target="_blank"><code>WINS</code></a>, <a href="https://cran.r-project.org/web/packages/BuyseTest/" target="_blank"><code>BuyseTest</code></a>, <a href="https://cran.r-project.org/web/packages/WinRatio/" target="_blank"><code>WinRatio</code></a>, etc.</li>
+</ul></li>
+</ul>
+</section>
+<section id="null-vs-alternative-hypotheses" class="slide level2">
+<h2>Null vs Alternative Hypotheses</h2>
+<ul>
+<li><strong>Null hypothesis</strong>: No treatment effect on any event
+<ul>
+<li>WR <span class="math inline">\(= 1\)</span>, NB <span class="math inline">\(= 0\)</span>, WO <span class="math inline">\(= 1\)</span> regardless of follow-up time</li>
+</ul></li>
+<li><strong>Alternative hypothesis</strong>
+<ul>
+<li>Death and hospitalization times: <em>stochastically larger</em> in treatment than in control <span class="citation" data-cites="Luo2015 Mao2019">(<a href="#/references" role="doc-biblioref" onclick="">Luo et al., 2015</a>; <a href="#/references" role="doc-biblioref" onclick="">Mao, 2019</a>)</span>
+<ul>
+<li>Stratified test: Stochastical order in each stratum</li>
+</ul></li>
+<li>So WR <span class="math inline">\(&gt; 1\)</span>, NB <span class="math inline">\(&gt; 0\)</span>, WO <span class="math inline">\(&gt; 1\)</span> regardless of follow-up time</li>
+<li>Power <span class="math inline">\(\to 1\)</span> as <span class="math inline">\(n=n_1+n_0\to\infty\)</span></li>
+</ul></li>
+</ul>
+</section>
+<section id="recurrent-events-i" class="slide level2">
+<h2>Recurrent Events (I)</h2>
+<ul>
+<li><strong>GPC to accommodate recurrent events</strong>
+<ul>
+<li>E.g., hospitalizations, exacerbations, infections, etc.</li>
+</ul></li>
+<li><strong>Comparison rules</strong>
+<ul>
+<li>Death <span class="math inline">\(\to\)</span> Number of events <span class="math inline">\(\to\)</span> Time to first/last event <span class="citation" data-cites="mao2022a">(<a href="#/references" role="doc-biblioref" onclick="">Mao, Kim, &amp; Li, 2022</a>)</span> <span class="math inline">\(\to\)</span> … (Biomarker/QoL changes)</li>
+<li><span class="math inline">\(H_A\)</span>: Treatment stochastically delays all events</li>
+</ul></li>
+</ul>
+</section>
+<section id="recurrent-events-ii" class="slide level2">
+<h2>Recurrent Events (II)</h2>
 
+<img data-src="sj_images/comp_wr_rwr.png" class="quarto-figure quarto-figure-center r-stretch" style="width:60.0%"></section>
+<section id="attribute-cm-nejm-2024" class="slide level2">
+<h2>ATTRibute-CM (NEJM 2024)</h2>
+<div style="font-size:0.8em; line-height:1em;">
+<ul>
+<li><strong>Trial data</strong> <span class="citation" data-cites="gillmore:2024">(<a href="#/references" role="doc-biblioref" onclick="">Gillmore et al., 2024</a>)</span>
+<ul>
+<li><strong>Design:</strong> Phase 3, double-blind RCT (n = 632; 2:1 randomization)<br>
+</li>
+<li><strong>Population:</strong> Transthyretin amyloid cardiomyopathy (90 % wild-type, mean age 77 yr)<br>
+</li>
+<li><strong>Intervention:</strong> Acoramidis 800 mg BID vs placebo for 30 months<br>
+</li>
+<li><strong>Primary HCE:</strong> Death → CV hospitalization → NT-proBNP → 6-min walk distance
+<ul>
+<li>Stratified by TTR genotype, NT-proBNP level, eGFR, etc.</li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+
+<img data-src="sj_images/attr_cm.png" class="quarto-figure quarto-figure-center r-stretch" style="width:70.0%"></section>
+<section id="defender-jama-2024" class="slide level2">
+<h2>DEFENDER (JAMA 2024)</h2>
+<div style="font-size:0.8em; line-height:1em;">
+<ul>
+<li><strong>Trial data</strong> <span class="citation" data-cites="tavares:2024">(<a href="#/references" role="doc-biblioref" onclick="">Tavares et al., 2024</a>)</span>
+<ul>
+<li><strong>Design:</strong> Multicenter, open-label RCT (n = 507; 22 ICUs in Brazil)<br>
+</li>
+<li><strong>Population:</strong> Critically ill adults with an organ dysfunction (respiratory/ cardiovascular/renal)<br>
+</li>
+<li><strong>Intervention:</strong> Dapagliflozin 10 mg daily vs standard care alone (up to 14 days)<br>
+</li>
+<li><strong>Primary HCE:</strong> Hospital mortality → initiation of KRT → ICU length of stay (28 days)<br>
+</li>
+</ul></li>
+</ul>
+</div>
+
+<img data-src="win_ratio_and_beyond_files/figure-revealjs/unnamed-chunk-1-1.png" width="768" class="r-stretch"></section>
+<section id="wr-as-primary-endpoint-i" class="slide level2">
+<h2>WR as Primary Endpoint (I)</h2>
+<div style="font-size: 0.75em; line-height: 1.2em;">
+<p><span class="citation" data-cites="gregson:2025">Gregson et al. (<a href="#/references" role="doc-biblioref" onclick="">2025</a>)</span> summarizes recent/ongoing RCTs: <br></p>
+</div>
+<table class="caption-top">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Trial</th>
+<th style="text-align: left;">Condition</th>
+<th style="text-align: left;">Interventions</th>
+<th style="text-align: left;">HCE</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>ATTRibute-CM (2024)</strong></td>
+<td style="text-align: left;">Transthyretin amyloid cardiomyopathy</td>
+<td style="text-align: left;">Acoramidis vs placebo</td>
+<td style="text-align: left;">Death → CV hosp → NT-proBNP/6MWT</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>COVID-PACT (2022)</strong></td>
+<td style="text-align: left;">Critically ill COVID-19</td>
+<td style="text-align: left;">Full-dose AC vs standard-dose AC</td>
+<td style="text-align: left;">Venous/arterial death → PE → DVT → …</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>DAPA-MI (2024)</strong></td>
+<td style="text-align: left;">Clinically stable acute MI</td>
+<td style="text-align: left;">Dapagliflozin vs placebo</td>
+<td style="text-align: left;">CV death → non-CV death → HF hosp → …</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>DEFENDER (2024)</strong></td>
+<td style="text-align: left;">Critical illness with organ failure</td>
+<td style="text-align: left;">Dapagliflozin + SOC vs SOC</td>
+<td style="text-align: left;">In-hospital death → KRT initiation → ICU LOS</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>EMPULSE (2022)</strong></td>
+<td style="text-align: left;">Acute HF (hospitalized)</td>
+<td style="text-align: left;">Empagliflozin vs placebo</td>
+<td style="text-align: left;">All-cause death → HF events (number/time) → KCCQ change</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>HEART-FID (2023)</strong></td>
+<td style="text-align: left;">HFrEF with iron deficiency</td>
+<td style="text-align: left;">Ferric carboxymaltose vs placebo</td>
+<td style="text-align: left;">All-cause death → HF hosp → 6MWT change</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="wr-as-primary-endpoint-ii" class="slide level2">
+<h2>WR as Primary Endpoint (II)</h2>
+<p><br></p>
+<table class="caption-top">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Trial</th>
+<th style="text-align: left;">Condition</th>
+<th style="text-align: left;">Interventions</th>
+<th style="text-align: left;">HCE</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>PARTNER 3 (2023)</strong></td>
+<td style="text-align: left;">Low-risk symptomatic AS</td>
+<td style="text-align: left;">TAVR vs SAVR</td>
+<td style="text-align: left;">Death → stroke → rehospitalization days</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>REDUCE LAP-HF II (2022)</strong></td>
+<td style="text-align: left;">HFpEF/HFmrEF</td>
+<td style="text-align: left;">Atrial shunt device vs sham</td>
+<td style="text-align: left;">CV death/stroke → HF hosp → KCCQ change</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>TRILUMINATE (2023)</strong></td>
+<td style="text-align: left;">Symptomatic tricuspid regurgitation</td>
+<td style="text-align: left;">TEER vs OMT</td>
+<td style="text-align: left;">Death/surgery → HF hosp → KCCQ change</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>VIP-ACS (2022)</strong></td>
+<td style="text-align: left;">Acute coronary syndrome</td>
+<td style="text-align: left;">High-dose influenza vaccine vs standard</td>
+<td style="text-align: left;">Death → MI → stroke → …</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">…</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+</tbody>
+</table>
+</section></section>
 <section>
 <section id="extensions-and-variations" class="title-slide slide level1 center">
 <h1>Extensions and Variations</h1>
@@ -297,23 +546,238 @@ Lu Mao
 </section>
 <section id="sample-size-calculation" class="slide level2">
 <h2>Sample Size Calculation</h2>
+<ul>
+<li><strong>Rank-based approximation</strong> <span class="citation" data-cites="yu2022">(<a href="#/references" role="doc-biblioref" onclick="">Yu &amp; Ganju, 2022</a>)</span> <span class="math display">\[
+n\approx\frac{4(1+p_{\text{tie}})(z_{1-\alpha/2}+z_{1-\beta})^2}{3q(1-q)(1-p_{\text{tie}})\log^2(\text{WR})}
+\]</span>
+<ul>
+<li><span class="math inline">\(\alpha = 0.05\)</span>: type I error; <span class="math inline">\(\,\, 1 - \beta = 80\%, 90\%\)</span>: desired power</li>
+<li><span class="math inline">\(q = n_1/n\)</span>; <span class="math inline">\(\,\, p_{\text{tie}}\)</span>: proportion of ties</li>
+<li>Elicit effect size <span class="math inline">\(\log(\text{WR})\)</span> and <span class="math inline">\(p_{\text{tie}}\)</span> from component-wise win-loss measures <span class="citation" data-cites="barnhart:2025:sim barnhart:2025:sbr">(<a href="#/references" role="doc-biblioref" onclick="">Barnhart et al., 2025a</a>, <a href="#/references" role="doc-biblioref" onclick="">2025b</a>)</span></li>
+</ul></li>
+<li><strong>Parametric approach</strong> <span class="citation" data-cites="mao2022">(<a href="#/references" role="doc-biblioref" onclick="">Mao, Kim, &amp; Miao, 2022</a>)</span>
+<ul>
+<li>Gumbel–Hougaard copula <span class="math inline">\(+\)</span> Numerical integration (R package <a href="https://cran.r-project.org/web/packages/WR/" target="_blank"><code>WR</code></a>)</li>
+</ul></li>
+</ul>
+</section>
+<section id="estimand-issue" class="slide level2">
+<h2>Estimand Issue</h2>
+<ul>
+<li><strong>Without censoring</strong>
+<ul>
+<li>WR, NB, WO = functions of joint distribution of events</li>
+<li>Change with follow-up time <span class="citation" data-cites="oakes2016 mao2024">(<a href="#/references" role="doc-biblioref" onclick="">Mao, 2024</a>; <a href="#/references" role="doc-biblioref" onclick="">Oakes, 2016</a>)</span> <img data-src="images/exmp.png" class="quarto-figure quarto-figure-center" style="width:75.0%"></li>
+</ul></li>
+<li><strong>With censoring</strong>
+<ul>
+<li>Weighted average of win-loss probabilities over time</li>
+<li>Trial-dependent estimand <span class="citation" data-cites="ich2020">(<a href="#/references" role="doc-biblioref" onclick="">ICH, 2020</a>)</span></li>
+</ul></li>
+</ul>
+</section>
+<section id="time-restriction" class="slide level2">
+<h2>Time Restriction</h2>
+<ul>
+<li><strong>Specify time horizon</strong> <span class="math inline">\(\tau\)</span>
+<ul>
+<li>Imagine all subjects followed up to <span class="math inline">\(\tau\)</span> (1 yr, 3 yrs, etc.)</li>
+</ul></li>
+<li><strong>GPC under consistent time frame</strong>
+<ul>
+<li><strong>Estimand</strong>: WR<span class="math inline">\((\tau)\)</span>, NB<span class="math inline">\((\tau)\)</span>, WO<span class="math inline">\((\tau)\)</span></li>
+<li><strong>Interpretation</strong>: win ratio/net benefit/win odds up to time <span class="math inline">\(\tau\)</span></li>
+</ul></li>
+<li><strong>Estimation with censored data</strong>
+<ul>
+<li>Inverse probability censoring weighting <span class="citation" data-cites="Dong2020 Dong2021">(<a href="#/references" role="doc-biblioref" onclick="">Dong et al., 2020b</a>, <a href="#/references" role="doc-biblioref" onclick="">2021</a>)</span>
+<ul>
+<li><strong>R-package</strong>: <a href="https://cran.r-project.org/web/packages/WINS/" target="_blank"><code>WINS</code></a></li>
+</ul></li>
+<li>Multiple imputations <span class="citation" data-cites="wang2023 wang2024">(<a href="#/references" role="doc-biblioref" onclick="">T. Wang et al., 2023</a>, <a href="#/references" role="doc-biblioref" onclick="">2024</a>)</span></li>
+</ul></li>
+</ul>
 </section>
 <section id="regression-analysis" class="slide level2">
 <h2>Regression Analysis</h2>
+<ul>
+<li><strong>A proportional win-fractions (PW) model</strong> <span class="math display">\[
+\frac{{\rm pr}(W_{ij}(t) = 1\mid Z_i, Z_j)}{{\rm pr}(W_{ij}(t) = -1\mid Z_i, Z_j)}
+=\exp\left\{\beta^\T(Z_i - Z_j)\right\}
+\]</span>
+<ul>
+<li><span class="math inline">\(W_{ij}(t)\)</span>: win-loss indicator by time <span class="math inline">\(t\)</span></li>
+<li><span class="math inline">\(Z_i\)</span>, <span class="math inline">\(Z_j\)</span>: covariate vectors for subjects <span class="math inline">\(i\)</span> and <span class="math inline">\(j\)</span></li>
+<li><span class="math inline">\(\beta\)</span>: log-WRs for one-unit increases in covariates</li>
+<li>U-statistic estimation; residual analysis to check WR constancy <span class="citation" data-cites="Mao2021">(<a href="#/references" role="doc-biblioref" onclick="">Mao &amp; Wang, 2021</a>, R package <a href="https://cran.r-project.org/web/packages/WR/" target="_blank"><code>WR</code></a>)</span>; stratification <span class="citation" data-cites="Wang2022">(<a href="#/references" role="doc-biblioref" onclick="">T. Wang &amp; Mao, 2022</a>)</span></li>
+<li>Elastic net regularization for high-dimensional <span class="math inline">\(Z\)</span> <span class="citation" data-cites="mao2025">(<a href="#/references" role="doc-biblioref" onclick="">Mao, 2025</a>, R tool <a href="https://lmaowisc.github.io/wrnet/" target="_blank"><code>WRNet</code></a>)</span></li>
+</ul></li>
+</ul>
 </section>
 <section id="win-loss-times" class="slide level2">
 <h2>Win-Loss Times</h2>
+<ul>
+<li><strong>Restricted mean time</strong> in favor of treatment <span class="math display">\[
+\mu(\tau) = w_{1, 0}(\tau) - w_{0, 1}(\tau)
+\]</span>
+<ul>
+<li><span class="math inline">\(w_{a, 1-a}(\tau)\)</span>: average <em>time</em> subject in group <span class="math inline">\(a\)</span> wins over subject in group <span class="math inline">\(1-a\)</span> up to time <span class="math inline">\(\tau\)</span></li>
+<li>Interpretation: net favorable time gained/lost by treatment <span class="citation" data-cites="Mao2023">(<a href="#/references" role="doc-biblioref" onclick="">Mao, 2023</a>, R package <a href="https://cran.r-project.org/web/packages/rmt/" target="_blank"><code>rmt</code></a>)</span></li>
+</ul></li>
+<li><strong>Other win time measures</strong>
+<ul>
+<li>Expected win time (<span class="math inline">\(\tau\to\)</span> maximum length of follow-up), etc. <span class="citation" data-cites="troendle2024">(<a href="#/references" role="doc-biblioref" onclick="">Troendle et al., 2024</a>)</span></li>
+</ul></li>
+</ul>
 </section>
 <section id="door" class="slide level2">
 <h2>DOOR</h2>
+<ul>
+<li><strong>Desirability of outcome ranking</strong> <span class="citation" data-cites="evans:2015:door">(<a href="#/references" role="doc-biblioref" onclick="">Evans et al., 2015</a>)</span>
+<ul>
+<li>Pre-defined ordinal categories of clinical outcome <span class="math inline">\(Y^\a\)</span>
+<ol type="1">
+<li>Dead</li>
+<li>Alive with severe AE</li>
+<li>Alive with mild AE</li>
+<li>Alive without AE</li>
+</ol></li>
+</ul></li>
+<li><strong>Estimand</strong>
+<ul>
+<li>Tie-adjusted <em>win probability</em> from GPC ranked by DOOR <span class="math display">\[
+  \theta_{\text{DOOR}} = \Pr(Y^\t &gt; Y^\c) + \tfrac{1}{2}\Pr(Y^\t = Y^\c)
+  \]</span></li>
+<li>R package <a href="https://cran.r-project.org/web/packages/door/" target="_blank"><code>door</code></a></li>
+</ul></li>
+</ul>
 </section></section>
 <section>
 <section id="challenges-and-open-questions" class="title-slide slide level1 center">
 <h1>Challenges and Open Questions</h1>
 
 </section>
-<section id="criticisms" class="slide level2">
-<h2>Criticisms</h2>
+<section id="critiques" class="slide level2">
+<h2>Critiques</h2>
+<ul>
+<li><strong>Some caveats</strong> <span class="citation" data-cites="butler:2024">(<a href="#/references" role="doc-biblioref" onclick="">Butler et al., 2024</a>)</span>
+<ul>
+<li>WR ignores ties
+<ul>
+<li>Win relative to <em>loss</em> rather than <em>“not win”</em></li>
+<li>Some consider this to overstate effect size</li>
+</ul></li>
+<li>Inclusion of low-priority biomarker
+<ul>
+<li>Surrogate measures drives treatment effect</li>
+</ul></li>
+<li>Subjectivity in defining HCE
+<ul>
+<li>Clinical input needed</li>
+<li>Post hoc construction inflates type I error</li>
+</ul></li>
+</ul></li>
+</ul>
+</section>
+<section id="covariate-adjustment" class="slide level2">
+<h2>Covariate Adjustment</h2>
+<ul>
+<li><strong>Different from regression</strong>
+<ul>
+<li><strong>Marginal estimands</strong> between groups, not conditioning on <span class="math inline">\(Z\)</span></li>
+<li><strong>Gain efficiency</strong> when outcome-covariate model is true, otherwise still valid (robustness)</li>
+<li><strong>Standard endpoints</strong>
+<ul>
+<li>Continuous, binary, univariate survival, etc. <span class="citation" data-cites="tsiatis2008 wang2021 ye2022">(<a href="#/references" role="doc-biblioref" onclick="">Tsiatis et al., 2008</a>; <a href="#/references" role="doc-biblioref" onclick="">B. Wang et al., 2021</a>; <a href="#/references" role="doc-biblioref" onclick="">Ye et al., 2023</a>)</span></li>
+<li>FDA recommendation <span class="citation" data-cites="fda:2023">(<a href="#/references" role="doc-biblioref" onclick="">FDA, 2023</a>)</span></li>
+</ul></li>
+</ul></li>
+<li><strong>Challenges with WR</strong>
+<ul>
+<li><span class="math inline">\(U\)</span>-statistic structure</li>
+<li>Lack of likelihood structure</li>
+</ul></li>
+</ul>
+</section>
+<section id="interim-analysis" class="slide level2">
+<h2>Interim Analysis</h2>
+<ul>
+<li><strong>Purpose</strong>
+<ul>
+<li>Analyze interim data for evidence of efficacy/futility <span class="math inline">\(\to\)</span> stop trial early</li>
+<li>Univariate survival: information accrued <span class="math inline">\(\propto\)</span> number of events</li>
+</ul></li>
+<li><strong>Challenges with WR</strong>
+<ul>
+<li>Information time not event-driven
+<ul>
+<li>Case study: RMST <span class="citation" data-cites="luo2019 lu2021">(<a href="#/references" role="doc-biblioref" onclick="">Lu &amp; Tian, 2021</a>; <a href="#/references" role="doc-biblioref" onclick="">Luo et al., 2019</a>)</span></li>
+</ul></li>
+<li>Correlations between component events
+<ul>
+<li><em>Dependent</em> increments</li>
+</ul></li>
+</ul></li>
+</ul>
+</section>
+<section id="meta-analysis" class="slide level2">
+<h2>Meta Analysis</h2>
+<ul>
+<li><strong>Challenges</strong>
+<ul>
+<li>Primary studies <em>not</em> reporting win-loss measures</li>
+<li>Primary studies over <em>different</em> time spans</li>
+<li>Primary studies with <em>different</em> definitions of win/loss</li>
+</ul></li>
+<li><a href="https://lmaowisc.github.io/winkm/" target="_blank"><code>WinKM</code></a>: A toolkit to start
+<ul>
+<li>Calculate win-loss statistics based on
+<ul>
+<li>KM estimates for OS and EFS</li>
+<li>At-risk table at selected time points</li>
+<li>Total event counts (reported in the CONSORT diagram or results section)</li>
+</ul></li>
+</ul></li>
+</ul>
+</section></section>
+<section>
+<section id="conclusion" class="title-slide slide level1 center">
+<h1>Conclusion</h1>
+
+</section>
+<section id="key-takeaways-i" class="slide level2">
+<h2>Key Takeaways (I)</h2>
+<ul>
+<li><strong>Win ratio and its variants</strong>
+<ul>
+<li>Intuitive, clinically interpretable effect sizes for HCEs</li>
+<li>Support recurrent events, stratification, etc.</li>
+<li>Time-resticted estimands, regression analysis, win times, DOOR, etc.</li>
+</ul></li>
+<li><strong>Good practice</strong>
+<ul>
+<li>Pre-specify HCE definition and analysis plan</li>
+<li>Caution in including surrogate measures
+<ul>
+<li>Anticipated clinical event rates</li>
+<li>Set thresholds for meaningful differences</li>
+</ul></li>
+<li>Sensitivity analyses</li>
+</ul></li>
+</ul>
+</section>
+<section id="key-takeaways-ii" class="slide level2">
+<h2>Key Takeaways (II)</h2>
+<ul>
+<li><strong>R packages</strong>
+<ul>
+<li><a href="https://cran.r-project.org/web/packages/WINS/" target="_blank"><code>WR</code></a>, <a href="https://cran.r-project.org/web/packages/WINS/" target="_blank"><code>WINS</code></a>, <a href="https://cran.r-project.org/web/packages/BuyseTest/" target="_blank"><code>BuyseTest</code></a>, <a href="https://cran.r-project.org/web/packages/WinRatio/" target="_blank"><code>WinRatio</code></a>, <a href="https://cran.r-project.org/web/packages/rmt/" target="_blank"><code>rmt</code></a>, <a href="https://lmaowisc.github.io/wrnet/" target="_blank"><code>WRNet</code></a>, <a href="https://cran.r-project.org/web/packages/door/" target="_blank"><code>door</code></a>, <a href="https://lmaowisc.github.io/winkm/" target="_blank"><code>WinKM</code></a>, etc.</li>
+</ul></li>
+<li><strong>Open questions</strong>
+<ul>
+<li>Covariate adjustment, interim analysis, meta analysis, etc.</li>
+</ul></li>
+</ul>
 </section>
 <section id="acknowledgments" class="slide level2">
 <h2>Acknowledgments</h2>
@@ -334,11 +798,119 @@ Lu Mao
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list">
+<div id="ref-barnhart:2025:sbr" class="csl-entry" role="listitem">
+Barnhart, H., Lokhnygina, Y., Matsouaka, R. A., &amp; Rockhold, F. W. (2025b). Trial design with win statistics for multiple time-to-event endpoints with hierarchy. <em>Statistics in Biopharmaceutical Research</em>, <em>17</em>(2), 197–210.
+</div>
+<div id="ref-barnhart:2025:sim" class="csl-entry" role="listitem">
+Barnhart, H., Lokhnygina, Y., Matsouaka, R., Halabi, S., Yanez, D., Mentz, R. J., &amp; Rockhold, F. (2025a). Sample size and power calculations with win measures based on hierarchical endpoints. <em>Statistics in Medicine</em>, <em>44</em>(10-12), e70096.
+</div>
+<div id="ref-Bebu2016" class="csl-entry" role="listitem">
+Bebu, I., &amp; Lachin, J. M. (2016). Large sample inference for a win ratio analysis of a composite outcome based on prioritized components. <em>Biostatistics</em>, <em>17</em>(1), 178–187. <a href="https://doi.org/10.1093/biostatistics/kxv032">https://doi.org/10.1093/biostatistics/kxv032</a>
+</div>
+<div id="ref-brunner2021" class="csl-entry" role="listitem">
+Brunner, E., Vandemeulebroecke, M., &amp; Mütze, T. (2021). Win odds: An adaptation of the win ratio to include ties. <em>Statistics in Medicine</em>, <em>40</em>(14), 3367–3384. <a href="https://doi.org/10.1002/sim.8967">https://doi.org/10.1002/sim.8967</a>
+</div>
+<div id="ref-butler:2024" class="csl-entry" role="listitem">
+Butler, J., Stockbridge, N., &amp; Packer, M. (2024). Win ratio: A seductive but potentially misleading method for evaluating evidence from clinical trials. <em>Circulation</em>, <em>149</em>(20), 1546–1548.
+</div>
 <div id="ref-buyse2010" class="csl-entry" role="listitem">
-Buyse, M. (2010). Generalized pairwise comparisons of prioritized outcomes in the two<span>-</span>sample problem. <em>Statistics in Medicine</em>, <em>29</em>(30), 3245–3257. <a href="https://doi.org/10.1002/sim.3923">https://doi.org/10.1002/sim.3923</a>
+Buyse, M. E. (2010). Generalized pairwise comparisons of prioritized outcomes in the two<span>-</span>sample problem. <em>Statistics in Medicine</em>, <em>29</em>(30), 3245–3257. <a href="https://doi.org/10.1002/sim.3923">https://doi.org/10.1002/sim.3923</a>
+</div>
+<div id="ref-buyse:2025" class="csl-entry" role="listitem">
+Buyse, M. E., Verbeeck, J., De Backer, M., Deltuvaite-Thomas, V., Saad, E. D., &amp; Molenberghs, G. (2025). <em>Handbook of generalized pairwise comparisons: Methods for patient-centric analysis</em>. CRC Press, Taylor &amp; Francis Group.
+</div>
+<div id="ref-dong2023" class="csl-entry" role="listitem">
+Dong, G., Hoaglin, D. C., Huang, B., Cui, Y., Wang, D., Cheng, Y., &amp; Gamalo-Siebers, M. (2023). The stratified win statistics (win ratio, win odds, and net benefit). <em>Pharmaceutical Statistics</em>, <em>22</em>(4), 748–756. <a href="https://doi.org/10.1002/pst.2293">https://doi.org/10.1002/pst.2293</a>
+</div>
+<div id="ref-Dong2021" class="csl-entry" role="listitem">
+Dong, G., Huang, B., Wang, D., Verbeeck, J., Wang, J., &amp; Hoaglin, D. C. (2021). Adjusting win statistics for dependent censoring. <em>Pharmaceutical Statistics</em>, <em>20</em>(3), 440–450. <a href="https://doi.org/10.1002/pst.2086">https://doi.org/10.1002/pst.2086</a>
+</div>
+<div id="ref-dong2016" class="csl-entry" role="listitem">
+Dong, G., Li, D., Ballerstedt, S., &amp; Vandemeulebroecke, M. (2016). A generalized analytic solution to the win ratio to analyze a composite endpoint considering the clinical importance order among components. <em>Pharmaceutical Statistics</em>, <em>15</em>(5), 430–437. <a href="https://doi.org/10.1002/pst.1763">https://doi.org/10.1002/pst.1763</a>
+</div>
+<div id="ref-Dong2020" class="csl-entry" role="listitem">
+Dong, G., Mao, L., Huang, B., Gamalo-Siebers, M., Wang, J., Yu, G., &amp; Hoaglin, D. C. (2020b). The inverse-probability-of-censoring weighting (IPCW) adjusted win ratio statistic: an unbiased estimator in the presence of independent censoring. <em>Journal of Biopharmaceutical Statistics</em>, <em>30</em>(5), 882–899. <a href="https://doi.org/10.1080/10543406.2020.1757692">https://doi.org/10.1080/10543406.2020.1757692</a>
+</div>
+<div id="ref-dong2017" class="csl-entry" role="listitem">
+Dong, G., Qiu, J., Wang, D., &amp; Vandemeulebroecke, M. (2018). The stratified win ratio. <em>Journal of Biopharmaceutical Statistics</em>, <em>28</em>(4), 778–796. <a href="https://doi.org/10.1080/10543406.2017.1397007">https://doi.org/10.1080/10543406.2017.1397007</a>
+</div>
+<div id="ref-evans:2015:door" class="csl-entry" role="listitem">
+Evans, S. R., Rubin, D., Follmann, D., Pennello, G., Huskins, W. C., Powers, J. H., Schoenfeld, D., Chuang-Stein, C., Cosgrove, S. E., Fowler Jr, V. G., et al. (2015). Desirability of outcome ranking (DOOR) and response adjusted for duration of antibiotic risk (RADAR). <em>Clinical Infectious Diseases</em>, <em>61</em>(5), 800–806.
+</div>
+<div id="ref-fda:2023" class="csl-entry" role="listitem">
+FDA. (2023). <em>Guidance document: Adjusting for covariates in randomized clinical trials for drugs and biological products</em>. US Food and Drug Adminstration. <a href="https://www.fda.gov/regulatory-information/search-fda-guidance-documents/adjusting-covariates-randomized-clinical-trials-drugs-and-biological-products">https://www.fda.gov/regulatory-information/search-fda-guidance-documents/adjusting-covariates-randomized-clinical-trials-drugs-and-biological-products</a>
+</div>
+<div id="ref-gillmore:2024" class="csl-entry" role="listitem">
+Gillmore, J. D., Judge, D. P., Cappelli, F., Fontana, M., Garcia-Pavia, P., Gibbs, S., Grogan, M., Hanna, M., Hoffman, J., Masri, A., Maurer, M. S., Nativi-Nicolau, J., Obici, L., Poulsen, S. H., Rockhold, F., Shah, K. B., Soman, P., Garg, J., Chiswell, K., … Fox, J. C. (2024). Efficacy and safety of acoramidis in transthyretin amyloid cardiomyopathy. <em>New England Journal of Medicine</em>, <em>390</em>(2), 132–142. <a href="https://doi.org/10.1056/NEJMoa2305434">https://doi.org/10.1056/NEJMoa2305434</a>
+</div>
+<div id="ref-gregson:2025" class="csl-entry" role="listitem">
+Gregson, J., Taylor, D., Owen, R., Collier, T., J. Cohen, D., &amp; Pocock, S. (2025). Hierarchical composite outcomes and win ratio methods in cardiovascular trials: A review and consequent guidance. <em>Circulation</em>, <em>151</em>(22), 1606–1619.
+</div>
+<div id="ref-ich2020" class="csl-entry" role="listitem">
+ICH. (2020). <em>ICH E9 (R1) addendum on estimands and sensitivity analysis in clinical trials to the guideline on statistical principles for clinical trials, step 5</em>. London: European Medicines Evaluation Agency.
+</div>
+<div id="ref-lu2021" class="csl-entry" role="listitem">
+Lu, Y., &amp; Tian, L. (2021). Statistical Considerations for Sequential Analysis of the Restricted Mean Survival Time for Randomized Clinical Trials. <em>Statistics in Biopharmaceutical Research</em>, <em>13</em>(2), 210–218. <a href="https://doi.org/10.1080/19466315.2020.1816491">https://doi.org/10.1080/19466315.2020.1816491</a>
+</div>
+<div id="ref-luo2019" class="csl-entry" role="listitem">
+Luo, X., Huang, B., &amp; Quan, H. (2019). Design and monitoring of survival trials based on restricted mean survival times. <em>Clinical Trials</em>, <em>16</em>(6), 616–625. <a href="https://doi.org/10.1177/1740774519871447">https://doi.org/10.1177/1740774519871447</a>
+</div>
+<div id="ref-Luo2015" class="csl-entry" role="listitem">
+Luo, X., Tian, H., Mohanty, S., &amp; Tsai, W. Y. (2015). An Alternative Approach to Confidence Interval Estimation for the Win Ratio Statistic. <em>Biometrics</em>, <em>71</em>(1), 139–145. <a href="https://doi.org/10.1111/biom.12225">https://doi.org/10.1111/biom.12225</a>
+</div>
+<div id="ref-Mao2019" class="csl-entry" role="listitem">
+Mao, L. (2019). On the Alternative Hypotheses for the Win Ratio. <em>Biometrics</em>, <em>75</em>(1), 347–351. <a href="https://doi.org/10.1111/biom.12954">https://doi.org/10.1111/biom.12954</a>
+</div>
+<div id="ref-Mao2023" class="csl-entry" role="listitem">
+Mao, L. (2023). On restricted mean time in favor of treatment. <em>Biometrics</em>, <em>79</em>(1), 61–72. <a href="https://doi.org/10.1111/biom.13570">https://doi.org/10.1111/biom.13570</a>
+</div>
+<div id="ref-mao2024" class="csl-entry" role="listitem">
+Mao, L. (2024). Defining estimand for the win ratio: Separate the true effect from censoring. <em>Clinical Trials</em>, <em>21</em>(5), 584–594.
+</div>
+<div id="ref-mao2025" class="csl-entry" role="listitem">
+Mao, L. (2025). Regularized win ratio regression for variable selection and risk prediction, with an application to a cardiovascular trial. <em>BMC Medical Research Methodology</em>, <em>25</em>(1). <a href="https://doi.org/10.1186/s12874-025-02554-w">https://doi.org/10.1186/s12874-025-02554-w</a>
+</div>
+<div id="ref-mao2022a" class="csl-entry" role="listitem">
+Mao, L., Kim, K., &amp; Li, Y. (2022). On recurrent-event win ratio. <em>Statistical Methods in Medical Research</em>, <em>31</em>(6), 1120–1134. <a href="https://doi.org/10.1177/09622802221084134">https://doi.org/10.1177/09622802221084134</a>
+</div>
+<div id="ref-mao2022" class="csl-entry" role="listitem">
+Mao, L., Kim, K., &amp; Miao, X. (2022). Sample size formula for general win ratio analysis. <em>Biometrics</em>, <em>78</em>(3), 1257–1268. <a href="https://doi.org/10.1111/biom.13501">https://doi.org/10.1111/biom.13501</a>
+</div>
+<div id="ref-Mao2021" class="csl-entry" role="listitem">
+Mao, L., &amp; Wang, T. (2021). A class of proportional win<span>-</span>fractions regression models for composite outcomes. <em>Biometrics</em>, <em>77</em>(4), 1265–1275. <a href="https://doi.org/10.1111/biom.13382">https://doi.org/10.1111/biom.13382</a>
+</div>
+<div id="ref-oakes2016" class="csl-entry" role="listitem">
+Oakes, D. (2016). On the win-ratio statistic in clinical trials with multiple types of event. <em>Biometrika</em>, <em>103</em>(3), 742–745. <a href="https://doi.org/10.1093/biomet/asw026">https://doi.org/10.1093/biomet/asw026</a>
 </div>
 <div id="ref-pocock2012" class="csl-entry" role="listitem">
 Pocock, S. J., Ariti, C. A., Collier, T. J., &amp; Wang, D. (2012). The win ratio: a new approach to the analysis of composite endpoints in clinical trials based on clinical priorities. <em>European Heart Journal</em>, <em>33</em>(2), 176–182. <a href="https://doi.org/10.1093/eurheartj/ehr352">https://doi.org/10.1093/eurheartj/ehr352</a>
+</div>
+<div id="ref-tavares:2024" class="csl-entry" role="listitem">
+Tavares, C. A. M., Azevedo, L. C. P., Rea-Neto, Á., Campos, N. S., Amendola, C. P., Kozesinski-Nakatani, A. C., David-João, P. G., Lobo, S. M., Filiponi, T. C., Almeida, G. M. B., Bergo, R. R., Guimarães-Júnior, M. R. R., Figueiredo, R. C., Castro, J. R., Schuler, C. J., Westphal, G. A., Carioca, A. C. R., Monfradini, F., Nieri, J., … Zampieri, F. G. (2024). Dapagliflozin for critically ill patients with acute organ dysfunction: The DEFENDER randomized clinical trial. <em>JAMA</em>, <em>332</em>(5), 401–411. <a href="https://doi.org/10.1001/jama.2024.10510">https://doi.org/10.1001/jama.2024.10510</a>
+</div>
+<div id="ref-troendle2024" class="csl-entry" role="listitem">
+Troendle, J. F., Leifer, E. S., Yang, S., Jeffries, N., Kim, D.-Y., Joo, J., &amp; O’Connor, C. M. (2024). Use of win time for ordered composite endpoints in clinical trials. <em>Statistics in Medicine</em>, <em>43</em>(10), 1920–1932. <a href="https://doi.org/10.1002/sim.10045">https://doi.org/10.1002/sim.10045</a>
+</div>
+<div id="ref-tsiatis2008" class="csl-entry" role="listitem">
+Tsiatis, A. A., Davidian, M., Zhang, M., &amp; Lu, X. (2008). Covariate adjustment for two<span>-</span>sample treatment comparisons in randomized clinical trials: A principled yet flexible approach. <em>Statistics in Medicine</em>, <em>27</em>(23), 4658–4677. <a href="https://doi.org/10.1002/sim.3113">https://doi.org/10.1002/sim.3113</a>
+</div>
+<div id="ref-wang2021" class="csl-entry" role="listitem">
+Wang, B., Susukida, R., Mojtabai, R., Amin-Esmaeili, M., &amp; Rosenblum, M. (2021). Model-Robust Inference for Clinical Trials that Improve Precision by Stratified Randomization and Covariate Adjustment. <em>Journal of the American Statistical Association</em>, <em>118</em>(542), 1152–1163. <a href="https://doi.org/10.1080/01621459.2021.1981338">https://doi.org/10.1080/01621459.2021.1981338</a>
+</div>
+<div id="ref-wang2024" class="csl-entry" role="listitem">
+Wang, T., Li, Y., &amp; Qu, Y. (2024). Restricted time win ratio: from estimands to estimation. <em>Statistics in Biopharmaceutical Research</em>, 1–18. <a href="https://doi.org/10.1080/19466315.2024.2332675">https://doi.org/10.1080/19466315.2024.2332675</a>
+</div>
+<div id="ref-Wang2022" class="csl-entry" role="listitem">
+Wang, T., &amp; Mao, L. (2022). Stratified proportional win<span>-</span>fractions regression analysis. <em>Statistics in Medicine</em>, <em>41</em>(26), 5305–5318. <a href="https://doi.org/10.1002/sim.9570">https://doi.org/10.1002/sim.9570</a>
+</div>
+<div id="ref-wang2023" class="csl-entry" role="listitem">
+Wang, T., Zilinskas, R., Li, Y., &amp; Qu, Y. (2023). Missing Data Imputation for a Multivariate Outcome of Mixed Variable Types. <em>Statistics in Biopharmaceutical Research</em>, <em>15</em>(4), 826–837. <a href="https://doi.org/10.1080/19466315.2023.2169753">https://doi.org/10.1080/19466315.2023.2169753</a>
+</div>
+<div id="ref-ye2022" class="csl-entry" role="listitem">
+Ye, T., Shao, J., Yi, Y., &amp; Zhao, Q. (2023). Toward Better Practice of Covariate Adjustment in Analyzing Randomized Clinical Trials. <em>Journal of the American Statistical Association</em>, <em>118</em>(544), 2370–2382. <a href="https://doi.org/10.1080/01621459.2022.2049278">https://doi.org/10.1080/01621459.2022.2049278</a>
+</div>
+<div id="ref-yu2022" class="csl-entry" role="listitem">
+Yu, R. X., &amp; Ganju, J. (2022). Sample size formula for a win ratio endpoint. <em>Statistics in Medicine</em>, <em>41</em>(6), 950–963. <a href="https://doi.org/10.1002/sim.9297">https://doi.org/10.1002/sim.9297</a>
 </div>
 </div>
 </section></section>
@@ -557,6 +1129,82 @@ Pocock, S. J., Ariti, C. A., Collier, T. J., &amp; Wang, D. (2012). The win rati
         ]
       });
     </script>
+    
+
+    <script>
+
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+
+      // slide changes (different for each slide format).
+
+      (function () {
+
+        // dispatch for htmlwidgets
+
+        function fireSlideEnter() {
+
+          const event = window.document.createEvent("Event");
+
+          event.initEvent("slideenter", true, true);
+
+          window.document.dispatchEvent(event);
+
+        }
+
+    
+
+        function fireSlideChanged(previousSlide, currentSlide) {
+
+          fireSlideEnter();
+
+    
+
+          // dispatch for shiny
+
+          if (window.jQuery) {
+
+            if (previousSlide) {
+
+              window.jQuery(previousSlide).trigger("hidden");
+
+            }
+
+            if (currentSlide) {
+
+              window.jQuery(currentSlide).trigger("shown");
+
+            }
+
+          }
+
+        }
+
+    
+
+        // hookup for slidy
+
+        if (window.w3c_slidy) {
+
+          window.w3c_slidy.add_observer(function (slide_num) {
+
+            // slide_num starts at position 1
+
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+
+          });
+
+        }
+
+    
+
+      })();
+
+    </script>
+
+    
+
     <script id="quarto-html-after-body" type="application/javascript">
     window.document.addEventListener("DOMContentLoaded", function (event) {
       const toggleBodyColorMode = (bsSheetEl) => {

@@ -41,3 +41,11 @@ code.sourceCode {
 .big-code{
   font-size: 120%  
 }
+
+/* Smaller references / citations */
+.reveal .slide .citation,
+.reveal .slide .references {
+  font-size: 0.9em;
+  line-height: 1.1em;
+}
+
