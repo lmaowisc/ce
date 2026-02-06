@@ -465,6 +465,7 @@ p <- ggplot() +
   scale_color_manual(values = cols, breaks = c("Win","Loss","Tie")) +
   coord_cartesian(xlim = c(-0.15, 1.15), ylim = c(0.7, 4.7), expand = FALSE) +
   labs(color = "Treatment vs Control:") +
+  # ggtitle("GPC: A Toy Example") +
   theme_clean
 
 print(p)

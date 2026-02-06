@@ -8,7 +8,7 @@ author:
   affiliations: 
     - name: Department of Biostatistics & Medical Informatics
     - University of Wisconsin-Madison
-    - May 19, 2025
+    - Feb 6, 2026
     - Main paper - [https://doi.org/10.1177/17407745241259356](https://doi.org/10.1177/17407745241259356)
   email: lmao@biostat.wisc.edu
 format: 
