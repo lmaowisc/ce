@@ -1831,28 +1831,28 @@
     "href": "win_ratio_and_beyond.html#sample-size-calculation",
     "title": "The Win Ratio and Beyond",
     "section": "Sample Size Calculation",
-    "text": "Sample Size Calculation\n\nRank-based approximation (Yu & Ganju, 2022) \\[\nn\\approx\\frac{4(1+p_{\\text{tie}})(z_{1-\\alpha/2}+z_{1-\\beta})^2}{3q(1-q)(1-p_{\\text{tie}})\\log^2(\\text{WR})}\n\\]\n\n\\(\\alpha = 0.05\\): type I error; \\(\\,\\, 1 - \\beta = 80\\%, 90\\%\\): desired power\n\\(q = n_1/n\\); \\(\\,\\, p_{\\text{tie}}\\): proportion of ties\n\\(\\log(\\text{WR})\\) and \\(p_{\\text{tie}}\\) elicitable from component-wise win-loss measures (Barnhart et al., 2025a, 2025b)\n\nParametric approach (Mao, Kim, & Miao, 2022)\n\nGumbel–Hougaard copula \\(+\\) numerical integration (R package WR)"
+    "text": "Sample Size Calculation\n\nRank-based approximation (Yu & Ganju, 2022) \\[n\\approx\\frac{4(1+p_{\\text{tie}})(z_{1-\\alpha/2}+z_{1-\\beta})^2}{3q(1-q)(1-p_{\\text{tie}})\\log^2(\\text{WR})}\\]\n\n\\(\\alpha = 0.05\\): type I error; \\(\\,\\, 1 - \\beta = 80\\%, 90\\%\\): desired power\n\\(q = n_1/n\\); \\(\\,\\, p_{\\text{tie}}\\): proportion of ties\n\\(\\log(\\text{WR})\\) and \\(p_{\\text{tie}}\\) elicitable from component-wise win-loss measures (Barnhart et al., 2025a, 2025b)\n\nParametric approach (Mao, Kim, & Miao, 2022)\n\nGumbel–Hougaard copula \\(+\\) numerical integration (R package WR)"
   },
   {
     "objectID": "win_ratio_and_beyond.html#regression-analysis",
     "href": "win_ratio_and_beyond.html#regression-analysis",
     "title": "The Win Ratio and Beyond",
     "section": "Regression Analysis",
-    "text": "Regression Analysis\n\nA proportional win-fractions (PW) model \\[\n\\frac{{\\rm pr}(W_{ij}(t) = 1\\mid Z_i, Z_j)}{{\\rm pr}(W_{ij}(t) = -1\\mid Z_i, Z_j)}\n=\\exp\\left\\{\\beta^\\T(Z_i - Z_j)\\right\\}\n\\]\n\n\\(W_{ij}(t)\\): win-loss indicator by time \\(t\\)\n\\(Z_i\\), \\(Z_j\\): covariate vectors for subjects \\(i\\) and \\(j\\)\n\\(\\beta\\): log-WRs for one-unit increases in covariates\nU-statistic estimation; residual analysis to check WR constancy (Mao & Wang, 2021, R package WR); stratification (T. Wang & Mao, 2022)\nElastic net regularization for high-dimensional \\(Z\\) (Mao, 2025, R tool WRNet)"
+    "text": "Regression Analysis\n\nA proportional win-fractions (PW) model \\[\\frac{{\\rm pr}(W_{ij}(t) = 1\\mid Z_i, Z_j)}{{\\rm pr}(W_{ij}(t) = -1\\mid Z_i, Z_j)}\n=\\exp\\left\\{\\beta^\\T(Z_i - Z_j)\\right\\}\\]\n\n\\(W_{ij}(t)\\): win-loss indicator by time \\(t\\)\n\\(Z_i\\), \\(Z_j\\): covariate vectors for subjects \\(i\\) and \\(j\\)\n\\(\\beta\\): log-WRs for one-unit increases in covariates\nU-statistic estimation; residual analysis to check WR constancy (Mao & Wang, 2021, R package WR); stratification (T. Wang & Mao, 2022)\nElastic net regularization for high-dimensional \\(Z\\) (Mao, 2025, R tool WRNet)"
   },
   {
     "objectID": "win_ratio_and_beyond.html#win-loss-times",
     "href": "win_ratio_and_beyond.html#win-loss-times",
     "title": "The Win Ratio and Beyond",
     "section": "Win-Loss Times",
-    "text": "Win-Loss Times\n\nRestricted mean time in favor of treatment \\[\n\\mu(\\tau) = w_{1, 0}(\\tau) - w_{0, 1}(\\tau)\n\\]\n\n\\(w_{a, 1-a}(\\tau)\\): average time group \\(a\\) wins over group \\(1-a\\) up to time \\(\\tau\\)\nInterpretation: net favorable time gained/lost by treatment (Mao, 2023, R package rmt)\n\nDecomposable by component\n\n\nOther win time measures\n\nExpected win time (\\(\\tau\\to\\) maximum length of follow-up), etc. (Troendle et al., 2024)"
+    "text": "Win-Loss Times\n\nRestricted mean time in favor of treatment \\[\\mu(\\tau) = w_{1, 0}(\\tau) - w_{0, 1}(\\tau)\\]\n\n\\(w_{a, 1-a}(\\tau)\\): average time group \\(a\\) wins over group \\(1-a\\) up to time \\(\\tau\\)\nInterpretation: net favorable time gained/lost by treatment (Mao, 2023, R package rmt)\n\nDecomposable by component\n\n\nOther win time measures\n\nExpected win time (\\(\\tau\\to\\) maximum length of follow-up), etc. (Troendle et al., 2024)"
   },
   {
     "objectID": "win_ratio_and_beyond.html#door",
     "href": "win_ratio_and_beyond.html#door",
     "title": "The Win Ratio and Beyond",
     "section": "DOOR",
-    "text": "DOOR\n\nDesirability of outcome ranking (Evans et al., 2015)\n\nPre-defined ordinal categories of clinical outcome \\(Y^\\a\\)\n\nDead\nAlive with severe AE\nAlive with mild AE\nAlive without AE\n\n\nEstimand\n\nTie-adjusted win probability from GPC ranked by DOOR \\[\n  \\theta_{\\text{DOOR}} = \\Pr(Y^\\t &gt; Y^\\c) + \\tfrac{1}{2}\\Pr(Y^\\t = Y^\\c)\n  \\]\nR package door"
+    "text": "DOOR\n\nDesirability of outcome ranking (Evans et al., 2015)\n\nPre-defined ordinal categories of clinical outcome \\(Y^\\a\\)\n\nDead\nAlive with severe AE\nAlive with mild AE\nAlive without AE\n\n\nEstimand\n\nTie-adjusted win probability from GPC ranked by DOOR \\[  \\theta_{\\text{DOOR}} = \\Pr(Y^\\t &gt; Y^\\c) + \\tfrac{1}{2}\\Pr(Y^\\t = Y^\\c)\n  \\]\nR package door"
   },
   {
     "objectID": "win_ratio_and_beyond.html#criticisms",
@@ -1887,14 +1887,14 @@
     "href": "win_ratio_and_beyond.html#binary-case-equivalencies",
     "title": "The Win Ratio and Beyond",
     "section": "Binary Case Equivalencies",
-    "text": "Binary Case Equivalencies\n\nBinary outcome, no censoring\n\n\\(Y^\\a_i = 1\\) (response) vs 0 (no-response) for subject \\(i\\) in group \\(a\\) (\\(a = 0, 1\\))\nWin-loss (1-0) fractions \\[\n\\hat w_{a, 1-a} = (n_an_{1-a})^{-1} \\sum_{i=1}^{n_a}\\sum_{j=1}^{n_{1-a}} Y^\\a_i (1 - Y^\\b_j) = \\hat p_a (1 - \\hat p_{1-a})\n\\]\n\n\\(\\hat p_a = n_a^{-1} \\sum_{i=1}^{n_a} Y^\\a_i =\\) response rate in group \\(a\\)\n\n\nGPC stats\n\nWR \\(= [\\hat p_1 (1 - \\hat p_0)] / [\\hat p_0 (1 - \\hat p_1)] =\\) response odds ratio\nNB \\(= \\hat p_1 - \\hat p_0=\\) response rate difference"
+    "text": "Binary Case Equivalencies\n\nBinary outcome, no censoring\n\n\\(Y^\\a_i = 1\\) (response) vs 0 (no-response) for subject \\(i\\) in group \\(a\\) (\\(a = 0, 1\\))\nWin-loss (1-0) fractions \\[\\hat w_{a, 1-a} = (n_an_{1-a})^{-1} \\sum_{i=1}^{n_a}\\sum_{j=1}^{n_{1-a}} Y^\\a_i (1 - Y^\\b_j) = \\hat p_a (1 - \\hat p_{1-a})\\]\n\n\\(\\hat p_a = n_a^{-1} \\sum_{i=1}^{n_a} Y^\\a_i =\\) response rate in group \\(a\\)\n\n\nGPC stats\n\nWR \\(= [\\hat p_1 (1 - \\hat p_0)] / [\\hat p_0 (1 - \\hat p_1)] =\\) response odds ratio\nNB \\(= \\hat p_1 - \\hat p_0=\\) response rate difference"
   },
   {
     "objectID": "win_ratio_and_beyond.html#general-setting",
     "href": "win_ratio_and_beyond.html#general-setting",
     "title": "The Win Ratio and Beyond",
     "section": "General Setting",
-    "text": "General Setting\n\nNotation\n\n\\(n_1\\), \\(n_0\\): sample sizes in treatment and control\n\\(W_{ij}\\): win-loss indicator of subject \\(i\\) in treatment vs \\(j\\) in control \\[\nW_{ij} = \\begin{cases}\n1, & \\text{if subject } i \\text{ in treatment wins} \\\\\n-1, & \\text{if subject } j \\text{ in control wins} \\\\\n0, & \\text{if tie}\n\\end{cases}\n\\]\n\n\\(\\text{Wins}: \\hat w_{1, 0} = (n_1n_0)^{-1}\\sum_{i=1}^{n_1} \\sum_{j=1}^{n_0} I(W_{ij} = 1)\\)\n\\(\\text{Losses}: \\hat w_{0, 1} = (n_1n_0)^{-1}\\sum_{i=1}^{n_1} \\sum_{j=1}^{n_0} I(W_{ij} = -1)\\)\n\nWR \\(=\\hat w_{1, 0} / \\hat w_{0, 1}\\); \\(\\,\\,\\) NB \\(=\\hat w_{1, 0} - \\hat w_{0, 1}\\); \\(\\,\\,\\) WO \\(=(1 + \\text{NB}) / (1 - \\text{NB})\\)"
+    "text": "General Setting\n\nNotation\n\n\\(n_1\\), \\(n_0\\): sample sizes in treatment and control\n\\(W_{ij}\\): win-loss indicator of subject \\(i\\) in treatment vs \\(j\\) in control \\[W_{ij} = \\begin{cases}\n1, & \\text{if subject } i \\text{ in treatment wins} \\\\\n-1, & \\text{if subject } j \\text{ in control wins} \\\\\n0, & \\text{if tie}\n\\end{cases}\\]\n\n\\(\\text{Wins}: \\hat w_{1, 0} = (n_1n_0)^{-1}\\sum_{i=1}^{n_1} \\sum_{j=1}^{n_0} I(W_{ij} = 1)\\)\n\\(\\text{Losses}: \\hat w_{0, 1} = (n_1n_0)^{-1}\\sum_{i=1}^{n_1} \\sum_{j=1}^{n_0} I(W_{ij} = -1)\\)\n\nWR \\(=\\hat w_{1, 0} / \\hat w_{0, 1}\\); \\(\\,\\,\\) NB \\(=\\hat w_{1, 0} - \\hat w_{0, 1}\\); \\(\\,\\,\\) WO \\(=(1 + \\text{NB}) / (1 - \\text{NB})\\)"
   },
   {
     "objectID": "win_ratio_and_beyond.html#variance-estimation",
@@ -2070,5 +2070,47 @@
     "title": "The Win Ratio and Beyond",
     "section": "Key Takeaways (II)",
     "text": "Key Takeaways (II)\n\nR packages\n\nWR, WINS, BuyseTest, WinRatio, rmt, WRNet, door, WinKM, etc.\n\nOpen questions\n\nCovariate adjustment, interim analysis, meta analysis, etc."
+  },
+  {
+    "objectID": "win_ratio_and_beyond.html#self-introduction",
+    "href": "win_ratio_and_beyond.html#self-introduction",
+    "title": "The Win Ratio and Beyond",
+    "section": "Self-introduction",
+    "text": "Self-introduction\n\nAssociate Professor, Biostatistics & Medical Informatics\nUniversity of Wisconsin–Madison\nMethodological research\nSurvival analysis, clinical trials, causal inference, machine learning\nCollaborative leadership\nCancer Center BSR, CASCADE Network, Radiology/Medical Physics\nTeaching and mentoring\nGraduate survival analysis, short courses, PhD and staff mentorship"
+  },
+  {
+    "objectID": "win_ratio_and_beyond.html#research-identity",
+    "href": "win_ratio_and_beyond.html#research-identity",
+    "title": "The Win Ratio and Beyond",
+    "section": "Research identity",
+    "text": "Research identity\n\nMy work sits at the interface of collaborative science and methodological development\nCollaborations motivate new statistical questions\nComplex endpoints, longitudinal outcomes, pragmatic studies, real-world data\nMethods return to practice through\nTrial design, reproducible workflows, software, and team-based biostatistics\nAt QSU, I hope to build on this model:\nmethods → tools → collaboration → impact"
+  },
+  {
+    "objectID": "win_ratio_and_beyond.html#self-overview",
+    "href": "win_ratio_and_beyond.html#self-overview",
+    "title": "The Win Ratio and Beyond",
+    "section": "Self-Overview",
+    "text": "Self-Overview\n\nMethodological research\n\nClinical trials, causal inference, machine learning\n\nNIH R01HL149875 and NSF DMS2015526 grants\nSoftware development (R packages, Shiny apps, etc.)\n\n\nCollaborative leadership\n\nUW Carbone Cancer Center – Biostatistics Shared Resource\nNCI-Sponsored Clinical Trials Network\nRadiology and Medical Physics\n\nEducation and mentorship\n\nApplied Survival Analysis (BMI/STAT 741; 2020—2026)\nWorkshops at SCT/JSM for clinical researchers"
+  },
+  {
+    "objectID": "win_ratio_and_beyond.html#research-overview",
+    "href": "win_ratio_and_beyond.html#research-overview",
+    "title": "The Win Ratio and Beyond",
+    "section": "Research Overview",
+    "text": "Research Overview\n\nMethodological research\n\nClinical trials, causal inference, machine learning\n\nNIH R01HL149875 and NSF DMS2015526 grants\nSoftware development (R packages, Shiny apps, etc.)\n\n\nCollaborative leadership\n\nUW Carbone Cancer Center – Biostatistics Shared Resource\nNCI-Sponsored Clinical Trials Network\nRadiology and Medical Physics"
+  },
+  {
+    "objectID": "win_ratio_and_beyond.html#teaching-and-mentoring",
+    "href": "win_ratio_and_beyond.html#teaching-and-mentoring",
+    "title": "The Win Ratio and Beyond",
+    "section": "Teaching and Mentoring",
+    "text": "Teaching and Mentoring\n\n\n\n\n\n\nCourses\n\nApplied Survival Analysis (BMI/STAT 741; 2020—2026)\nShort courses in advanced methodology and R programming\nA textbook on survival analysis (in print by Springer)\n\nMentoring\n\n2 current + 1 graduating + 4 former PhD students (→ JP Morgan, Amazon, Eli Lilly, Merck)\nResearch staff, research assistants, etc."
+  },
+  {
+    "objectID": "win_ratio_and_beyond.html#service-and-leadership",
+    "href": "win_ratio_and_beyond.html#service-and-leadership",
+    "title": "The Win Ratio and Beyond",
+    "section": "Service and Leadership",
+    "text": "Service and Leadership\n\n\n\n\n\nJournal editorial\n\nCo-Editor | Journal of Biopharmaceutical Statistics | 04/2026 – Now\nAssociate Editor | Biometrics | 7/2026 – Now\nAssociate Editor | Biometric Bulletin | 12/2025 – Now\nAssociate Editor | Statistics in Biopharmaceutical Research | 01/2023 – Now\nStatistical Editor | JACC Journals | 12/2022 – Now\n\nOther\n\nProgram Chair | 2026 ASA LiDS | 2025 – 2027\nNIH-NHLBI/PCOR/NSF study sections/review panels"
   }
 ]

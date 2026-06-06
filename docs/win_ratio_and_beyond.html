@@ -9,7 +9,7 @@
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-e26003cea8cd680ca0c55a263523d882.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.6.39">
 
-  <meta name="author" content="Lu Mao">
+  <meta name="author" content="Lu Mao, PhD">
   <title>The Win Ratio and Beyond</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -152,18 +152,21 @@
   <div class="reveal">
     <div class="slides">
 
-<section id="title-slide" data-background-image="sj_images/banner.webp" data-background-position="0% 2%" data-background-size="35%" class="quarto-title-block center">
+<section id="title-slide" data-background-image="sj_images/standford.png" data-background-position="2% 4%" data-background-size="30%" class="quarto-title-block center">
   <h1 class="title">The Win Ratio and Beyond</h1>
   <p class="subtitle">Evolution, Applications, and Open Questions in Composite Endpoint Analysis</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
 <div class="quarto-title-author-name">
-Lu Mao 
+Lu Mao, PhD 
 </div>
 <div class="quarto-title-author-email">
 <a href="mailto:lmao@biostat.wisc.edu">lmao@biostat.wisc.edu</a>
 </div>
+        <p class="quarto-title-affiliation">
+            Associate Professor
+          </p>
         <p class="quarto-title-affiliation">
             Department of Biostatistics &amp; Medical Informatics
           </p>
@@ -185,17 +188,85 @@ Lu Mao
 </ul>
 </nav>
 </section>
+<section id="research-overview" class="slide level2">
+<h2>Research Overview</h2>
+<ul>
+<li><strong>Methodological research</strong>
+<ul>
+<li>Clinical trials, causal inference, machine learning
+<ul>
+<li>NIH R01HL149875 and NSF DMS2015526 grants</li>
+<li>Software development (R packages, Shiny apps, etc.)</li>
+</ul></li>
+</ul></li>
+<li><strong>Collaborative leadership</strong>
+<ul>
+<li>UW Carbone Cancer Center – Biostatistics Shared Resource</li>
+<li>NCI-Sponsored Clinical Trials Network</li>
+<li>Radiology and Medical Physics</li>
+</ul></li>
+</ul>
+</section>
+<section id="teaching-and-mentoring" class="slide level2">
+<h2>Teaching and Mentoring</h2>
+<!-- Courses -->
+<!--  Applied Survival Analysis (BMI/STAT 741; 2020—2026) -->
+<!--  Short courses in advanced methodology and R programming -->
+<!--  Mentoring -->
+<!--  3 current + 4 former PhD students (→ JP Morgan, Amazon, Eli Lilly, Merck) -->
+<ul>
+<li><strong>Courses</strong>
+<ul>
+<li>Applied Survival Analysis (BMI/STAT 741; 2020—2026)</li>
+<li>Short courses in advanced methodology and R programming</li>
+<li>A textbook on survival analysis (in print by Springer)</li>
+</ul></li>
+<li><strong>Mentoring</strong>
+<ul>
+<li>2 current + 1 graduating + 4 former PhD students (→ JP Morgan, Amazon, Eli Lilly, Merck)</li>
+<li>Research staff, research assistants, etc.</li>
+</ul></li>
+</ul>
+</section>
+<section id="service-and-leadership" class="slide level2">
+<h2>Service and Leadership</h2>
+<!-- Co-Editor | Journal of Biopharmaceutical Statistics | 04/2026 – Now -->
+<!-- Associate Editor | Biometric Bulletin | 12/2025 – Now -->
+<!-- Associate Editor | Statistics in Biopharmaceutical Research | 01/2023 – Now -->
+<!-- Statistical Editor | JACC Journals | 12/2022 – Now -->
+<ul>
+<li><strong>Journal editorial</strong>
+<ul>
+<li><strong>Co-Editor</strong> | <em>Journal of Biopharmaceutical Statistics</em> | 04/2026 – Now</li>
+<li><strong>Associate Editor</strong> | <em>Biometrics</em> | 7/2026 – Now</li>
+<li><strong>Associate Editor</strong> | <em>Biometric Bulletin</em> | 12/2025 – Now</li>
+<li><strong>Associate Editor</strong> | <em>Statistics in Biopharmaceutical Research</em> | 01/2023 – Now</li>
+<li><strong>Statistical Editor</strong> | <em>JACC Journals</em> | 12/2022 – Now</li>
+</ul></li>
+<li><strong>Other</strong>
+<ul>
+<li><strong>Program Chair</strong> | 2026 ASA LiDS | 2025 – 2027</li>
+<li><strong>NIH-NHLBI</strong>/<strong>PCOR</strong>/<strong>NSF</strong> study sections/review panels</li>
+</ul></li>
+</ul>
+<!-- ## Research identity -->
+<!-- - My work sits at the interface of **collaborative science** and **methodological development** -->
+<!-- - Collaborations motivate new statistical questions   -->
+<!--   Complex endpoints, longitudinal outcomes, pragmatic studies, real-world data -->
+<!-- - Methods return to practice through   -->
+<!--   Trial design, reproducible workflows, software, and team-based biostatistics -->
+<!-- - At QSU, I hope to build on this model:   -->
+<!--   **methods → tools → collaboration → impact** -->
+</section>
 <section>
 <section id="introduction" class="title-slide slide level1 center">
 <h1>Introduction</h1>
-<p><span class="math display">\[
-\def\a{{(a)}}
+<p><span class="math display">\[\def\a{{(a)}}
 \def\b{{(1-a)}}
 \def\t{{(1)}}
 \def\c{{(0)}}
 \def\d{{\rm d}}
-\def\T{{\rm T}}
-\]</span></p>
+\def\T{{\rm T}}\]</span></p>
 </section>
 <section id="composite-endpoint" class="slide level2">
 <h2>Composite Endpoint</h2>
@@ -282,7 +353,7 @@ Lu Mao
 <h2>Stratification</h2>
 <div style="font-size: 0.75em;">
 <ul>
-<li><strong>GPC within stratum <span class="math inline">\(\to\)</span> combine</strong> <span class="citation" data-cites="dong2017 gasparyan2020 dong2023">(<a href="#/references" role="doc-biblioref" onclick="">Dong et al., 2018</a>, <a href="#/references" role="doc-biblioref" onclick="">2023</a>; <a href="#/references" role="doc-biblioref" onclick="">Gasparyan et al., 2020</a>)</span> <img data-src="sj_images/str_winloss.png" class="quarto-figure quarto-figure-center" style="width:100.0%"> <span class="math display">\[\begin{align}
+<li><strong>GPC within stratum</strong> <span class="math inline">\(\to\)</span> combine <span class="citation" data-cites="dong2017 gasparyan2020 dong2023">(<a href="#/references" role="doc-biblioref" onclick="">Dong et al., 2018</a>, <a href="#/references" role="doc-biblioref" onclick="">2023</a>; <a href="#/references" role="doc-biblioref" onclick="">Gasparyan et al., 2020</a>)</span> <img data-src="sj_images/str_winloss.png" class="quarto-figure quarto-figure-center" style="width:100.0%"> <span class="math display">\[\begin{align}
 \text{Wins: } &amp; 50\% \times 8/(8+6) + 33\% \times 6/(8+6) = 42.7\% \\
 \text{Losses: } &amp; 38\% \times 8/(8+6) + 22\% \times 6/(8+6) = 31.1\%
 \end{align}\]</span></li>
@@ -301,13 +372,11 @@ Lu Mao
 <li><strong>Notation</strong>
 <ul>
 <li><span class="math inline">\(n_1\)</span>, <span class="math inline">\(n_0\)</span>: sample sizes in treatment and control</li>
-<li><span class="math inline">\(W_{ij}\)</span>: win-loss indicator of subject <span class="math inline">\(i\)</span> in treatment vs <span class="math inline">\(j\)</span> in control <span class="math display">\[
-W_{ij} = \begin{cases}
+<li><span class="math inline">\(W_{ij}\)</span>: win-loss indicator of subject <span class="math inline">\(i\)</span> in treatment vs <span class="math inline">\(j\)</span> in control <span class="math display">\[W_{ij} = \begin{cases}
 1, &amp; \text{if subject } i \text{ in treatment wins} \\
 -1, &amp; \text{if subject } j \text{ in control wins} \\
 0, &amp; \text{if tie}
-\end{cases}
-\]</span>
+\end{cases}\]</span>
 <ul>
 <li><span class="math inline">\(\text{Wins}: \hat w_{1, 0} = (n_1n_0)^{-1}\sum_{i=1}^{n_1} \sum_{j=1}^{n_0} I(W_{ij} = 1)\)</span></li>
 <li><span class="math inline">\(\text{Losses}: \hat w_{0, 1} = (n_1n_0)^{-1}\sum_{i=1}^{n_1} \sum_{j=1}^{n_0} I(W_{ij} = -1)\)</span></li>
@@ -322,9 +391,7 @@ W_{ij} = \begin{cases}
 <li><strong>Binary outcome, no censoring</strong>
 <ul>
 <li><span class="math inline">\(Y^\a_i = 1\)</span> (response) vs 0 (no-response) for subject <span class="math inline">\(i\)</span> in group <span class="math inline">\(a\)</span> (<span class="math inline">\(a = 0, 1\)</span>)</li>
-<li>Win-loss (1-0) fractions <span class="math display">\[
-\hat w_{a, 1-a} = (n_an_{1-a})^{-1} \sum_{i=1}^{n_a}\sum_{j=1}^{n_{1-a}} Y^\a_i (1 - Y^\b_j) = \hat p_a (1 - \hat p_{1-a})
-\]</span>
+<li>Win-loss (1-0) fractions <span class="math display">\[\hat w_{a, 1-a} = (n_an_{1-a})^{-1} \sum_{i=1}^{n_a}\sum_{j=1}^{n_{1-a}} Y^\a_i (1 - Y^\b_j) = \hat p_a (1 - \hat p_{1-a})\]</span>
 <ul>
 <li><span class="math inline">\(\hat p_a = n_a^{-1} \sum_{i=1}^{n_a} Y^\a_i =\)</span> response rate in group <span class="math inline">\(a\)</span></li>
 </ul></li>
@@ -546,9 +613,7 @@ W_{ij} = \begin{cases}
 <section id="sample-size-calculation" class="slide level2">
 <h2>Sample Size Calculation</h2>
 <ul>
-<li><strong>Rank-based approximation</strong> <span class="citation" data-cites="yu2022">(<a href="#/references" role="doc-biblioref" onclick="">Yu &amp; Ganju, 2022</a>)</span> <span class="math display">\[
-n\approx\frac{4(1+p_{\text{tie}})(z_{1-\alpha/2}+z_{1-\beta})^2}{3q(1-q)(1-p_{\text{tie}})\log^2(\text{WR})}
-\]</span>
+<li><strong>Rank-based approximation</strong> <span class="citation" data-cites="yu2022">(<a href="#/references" role="doc-biblioref" onclick="">Yu &amp; Ganju, 2022</a>)</span> <span class="math display">\[n\approx\frac{4(1+p_{\text{tie}})(z_{1-\alpha/2}+z_{1-\beta})^2}{3q(1-q)(1-p_{\text{tie}})\log^2(\text{WR})}\]</span>
 <ul>
 <li><span class="math inline">\(\alpha = 0.05\)</span>: type I error; <span class="math inline">\(\,\, 1 - \beta = 80\%, 90\%\)</span>: desired power</li>
 <li><span class="math inline">\(q = n_1/n\)</span>; <span class="math inline">\(\,\, p_{\text{tie}}\)</span>: proportion of ties</li>
@@ -600,10 +665,8 @@ n\approx\frac{4(1+p_{\text{tie}})(z_{1-\alpha/2}+z_{1-\beta})^2}{3q(1-q)(1-p_{\t
 <section id="regression-analysis" class="slide level2">
 <h2>Regression Analysis</h2>
 <ul>
-<li><strong>A proportional win-fractions (PW) model</strong> <span class="math display">\[
-\frac{{\rm pr}(W_{ij}(t) = 1\mid Z_i, Z_j)}{{\rm pr}(W_{ij}(t) = -1\mid Z_i, Z_j)}
-=\exp\left\{\beta^\T(Z_i - Z_j)\right\}
-\]</span>
+<li><strong>A proportional win-fractions (PW) model</strong> <span class="math display">\[\frac{{\rm pr}(W_{ij}(t) = 1\mid Z_i, Z_j)}{{\rm pr}(W_{ij}(t) = -1\mid Z_i, Z_j)}
+=\exp\left\{\beta^\T(Z_i - Z_j)\right\}\]</span>
 <ul>
 <li><span class="math inline">\(W_{ij}(t)\)</span>: win-loss indicator by time <span class="math inline">\(t\)</span></li>
 <li><span class="math inline">\(Z_i\)</span>, <span class="math inline">\(Z_j\)</span>: covariate vectors for subjects <span class="math inline">\(i\)</span> and <span class="math inline">\(j\)</span></li>
@@ -616,9 +679,7 @@ n\approx\frac{4(1+p_{\text{tie}})(z_{1-\alpha/2}+z_{1-\beta})^2}{3q(1-q)(1-p_{\t
 <section id="win-loss-times" class="slide level2">
 <h2>Win-Loss Times</h2>
 <ul>
-<li><strong>Restricted mean time</strong> in favor of treatment <span class="math display">\[
-\mu(\tau) = w_{1, 0}(\tau) - w_{0, 1}(\tau)
-\]</span>
+<li><strong>Restricted mean time</strong> in favor of treatment <span class="math display">\[\mu(\tau) = w_{1, 0}(\tau) - w_{0, 1}(\tau)\]</span>
 <ul>
 <li><span class="math inline">\(w_{a, 1-a}(\tau)\)</span>: average <em>time</em> group <span class="math inline">\(a\)</span> wins over group <span class="math inline">\(1-a\)</span> up to time <span class="math inline">\(\tau\)</span></li>
 <li><strong>Interpretation</strong>: net favorable time gained/lost by treatment <span class="citation" data-cites="Mao2023">(<a href="#/references" role="doc-biblioref" onclick="">Mao, 2023</a>, R package <a href="https://cran.r-project.org/web/packages/rmt/" target="_blank"><code>rmt</code></a>)</span>
@@ -647,8 +708,7 @@ n\approx\frac{4(1+p_{\text{tie}})(z_{1-\alpha/2}+z_{1-\beta})^2}{3q(1-q)(1-p_{\t
 </ul></li>
 <li><strong>Estimand</strong>
 <ul>
-<li>Tie-adjusted <em>win probability</em> from GPC ranked by DOOR <span class="math display">\[
-  \theta_{\text{DOOR}} = \Pr(Y^\t &gt; Y^\c) + \tfrac{1}{2}\Pr(Y^\t = Y^\c)
+<li>Tie-adjusted <em>win probability</em> from GPC ranked by DOOR <span class="math display">\[  \theta_{\text{DOOR}} = \Pr(Y^\t &gt; Y^\c) + \tfrac{1}{2}\Pr(Y^\t = Y^\c)
   \]</span></li>
 <li>R package <a href="https://cran.r-project.org/web/packages/door/" target="_blank"><code>door</code></a></li>
 </ul></li>
