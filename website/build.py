@@ -5,6 +5,7 @@ Chapter narratives are editable Quarto files in this folder.
 """
 from pathlib import Path
 import html
+import hashlib
 import re
 import subprocess
 import shutil
@@ -18,6 +19,7 @@ OUTPUT.mkdir(exist_ok=True)
 shutil.copyfile(HERE / 'style.css', OUTPUT / 'book.css')
 shutil.copyfile(HERE / 'app.js', OUTPUT / 'app.js')
 shutil.copyfile(HERE / 'references.bib', OUTPUT / 'references.bib')
+STYLE_VERSION = hashlib.sha256((HERE / 'style.css').read_bytes()).hexdigest()[:12]
 TITLE = 'Statistical Methods for Composite Endpoints'
 CHAPTER_ORDER = ['intro', 'testing', 'estimation', 'regression', 'discussions']
 chapter_metadata = {}
@@ -48,7 +50,7 @@ def page(slug, title, content):
     text = f'''<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="{html.escape(title)} — Win Ratio and Beyond, by Lu Mao.">
-<title>{html.escape(title)} — Win Ratio and Beyond</title><link rel="stylesheet" href="book.css"><link rel="icon" href="favicon.svg" type="image/svg+xml"><script src="app.js" defer></script></head>
+<title>{html.escape(title)} — Win Ratio and Beyond</title><link rel="stylesheet" href="book.css?v={STYLE_VERSION}"><link rel="icon" href="favicon.svg" type="image/svg+xml"><script src="app.js" defer></script></head>
 <body><a class="skip" href="#main">Skip to content</a>
 <header class="masthead"><a class="brand" href="index.html"><span class="monogram" aria-hidden="true">CE</span><span>COMPOSITE<br>ENDPOINTS</span></a><div class="masthead-right"><a href="resources.html">Course Materials</a><a href="references.html">References</a><button class="menu-toggle" aria-expanded="false" aria-controls="book-navigation">Contents</button></div></header>
 <div class="layout">{nav(slug)}<main class="main" id="main">{content}<footer class="footer"><span class="footer-title">Statistical Methods for Composite Endpoints<span>Win Ratio and Beyond</span></span><span class="footer-author">Lu Mao</span></footer></main></div></body></html>'''
