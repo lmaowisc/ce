@@ -51,9 +51,8 @@
 
 /* Group the book introduction independently of the taller interactive figure. */
 .nav-link.nav-home{border:1px solid #bba9b6;border-radius:4px;padding:12px 14px;font-size:17px;font-weight:500}
-.nav-link.nav-home.active{background:var(--plum);border-color:var(--plum);color:var(--white)}
-.nav-link.nav-home:hover{background:var(--rose);color:var(--plum)}
-.nav-link.nav-home.active:hover{background:var(--plum-dark);color:var(--white)}
+.nav-link.nav-home,.nav-link.nav-home.active{background:var(--plum);border-color:var(--plum);color:var(--white)}
+.nav-link.nav-home:hover,.nav-link.nav-home.active:hover{background:var(--plum-dark);border-color:var(--plum-dark);color:var(--white)}
 .book-tools{gap:8px;border:0;margin-top:25px;padding:0}
 .book-tools a{padding:9px 12px;border:1px solid var(--line);border-radius:3px;background:var(--white);font-size:15px;line-height:1.5;gap:9px}
 .book-tools a:hover{border-color:var(--plum);background:var(--rose);color:var(--plum)}
