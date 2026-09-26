@@ -26,15 +26,80 @@ include-in-header:
       }
       </style>
 bibliography: references.bib
-# title-slide-attributes:
-#   data-background-image: sj_images/standford.png
-#   data-background-size: 30%
-#   data-background-position: 2% 4%
+title-slide-attributes:
+  data-background-image: sj_images/standford.png
+  data-background-size: 30%
+  data-background-position: 2% 4%
 ---
 
-# Introduction
+## Research Overview
 
-How can we measure treatment benefit when the patient experience cannot be represented by a single time-to-first event?
+- **Methodological research**
+  - Clinical trials, causal inference, machine learning
+    - NIH R01HL149875 and NSF DMS2015526 grants
+    - Software development (R packages, Shiny apps, etc.)
+- **Collaborative leadership**
+  - UW Carbone Cancer Center – Biostatistics Shared Resource
+  - NCI-Sponsored Clinical Trials Network
+  - Radiology and Medical Physics
+
+## Teaching and Mentoring
+
+<!-- Courses -->
+
+<!--  Applied Survival Analysis (BMI/STAT 741; 2020—2026) -->
+
+<!--  Short courses in advanced methodology and R programming -->
+
+<!--  Mentoring -->
+
+<!--  3 current + 4 former PhD students (→ JP Morgan, Amazon, Eli Lilly, Merck) -->
+
+- **Courses**
+  - Applied Survival Analysis (BMI/STAT 741; 2020—2026)
+  - Short courses in advanced methodology and R programming
+  - A textbook on survival analysis (in print by Springer)
+- **Mentoring**
+  - 2 current + 1 graduating + 4 former PhD students (→ JP Morgan, Amazon, Eli Lilly, Merck)
+  - Research staff, research assistants, etc.
+
+## Service and Leadership
+
+<!-- Co-Editor | Journal of Biopharmaceutical Statistics | 04/2026 – Now -->
+
+<!-- Associate Editor | Biometric Bulletin | 12/2025 – Now -->
+
+<!-- Associate Editor | Statistics in Biopharmaceutical Research | 01/2023 – Now -->
+
+<!-- Statistical Editor | JACC Journals | 12/2022 – Now -->
+
+- **Journal editorial**
+  - **Co-Editor** \| *Journal of Biopharmaceutical Statistics* \| 04/2026 – Now
+  - **Associate Editor** \| *Biometrics* \| 7/2026 – Now
+  - **Associate Editor** \| *Biometric Bulletin* \| 12/2025 – Now
+  - **Associate Editor** \| *Statistics in Biopharmaceutical Research* \| 01/2023 – Now
+  - **Statistical Editor** \| *JACC Journals* \| 12/2022 – Now
+- **Other**
+  - **Program Chair** \| 2026 ASA LiDS \| 2025 – 2027
+  - **NIH-NHLBI**/**PCOR**/**NSF** study sections/review panels
+
+<!-- ## Research identity -->
+
+<!-- - My work sits at the interface of **collaborative science** and **methodological development** -->
+
+<!-- - Collaborations motivate new statistical questions   -->
+
+<!--   Complex endpoints, longitudinal outcomes, pragmatic studies, real-world data -->
+
+<!-- - Methods return to practice through   -->
+
+<!--   Trial design, reproducible workflows, software, and team-based biostatistics -->
+
+<!-- - At QSU, I hope to build on this model:   -->
+
+<!--   **methods → tools → collaboration → impact** -->
+
+# Introduction
 
 $$\def\a{{(a)}}
 \def\b{{(1-a)}}
@@ -368,11 +433,10 @@ plot.background = element_rect(color = "black", fill = NA, size = 0.8)
 ## Meta Analysis
 
 - **Challenges**
-  - Primary studies
-    - *not* reporting win-loss measures
-    - over *different* time spans
-    - *different* win/loss definitions
-- [`WinKM`](https://lmaowisc.github.io/winkm/){target="_blank"}: A toolkit to start [@mao2025a]
+  - Primary studies *not* reporting win-loss measures
+  - Primary studies over *different* time spans
+  - Primary studies with *different* definitions of win/loss
+- [`WinKM`](https://lmaowisc.github.io/winkm/){target="_blank"}: A toolkit to start
   - Calculate win-loss statistics based on
     - KM estimates for OS and EFS
     - At-risk table at selected time points
@@ -407,10 +471,8 @@ plot.background = element_rect(color = "black", fill = NA, size = 0.8)
   - [R01HL149875](https://reporter.nih.gov/search/9aSu5u3xlE26GrjbF_4cBg/project-details/10734551) (11/2019 -- 7/2028)
   - [DMS2015526](https://www.nsf.gov/awardsearch/showAward?AWD_ID=2015526) (7/2020 -- 6/2024) ![](images/funds.png){fig-align="center" width="70%"}
 
-  <!-- - **Pending**: NSF, PCORI (MPI with Medical College of Wisconsin) -->
-
 - **Collaborators**
 
-  - [KyungMann Kim](https://biostat.wiscweb.wisc.edu/staff/kim-kyungmann/), [Tuo Wang](https://tuowang.rbind.io/), [Fan Li](https://ysph.yale.edu/profile/fan-f-li/), [Soyoung Kim](https://www.mcw.edu/departments/biostatistics/people/soyoung-kim-phd), Gaohong Dong, Bo Huang, etc.
+  - [KyungMann Kim](https://biostat.wiscweb.wisc.edu/staff/kim-kyungmann/), [Tuo Wang](https://tuowang.rbind.io/), Gaohong Dong, Bo Huang, etc.
 
 ## References

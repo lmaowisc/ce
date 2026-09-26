@@ -1,28 +1,28 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="Nonparametric Estimation — Win Ratio and Beyond, by Lu Mao.">
-<title>Nonparametric Estimation — Win Ratio and Beyond</title><link rel="stylesheet" href="book.css?v=960fda23ad86"><link rel="icon" href="favicon.svg" type="image/svg+xml"><script src="app.js" defer></script></head>
+<title>Nonparametric Estimation — Win Ratio and Beyond</title><link rel="stylesheet" href="book.css?v=a6e324f764ef"><link rel="icon" href="favicon.svg" type="image/svg+xml"><script src="app.js" defer></script></head>
 <body><a class="skip" href="#main">Skip to content</a>
 <header class="masthead"><a class="brand" href="index.html"><span class="monogram" aria-hidden="true">CE</span><span>COMPOSITE<br>ENDPOINTS</span></a><div class="masthead-right"><a href="resources.html">Course Materials</a><a href="references.html">References</a><button class="menu-toggle" aria-expanded="false" aria-controls="book-navigation">Contents</button></div></header>
 <div class="layout"><nav class="sidebar" id="book-navigation" aria-label="Book contents"><a class="nav-link nav-home" href="index.html"><span class="nav-text">About This Book</span></a><p class="nav-label">CONTENTS</p><a class="nav-link" href="intro.html"><span class=num>01</span><span class="nav-text">Introduction</span></a><a class="nav-link" href="testing.html"><span class=num>02</span><span class="nav-text">Hypothesis Testing</span></a><a class="nav-link active" href="estimation.html" aria-current="page"><span class=num>03</span><span class="nav-text">Nonparametric Estimation</span></a><a class="nav-link" href="regression.html"><span class=num>04</span><span class="nav-text">Semiparametric Regression</span></a><a class="nav-link" href="discussions.html"><span class=num>05</span><span class="nav-text">Discussions</span></a><div class="nav-bottom"><a class="nav-link" href="resources.html"><span class="nav-text">Slides & R Code</span></a><a class="nav-link" href="references.html"><span class="nav-text">References</span></a></div></nav><main class="main" id="main"><div class="reader-layout"><article class="article"><p class="eyebrow">Chapter 03</p><h1>Nonparametric Estimation</h1><p class="deck">Define treatment effects through restricted win ratios, average win time, and while-alive loss.</p><div class="chapter-actions"><a href="chap3.html" target="_blank" rel="noopener noreferrer">Open Chapter Slides ↗</a><a href="code/estimation.R" download>Download R Code ↓</a></div><p class="chapter-status">Chapter overview · Full exposition to follow</p><section class="level2" id="section-1">
-<h2><span class="section-no">3.1</span>Restricted Win Ratio</h2>
+<h2><span class="section-no">3.1 </span>Restricted Win Ratio</h2>
 <p>A restricted win ratio defines win and loss probabilities at a prespecified time horizon, τ. The comparison asks what would happen if each patient’s outcome history were available through that horizon.</p>
-<p class="equation"><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mi mathvariant="normal">W</mi><mi mathvariant="normal">R</mi></mrow><mrow><mo form="prefix" stretchy="true">(</mo><mi>τ</mi><mo form="postfix" stretchy="true">)</mo></mrow><mo>=</mo><mfrac><mrow><msub><mi>w</mi><mrow><mn>1</mn><mo>,</mo><mn>0</mn></mrow></msub><mrow><mo form="prefix" stretchy="true">(</mo><mi>τ</mi><mo form="postfix" stretchy="true">)</mo></mrow></mrow><mrow><msub><mi>w</mi><mrow><mn>0</mn><mo>,</mo><mn>1</mn></mrow></msub><mrow><mo form="prefix" stretchy="true">(</mo><mi>τ</mi><mo form="postfix" stretchy="true">)</mo></mrow></mrow></mfrac></mrow><annotation encoding="application/x-tex">
+<p class="equation"><span class="math display">\[
 \mathrm{WR}(\tau) = \frac{w_{1,0}(\tau)}{w_{0,1}(\tau)}
-</annotation></semantics></math></p>
+\]</span></p>
 <p>Defining the target at τ does not itself solve censoring. The slides discuss estimation through inverse-probability-of-censoring weighting or imputation, under the assumptions required by those approaches.</p>
 </section>
 <section class="level2" id="section-2">
-<h2><span class="section-no">3.2</span>Average Win Time</h2>
+<h2><span class="section-no">3.2 </span>Average Win Time</h2>
 <p>Rather than summarize only which patient wins at one time, consider the time a patient spends in a more favorable state than a patient from the other group. Integrating that comparison up to τ and taking a population average leads to restricted mean time in favor of treatment (RMT-IF).</p>
 <p>The net average win time is the treatment group’s average win time minus the control group’s average win time. It is measured in units of time and can be decomposed by outcome state. For a life–death outcome alone, it reduces to the difference in restricted mean survival time.</p>
 <figure>
 <img alt="Pairwise win and loss time. Original figure from Chapter 3 of the course slides." data-fig-alt="Course illustration of pairwise win and loss time across ordered outcome states" src="images/rmt_cases.png"/>
-<figcaption aria-hidden="true">Pairwise win and loss time. Original figure from Chapter 3 of the course slides.</figcaption>
+<figcaption aria-hidden="true"><strong>Figure 3.1. </strong>Pairwise win and loss time. Original figure from Chapter 3 of the course slides.</figcaption>
 </figure>
 </section>
 <section class="level2" id="section-3">
-<h2><span class="section-no">3.3</span>While-Alive Weighted Loss</h2>
+<h2><span class="section-no">3.3 </span>While-Alive Weighted Loss</h2>
 <p>Death limits the opportunity to accumulate nonfatal events. While-alive methods address this by relating outcome burden to time alive, with the precise estimand depending on the specified loss process and weighting.</p>
 <p>The course introduces general while-alive estimands and nonparametric estimation, followed by an HF-ACTION analysis using <code>WA::LRfit()</code>. The interpretation of component weights and the role of survival are essential parts of that analysis.</p>
 </section>
@@ -33,4 +33,4 @@
 <li><a href="references.html#ref-Mao2023">Mao (2023) · Restricted mean time in favor of treatment</a></li>
 </ul>
 </section>
-<nav class="page-turn" aria-label="Chapter navigation"><a href="testing.html"><small>PREVIOUS</small>← Hypothesis Testing</a><a href="regression.html"><small>NEXT</small>Semiparametric Regression →</a></nav></article><aside class="toc" aria-label="On this page"><strong>ON THIS PAGE</strong><a href="#section-1">3.1 Restricted Win Ratio</a><a href="#section-2">3.2 Average Win Time</a><a href="#section-3">3.3 While-Alive Weighted Loss</a><a href="#reading">Selected Reading</a></aside></div><footer class="footer"><span class="footer-title">Statistical Methods for Composite Endpoints<span>Win Ratio and Beyond</span></span><span class="footer-author">Lu Mao</span></footer></main></div></body></html>
+<script>MathJax={svg:{fontCache:"local"},options:{enableMenu:false}};</script><script defer src="vendor/tex-svg.js"></script><nav class="page-turn" aria-label="Chapter navigation"><a href="testing.html"><small>PREVIOUS</small>← Hypothesis Testing</a><a href="regression.html"><small>NEXT</small>Semiparametric Regression →</a></nav></article><aside class="toc" aria-label="On this page"><strong>ON THIS PAGE</strong><a href="#section-1">3.1 Restricted Win Ratio</a><a href="#section-2">3.2 Average Win Time</a><a href="#section-3">3.3 While-Alive Weighted Loss</a><a href="#reading">Selected Reading</a></aside></div><footer class="footer"><span class="footer-title">Statistical Methods for Composite Endpoints<span>Win Ratio and Beyond</span></span><span class="footer-author">Lu Mao</span></footer></main></div></body></html>

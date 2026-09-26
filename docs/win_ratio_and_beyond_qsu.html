@@ -152,7 +152,7 @@
   <div class="reveal">
     <div class="slides">
 
-<section id="title-slide" class="quarto-title-block center">
+<section id="title-slide" data-background-image="sj_images/standford.png" data-background-position="2% 4%" data-background-size="30%" class="quarto-title-block center">
   <h1 class="title">The Win Ratio and Beyond</h1>
   <p class="subtitle">Evolution, Applications, and Open Questions in Composite Endpoint Analysis</p>
 
@@ -188,10 +188,79 @@ Lu Mao, PhD
 </ul>
 </nav>
 </section>
+<section id="research-overview" class="slide level2">
+<h2>Research Overview</h2>
+<ul>
+<li><strong>Methodological research</strong>
+<ul>
+<li>Clinical trials, causal inference, machine learning
+<ul>
+<li>NIH R01HL149875 and NSF DMS2015526 grants</li>
+<li>Software development (R packages, Shiny apps, etc.)</li>
+</ul></li>
+</ul></li>
+<li><strong>Collaborative leadership</strong>
+<ul>
+<li>UW Carbone Cancer Center – Biostatistics Shared Resource</li>
+<li>NCI-Sponsored Clinical Trials Network</li>
+<li>Radiology and Medical Physics</li>
+</ul></li>
+</ul>
+</section>
+<section id="teaching-and-mentoring" class="slide level2">
+<h2>Teaching and Mentoring</h2>
+<!-- Courses -->
+<!--  Applied Survival Analysis (BMI/STAT 741; 2020—2026) -->
+<!--  Short courses in advanced methodology and R programming -->
+<!--  Mentoring -->
+<!--  3 current + 4 former PhD students (→ JP Morgan, Amazon, Eli Lilly, Merck) -->
+<ul>
+<li><strong>Courses</strong>
+<ul>
+<li>Applied Survival Analysis (BMI/STAT 741; 2020—2026)</li>
+<li>Short courses in advanced methodology and R programming</li>
+<li>A textbook on survival analysis (in print by Springer)</li>
+</ul></li>
+<li><strong>Mentoring</strong>
+<ul>
+<li>2 current + 1 graduating + 4 former PhD students (→ JP Morgan, Amazon, Eli Lilly, Merck)</li>
+<li>Research staff, research assistants, etc.</li>
+</ul></li>
+</ul>
+</section>
+<section id="service-and-leadership" class="slide level2">
+<h2>Service and Leadership</h2>
+<!-- Co-Editor | Journal of Biopharmaceutical Statistics | 04/2026 – Now -->
+<!-- Associate Editor | Biometric Bulletin | 12/2025 – Now -->
+<!-- Associate Editor | Statistics in Biopharmaceutical Research | 01/2023 – Now -->
+<!-- Statistical Editor | JACC Journals | 12/2022 – Now -->
+<ul>
+<li><strong>Journal editorial</strong>
+<ul>
+<li><strong>Co-Editor</strong> | <em>Journal of Biopharmaceutical Statistics</em> | 04/2026 – Now</li>
+<li><strong>Associate Editor</strong> | <em>Biometrics</em> | 7/2026 – Now</li>
+<li><strong>Associate Editor</strong> | <em>Biometric Bulletin</em> | 12/2025 – Now</li>
+<li><strong>Associate Editor</strong> | <em>Statistics in Biopharmaceutical Research</em> | 01/2023 – Now</li>
+<li><strong>Statistical Editor</strong> | <em>JACC Journals</em> | 12/2022 – Now</li>
+</ul></li>
+<li><strong>Other</strong>
+<ul>
+<li><strong>Program Chair</strong> | 2026 ASA LiDS | 2025 – 2027</li>
+<li><strong>NIH-NHLBI</strong>/<strong>PCOR</strong>/<strong>NSF</strong> study sections/review panels</li>
+</ul></li>
+</ul>
+<!-- ## Research identity -->
+<!-- - My work sits at the interface of **collaborative science** and **methodological development** -->
+<!-- - Collaborations motivate new statistical questions   -->
+<!--   Complex endpoints, longitudinal outcomes, pragmatic studies, real-world data -->
+<!-- - Methods return to practice through   -->
+<!--   Trial design, reproducible workflows, software, and team-based biostatistics -->
+<!-- - At QSU, I hope to build on this model:   -->
+<!--   **methods → tools → collaboration → impact** -->
+</section>
 <section>
 <section id="introduction" class="title-slide slide level1 center">
 <h1>Introduction</h1>
-<p>How can we measure treatment benefit when the patient experience cannot be represented by a single time-to-first event?</p>
 <p><span class="math display">\[\def\a{{(a)}}
 \def\b{{(1-a)}}
 \def\t{{(1)}}
@@ -423,7 +492,7 @@ Lu Mao, PhD
 </ul>
 </div>
 
-<img data-src="win_ratio_and_beyond_files/figure-revealjs/unnamed-chunk-1-1.png" width="768" class="r-stretch"></section>
+<img data-src="win_ratio_and_beyond_qsu_files/figure-revealjs/unnamed-chunk-1-1.png" width="768" class="r-stretch"></section>
 <section id="wr-as-primary-endpoint-i" class="slide level2">
 <h2>WR as Primary Endpoint (I)</h2>
 <div style="font-size: 0.75em; line-height: 1.2em;">
@@ -603,7 +672,7 @@ Lu Mao, PhD
 <li><span class="math inline">\(Z_i\)</span>, <span class="math inline">\(Z_j\)</span>: covariate vectors for subjects <span class="math inline">\(i\)</span> and <span class="math inline">\(j\)</span></li>
 <li><span class="math inline">\(\beta\)</span>: log-WRs for one-unit increases in covariates</li>
 <li>U-statistic estimation; residual analysis to check WR constancy <span class="citation" data-cites="Mao2021">(<a href="#/references" role="doc-biblioref" onclick="">Mao &amp; Wang, 2021</a>, R package <a href="https://cran.r-project.org/web/packages/WR/" target="_blank"><code>WR</code></a>)</span>; stratification <span class="citation" data-cites="Wang2022">(<a href="#/references" role="doc-biblioref" onclick="">T. Wang &amp; Mao, 2022</a>)</span></li>
-<li>Elastic net regularization for high-dimensional <span class="math inline">\(Z\)</span> <span class="citation" data-cites="mao2025">(<a href="#/references" role="doc-biblioref" onclick="">Mao, 2025b</a>, R tool <a href="https://lmaowisc.github.io/wrnet/" target="_blank"><code>WRNet</code></a>)</span></li>
+<li>Elastic net regularization for high-dimensional <span class="math inline">\(Z\)</span> <span class="citation" data-cites="mao2025">(<a href="#/references" role="doc-biblioref" onclick="">Mao, 2025</a>, R tool <a href="https://lmaowisc.github.io/wrnet/" target="_blank"><code>WRNet</code></a>)</span></li>
 </ul></li>
 </ul>
 </section>
@@ -718,14 +787,11 @@ Lu Mao, PhD
 <ul>
 <li><strong>Challenges</strong>
 <ul>
-<li>Primary studies
-<ul>
-<li><em>not</em> reporting win-loss measures</li>
-<li>over <em>different</em> time spans</li>
-<li><em>different</em> win/loss definitions</li>
+<li>Primary studies <em>not</em> reporting win-loss measures</li>
+<li>Primary studies over <em>different</em> time spans</li>
+<li>Primary studies with <em>different</em> definitions of win/loss</li>
 </ul></li>
-</ul></li>
-<li><a href="https://lmaowisc.github.io/winkm/" target="_blank"><code>WinKM</code></a>: A toolkit to start <span class="citation" data-cites="mao2025a">(<a href="#/references" role="doc-biblioref" onclick="">Mao, 2025a</a>)</span>
+<li><a href="https://lmaowisc.github.io/winkm/" target="_blank"><code>WinKM</code></a>: A toolkit to start
 <ul>
 <li>Calculate win-loss statistics based on
 <ul>
@@ -782,11 +848,10 @@ Lu Mao, PhD
 <ul>
 <li><a href="https://reporter.nih.gov/search/9aSu5u3xlE26GrjbF_4cBg/project-details/10734551">R01HL149875</a> (11/2019 – 7/2028)</li>
 <li><a href="https://www.nsf.gov/awardsearch/showAward?AWD_ID=2015526">DMS2015526</a> (7/2020 – 6/2024) <img data-src="images/funds.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></li>
-</ul>
-<!-- - **Pending**: NSF, PCORI (MPI with Medical College of Wisconsin) --></li>
+</ul></li>
 <li><p><strong>Collaborators</strong></p>
 <ul>
-<li><a href="https://biostat.wiscweb.wisc.edu/staff/kim-kyungmann/">KyungMann Kim</a>, <a href="https://tuowang.rbind.io/">Tuo Wang</a>, <a href="https://ysph.yale.edu/profile/fan-f-li/">Fan Li</a>, <a href="https://www.mcw.edu/departments/biostatistics/people/soyoung-kim-phd">Soyoung Kim</a>, Gaohong Dong, Bo Huang, etc.</li>
+<li><a href="https://biostat.wiscweb.wisc.edu/staff/kim-kyungmann/">KyungMann Kim</a>, <a href="https://tuowang.rbind.io/">Tuo Wang</a>, Gaohong Dong, Bo Huang, etc.</li>
 </ul></li>
 </ul>
 </section>
@@ -867,11 +932,8 @@ Mao, L. (2023). On restricted mean time in favor of treatment. <em>Biometrics</e
 <div id="ref-mao2024" class="csl-entry" role="listitem">
 Mao, L. (2024). Defining estimand for the win ratio: Separate the true effect from censoring. <em>Clinical Trials</em>, <em>21</em>(5), 584–594.
 </div>
-<div id="ref-mao2025a" class="csl-entry" role="listitem">
-Mao, L. (2025a). Approximating win-loss probabilities based on the overall and event-free survival functions. <em>Statistics &amp; Probability Letters</em>, <em>226</em>, 110478. <a href="https://doi.org/10.1016/j.spl.2025.110478">https://doi.org/10.1016/j.spl.2025.110478</a>
-</div>
 <div id="ref-mao2025" class="csl-entry" role="listitem">
-Mao, L. (2025b). Regularized win ratio regression for variable selection and risk prediction, with an application to a cardiovascular trial. <em>BMC Medical Research Methodology</em>, <em>25</em>(1). <a href="https://doi.org/10.1186/s12874-025-02554-w">https://doi.org/10.1186/s12874-025-02554-w</a>
+Mao, L. (2025). Regularized win ratio regression for variable selection and risk prediction, with an application to a cardiovascular trial. <em>BMC Medical Research Methodology</em>, <em>25</em>(1). <a href="https://doi.org/10.1186/s12874-025-02554-w">https://doi.org/10.1186/s12874-025-02554-w</a>
 </div>
 <div id="ref-mao2022a" class="csl-entry" role="listitem">
 Mao, L., Kim, K., &amp; Li, Y. (2022). On recurrent-event win ratio. <em>Statistical Methods in Medical Research</em>, <em>31</em>(6), 1120–1134. <a href="https://doi.org/10.1177/09622802221084134">https://doi.org/10.1177/09622802221084134</a>

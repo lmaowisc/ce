@@ -1,11 +1,11 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="Hypothesis Testing — Win Ratio and Beyond, by Lu Mao.">
-<title>Hypothesis Testing — Win Ratio and Beyond</title><link rel="stylesheet" href="book.css?v=960fda23ad86"><link rel="icon" href="favicon.svg" type="image/svg+xml"><script src="app.js" defer></script></head>
+<title>Hypothesis Testing — Win Ratio and Beyond</title><link rel="stylesheet" href="book.css?v=a6e324f764ef"><link rel="icon" href="favicon.svg" type="image/svg+xml"><script src="app.js" defer></script></head>
 <body><a class="skip" href="#main">Skip to content</a>
 <header class="masthead"><a class="brand" href="index.html"><span class="monogram" aria-hidden="true">CE</span><span>COMPOSITE<br>ENDPOINTS</span></a><div class="masthead-right"><a href="resources.html">Course Materials</a><a href="references.html">References</a><button class="menu-toggle" aria-expanded="false" aria-controls="book-navigation">Contents</button></div></header>
 <div class="layout"><nav class="sidebar" id="book-navigation" aria-label="Book contents"><a class="nav-link nav-home" href="index.html"><span class="nav-text">About This Book</span></a><p class="nav-label">CONTENTS</p><a class="nav-link" href="intro.html"><span class=num>01</span><span class="nav-text">Introduction</span></a><a class="nav-link active" href="testing.html" aria-current="page"><span class=num>02</span><span class="nav-text">Hypothesis Testing</span></a><a class="nav-link" href="estimation.html"><span class=num>03</span><span class="nav-text">Nonparametric Estimation</span></a><a class="nav-link" href="regression.html"><span class=num>04</span><span class="nav-text">Semiparametric Regression</span></a><a class="nav-link" href="discussions.html"><span class=num>05</span><span class="nav-text">Discussions</span></a><div class="nav-bottom"><a class="nav-link" href="resources.html"><span class="nav-text">Slides & R Code</span></a><a class="nav-link" href="references.html"><span class="nav-text">References</span></a></div></nav><main class="main" id="main"><div class="reader-layout"><article class="article"><p class="eyebrow">Chapter 02</p><h1>Hypothesis Testing</h1><p class="deck">Win ratio statistics, recurrent events, and the design of adequately powered trials.</p><div class="chapter-actions"><a href="chap2.html" target="_blank" rel="noopener noreferrer">Open Chapter Slides ↗</a><a href="code/testing.R" download>Download R Code ↓</a></div><p class="chapter-status">Chapter overview · Full exposition to follow</p><section class="level2" id="section-1">
-<h2><span class="section-no">2.1</span>Win Ratio Basics</h2>
+<h2><span class="section-no">2.1 </span>Win Ratio Basics</h2>
 <p>The two-sample win ratio compares patients across treatment groups using an ordered set of outcome rules. The sample win and loss fractions aggregate the pairwise comparisons; their ratio is the win ratio statistic.</p>
 <p>Because each patient contributes to many pairs, the pairwise results are dependent. The slides develop inference using the associated U-statistic structure, including the large-sample behavior of the log win ratio.</p>
 <div class="callout">
@@ -14,12 +14,12 @@
 </div>
 </section>
 <section class="level2" id="section-2">
-<h2><span class="section-no">2.2</span>Recurrent Events</h2>
+<h2><span class="section-no">2.2 </span>Recurrent Events</h2>
 <p>When nonfatal events recur, a comparison based only on the first event leaves part of the history unused. The course introduces rules that prioritize survival and then compare recurrent-event frequency and timing.</p>
 <p>The HF-ACTION example contrasts recurrent-event win ratio analyses through the <code>WR</code> package. The choice of comparison rule belongs to the endpoint definition and should follow the clinical question.</p>
 </section>
 <section class="level2" id="section-3">
-<h2><span class="section-no">2.3</span>Sample Size and Power</h2>
+<h2><span class="section-no">2.3 </span>Sample Size and Power</h2>
 <p>Planning a win ratio analysis requires assumptions about the component events and their dependence. The slides use a Gumbel–Hougaard model and pilot information to connect component-specific effects with power and required sample size.</p>
 <p>The worked example uses <code>WR::WRSS()</code>. Its inputs and calculations are available in the original chapter code; the full derivation will accompany the later book chapter.</p>
 </section>
@@ -31,4 +31,4 @@
 <li><a href="references.html#ref-mao2022">Mao, Kim &amp; Miao (2022) · Sample size formula</a></li>
 </ul>
 </section>
-<nav class="page-turn" aria-label="Chapter navigation"><a href="intro.html"><small>PREVIOUS</small>← Introduction</a><a href="estimation.html"><small>NEXT</small>Nonparametric Estimation →</a></nav></article><aside class="toc" aria-label="On this page"><strong>ON THIS PAGE</strong><a href="#section-1">2.1 Win Ratio Basics</a><a href="#section-2">2.2 Recurrent Events</a><a href="#section-3">2.3 Sample Size and Power</a><a href="#reading">Selected Reading</a></aside></div><footer class="footer"><span class="footer-title">Statistical Methods for Composite Endpoints<span>Win Ratio and Beyond</span></span><span class="footer-author">Lu Mao</span></footer></main></div></body></html>
+<script>MathJax={svg:{fontCache:"local"},options:{enableMenu:false}};</script><script defer src="vendor/tex-svg.js"></script><nav class="page-turn" aria-label="Chapter navigation"><a href="intro.html"><small>PREVIOUS</small>← Introduction</a><a href="estimation.html"><small>NEXT</small>Nonparametric Estimation →</a></nav></article><aside class="toc" aria-label="On this page"><strong>ON THIS PAGE</strong><a href="#section-1">2.1 Win Ratio Basics</a><a href="#section-2">2.2 Recurrent Events</a><a href="#section-3">2.3 Sample Size and Power</a><a href="#reading">Selected Reading</a></aside></div><footer class="footer"><span class="footer-title">Statistical Methods for Composite Endpoints<span>Win Ratio and Beyond</span></span><span class="footer-author">Lu Mao</span></footer></main></div></body></html>
