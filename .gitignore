@@ -7,3 +7,9 @@ ce.Rproj
 # Private publications and local literature-review working files
 /Methods Publications/
 /research/
+
+# Local author guidance and build intermediates
+/website/EDITING.md
+/website/README.md
+*.log
+*.aux
