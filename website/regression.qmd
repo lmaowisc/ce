@@ -1,0 +1,43 @@
+---
+title: Semiparametric Regression
+description: Regression methods for relating composite outcomes to treatment and other covariates.
+topics: Regression models · Model diagnostics · Regularization
+status: Chapter overview · Full exposition to follow
+format: html
+execute:
+  eval: false
+  echo: true
+---
+
+## Proportional Win-Fractions Model {#section-1}
+
+The proportional win-fractions (PW) model connects a covariate-specific win ratio to differences in covariates. It extends the two-sample comparison to regression while retaining the specified outcome hierarchy.
+
+$$
+\mathrm{WR}(t; Z_i, Z_j) = \exp\{\beta^{\mathsf T}(Z_i-Z_j)\}
+$$
+
+The right-hand side does not depend on time. This proportionality assumption gives the coefficients their interpretation and motivates model checking.
+
+## Estimation and Diagnostics {#section-2}
+
+The slides develop estimation and inference for the PW model, followed by cumulative score-residual methods for assessing model adequacy. Stratification allows separate baseline structures while retaining a common regression effect.
+
+The HF-ACTION application illustrates preparation of covariates, fitting through `WR::pwreg()`, joint hypothesis tests, and residual plots. These steps are available together in the chapter's original R code.
+
+::: callout
+**Specify the target before adjustment.**
+
+A conditional regression effect and a marginal treatment effect answer different questions. Chapter 5 returns to covariate adjustment for marginal estimands.
+:::
+
+## Variable Selection and Prediction {#section-3}
+
+The final part of the chapter introduces regularized PW regression, using an elastic net penalty for variable selection and prediction. Cross-validation, variable importance, and assessment of concordance connect model fitting to predictive performance.
+
+The accompanying `WRNet` material provides the software context. The full exposition of this topic will be developed as the book chapters take shape.
+
+## Selected Reading {#reading}
+
+-   [Mao & Wang (2021) · Proportional win-fractions regression](references.html#ref-Mao2021)
+-   [Wang & Mao (2022) · Stratified PW regression](references.html#ref-Wang2022)

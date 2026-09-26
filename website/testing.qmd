@@ -1,0 +1,40 @@
+---
+title: Hypothesis Testing
+description: Win ratio statistics, recurrent events, and the design of adequately powered trials.
+topics: Win ratio test · Recurrent events · Sample size
+status: Chapter overview · Full exposition to follow
+format: html
+execute:
+  eval: false
+  echo: true
+---
+
+## Win Ratio Basics {#section-1}
+
+The two-sample win ratio compares patients across treatment groups using an ordered set of outcome rules. The sample win and loss fractions aggregate the pairwise comparisons; their ratio is the win ratio statistic.
+
+Because each patient contributes to many pairs, the pairwise results are dependent. The slides develop inference using the associated U-statistic structure, including the large-sample behavior of the log win ratio.
+
+::: callout
+**Testing and interpretation**
+
+A test requires a clearly stated null hypothesis and valid assumptions about observation. The statistic's interpretation as an effect estimate requires a separate discussion of its target.
+:::
+
+## Recurrent Events {#section-2}
+
+When nonfatal events recur, a comparison based only on the first event leaves part of the history unused. The course introduces rules that prioritize survival and then compare recurrent-event frequency and timing.
+
+The HF-ACTION example contrasts recurrent-event win ratio analyses through the `WR` package. The choice of comparison rule belongs to the endpoint definition and should follow the clinical question.
+
+## Sample Size and Power {#section-3}
+
+Planning a win ratio analysis requires assumptions about the component events and their dependence. The slides use a Gumbel--Hougaard model and pilot information to connect component-specific effects with power and required sample size.
+
+The worked example uses `WR::WRSS()`. Its inputs and calculations are available in the original chapter code; the full derivation will accompany the later book chapter.
+
+## Selected Reading {#reading}
+
+-   [Bebu & Lachin (2016) · Large sample inference](references.html#ref-Bebu2016)
+-   [Mao, Kim & Li (2022) · Recurrent-event win ratio](references.html#ref-mao2022a)
+-   [Mao, Kim & Miao (2022) · Sample size formula](references.html#ref-mao2022)

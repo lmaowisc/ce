@@ -1,0 +1,58 @@
+---
+title: Introduction
+description: Clinical questions, traditional composites, and the motivation for hierarchical comparisons.
+topics: Examples & guidelines · Traditional methods · Win ratio
+status: Sample reading · Adapted from the course slides
+format: html
+execute:
+  eval: false
+  echo: true
+---
+
+## Clinical Outcomes and Priorities {#section-1}
+
+A clinical trial can tell more than one story about a patient's outcome. In heart failure, survival matters, but so do hospitalizations and their recurrence. In cancer, a patient may experience relapse, progression, and ultimately death. A composite endpoint brings several outcomes together through a specified rule.
+
+The rule is substantive: it determines which features of the patient's experience enter the analysis and how they contribute to the treatment comparison. The first chapter uses colon cancer and HF-ACTION to motivate this choice.
+
+::: callout
+**Begin with the clinical question.**
+
+Which outcomes matter, how should they be combined, and what population-level treatment effect should the analysis estimate?
+:::
+
+## From First Events to Hierarchies {#section-2}
+
+**Time to first event** reduces the outcome to the earliest occurrence of a component event. It supports familiar survival methods, but subsequent events do not contribute to that endpoint, and the rule does not give a fatal event priority over an earlier nonfatal event.
+
+**Weighted total events** retain event counts and assign relative weights to the components. The choice of weights expresses how different events contribute to the composite burden.
+
+**Hierarchical comparisons** compare patients sequentially according to clinical priority. Under a survival-first rule, a decisive survival comparison determines the winner. If survival does not decide the comparison, the specified nonfatal-event rule is considered.
+
+$$
+\widehat{\mathrm{WR}} = \frac{\text{treatment wins}}{\text{control wins}}
+$$
+
+The win ratio summarizes these pairwise comparisons. Win odds and net benefit provide related summaries with different treatment of ties and different effect scales. See [Pocock et al. (2012)](references.html#ref-pocock2012) for the original win ratio formulation.
+
+## Why the Time Horizon Matters {#section-3}
+
+Win--loss status can change as the comparison horizon changes. A treatment patient might initially fare better on hospitalization but later lose the comparison on survival. This makes follow-up time part of the substantive interpretation.
+
+In standard censored-data comparisons, the available follow-up determines the time at which pairs are compared. Without additional structure, the resulting summary can depend on the censoring distribution. Valid hypothesis testing and estimation of a specified treatment effect are therefore distinct tasks.
+
+The course develops two responses: define a common restriction time and estimate the corresponding effect, or specify a model for the time-dependent win fractions. Chapters 3 and 4 examine these approaches.
+
+::: callout
+**A recurring distinction**
+
+Evidence that the groups differ is not the same as an interpretable estimate of how much they differ. Keep the estimand, assumptions, and estimator separate.
+:::
+
+For the detailed argument, see [Mao (2024), "Defining estimand for the win ratio."](references.html#ref-mao2024)
+
+## Selected Reading {#reading}
+
+-   [Pocock et al. (2012) · The win ratio](references.html#ref-pocock2012)
+-   [Mao & Kim (2021) · Statistical models for composite endpoints](references.html#ref-mao2021)
+-   [Mao (2024) · Defining estimand for the win ratio](references.html#ref-mao2024)

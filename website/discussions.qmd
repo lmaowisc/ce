@@ -1,0 +1,33 @@
+---
+title: Discussions
+description: Connect the methods and examine questions in adjustment, monitoring, and evidence synthesis.
+topics: Covariate adjustment · Interim analysis · Meta Analysis
+status: Chapter overview · Full exposition to follow
+format: html
+execute:
+  eval: false
+  echo: true
+---
+
+## Covariate Adjustment {#section-1}
+
+Covariate adjustment can seek improved precision for a marginal treatment effect while protecting validity against outcome-model misspecification. This objective differs from interpreting covariate-specific regression coefficients.
+
+The course identifies the U-statistic structure and the absence of a simple likelihood formulation as challenges for win ratio adjustment. This section is a record of the questions raised in the slides, rather than an updated survey of current solutions.
+
+## Interim Analysis {#section-2}
+
+Interim monitoring requires understanding how statistical information accumulates. For composite endpoints, simple event counts may not adequately describe information, and dependence among component events complicates the joint behavior of sequential statistics.
+
+The slides use restricted mean survival time as a related example and motivate further work on monitoring methods for win--loss analyses.
+
+## Meta Analysis {#section-3}
+
+Evidence synthesis becomes difficult when studies use different follow-up durations or different definitions of winning. Many published trials also do not report the win--loss quantities needed for a direct synthesis.
+
+The course points to `WinKM` as a toolkit for recovering win--loss information from reported survival curves and related summaries. A future book treatment can build on this starting point while stating the required assumptions and limitations.
+
+## Selected Reading {#reading}
+
+-   [Mao (2018) · Causal estimation using U-statistics](references.html#ref-mao2018)
+-   [Mao (2024) · Defining estimand for the win ratio](references.html#ref-mao2024)
