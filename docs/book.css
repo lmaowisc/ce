@@ -77,3 +77,62 @@
 /* Keep the title and subtitle unboxed. */
 .subtitle{display:block;background:none;border:0;border-radius:0;padding:0;font-size:clamp(25px,2.3vw,34px);line-height:1.3}
 @media(max-width:620px){.subtitle{padding:0;font-size:27px}}
+
+/* Book exposition: readable analysis panels, output, figures, and mathematics. */
+.article .analysis-block{margin:24px 0;border:1px solid var(--line);border-radius:5px;overflow:hidden;background:#fffefd}
+.article .analysis-label{padding:8px 17px;font:500 14px/1.5 var(--sans);letter-spacing:.3px;background:#eee6ed;color:var(--plum);border-bottom:1px solid var(--line)}
+.article .analysis-label{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.copy-button{font-family:var(--sans);padding:3px 9px;border:1px solid #b6a2b0;border-radius:4px;line-height:1.4}
+.copy-button:hover{background:#fffefd}
+.copy-button:focus-visible{outline:2px solid var(--plum);outline-offset:3px}
+.article .analysis-block pre{margin:0;padding:18px 20px;background:#faf7fa;color:#302a32;font:15px/1.7 Consolas,'Cascadia Code',monospace;tab-size:2;overflow:auto}
+.article .analysis-block div.sourceCode{margin:0;overflow:auto}
+.article .result-block .analysis-label{background:#f1efea;color:#635746}
+.article .result-block pre{background:#fffefd;font-size:14px;line-height:1.65}
+.article code{font-size:.92em}
+.article pre code{font-size:inherit;white-space:pre}
+.article code span.co{color:#65796c;font-style:italic}
+.article code span.fu,.article code span.kw{color:#693963}
+.article code span.st{color:#8b492f}
+.article code span.dv,.article code span.fl,.article code span.cn{color:#215e79}
+.article code span.op{color:#6d5365}
+.article section p,.article section li{font-family:var(--serif);font-size:18px;line-height:1.78}
+.article .equation{border:0;background:none;color:inherit;font-size:18px;padding:4px 0;margin:16px 0;overflow-x:auto;overflow-y:hidden}
+.article mjx-container{font-size:100%!important;color:inherit}
+.article mjx-container[display="true"]{margin:0!important}
+.article figure{margin:34px 0;padding:20px 20px 16px;background:#fff;border:1px solid var(--line);border-radius:4px}
+.article figure img{border:0;width:100%;max-width:100%;height:auto;object-fit:contain}
+.article figure figcaption{font:15px/1.65 var(--sans);color:var(--muted);border-top:1px solid #eee8ec;padding-top:13px;margin-top:18px}
+.article figure figcaption strong{color:var(--plum);font-weight:500}
+.article table{width:100%;border-collapse:collapse;margin:25px 0;font-size:15px;line-height:1.65;font-variant-numeric:tabular-nums}
+.article th{text-align:left;font-weight:500;background:#eee6ed;color:var(--plum)}
+.article th,.article td{padding:11px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+.article tbody tr:nth-child(even){background:#f7f3f5}
+.article h3{font-size:24px;line-height:1.4;margin:30px 0 16px}
+.toc{max-height:calc(100vh - 65px);overflow-y:auto;padding-right:8px}
+@media(max-width:620px){.article figure{padding:12px 8px}.article table{font-size:14px}.article th,.article td{padding:8px 5px}.article .analysis-block pre{font-size:14px;padding:14px}}
+
+/* Monograph-style author-year citations and chapter bibliography. */
+.article .citation a{color:inherit;text-decoration:none}
+.article .citation a:hover{text-decoration:underline;color:var(--plum)}
+.article #refs{margin-top:22px}
+.article #refs .csl-entry{border:0;padding:0 0 0 1.5em;text-indent:-1.5em;margin:0 0 18px;font-size:16px;line-height:1.65;overflow-wrap:anywhere}
+.article #refs a{font-size:inherit}
+
+/* Numbering follows the text baseline at both section levels. */
+.article .section-no,.article .subsection-no{display:inline;font:inherit;color:inherit;letter-spacing:normal;margin:0 .25em 0 0}
+.article figure{padding:12px 0 0;background:transparent;border:0;border-radius:0}
+.article figure img{background:#fffefd}
+.article figure figcaption{border-top:0;padding-top:0}
+
+/* Keep chapter figures at a text-compatible scale on wide screens. */
+.article figure img{max-width:640px;margin-inline:auto}
+.article figure{margin:22px 0;padding-top:4px}
+.article figure figcaption{margin-top:12px}
+/* At narrow reading widths, use the existing Contents menu so figures stay legible. */
+@media(max-width:850px){
+  body:has(.reader-layout) .layout{display:block}
+  body:has(.reader-layout) .sidebar{display:none;position:static;height:auto;border-bottom:1px solid var(--line);border-right:0;padding:15px 20px}
+  body:has(.reader-layout) .sidebar.open{display:block}
+  body:has(.reader-layout) .menu-toggle{display:block;border:1px solid var(--line);background:transparent;color:var(--plum);padding:5px 11px;font-size:14px}
+}

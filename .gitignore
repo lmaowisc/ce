@@ -3,3 +3,7 @@
 _book
 ce.Rproj
 .positai
+
+# Private publications and local literature-review working files
+/Methods Publications/
+/research/

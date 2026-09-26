@@ -48,8 +48,10 @@ if (filter) {
 document.querySelectorAll('.copy-button').forEach(button => {
   button.addEventListener('click', async () => {
     try {
-      await navigator.clipboard.writeText(button.closest('.code-block').querySelector('code').textContent);
+      const panel = button.closest('.code-block, .analysis-block');
+      await navigator.clipboard.writeText(panel.querySelector('pre code, pre').textContent);
       button.textContent = 'Copied';
+      setTimeout(() => { button.textContent = 'Copy'; }, 2000);
     } catch { button.textContent = 'Select code to copy'; }
   });
 });

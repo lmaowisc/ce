@@ -19,6 +19,8 @@ OUTPUT.mkdir(exist_ok=True)
 shutil.copyfile(HERE / 'style.css', OUTPUT / 'book.css')
 shutil.copyfile(HERE / 'app.js', OUTPUT / 'app.js')
 shutil.copyfile(HERE / 'references.bib', OUTPUT / 'references.bib')
+shutil.copytree(HERE / 'vendor', OUTPUT / 'vendor', dirs_exist_ok=True)
+shutil.copytree(HERE / 'figures', OUTPUT / 'figures', dirs_exist_ok=True)
 STYLE_VERSION = hashlib.sha256((HERE / 'style.css').read_bytes()).hexdigest()[:12]
 TITLE = 'Statistical Methods for Composite Endpoints'
 CHAPTER_ORDER = ['intro', 'testing', 'estimation', 'regression', 'discussions']
@@ -83,12 +85,48 @@ for i, (title, slug, summary, tags, headings) in enumerate(chapters, 1):
     # The first chunk is the original worked analysis; later prose includes separate examples.
     if i <= 4 and chunks:
         (OUTPUT / 'code' / f'{slug}.R').write_text(f'# Extracted from {slug}.qmd, first R chunk.\n# Original course code; not re-executed for this website refresh.\n\n' + chunks[0] + '\n', encoding='utf-8')
+    narrative = (HERE / f'{slug}.qmd').read_text(encoding='utf-8')
+    if slug == 'intro':
+        chapter_code = re.findall(r'```\{r[^\n]*\}\s*\n(.*?)\n```', narrative, re.S)
+        (OUTPUT / 'code' / 'intro.R').write_text('# Chapter 1: code in reading order.\n\n' + '\n\n'.join(chapter_code) + '\n', encoding='utf-8')
+    # Pandoc alone does not recognize Quarto executable chunk headers.
+    # Display R chunks as highlighted code without executing them.
+    narrative = re.sub(r'^```\{r[^\n]*\}\s*$', '```r', narrative, flags=re.M)
+    # Keep standard Quarto cross-reference syntax in the editable source.
+    # Resolve it here because this lightweight build uses Pandoc directly.
+    table_ids = re.findall(r'^: .*?\{#(tbl-[\w-]+)\}\s*$', narrative, re.M)
+    narrative = re.sub(r'(^: .*?)\s*\{#tbl-[\w-]+\}', r'\1', narrative, flags=re.M)
+    narrative = re.sub(r'(?<![\w])@((?:fig|tbl)-[\w-]+)',
+                       r'[\1](#\1){.book-xref}', narrative)
     rendered = subprocess.run(
-        ['quarto', 'pandoc', str(HERE / f'{slug}.qmd'), '--from=markdown',
-         '--to=html5', '--section-divs', '--mathml', '--wrap=none'],
-        capture_output=True, text=True, encoding='utf-8', check=True,
+        ['quarto', 'pandoc', '--from=markdown',
+         '--to=html5', '--section-divs', '--mathjax', '--wrap=none',
+         '--citeproc', '--bibliography', str(HERE / 'references.bib'),
+         '--csl', str(ROOT / 'apa.csl'), '--metadata=link-citations:true',
+         '--metadata=nocite:@*'],
+        input=narrative, capture_output=True, text=True, encoding='utf-8', check=True,
     ).stdout
     chapter = BeautifulSoup(rendered, 'html.parser')
+    # Use the book-wide bibliography for consistent author-year disambiguation.
+    # Chapter citations link to that list; no full bibliography is repeated here.
+    for citation in chapter.select('.citation a[href^="#ref-"]'):
+        citation['href'] = 'references.html' + citation['href']
+    for references in chapter.select('#refs'):
+        references.decompose()
+    for formula in chapter.select('span.math.display'):
+        formula.parent['class'] = ['equation']
+    for pre in chapter.select('pre'):
+        is_output = 'output' in pre.get('class', []) or bool(pre.select('code.output'))
+        container = pre.parent if 'sourceCode' in pre.parent.get('class', []) else pre
+        panel = chapter.new_tag('div', attrs={'class': 'analysis-block result-block' if is_output else 'analysis-block input-block'})
+        container.wrap(panel)
+        label = chapter.new_tag('div', attrs={'class': 'analysis-label'})
+        label.string = 'Output' if is_output else 'R'
+        if not is_output:
+            button = chapter.new_tag('button', attrs={'class': 'copy-button', 'type': 'button', 'aria-label': 'Copy R code', 'aria-live': 'polite'})
+            button.string = 'Copy'
+            label.append(button)
+        panel.insert(0, label)
     for formula in chapter.select('math[display="block"]'):
         if formula.parent.name == 'p':
             formula.parent['class'] = ['equation']
@@ -105,13 +143,44 @@ for i, (title, slug, summary, tags, headings) in enumerate(chapters, 1):
                 listing['class'] = ['reading-list']
             continue
         number = chapter.new_tag('span', attrs={'class': 'section-no'})
-        number.string = f'{i}.{j}'
+        number.string = f'{i}.{j} '
         heading.insert(0, number)
+        for k, subsection in enumerate(section.select('section.level3'), 1):
+            subheading = subsection.find('h3')
+            subnumber = chapter.new_tag('span', attrs={'class': 'subsection-no'})
+            subnumber.string = f'{i}.{j}.{k} '
+            subheading.insert(0, subnumber)
         toc += f'<a href="#{html.escape(section_id)}">{i}.{j} {html.escape(label)}</a>'
     for figure in chapter.select('img[src]'):
         if figure['src'].startswith('../images/'):
             figure['src'] = figure['src'][3:]
-    body = str(chapter)
+    crossrefs = {}
+    for j, figure in enumerate(chapter.select('figure'), 1):
+        caption = figure.find('figcaption')
+        if caption:
+            label = chapter.new_tag('strong')
+            label.string = f'Figure {i}.{j}. '
+            caption.insert(0, label)
+            target = figure.get('id') or (figure.find(id=True) or {}).get('id')
+            crossrefs[target] = f'Figure {i}.{j}'
+    tables = chapter.select('table')
+    if table_ids and len(table_ids) != len(tables):
+        raise ValueError(f'{slug}: every table must have an identified caption')
+    for j, (table, target) in enumerate(zip(tables, table_ids), 1):
+        table['id'] = target
+        caption = table.find('caption')
+        if caption is None:
+            raise ValueError(f'{slug}: missing caption for {target}')
+        label = chapter.new_tag('strong')
+        label.string = f'Table {i}.{j}. '
+        caption.insert(0, label)
+        crossrefs[target] = f'Table {i}.{j}'
+    for reference in chapter.select('a.book-xref'):
+        target = reference['href'][1:]
+        if target not in crossrefs:
+            raise ValueError(f'{slug}: unresolved cross-reference {target}')
+        reference.string = crossrefs[target]
+    body = str(chapter) + '<script>MathJax={svg:{fontCache:"local"},options:{enableMenu:false}};</script><script defer src="vendor/tex-svg.js"></script>'
     if i <= 4:
         code_link = f'<a href="code/{slug}.R" download>Download R Code ↓</a>'
     else:
@@ -120,7 +189,10 @@ for i, (title, slug, summary, tags, headings) in enumerate(chapters, 1):
     nxt = ('references', 'References') if i == 5 else (chapters[i][1], chapters[i][0])
     body += f'<nav class="page-turn" aria-label="Chapter navigation"><a href="{prev[0]}.html"><small>PREVIOUS</small>← {prev[1]}</a><a href="{nxt[0]}.html"><small>NEXT</small>{nxt[1]} →</a></nav>'
     status = html.escape(chapter_metadata[slug]['status'])
-    page(slug, title, f'<div class="reader-layout"><article class="article"><p class="eyebrow">Chapter {i:02}</p><h1>{title}</h1><p class="deck">{summary}</p><div class="chapter-actions">{external(f"chap{i}.html", "Open Chapter Slides ↗")}{code_link}</div><p class="chapter-status">{status}</p>{body}</article><aside class="toc" aria-label="On this page"><strong>ON THIS PAGE</strong>{toc}<a href="#reading">Selected Reading</a></aside></div>')
+    status_html = f'<p class="chapter-status">{status}</p>' if status else ''
+    reading_label = 'Selected Reading' if chapter.select_one('#reading') else 'Book References'
+    reading_href = '#reading' if chapter.select_one('#reading') else 'references.html'
+    page(slug, title, f'<div class="reader-layout"><article class="article"><p class="eyebrow">Chapter {i:02}</p><h1>{title}</h1><p class="deck">{summary}</p><div class="chapter-actions">{external(f"chap{i}.html", "Open Chapter Slides ↗")}{code_link}</div>{status_html}{body}</article><aside class="toc" aria-label="On this page"><strong>ON THIS PAGE</strong>{toc}<a href="{reading_href}">{reading_label}</a></aside></div>')
 
 resource_rows = ''
 for i, (title, slug, *_rest) in enumerate(chapters, 1):
