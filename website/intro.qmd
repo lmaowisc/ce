@@ -2,7 +2,7 @@
 title: Introduction
 description: From patients' event histories to clinically interpretable treatment comparisons.
 topics: Clinical questions · HF-ACTION · Traditional composites · Hierarchical comparisons
-status: ""
+status: Writing in progress
 bibliography: references.bib
 csl: ../apa.csl
 link-citations: true

@@ -136,3 +136,5 @@
   body:has(.reader-layout) .sidebar.open{display:block}
   body:has(.reader-layout) .menu-toggle{display:block;border:1px solid var(--line);background:transparent;color:var(--plum);padding:5px 11px;font-size:14px}
 }
+
+.article h1 + .chapter-status{border:0;padding:0;margin:-8px 0 16px;font-size:16px}

@@ -190,9 +190,12 @@ for i, (title, slug, summary, tags, headings) in enumerate(chapters, 1):
     body += f'<nav class="page-turn" aria-label="Chapter navigation"><a href="{prev[0]}.html"><small>PREVIOUS</small>← {prev[1]}</a><a href="{nxt[0]}.html"><small>NEXT</small>{nxt[1]} →</a></nav>'
     status = html.escape(chapter_metadata[slug]['status'])
     status_html = f'<p class="chapter-status">{status}</p>' if status else ''
+    heading_note = status_html if slug == 'intro' else ''
+    if slug == 'intro':
+        status_html = ''
     reading_label = 'Selected Reading' if chapter.select_one('#reading') else 'Book References'
     reading_href = '#reading' if chapter.select_one('#reading') else 'references.html'
-    page(slug, title, f'<div class="reader-layout"><article class="article"><p class="eyebrow">Chapter {i:02}</p><h1>{title}</h1><p class="deck">{summary}</p><div class="chapter-actions">{external(f"chap{i}.html", "Open Chapter Slides ↗")}{code_link}</div>{status_html}{body}</article><aside class="toc" aria-label="On this page"><strong>ON THIS PAGE</strong>{toc}<a href="{reading_href}">{reading_label}</a></aside></div>')
+    page(slug, title, f'<div class="reader-layout"><article class="article"><p class="eyebrow">Chapter {i:02}</p><h1>{title}</h1>{heading_note}<p class="deck">{summary}</p><div class="chapter-actions">{external(f"chap{i}.html", "Open Chapter Slides ↗")}{code_link}</div>{status_html}{body}</article><aside class="toc" aria-label="On this page"><strong>ON THIS PAGE</strong>{toc}<a href="{reading_href}">{reading_label}</a></aside></div>')
 
 resource_rows = ''
 for i, (title, slug, *_rest) in enumerate(chapters, 1):
