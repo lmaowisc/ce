@@ -14,13 +14,13 @@ execute:
 
 ## Clinical Outcomes and Priorities {#section-1}
 
-Does a treatment improve patients' outcomes? In a trial of patients with heart failure, we might begin by asking whether treatment prolongs life. But survival alone does not describe the course of the disease. Some patients remain out of the hospital for years; others experience repeated admissions, each accompanied by symptoms, disruption of daily life, and additional treatment. An intervention that reduces these admissions may offer an important benefit even if its effect on mortality is modest. Conversely, a reduction in admissions would be difficult to celebrate if it arose because patients died sooner.
+Does a treatment improve patients' outcomes? In a trial of patients with heart failure, we might begin with the most serious question: does treatment prolong life? Survival alone, however, does not describe the course of the disease. Some patients remain out of the hospital for years; others experience repeated admissions, each accompanied by symptoms, disruption of daily life, and additional treatment. An intervention that reduces these admissions may offer an important benefit even if its mortality effect is modest. Conversely, a reduction in admissions would be difficult to celebrate if it arose because patients died sooner.
 
 The difficulty is not a shortage of outcomes. It is how to combine the information they provide into a treatment comparison that answers a useful clinical question. We could analyze death and hospitalization separately, but the resulting conclusions may point in different directions. We could combine them into a single endpoint, but then we must decide how a hospitalization should contribute relative to a death, and whether repeated hospitalizations should count. These decisions determine what we mean by an improved outcome.
 
-A **composite endpoint** combines several outcome components according to a specified rule. Time to death or first hospitalization is one example. A weighted count of deaths and hospitalizations is another. A third approach compares patients in a sequence that reflects clinical priorities, considering survival before nonfatal events. Each construction summarizes a different aspect of the patient's experience. Choosing among them requires more than comparing their statistical power.
+A **composite endpoint** combines several outcome components according to a specified rule. The traditional time-to-first-event endpoint, such as time to death or first hospitalization, is one example. A weighted count of deaths and hospitalizations is another. A third approach compares patients in a sequence that reflects clinical priorities, considering survival before nonfatal events. Each construction summarizes a different aspect of the patient's experience. Choosing among them requires more than comparing their statistical power.
 
-This chapter develops that choice through examples. We first consider why composite endpoints are used and how clinical events are represented in an analysis dataset. We then examine time-to-first-event and weighted total-event methods, using HF-ACTION as a recurring application. Their strengths and limitations motivate hierarchical comparisons and the win ratio. Finally, we distinguish the effect we wish to estimate from the comparisons we can make with incomplete follow-up.
+This chapter develops that choice through examples. We first consider why composite endpoints are used and how clinical events are represented in an analysis dataset. We then examine time-to-first-event and weighted total-event methods, using HF-ACTION as a recurring application. Their strengths and limitations motivate hierarchical comparisons and the win ratio. Finally, we distinguish the effect we wish to estimate from the comparisons that incomplete follow-up permits us to observe.
 
 ### Colon cancer: relapse and survival
 
@@ -32,7 +32,7 @@ In adjuvant cancer trials, treatment is given after the primary tumor has been r
 
 For relapse-free survival, follow-up for the endpoint ends on leaving the initial state. The transition from relapse to death is consequently omitted from this particular analysis. For overall survival, both routes to death matter, whereas relapse itself does not constitute the endpoint. The same collected histories therefore support different statistical questions, depending on which transitions are retained.
 
-The example compares levamisole plus fluorouracil with control in 619 patients with stage C disease (304 and 315 patients, respectively). It reports a relapse-free survival log-rank $p$-value below 0.001 and 258 deaths after relapse, approximately 89% of the deaths. The point of the example is not that relapse-free survival is an inappropriate endpoint. It is that even a clear benefit on this endpoint leaves a further question: what happened to patients after relapse? We need to retain the later transitions if that question is part of the treatment comparison.
+The example compares levamisole plus fluorouracil with control in 619 patients with stage C disease (304 and 315 patients, respectively). It reports a relapse-free survival log-rank $p$-value below 0.001 and 258 deaths after relapse, approximately 89% of the deaths. The point is not that relapse-free survival is inappropriate. Rather, even a clear benefit on this endpoint leaves a further clinical question: what happened to patients after relapse? We must retain the later transitions when that question is part of the treatment comparison.
 
 ### HF-ACTION: repeated hospitalization and death
 
@@ -46,11 +46,13 @@ In @fig-hf-states, the living states distinguish how many hospitalizations a pat
 
 A first-event analysis uses only the first departure from the initial state. It treats admission and death as alternative ways to leave that state and makes no further use of the patient's subsequent transitions. A total-event analysis instead counts subsequent admissions. A survival-prioritized analysis uses both types of information but asks about survival first. Keeping @fig-hf-states in view helps us distinguish these constructions before introducing their formulas.
 
-The question is therefore broader than whether exercise postpones the first adverse event. We may also wish to know whether it prolongs survival, reduces repeated admissions, or improves the overall course of illness when survival takes priority. We will return to these questions as we change the way the outcomes are summarized.
+The question is therefore broader than whether exercise postpones the first adverse event. We may also wish to know whether it prolongs survival, reduces repeated admissions, or improves the overall course of illness when survival takes priority. We will return to the same patients as we change the way their histories are summarized.
 
 ## Why Combine Outcomes? {#why-combine}
 
 There are both clinical and statistical reasons to use a composite. Clinically, several events may express different consequences of the same disease. Combining them can provide a more complete description of treatment benefit than any one component. Statistically, a composite may accumulate more events than a mortality endpoint alone, allowing a comparison to use information from patients who experience important nonfatal outcomes.
+
+For many years, the usual way to make this comparison has been time to the first component event. The approach produces one event time per patient and can be analyzed with familiar Kaplan–Meier curves, log-rank tests, and Cox models. It is consequently straightforward to prespecify, implement, and communicate. When remaining alive without any component event is the clinical goal, it also provides a direct and useful summary.
 
 More events do not automatically imply a more informative comparison. Suppose a treatment has a substantial effect on mortality but little effect on a frequent, less serious event. Adding that event to a first-event composite may increase the event count while moving the treatment contrast toward the null. Whether precision and power improve depends on event frequencies, dependence between components, treatment effects, and the rule used to combine them. A composite should therefore be justified by the clinical question before its operating characteristics are assessed.
 
@@ -64,9 +66,9 @@ For HF-ACTION, reporting only a treatment coefficient would leave several questi
 
 The EMPA-REG OUTCOME trial illustrates why the composite estimate should be read together with its components. As reported by @Zinman2015, 7,020 patients with type 2 diabetes were studied, and the primary three-point major adverse cardiovascular event endpoint combined cardiovascular death, nonfatal myocardial infarction, and nonfatal stroke.
 
-![Hazard ratios and 95% confidence intervals for the three-point MACE composite and its components in EMPA-REG.](figures/empa-components.svg){#fig-empa}
+![Risk ratios and 95% confidence intervals for the three-point MACE composite and its components in EMPA-REG.](figures/empa-components.svg){#fig-empa}
 
-The composite hazard ratio was 0.86, compared with 0.62 for cardiovascular death, 0.87 for nonfatal myocardial infarction, and 1.24 for nonfatal stroke. The confidence intervals in @fig-empa are essential: the estimates for the nonfatal components are less conclusive, and a point estimate above one for stroke should not alone be read as evidence of harm. Nevertheless, the pattern makes clear that the composite does not describe a common proportional reduction in every component.
+The composite risk ratio was 0.86, compared with 0.62 for cardiovascular death, 0.87 for nonfatal myocardial infarction, and 1.24 for nonfatal stroke. The confidence intervals in @fig-empa are essential: the estimates for the nonfatal components are less conclusive, and a point estimate above one for stroke should not alone be read as evidence of harm. Nevertheless, the pattern makes clear that the composite does not describe a common proportional reduction in every component.
 
 Why can the overall estimate be nearer one than the mortality estimate? The first-event endpoint includes nonfatal events that may respond differently to treatment. Patients who experience one of these events have reached the endpoint even if their subsequent survival is improved. The composite coefficient is not a simple arithmetic average of the component coefficients; event timing and the changing risk sets also enter the analysis. @fig-empa motivates examining component effects without interpreting a difference in their individual significance levels as a formal test of heterogeneity.
 
@@ -78,7 +80,7 @@ Combining events of similar importance, as emphasized in the European guidance, 
 
 ## From a Patient History to an Analysis Dataset {#data-history}
 
-A statistical analysis begins with the patient histories the study records. We first describe those histories mathematically, then examine their representation as rows and variables in the HF-ACTION data.
+A statistical analysis begins with the patient histories that the study records. We first describe those histories mathematically, then examine their representation as rows and variables in the HF-ACTION data. The notation is useful only insofar as it keeps the statistical object connected to those records.
 
 ### Events, follow-up, and censoring
 
@@ -107,7 +109,7 @@ $$
 \qquad X=D\wedge C.
 $$
 
-The symbol $\wedge$ denotes the minimum, so the observed record is $\{\mathcal H^*(X),X\}$. The distinction between the full history and the observed record is substantive. The target treatment effect concerns patients' outcomes; the estimator must recover information about that effect from the histories the study was able to observe. In the HF-ACTION illustrations below, there is one nonfatal component, hospitalization, which can recur.
+The symbol $\wedge$ denotes the minimum, so the observed record is $\{\mathcal H^*(X),X\}$. The distinction between the full history and the observed record is substantive. The treatment effect concerns the outcomes that patients would experience under the treatment conditions being compared; the estimator uses the histories the study was able to observe to learn about that effect. In the HF-ACTION illustrations below, there is one nonfatal component, hospitalization, which can recur.
 
 ### The subgroup at baseline and during follow-up
 
@@ -126,7 +128,7 @@ The symbol $\wedge$ denotes the minimum, so the observed record is $\{\mathcal H
 
 : Baseline characteristics and observed outcomes in the HF-ACTION subgroup. {#tbl-hf-baseline}
 
-The hospitalization categories reveal substantial recurrence. A single binary indicator of whether hospitalization ever occurred would hide the distinction between one admission and more than ten. The mortality percentages are crude observed proportions, not estimated death probabilities at a common time. Patients have different lengths of follow-up, so a survival analysis is needed to make comparisons over a specified time scale. @tbl-hf-baseline describes the data; it does not replace that analysis.
+The hospitalization categories reveal substantial recurrence. A single binary indicator of whether hospitalization ever occurred would hide the distinction between one admission and more than ten. The mortality percentages are crude observed proportions, not estimated death probabilities at a common time. Patients have different lengths of follow-up, so a survival analysis is needed to compare mortality over a specified period. @tbl-hf-baseline describes the data; it does not replace that analysis.
 
 ### Reading the HF-ACTION data in R
 
@@ -192,7 +194,7 @@ Here `distinct()` removes repetitions of the same patient and treatment assignme
 
 ## Time to First Event {#section-2}
 
-The most familiar composite reduces each history to one event time. We examine what this reduction preserves, how to construct it in R, and how to interpret the resulting treatment comparison.
+The traditional time-to-first-event analysis reduces each history to one event time. It has long been the default analysis for many composite endpoints because it gives each patient a single, familiar survival outcome. We examine what this reduction preserves, how to construct it in R, and how to interpret the resulting treatment comparison. The reduction is sensible when remaining alive without any component event is itself the clinical objective.
 
 ### What does the endpoint measure?
 
@@ -206,7 +208,7 @@ Its survival function $S_F(t)=\Pr(T_F>t)$ is the probability of being alive and 
 
 Consider two hypothetical patients followed for four years. Patient A is hospitalized at six months and remains alive at four years. Patient B has no hospitalization but dies at one year. Their first-event times are six months and one year, respectively. Thus, B has the longer event-free time. This is consistent with the definition of $T_F$, although a survival-first assessment would favor A. The example makes clear why the endpoint must be chosen with the intended interpretation in mind.
 
-The first-event composite is useful when postponement of any component event is itself the clinical objective. It also permits established survival-analysis methods. Its limitation is the information it omits: neither additional admissions nor death after the first admission changes $T_F$. We should not expect it to answer questions about the entire subsequent course of illness.
+The first-event composite is useful when postponement of any component event is itself the clinical objective. It also permits established survival-analysis methods, which is one reason for its central role in trial practice. Its limitation is the information it omits: neither additional admissions nor death after the first admission changes $T_F$. We should not expect it to answer questions about the entire subsequent course of illness.
 
 ### What weighting the first event can and cannot recover
 
@@ -255,7 +257,7 @@ $$
 \lambda_D(t\mid Z)=\lambda_{D0}(t)\exp(\beta_D Z),
 $$
 
-where $Z=1$ denotes training and $Z=0$ denotes usual care. The hazard describes the instantaneous event occurrence rate among those still at risk. Proportional hazards means that the treatment-to-control hazard ratio, $\exp(\beta_D)$, does not change with time. For the first-event model, the risk set instead consists of patients who are alive and have not yet been hospitalized.
+where $Z=1$ denotes training and $Z=0$ denotes usual care. The hazard describes the instantaneous event occurrence rate among those still at risk. We refer to $\exp(\beta_D)$ as the treatment-to-control **risk ratio**; it is also commonly called the hazard ratio. Proportional hazards means that this risk ratio does not change with time. For the first-event model, the risk set instead consists of patients who are alive and have not yet been hospitalized.
 
 ```{r}
 # Mortality model: time is in years; death marks observed deaths.
@@ -289,18 +291,18 @@ n = 426, number of events = 326
 trt_ab -0.1770    0.8378   0.1112 -1.592  0.111
 ```
 
-`Surv()` combines follow-up time and the indicator of an observed endpoint. The formula `~ trt_ab` specifies a treatment-only comparison. In the model summary, `coef` is the estimated log hazard ratio, whereas `exp(coef)` is the hazard ratio itself. Standard errors and confidence intervals quantify sampling uncertainty; the test of a zero coefficient is a test of a hazard ratio of one under the model.
+`Surv()` combines follow-up time and the indicator of an observed endpoint. The formula `~ trt_ab` specifies a treatment-only comparison. In the model summary, `coef` is the estimated log risk ratio, whereas `exp(coef)` is the risk ratio itself. Standard errors and confidence intervals quantify sampling uncertainty; the test of a zero coefficient is a test of a risk ratio of one under the model.
 
 @tbl-hf-cox summarizes the two fitted treatment contrasts.
 
-| Endpoint | Observed endpoint events | Hazard ratio, training versus usual care | Reported $p$-value |
+| Endpoint | Observed endpoint events | Risk ratio, training versus usual care | Reported $p$-value |
 | --- | ---: | ---: | ---: |
 | Death | 93 | 0.672 | 0.062 |
 | Death or first hospitalization | 326 | 0.838 | 0.111 |
 
 : Treatment-only Cox model results in HF-ACTION. {#tbl-hf-cox}
 
-Exercise training was associated with an estimated 32.8% reduction in the risk of death (hazard ratio, 0.672), under the proportional hazards and censoring assumptions. This is the usual clinical interpretation of the hazard ratio. When a question specifically concerns the probability of dying by four years, we instead compare the estimated mortality probabilities at that time. Similarly, the first-event estimate describes the hazard of death or initial hospitalization among patients still free of both, not the rate of all hospitalizations.
+Exercise training was associated with an estimated 32.8% lower instantaneous risk of death (risk ratio, 0.672), under the proportional-hazards and censoring assumptions. This comparison is made at each time among patients still alive. It does not say that the four-year probability of death was lower by 32.8%; that question calls for estimated mortality probabilities at four years. Similarly, the first-event risk ratio describes death or an initial hospitalization among patients still free of both, rather than the rate of all hospitalizations.
 
 Neither reported test rejects its null at the conventional 5% level. More importantly, the difference between the two $p$-values is not a test that exercise affects death more than hospitalization. The analyses concern different endpoints, with different risk sets and precision. They illustrate that adding events changes the clinical comparison as well as the amount of information.
 
@@ -344,7 +346,7 @@ p_first <- survfit2(Surv(time, event) ~ trt_ab, data = hf_first) |>
 
 ```
 
-`survfit2()` fits the survival curves; `ggsurvfit()` displays them using the `ggplot2` graphics system. `scale_ggsurvfit()` formats the survival scale, and the color labels translate treatment codes into clinical group names. `plot_layout(guides = "collect")` combines the panels with one legend; `/` stacks them vertically. `book_theme` sets the typeface, text size, and grid while preserving the treatment colors. @fig-hf-survival displays the resulting curves.
+`survfit2()` fits the survival curves; `ggsurvfit()` displays them using the `ggplot2` graphics system. `scale_ggsurvfit()` formats the survival scale, and the color labels translate treatment codes into clinical group names. `plot_layout(guides = "collect")` combines the panels with one legend; `/` stacks them vertically. `book_theme` sets the typeface, text size, and grid while preserving the treatment colors. The code therefore changes only the presentation, not the event histories or fitted estimates. @fig-hf-survival displays the resulting curves.
 
 ![Overall survival and hospitalization-free survival in the HF-ACTION subgroup. Both panels use years since randomization.](figures/hf-survival.svg){#fig-hf-survival}
 
@@ -378,7 +380,7 @@ $$
 
 Each weight has a clinical interpretation only relative to the others. Multiplying every weight by the same positive constant changes the units of burden but not a ratio of group means. Changing the relative weights changes the endpoint itself. We should therefore explain the choice of weights and examine clinically reasonable alternatives when that choice is uncertain.
 
-The weights express a quantitative trade-off. A death contributes twice as much as a hospitalization in this example, but sufficiently many hospitalizations can outweigh a death. This differs from a hierarchical rule under which survival, whenever it decides the comparison, takes precedence over every nonfatal component. Neither choice follows automatically from calling death “more important.” Investigators must decide which interpretation fits the objective.
+The weights express a quantitative trade-off. A death contributes twice as much as a hospitalization in this example, but sufficiently many hospitalizations can outweigh a death. This differs from a hierarchical rule under which survival, whenever it decides the comparison, takes precedence over every nonfatal component. Calling death “more important” does not itself choose between these two meanings. Investigators must decide which comparison addresses their objective.
 
 The proportional means model of @Mao2016 relates the expected weighted count to covariates. With treatment as the only covariate,
 
@@ -473,7 +475,7 @@ The first part of the output confirms the endpoint that was fitted. We should re
 
 All event and terminal records remain in this analysis. `id` links records from the same participant; `Z` supplies the treatment indicator as a one-column matrix, repeated across that participant's records. The weight vector follows the recoded event order: death first, hospitalization second. Assigning the right weights to the wrong event codes would fit a different endpoint. The software reference [@wcompo-software] specifies the interface.
 
-The treatment-only analysis gives $\widehat\beta_W=-0.15398$, giving a mean ratio of approximately 0.857, with $p=0.170$. Under the model, this represents an estimated 14.3% lower **mean cumulative weighted count** in the training group. It is neither a mortality hazard ratio nor a 14.3% reduction in the probability of any event. Its units and interpretation depend on the weights.
+The treatment-only analysis gives $\widehat\beta_W=-0.15398$, giving a mean ratio of approximately 0.857, with $p=0.170$. Under the model, the training group has an estimated 14.3% lower **mean cumulative weighted count**. Because death contributes two units and each hospitalization one, this is a comparison of the specified combined burden over follow-up. It is neither a mortality risk ratio nor a 14.3% reduction in the probability of any event. Its units and interpretation depend on the weights.
 
 The fitted object also contains `fit_weighted$beta`, the estimated log-mean coefficients, and `fit_weighted$var`, their estimated covariance matrix. The square roots of its diagonal entries give the coefficient standard errors. These are patient-level uncertainty calculations, not calculations that treat the hospitalization rows as independent patients. With additional baseline covariates, the model takes the form $E\{N_W(t)\mid Z\}=\mu_0(t)\exp(\beta^{\mathsf T}Z)$; each treatment comparison is then conditional on the included covariates. The present analysis includes treatment as its only covariate.
 
@@ -503,7 +505,7 @@ This last distinction matters. A patient who survives longer has more opportunit
 
 ### What have the three analyses taught us?
 
-The mortality, first-event, and weighted total-event estimates all favor exercise in this subgroup, but their magnitudes differ. Mortality gives a hazard ratio of 0.672; including first hospitalization gives 0.838; and retaining recurrent admissions with a two-to-one death weight gives a mean ratio of 0.857. These are not three estimators of one common parameter. They measure different features of the same histories.
+The mortality, first-event, and weighted total-event estimates all favor exercise in this subgroup, but their magnitudes differ. Mortality gives a risk ratio of 0.672; including first hospitalization gives 0.838; and retaining recurrent admissions with a two-to-one death weight gives a mean ratio of 0.857. These are not three estimators of one common parameter. They measure different features of the same histories.
 
 There are two reasons to resist choosing among them by the smallest $p$-value. First, such selection uses the observed results to define the question after the fact. Second, a larger estimated effect can arise from changing the effect scale or the endpoint, without establishing that one analysis is more efficient. Comparisons of power require a defined alternative and a study design, not just the observed significance levels in one dataset.
 
@@ -511,7 +513,7 @@ These results suggest two ways to address the substantive difficulties. One is t
 
 ## Hierarchical Comparisons and the Win Ratio {#hierarchical-comparisons}
 
-Clinical priorities can also be expressed through an ordered comparison of two patients. We begin with one pair, then aggregate the comparisons to describe the treatment effect in a population.
+Clinical priorities can also be expressed through an ordered comparison of two patients. Prioritized or hierarchical composite approaches, including the win ratio, have gained traction in recent clinical trials because they make the ordering of outcomes part of the endpoint definition. They are especially appealing when survival and nonfatal events should not be treated as exchangeable first events. We begin with one pair, then aggregate the comparisons to describe a treatment effect in a population. This construction replaces a numerical trade-off with a clinical ordering.
 
 ### Comparing one patient with another
 
@@ -527,11 +529,11 @@ The hierarchy need not end with hospitalization. For example, death precedes non
 
 ![Number of trials using the win ratio and their enrolled patients, by start year and use as a primary or secondary/other endpoint. Counts are approximated from the historical graphical summary.](figures/trial-uptake.svg){#fig-trial-use}
 
-The growing use illustrated by @fig-trial-use should motivate careful interpretation rather than serve as a justification in itself. A familiar analysis label does not guarantee the same endpoint across trials. Two studies can both report a win ratio while using different components, ordering, thresholds, and follow-up periods. Understanding those differences is necessary before comparing their estimates or combining them in a review.
+The growing use illustrated by @fig-trial-use reflects an effort to align composite analyses more closely with clinical priorities. When death is considered first, a later hospitalization cannot make a patient who died earlier appear to have fared better. This can answer the clinical question more directly than a first-event comparison when severity differs sharply across components. The approach does not eliminate judgment: a familiar analysis label does not guarantee the same endpoint across trials. Two studies can both report a win ratio while using different components, ordering, thresholds, and follow-up periods. Understanding those differences is necessary before comparing their estimates or combining them in a review.
 
 ### From pairs to a population summary
 
-With $n_1$ treatment patients and $n_0$ control patients, compare each treatment patient with each control patient. Let $W$, $L$, and $T$ denote the numbers of treatment wins, treatment losses, and ties among the $n_1n_0$ pairs. Then
+With $n_1$ treatment patients and $n_0$ control patients, compare each treatment patient with each control patient. Let $W$, $L$, and $T$ denote the numbers of treatment wins, treatment losses, and ties among the $n_1n_0$ pairs. Dividing each count by $n_1n_0$ converts it into the observed probability of the corresponding pairwise result. Thus
 
 $$
 \widehat p_W=\frac{W}{n_1n_0},\qquad
@@ -570,7 +572,7 @@ For an application, we should report the hierarchy, the tie rules, the compariso
 
 ## Why the Time Horizon Matters {#section-3}
 
-The same patients can have different win–loss results at different times. To interpret the comparison, we must specify the period of interest and distinguish it from the follow-up that happens to be observed.
+The same patients can have different win–loss results at different times. To interpret the comparison, we must specify the period of clinical interest and distinguish it from the follow-up that happens to be observed.
 
 ### The target treatment effect
 
@@ -625,9 +627,9 @@ The remainder of the book develops the assumptions, estimators, and software nee
 
 ## Returning to the Clinical Question {#closing}
 
-For the HF-ACTION example, we have considered several ways to ask whether exercise improves outcomes. Mortality analysis asks about survival. Time to first event asks how long a patient remains alive without an admission. Weighted total events ask about accumulated burden under specified numerical weights. A hierarchical comparison asks which of two patients fares better under a specified ordering of outcomes and a specified horizon.
+For the HF-ACTION example, we have considered several ways to ask whether exercise improves outcomes. Traditional time-to-first-event analysis asks how long a patient remains alive without an admission. Mortality analysis asks about survival. Weighted total events ask about accumulated burden under specified numerical weights. A hierarchical comparison asks which of two patients fares better under a specified ordering of outcomes and a specified horizon. Each question starts from the same event histories, yet retains different features of a patient's experience.
 
-These questions need not produce the same effect estimate or the same strength of evidence. The appropriate response is to explain the differences and relate them to the study objective. No single coefficient can replace an account of the outcome components, assumptions, and uncertainty.
+These questions need not produce the same effect estimate or the same strength of evidence. The appropriate response is to explain the differences and relate them to the study objective. No single coefficient can replace an account of the outcome components, assumptions, and uncertainty. A composite analysis becomes clinically useful when readers can see that connection.
 
 Chapter 2 develops the statistical foundations of pairwise testing. Later chapters address estimation of interpretable treatment effects and regression methods. Throughout, we will keep the analysis connected to the observed patient histories: which events were collected, how they were represented in R, what assumptions permit the calculation, and what the result says about patient experience.
 
